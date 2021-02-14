@@ -10,15 +10,7 @@ Welcome to TIGER's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-attacks
-cascading
-defenses
-diffusion
-experiments
-measures
-tests
-simulations
-utils
+   modules
 
 Indices and tables
 ==================
