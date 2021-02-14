@@ -249,6 +249,7 @@ class Simulation:
         plt.axis('image')
         title = self.get_plot_title(step)
         plt.savefig(os.path.join(self.save_dir, title + '.pdf'))
+        plt.show()
 
         plt.clf()
 
