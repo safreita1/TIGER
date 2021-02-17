@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Tutorial 1: Measuring Vulnerability and Robustness &mdash; TIGER 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial 2: Attacking a Network" href="tutorial-2.html" />
+    <link rel="prev" title="Tutorials" href="tutorials.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TIGER
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-3-cascading-failure-simulation">Example 3: Cascading Failure Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-4-sis-model-network-vaccination">Example 4: SIS Model Network Vaccination</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorial 1: Measuring Vulnerability and Robustness</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comparing-robustness-measures">Comparing Robustness Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#approximate-vs-non-approximate">Approximate vs Non-Approximate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-2.html">Tutorial 2: Attacking a Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-3.html">Tutorial 3: Defending a Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-4.html">Tutorial 4: Cascading Failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">robustness</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../attacks.html">attacks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cascading.html">cascading module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../defenses.html">defenses module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">diffusion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../experiments.html">experiments package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../experiments.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.attack.html">experiments.attack package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.cascading.html">experiments.cascading package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.defense.html">experiments.defense package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.diffusion.html">experiments.diffusion package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.robustness.html">experiments.robustness package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../experiments.html#module-experiments">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../graphs.html">graphs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../measures.html">measures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations.html">simulations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../test.html">test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tests.html">tests package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_measures">tests.test_measures module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TIGER</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Tutorial 1: Measuring Vulnerability and Robustness</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/tutorials/tutorial-1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial-1-measuring-vulnerability-and-robustness">
+<h1>Tutorial 1: Measuring Vulnerability and Robustness<a class="headerlink" href="#tutorial-1-measuring-vulnerability-and-robustness" title="Permalink to this headline">¶</a></h1>
+<p>TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure utilizes the graph, adjacency or Laplacian matrix. In the figure below, we show some common robustness measures and their application to measuring network robustness.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-coordsys-rect"></span><a class="reference internal image-reference" href="../_images/robustness_measures.jpg"><img alt="../_images/robustness_measures.jpg" src="../_images/robustness_measures.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Comparison of TIGER robustness measures. Measures are grouped based on whether they use the graph, adjacency or Laplacian matrix. For each measure, we briefly describe it’s application to measuring network robustness.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="comparing-robustness-measures">
+<h2>Comparing Robustness Measures<a class="headerlink" href="#comparing-robustness-measures" title="Permalink to this headline">¶</a></h2>
+<p><strong>1. Average vertex betweenness</strong> (<span class="math notranslate nohighlight">\(\bar{b}_v\)</span>) of a graph <span class="math notranslate nohighlight">\(G=(V, E)\)</span> is the summation of vertex betweenness <span class="math notranslate nohighlight">\(b_u\)</span> for every node <span class="math notranslate nohighlight">\(u \in V\)</span>, where vertex betweenness for node <em>u</em> is defined as the number of shortest paths that pass through <em>u</em> out of the total possible shortest paths</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\bar{b}_v = \sum_{u\in V}\sum_{s\in V}\sum_{\substack{t\in V \\ s\neq t\neq u}} \frac{n_{s,t}(u)}{n_{s,t}}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(n_{s, t}(u)\)</span> is the number of shortest paths betweeen <em>s</em> and <em>t</em> that pass through <em>t</em> and <span class="math notranslate nohighlight">\(n_{s, t}\)</span> is the total number of shortest paths between <em>s</em> and <em>t</em>. Average vertex betweenness has a natural connection to graph robustness since it measures the average load on vertices in the network. The smaller the average the more robust the network, since load is more evenly distributed across nodes. In order to calculate this for measure for a graph, you can simply run the following:</p>
+<div class="highlight-python notranslate" id="average-vertex-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
+<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">avg_vertex_betweenness</span> <span class="o">=</span> <span class="n">run_measure</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="s1">&#39;average_vertex_betweenness&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average vertex betweenness:&quot;</span><span class="p">,</span> <span class="n">avg_vertex_betweenness</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since calculting the average vertex betweenness for large graphs is not computationally feasible, we can find a “close” approximate version by running the following code</p>
+<div class="highlight-python notranslate" id="average-vertex-approx-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
+<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">avg_vertex_betweenness</span> <span class="o">=</span> <span class="n">run_measure</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="s1">&#39;average_vertex_betweenness_approx&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Approximate average vertex betweenness:&quot;</span><span class="p">,</span> <span class="n">avg_vertex_betweenness</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since we are using an approximate version, the results will differ slightly from the full version. However, the advantage is that approximate versions can scale much better to large graphs. Selecting variable <em>k</em> is method dependent, however, we set reasonable default values for each method (i.e., just run <em>run_measure(graph, measure=’…’)</em>). We’ll do an in-depth comparison on how to practically set these approximation values at the end of this tutorial.</p>
+<p><strong>2. Spectral scaling</strong> (<span class="math notranslate nohighlight">\(\xi\)</span>) indicates if a network is simultaneously sparse and highly connected, known as “good expansion” (GE). Intuitively, we can think of a network with GE as a network lacking bridges or bottlenecks. In order to determine if a network has GE, the spectral gap is combined with odd subgraph centrality <span class="math notranslate nohighlight">\(SC_{odd}\)</span>, which measures the number of odd length closed walks a node participates in. Formally, <em>spectral scaling</em> is described as</p>
+<div class="math notranslate nohighlight">
+\[\xi(G) = \sqrt{\frac{1}{n} \sum_{i=1}^{n} \{log[\textbf{u}_1(i)] - [log\textbf{A} + \frac{1}{2} log[SC_{odd}(i)]] \}^2 }\]</div>
+<p>where <span class="math notranslate nohighlight">\(\textbf{A} = [sinh(\lambda_1)]^{-0.5}, n\)</span> is the number of nodes, and <span class="math notranslate nohighlight">\(\textbf{u}_1\)</span> is the first eigenvector of adjacency matrix <strong>A</strong>. The closer <span class="math notranslate nohighlight">\(\xi\)</span> is to zero, the better the expansion properties and the more robust the network. Formally, a network is considered to have GE if <span class="math notranslate nohighlight">\(\xi &lt; 10^{-2}\)</span>, the correlation coefficient <span class="math notranslate nohighlight">\(r &lt; 0.999\)</span> and the slope is 0.5.</p>
+<p><strong>3. Effective resistance</strong> (<span class="math notranslate nohighlight">\(R\)</span>) views a graph as an electrical circuit where an edge <span class="math notranslate nohighlight">\((i, j)\)</span> corresponds to a resister of <span class="math notranslate nohighlight">\(r_{ij} = 1\)</span> Ohm and a node <em>i</em> corresponds to a junction.
+As such, the effective resistance between two vertices <em>i</em> and <em>j</em>, denoted <span class="math notranslate nohighlight">\(R_{ij}\)</span>, is the electrical resistance measured across <em>i</em> and <em>j</em> when calculated using Kirchoff’s circuit laws.
+Extending this to the whole graph, we say the <em>effective graph resistance</em> <em>R</em> is the sum of resistances for all distinct pairs of vertices. Klein and Randic proved this can be calculated based on the sum of the inverse non-zero Laplacian eigenvalues:</p>
+<div class="math notranslate nohighlight">
+\[R = \frac{1}{2}\sum_{i, j}^{n} R_{ij} = n\sum_{i=2}^{n} \frac{1}{\mu_i}\]</div>
+<p>As a robustness measure, effective resistance measures how well connected a network is, where a smaller value indicates a more robust network. In addition, the effective resistance has many desirable properties, including the fact that it strictly decreases when adding edges, and takes into account both the number of paths between node pairs and their length.</p>
+</div>
+<div class="section" id="approximate-vs-non-approximate">
+<h2>Approximate vs Non-Approximate<a class="headerlink" href="#approximate-vs-non-approximate" title="Permalink to this headline">¶</a></h2>
+<p>Below, we’ll implement 5 robustness measures, and their approximate counterparts, so we can see how approximation value <em>k</em> affects the measurement quality. We can think of parameter <em>k</em> as representing the trade-off between speed (low <em>k</em>) and precision (high <em>k</em>).</p>
+<div class="highlight-python notranslate" id="measure-comparison"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+   <span class="c1"># compare 2 measures based on graph connectivity</span>
+   <span class="n">measures_graph</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s1">&#39;average_vertex_betweenness&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;average_edge_betweenness&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;average_vertex_betweenness_approx&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;average_edge_betweenness_approx&#39;</span>
+   <span class="p">]</span>
+
+   <span class="c1"># compare 3 measures based on graph Laplacian matrix</span>
+   <span class="n">measures_spectral</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s1">&#39;natural_connectivity&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;number_spanning_trees&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;effective_resistance&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;natural_connectivity_approx&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;number_spanning_trees_approx&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;effective_resistance_approx&#39;</span><span class="p">,</span>
+   <span class="p">]</span>
+
+   <span class="c1"># graph params</span>
+   <span class="n">n</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># number of graph nodes</span>
+   <span class="n">start</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># k = 5</span>
+   <span class="n">step</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># k += 10</span>
+
+   <span class="c1"># spectral params</span>
+   <span class="n">n_s</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># number of graph nodes</span>
+   <span class="n">start_s</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># k = 5</span>
+   <span class="n">step_s</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># k += 10</span>
+</pre></div>
+</div>
+<p>In this code block, we are just setting up the measures to compare and their associated parameters. Next, we are going to run each of the methods across different values of <em>k</em> to gather some data.</p>
+<div class="highlight-python notranslate" id="measure-comparison-2"><div class="highlight"><pre><span></span><span class="c1"># run the graph measures, averaging the results over 30 randomly generated graphs</span>
+<span class="n">graph_results</span> <span class="o">=</span> <span class="n">run_analysis</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">k_start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">k_step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">measures</span><span class="o">=</span><span class="n">measures_graph</span><span class="p">)</span>
+
+<span class="n">x_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="mi">300</span><span class="p">]</span>
+<span class="n">plot_results</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">graph_results</span><span class="p">,</span> <span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="n">measures_graph</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+
+
+<span class="c1"># run the spectral measures, averaging the results over 30 randomly generated graphs</span>
+<span class="n">spectral_results</span> <span class="o">=</span> <span class="n">run_analysis</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_s</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">k_start</span><span class="o">=</span><span class="n">start_s</span><span class="p">,</span> <span class="n">k_step</span><span class="o">=</span><span class="n">step_s</span><span class="p">,</span> <span class="n">measures</span><span class="o">=</span><span class="n">measures_spectral</span><span class="p">)</span>
+
+<span class="n">x_data_s</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start_s</span><span class="p">,</span> <span class="n">n_s</span><span class="p">,</span> <span class="n">step_s</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="mi">300</span><span class="p">]</span>
+<span class="n">plot_results</span><span class="p">(</span><span class="n">x_data_s</span><span class="p">,</span> <span class="n">spectral_results</span><span class="p">,</span> <span class="s2">&quot;spectral&quot;</span><span class="p">,</span> <span class="n">measures_spectral</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start_s</span><span class="p">,</span> <span class="n">step_s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to run each robustness measure, do the following:</p>
+<div class="highlight-python notranslate" id="measure-comparison-3"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_analysis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">runs</span><span class="p">,</span> <span class="n">k_start</span><span class="p">,</span> <span class="n">k_step</span><span class="p">,</span> <span class="n">measures</span><span class="p">):</span>
+   <span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+
+   <span class="n">graphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;CSF&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runs</span><span class="p">)]</span>  <span class="c1"># generate 30 random `clustered scale free` graphs</span>
+
+   <span class="n">approx_results</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="n">k_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">k_start</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k_step</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]</span>
+   <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">k_values</span><span class="p">):</span>
+      <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runs</span><span class="p">):</span>
+         <span class="n">r</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">measures</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+         <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+      <span class="n">k_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+      <span class="n">approx_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k_avg</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">approx_results</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">measures</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+   <span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">measures</span><span class="p">:</span>
+      <span class="k">if</span> <span class="s1">&#39;_approx&#39;</span> <span class="ow">in</span> <span class="n">measure</span><span class="p">:</span>
+         <span class="n">measure</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_approx&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+         <span class="n">r</span> <span class="o">=</span> <span class="n">run_measure</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="n">measure</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">r</span> <span class="o">=</span> <span class="n">run_measure</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="n">measure</span><span class="p">)</span>
+
+      <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Now that we have the results for all 5 measures at different values of <em>k</em>, along with non-approximate results (k=np.inf), we can plot the error between the non-approximate and the approximate robustness measure as a function of <em>k</em>.</p>
+<div class="highlight-python notranslate" id="measure-comparsion-4"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">measures</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+   <span class="n">num_measures</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measures</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+   <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="n">num_measures</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">num_measures</span><span class="o">*</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+   <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">measures</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">num_measures</span><span class="p">:</span>
+         <span class="k">break</span>
+
+      <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">results</span><span class="p">[:,</span> <span class="n">num_measures</span> <span class="o">+</span> <span class="n">index</span><span class="p">]</span> <span class="o">-</span> <span class="n">results</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">axes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">metric_name</span><span class="p">)</span>
+
+      <span class="n">axes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">metric_name</span><span class="p">)</span>
+      <span class="n">axes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+      <span class="n">axes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">metric_name</span> <span class="o">==</span> <span class="s1">&#39;number_spanning_trees&#39;</span><span class="p">:</span>
+         <span class="n">axes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+
+  <span class="n">save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/plots/&#39;</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_dir</span> <span class="o">+</span> <span class="s1">&#39;approximation_</span><span class="si">{}</span><span class="s1">_n=</span><span class="si">{}</span><span class="s1">,start=</span><span class="si">{}</span><span class="s1">,step=</span><span class="si">{}</span><span class="s1">.pdf&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id3">
+<span id="id1"></span><a class="reference internal image-reference" href="../_images/measurement-comparison.jpg"><img alt="../_images/measurement-comparison.jpg" src="../_images/measurement-comparison.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Error of 5 fast, approximate robustness measures supported by TIGER. Parameter <em>k</em> represents the trade-off between speed (low <em>k</em>) and precision (high <em>k</em>). To measure approximation efficacy, we vary <span class="math notranslate nohighlight">\(r\in [5, 300]\)</span> in increments of 10 and measure the error between the approximate and original measure averaged over 30 runs on a clustered scale-free graph with 300 nodes.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="tutorial-2.html" class="btn btn-neutral float-right" title="Tutorial 2: Attacking a Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Scott Freitas.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

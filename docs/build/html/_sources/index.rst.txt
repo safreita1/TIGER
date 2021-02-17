@@ -10,6 +10,8 @@ Welcome to TIGER's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   intro
+   tutorials/tutorials
    modules
 
 Indices and tables

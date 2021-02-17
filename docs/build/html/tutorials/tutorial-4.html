@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Tutorial 4: Cascading Failures &mdash; TIGER 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial 5: Entity Dissemination" href="tutorial-5.html" />
+    <link rel="prev" title="Tutorial 3: Defending a Network" href="tutorial-3.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TIGER
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-3-cascading-failure-simulation">Example 3: Cascading Failure Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro.html#example-4-sis-model-network-vaccination">Example 4: SIS Model Network Vaccination</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tutorial-1.html">Tutorial 1: Measuring Vulnerability and Robustness</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial-1.html#comparing-robustness-measures">Comparing Robustness Measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial-1.html#approximate-vs-non-approximate">Approximate vs Non-Approximate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-2.html">Tutorial 2: Attacking a Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-3.html">Tutorial 3: Defending a Network</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorial 4: Cascading Failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">robustness</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../attacks.html">attacks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cascading.html">cascading module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../defenses.html">defenses module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">diffusion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../experiments.html">experiments package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../experiments.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.attack.html">experiments.attack package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.cascading.html">experiments.cascading package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.defense.html">experiments.defense package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.diffusion.html">experiments.diffusion package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experiments.robustness.html">experiments.robustness package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../experiments.html#module-experiments">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../graphs.html">graphs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../measures.html">measures module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations.html">simulations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../test.html">test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tests.html">tests package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_measures">tests.test_measures module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TIGER</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Tutorial 4: Cascading Failures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/tutorials/tutorial-4.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial-4-cascading-failures">
+<h1>Tutorial 4: Cascading Failures<a class="headerlink" href="#tutorial-4-cascading-failures" title="Permalink to this headline">¶</a></h1>
+<p>Cascading failures often arise as a result of natural failures or targeted attacks in a network. Consider an electrical grid where a central substation goes offline. In order to maintain the distribution of power, neighboring substations have to increase production in order to meet demand. However, if this is not possible, the neighboring substation fails, which in turn causes additional neighboring substations to fail. The end result is a series of cascading failures i.e., a blackout. While cascading failures can occur in a variety of network types e.g., water, electrical, communication, we focus on the electrical grid. Below, we discuss the design and implementation of the cascading failure model and how TIGER can be used to both <strong>induce</strong> and <strong>prevent</strong> cascading failures using the attack and defense mechanisms discussed in previous tutorials. There are 3 main processes governing the network simulation:</p>
+<ul class="simple">
+<li><p><strong>capacity</strong> of each node <span class="math notranslate nohighlight">\(c_v\in [0,1]\)</span></p></li>
+<li><p><strong>load</strong> of each node <span class="math notranslate nohighlight">\(l_v\in U(0, l_{max})\)</span></p></li>
+<li><p>network <strong>redundancy</strong> <span class="math notranslate nohighlight">\(r\in [0, 1]\)</span></p></li>
+</ul>
+<p>The capacity of each node <span class="math notranslate nohighlight">\(c_v\)</span> is the the maximum load a node can handle, which is set based on the node’s normalized betweenness centrality. The load of each node <span class="math notranslate nohighlight">\(l_v\)</span> represents the fraction of maximum capacity <span class="math notranslate nohighlight">\(c_v\)</span> that the node operates at. Load for each node <span class="math notranslate nohighlight">\(c_v\)</span> is set by uniformly drawing from <span class="math notranslate nohighlight">\(U(0, l_{max})\)</span>, where <span class="math notranslate nohighlight">\(l_{max}\)</span> is the maximum initial load. Network redundancy <em>r</em> represents the amount of reserve capacity present in the network i.e., auxiliary support systems. At the beginning of the simulation, we allow the user to attack and defend the network according to the node attack and defense strategies discussed in previous tutorials. When a node is attacked it becomes “overloaded”, causing it to fail and requiring the load be distributed to its neighbors. When defending a node we increase it’s capacity to protect against attacks.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/cascading-failure.jpg"><img alt="../_images/cascading-failure.jpg" src="../_images/cascading-failure.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">TIGER cascading failure simulation on the US power grid network when 4 nodes are overloaded according to the ID attack strategy. Time step 1: shows the network under normal conditions. Time step 50: we observe a series of failures originating from the bottom of the network. Time step 70: most of the network has collapsed.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>To help users visualize cascading failures induced by targeted attacks, we enable them to create visuals like the figure above, where we overload 4 nodes selected by the ID attack strategy on the US power grid dataset (<span class="math notranslate nohighlight">\(l_max=0.8\)</span>). Nodesize represents capacity i.e., larger size <span class="math notranslate nohighlight">\(\rightarrow\)</span> higher capacity, and color indicates the load of each node on a gradient scale from blue (low load) to red (high load); dark red indicates node failure (overloaded). Time step 1 shows the network under normal conditions; at step 50 we observe a series of failures originating from the bottom of the network; by step 70 most of the network has collapsed.</p>
+<p>To run a cascading failure simulations and create the visual, we just have to write a few lines of code:</p>
+<div class="highlight-python notranslate" id="cascading-failure-1"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cascading</span> <span class="kn">import</span> <span class="n">Cascading</span>
+<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="s1">&#39;electrical&#39;</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s1">&#39;runs&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+   <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+
+   <span class="s1">&#39;l&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+   <span class="s1">&#39;r&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+   <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)),</span>
+
+   <span class="s1">&#39;k_a&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+   <span class="s1">&#39;attack&#39;</span><span class="p">:</span> <span class="s1">&#39;rb_node&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;attack_approx&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)),</span>
+
+   <span class="s1">&#39;k_d&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="s1">&#39;defense&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+
+   <span class="s1">&#39;robust_measure&#39;</span><span class="p">:</span> <span class="s1">&#39;largest_connected_component&#39;</span><span class="p">,</span>
+
+   <span class="s1">&#39;plot_transition&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># False turns off key simulation image &quot;snapshots&quot;</span>
+   <span class="s1">&#39;gif_animation&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># True creaets a video of the simulation (MP4 file)</span>
+   <span class="s1">&#39;gif_snaps&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># True saves each frame of the simulation as an image</span>
+
+   <span class="s1">&#39;edge_style&#39;</span><span class="p">:</span> <span class="s1">&#39;bundled&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;node_style&#39;</span><span class="p">:</span> <span class="s1">&#39;force_atlas&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;fa_iter&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">cascading</span> <span class="o">=</span> <span class="n">Cascading</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cascading</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
+
+<span class="n">cascading</span><span class="o">.</span><span class="n">plot_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also summarize simulation results over many configurations, and create plots the figure below, which shows the effect of network redundancy when 4 nodes are overloaded by the ID attack strategy. At 50% redundancy, we observe a critical threshold where the network is able to redistribute the increased load. For <span class="math notranslate nohighlight">\(r &lt; 50%\)</span>, the cascading failure can be delayed but not prevented.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/cascading-failure-comparison.jpg"><img alt="../_images/cascading-failure-comparison.jpg" src="../_images/cascading-failure-comparison.jpg" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text">Effect of network redundancy <em>r</em> on the US power grid where 4 nodes are overloaded using ID. When <span class="math notranslate nohighlight">\(r\geq 50\%\)</span> the network is able to redistribute the increased load.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Running and visualizing multiple simulations only takes a few extra lines of code:</p>
+<div class="highlight-python notranslate" id="cascading-failure-comparison"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="s1">&#39;runs&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+     <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+     <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+
+     <span class="s1">&#39;l&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+     <span class="s1">&#39;r&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+     <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)),</span>
+
+     <span class="s1">&#39;k_a&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+     <span class="s1">&#39;attack&#39;</span><span class="p">:</span> <span class="s1">&#39;id_node&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;attack_approx&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># int(0.1 * len(graph)),</span>
+
+     <span class="s1">&#39;k_d&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s1">&#39;defense&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+
+     <span class="s1">&#39;robust_measure&#39;</span><span class="p">:</span> <span class="s1">&#39;largest_connected_component&#39;</span><span class="p">,</span>
+
+     <span class="s1">&#39;plot_transition&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+     <span class="s1">&#39;gif_animation&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+
+     <span class="s1">&#39;edge_style&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+     <span class="s1">&#39;node_style&#39;</span><span class="p">:</span> <span class="s1">&#39;spectral&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;fa_iter&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+
+ <span class="p">}</span>
+
+ <span class="n">results</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+ <span class="n">redundancy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)</span>
+
+ <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">redundancy</span><span class="p">):</span>
+     <span class="n">params</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+
+     <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+         <span class="n">params</span><span class="p">[</span><span class="s1">&#39;plot_transition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+         <span class="n">params</span><span class="p">[</span><span class="s1">&#39;gif_animation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+         <span class="n">params</span><span class="p">[</span><span class="s1">&#39;gif_snaps&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="n">params</span><span class="p">[</span><span class="s1">&#39;plot_transition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+         <span class="n">params</span><span class="p">[</span><span class="s1">&#39;gif_animation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+         <span class="n">params</span><span class="p">[</span><span class="s1">&#39;gif_snaps&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+     <span class="n">cf</span> <span class="o">=</span> <span class="n">Cascading</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+     <span class="n">results</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
+
+ <span class="n">plot_results</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Steps&#39;</span><span class="p">,</span> <span class="n">line_label</span><span class="o">=</span><span class="s1">&#39;Redundancy&#39;</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="s1">&#39;redundancy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate" id="plot-results"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Steps&#39;</span><span class="p">,</span> <span class="n">line_label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">))</span>
+
+   <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">:step=</span><span class="si">{}</span><span class="s1">,l=</span><span class="si">{}</span><span class="s1">,r=</span><span class="si">{}</span><span class="s1">,k_a=</span><span class="si">{}</span><span class="s1">,attack=</span><span class="si">{}</span><span class="s1">,k_d=</span><span class="si">{}</span><span class="s1">,defense=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_a&#39;</span><span class="p">],</span>
+                                                                                 <span class="n">params</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_d&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;defense&#39;</span><span class="p">])</span>
+   <span class="k">for</span> <span class="n">strength</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">result_norm</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result_norm</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line_label</span><span class="p">,</span> <span class="n">strength</span><span class="p">))</span>
+
+   <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;robust_measure&#39;</span><span class="p">])</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+   <span class="n">save_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/plots/&#39;</span> <span class="o">+</span> <span class="n">experiment</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
+   <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+   <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_dir</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">)</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="tutorial-5.html" class="btn btn-neutral float-right" title="Tutorial 5: Entity Dissemination" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorial-3.html" class="btn btn-neutral float-left" title="Tutorial 3: Defending a Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Scott Freitas.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
