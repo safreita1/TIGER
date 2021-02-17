@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>defenses module &mdash; TIGER 0.0.1 documentation</title>
+  <title>Defense &mdash; TIGER 0.0.1 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="diffusion module" href="diffusion.html" />
-    <link rel="prev" title="cascading module" href="cascading.html" /> 
+    <link rel="next" title="Cascading" href="cascading.html" />
+    <link rel="prev" title="Attacks" href="attacks.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -111,37 +111,15 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">robustness</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="attacks.html">attacks module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cascading.html">cascading module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">defenses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diffusion.html">diffusion module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="experiments.html">experiments package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="experiments.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.attack.html">experiments.attack package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.cascading.html">experiments.cascading package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.defense.html">experiments.defense package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.diffusion.html">experiments.diffusion package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.robustness.html">experiments.robustness package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="experiments.html#module-experiments">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="graphs.html">graphs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="measures.html">measures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulations.html">simulations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_measures">tests.test_measures module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">TIGER</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attacks.html">Attacks</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Defense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cascading.html">Cascading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulations.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -192,9 +170,9 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="modules.html">robustness</a> &raquo;</li>
+          <li><a href="modules.html">TIGER</a> &raquo;</li>
         
-      <li>defenses module</li>
+      <li>Defense</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -214,20 +192,26 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-defenses">
-<span id="defenses-module"></span><h1>defenses module<a class="headerlink" href="#module-defenses" title="Permalink to this headline">¶</a></h1>
+<span id="defense"></span><h1>Defense<a class="headerlink" href="#module-defenses" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="defenses.Defense">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">Defense</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defense</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.Defense" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="simulations.html#simulations.Simulation" title="simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">simulations.Simulation</span></code></a></p>
 <p>This class simulates a variety of defense techniques on an undirected NetworkX graph</p>
-<p>Attributes:
-:param graph: an undirected NetworkX graph
-:param runs: an integer number of times to run the simulation
-:param steps: an integer number of steps to run a single simulation
-:param attack: a string representing the attack strategy to run
-:param defense: a string representing the defense strategy to run
-:param k_d: an integer number of nodes to defend
-:param <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: see parent class Simulation for additional options</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>runs</strong> – an integer number of times to run the simulation</p></li>
+<li><p><strong>steps</strong> – an integer number of steps to run a single simulation</p></li>
+<li><p><strong>attack</strong> – a string representing the attack strategy to run</p></li>
+<li><p><strong>defense</strong> – a string representing the defense strategy to run</p></li>
+<li><p><strong>k_d</strong> – an integer number of nodes to defend</p></li>
+<li><p><strong>**kwargs</strong> – <p>see parent class Simulation for additional options</p>
+</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="defenses.Defense.reset_simulation">
 <code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defenses.Defense.reset_simulation" title="Permalink to this definition">¶</a></dt>
@@ -237,7 +221,7 @@
 <dl class="py method">
 <dt id="defenses.Defense.run_single_sim">
 <code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defenses.Defense.run_single_sim" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run the attack simulation</p>
+<dd><p>Run the defense simulation</p>
 </dd></dl>
 
 <dl class="py method">
@@ -246,7 +230,7 @@
 <dd><p>Keeps track of important simulation information at each step of the simulation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>step</strong> – current simulation interation</p>
+<dd class="field-odd"><p><strong>step</strong> – current simulation iteration</p>
 </dd>
 </dl>
 </dd></dl>
@@ -282,7 +266,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of edges to add</p>
+<dd class="field-even"><p>a dictionary of the edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -299,7 +283,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of edges to add</p>
+<dd class="field-even"><p>a dictionary of the edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -307,9 +291,16 @@
 <dl class="py function">
 <dt id="defenses.add_edge_pref">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_pref</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.add_edge_pref" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd><p>Adds an edge connecting two nodes with the lowest degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of edges to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary of the edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -326,7 +317,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of edges to add</p>
+<dd class="field-even"><p>a dictionary of the edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -383,9 +374,16 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_pref">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_pref</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_pref" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd><p>Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of edges to rewire</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary of the edges to be ‘removed’ and edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -393,9 +391,16 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_pref_rnd">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_pref_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_pref_rnd" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd><p>Selects an edge, disconnects the higher degree node, and reconnects to a random one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of edges to rewire</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary of the edges to be ‘removed’ and edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -403,9 +408,16 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_rnd">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_rnd" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd><p>Removes a random edge and adds one using ‘add_edge_rnd()’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of edges to rewire</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary of the edges to be ‘removed’ and edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -413,9 +425,16 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_rnd_neighbor">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_rnd_neighbor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_rnd_neighbor" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd><p>Removes a random edge and adds one using ‘add_edge_rnd()’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of edges to rewire</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary of the edges to be ‘removed’ and edges to be ‘added’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -447,8 +466,8 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="diffusion.html" class="btn btn-neutral float-right" title="diffusion module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cascading.html" class="btn btn-neutral float-left" title="cascading module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cascading.html" class="btn btn-neutral float-right" title="Cascading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="attacks.html" class="btn btn-neutral float-left" title="Attacks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

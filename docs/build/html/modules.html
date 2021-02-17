@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>robustness &mdash; TIGER 0.0.1 documentation</title>
+  <title>TIGER &mdash; TIGER 0.0.1 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="attacks module" href="attacks.html" />
+    <link rel="next" title="Measures" href="measures.html" />
     <link rel="prev" title="Tutorial 5: Entity Dissemination" href="tutorials/tutorial-5.html" /> 
 </head>
 
@@ -111,37 +111,15 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">robustness</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="attacks.html">attacks module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cascading.html">cascading module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defenses.html">defenses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diffusion.html">diffusion module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="experiments.html">experiments package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="experiments.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.attack.html">experiments.attack package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.cascading.html">experiments.cascading package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.defense.html">experiments.defense package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.diffusion.html">experiments.diffusion package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.robustness.html">experiments.robustness package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="experiments.html#module-experiments">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="graphs.html">graphs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="measures.html">measures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulations.html">simulations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_measures">tests.test_measures module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TIGER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attacks.html">Attacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defenses.html">Defense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cascading.html">Cascading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulations.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -192,7 +170,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>robustness</li>
+      <li>TIGER</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -211,66 +189,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="robustness">
-<h1>robustness<a class="headerlink" href="#robustness" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tiger">
+<h1>TIGER<a class="headerlink" href="#tiger" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="attacks.html">attacks module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cascading.html">cascading module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defenses.html">defenses module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="diffusion.html">diffusion module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="experiments.html">experiments package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="experiments.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="experiments.attack.html">experiments.attack package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.attack.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.attack.html#module-experiments.attack.attack_experiments">experiments.attack.attack_experiments module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.attack.html#module-experiments.attack">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="experiments.cascading.html">experiments.cascading package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.cascading.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.cascading.html#module-experiments.cascading.sim_cascading">experiments.cascading.sim_cascading module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.cascading.html#module-experiments.cascading">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="experiments.defense.html">experiments.defense package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.defense.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.defense.html#module-experiments.defense.defense_experiments">experiments.defense.defense_experiments module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.defense.html#module-experiments.defense">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="experiments.diffusion.html">experiments.diffusion package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.diffusion.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.diffusion.html#module-experiments.diffusion.sim_diffusion">experiments.diffusion.sim_diffusion module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.diffusion.html#module-experiments.diffusion">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="experiments.robustness.html">experiments.robustness package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.robustness.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.robustness.html#module-experiments.robustness.approximation_experiments">experiments.robustness.approximation_experiments module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.robustness.html#module-experiments.robustness.scalability_experiments">experiments.robustness.scalability_experiments module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.robustness.html#module-experiments.robustness">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="experiments.html#module-experiments">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="graphs.html">graphs module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="measures.html">measures module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="simulations.html">simulations module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="test.html">test module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tests.html">tests package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.test_measures">tests.test_measures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="measures.html">Measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attacks.html">Attacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defenses.html">Defense</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cascading.html">Cascading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diffusion.html">Diffusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphs.html">Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 </div>
 </div>
@@ -281,7 +211,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="attacks.html" class="btn btn-neutral float-right" title="attacks module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="measures.html" class="btn btn-neutral float-right" title="Measures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="tutorials/tutorial-5.html" class="btn btn-neutral float-left" title="Tutorial 5: Entity Dissemination" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

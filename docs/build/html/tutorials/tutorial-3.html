@@ -111,37 +111,15 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">robustness</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../attacks.html">attacks module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cascading.html">cascading module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../defenses.html">defenses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">diffusion module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../experiments.html">experiments package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../experiments.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.attack.html">experiments.attack package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.cascading.html">experiments.cascading package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.defense.html">experiments.defense package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.diffusion.html">experiments.diffusion package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.robustness.html">experiments.robustness package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../experiments.html#module-experiments">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../graphs.html">graphs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../measures.html">measures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulations.html">simulations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../test.html">test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tests.html">tests package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_measures">tests.test_measures module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">TIGER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../attacks.html">Attacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../defenses.html">Defense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cascading.html">Cascading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graphs.html">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -215,7 +193,11 @@
             
   <div class="section" id="tutorial-3-defending-a-network">
 <h1>Tutorial 3: Defending a Network<a class="headerlink" href="#tutorial-3-defending-a-network" title="Permalink to this headline">¶</a></h1>
-<p>The same centrality measures effective in attacking a network are important to network defense (e.g., degree, betweenness, PageRank,eigenvector, etc.). In fact, if an attack strategy is known a priori, node monitoring can largely prevent an attack altogether. Below, we provide a high-level overview of several heuristic and optimization based defense techniques. Then, we show Tiger users how several defense techniques can be used to robustify an attacked network.</p>
+<p>The same centrality measures that are effective in attacking a network, are important to network defense (e.g., degree, betweenness, PageRank,eigenvector, etc.). In fact, if an attack strategy is known a priori, node monitoring can largely prevent an attack altogether. Below, we provide a high-level overview of several heuristic and optimization based defense techniques. Then, we show several defense techniques can be used to robustify an attacked network.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/defense-comparison.jpg"><img alt="../_images/defense-comparison.jpg" src="../_images/defense-comparison.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">There are 3 common ways to defend a network: edge addition, edge rewiring and node monitoring. Selecting an ideal defense requires knowledge of the network topology and some information on the expected attack (or failure).</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
 <p>We categorize defense techniques based on whether they operate heuristically, modifying graph structure independent of a robustness measure, or by optimizing for a particular robustness measure. Within each  category a network can be defended i.e., improve its robustness by: (1) <em>edge rewiring</em>, (2) <em>edge addition</em>, or (iii) <em>node monitoring</em>. Edge rewiring is considered a <em>low</em> cost, <em>less</em> effective version of edge addition. On the other hand, edge addition almost always provides stronger defense. Node monitoring provides an orthogonal mechanism to increase network robustness by monitoring (or removing) nodes in the graph. This has an array of applications, including: (i) preventing targeted attacks, (ii) mitigating cascading failures, and (iii) reducing the spread of network entities. Below, we highlight several heuristic edge rewiring and addition techniques contained in TIGER:</p>
 <ul class="simple">
 <li><p><strong>Random addition</strong>: adds an edge between two random nodes.</p></li>
@@ -287,9 +269,9 @@
 </pre></div>
 </div>
 <p>The results of the code are shown in the figure below, where the network is initially attacked using the RB attack strategy (30 nodes removed), and the success of each defense is measured based on how it can reconnect the network by adding or rewiring edges in the network (higher is better). Based on the figure, we identify three key observations: (i) preferential edge addition performs the best; (ii) edge addition, in general, outperforms rewiring strategies; and (iii) random neighbor rewiring typically performs better than the other rewiring strategies.</p>
-<div class="figure align-center" id="id1">
+<div class="figure align-center" id="id2">
 <a class="reference internal image-reference" href="../_images/network-defense.jpg"><img alt="../_images/network-defense.jpg" src="../_images/network-defense.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Comparing ability of 5 edge defenses to improve KY-2 network robustness after removing 30 nodes via RB attack. Edge addition performs the best, with random edge rewiring performing the worst.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Comparing ability of 5 edge defenses to improve KY-2 network robustness after removing 30 nodes via RB attack. Edge addition performs the best, with random edge rewiring performing the worst.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 

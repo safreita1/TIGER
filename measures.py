@@ -37,6 +37,7 @@ def run_measure(graph, measure, k=np.inf):
 def get_measures():
     """
     Returns a list of strings representing all of the available graph robustness measures
+
     :return: list of strings
     """
     return list(measures.keys())
@@ -61,7 +62,7 @@ Graph Connectivity Measures
 
 def node_connectivity(graph):
     """
-    Larger vertex (node) connectivity -> harder to disconnect graph -> more robust graph
+    Larger vertex (node) connectivity -> harder to disconnect graph -> more robust graph.
 
     :param graph: undirected NetworkX graph
     :return: an integer
@@ -71,7 +72,7 @@ def node_connectivity(graph):
 
 def edge_connectivity(graph):
     """
-    Larger edge connectivity -> harder to disconnect graph -> more robust graph
+    Larger edge connectivity -> harder to disconnect graph -> more robust graph.
 
     :param graph: undirected NetworkX graph
     :return: an integer
@@ -230,6 +231,15 @@ def natural_connectivity(graph, k=np.inf):
 
 
 def odd_subgraph_centrality(i, lam, u):
+    """
+    Used in the calculation of spectral scaling.
+
+    :param i: node index
+    :param lam: largest eigenvalue
+    :param u: largest eigenvector
+    :return:
+    """
+
     sc = 0
     for j in range(len(lam)):
         sc += np.power(u[i, j], 2) * np.sinh(lam[j])

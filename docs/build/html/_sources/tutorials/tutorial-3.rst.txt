@@ -1,7 +1,13 @@
 Tutorial 3: Defending a Network
 ===============================
 
-The same centrality measures effective in attacking a network are important to network defense (e.g., degree, betweenness, PageRank,eigenvector, etc.). In fact, if an attack strategy is known a priori, node monitoring can largely prevent an attack altogether. Below, we provide a high-level overview of several heuristic and optimization based defense techniques. Then, we show Tiger users how several defense techniques can be used to robustify an attacked network.
+The same centrality measures that are effective in attacking a network, are important to network defense (e.g., degree, betweenness, PageRank,eigenvector, etc.). In fact, if an attack strategy is known a priori, node monitoring can largely prevent an attack altogether. Below, we provide a high-level overview of several heuristic and optimization based defense techniques. Then, we show several defense techniques can be used to robustify an attacked network.
+
+.. figure:: ../../../images/defense-comparison.jpg
+   :width: 100 %
+   :align: center
+    
+   There are 3 common ways to defend a network: edge addition, edge rewiring and node monitoring. Selecting an ideal defense requires knowledge of the network topology and some information on the expected attack (or failure). 
 
 We categorize defense techniques based on whether they operate heuristically, modifying graph structure independent of a robustness measure, or by optimizing for a particular robustness measure. Within each  category a network can be defended i.e., improve its robustness by: (1) *edge rewiring*, (2) *edge addition*, or (iii) *node monitoring*. Edge rewiring is considered a *low* cost, *less* effective version of edge addition. On the other hand, edge addition almost always provides stronger defense. Node monitoring provides an orthogonal mechanism to increase network robustness by monitoring (or removing) nodes in the graph. This has an array of applications, including: (i) preventing targeted attacks, (ii) mitigating cascading failures, and (iii) reducing the spread of network entities. Below, we highlight several heuristic edge rewiring and addition techniques contained in TIGER:
 

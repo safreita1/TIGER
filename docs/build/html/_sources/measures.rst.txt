@@ -1,5 +1,5 @@
-measures module
-===============
+Measures
+========
 
 .. automodule:: measures
    :members:

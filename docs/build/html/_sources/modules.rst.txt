@@ -1,17 +1,14 @@
-robustness
-==========
+TIGER
+=====
 
 .. toctree::
    :maxdepth: 4
-
-   attacks
-   cascading
-   defenses
-   diffusion
-   experiments
-   graphs
+    
    measures
+   attacks
+   defenses
+   cascading
+   diffusion
    simulations
-   test
-   tests
+   graphs
    utils

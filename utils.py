@@ -1,9 +1,7 @@
-import time
 import bezier
 import numpy as np
 import networkx as nx
 from scipy import sparse
-from joblib import Parallel, delayed
 from scipy.linalg import eigh
 from scipy.sparse.linalg import eigsh
 
@@ -11,19 +9,22 @@ from scipy.sparse.linalg import eigsh
 def get_sparse_graph(graph):
     """
     Returns a sparse adjacency matrix in CSR format
+
     :param graph: undirected NetworkX graph
-    :return: sparse adjacency matrix
+    :return: Scipy sparse adjacency matrix
     """
+
     return nx.to_scipy_sparse_matrix(graph, format='csr', dtype=np.float, nodelist=graph.nodes)
 
 
 def get_adjacency_spectrum(graph, k=np.inf, eigvals_only=False, which='LA'):
     """
     Gets the top k eigenpairs of the adjacency matrix
-    :param graph: sparse matrix
+
+    :param graph: undirected NetworkX graph
     :param k: number of top k eigenpairs to obtain
     :param eigvals_only: get only the eigenvalues i.e., no eigenvectors
-    :param which:  he type of k eigenvectors and eigenvalues to find
+    :param which:  the type of k eigenvectors and eigenvalues to find
     :return: the eigenpair information
     """
 
@@ -41,7 +42,8 @@ def get_adjacency_spectrum(graph, k=np.inf, eigvals_only=False, which='LA'):
 def get_laplacian_spectrum(graph, k=np.inf, which='SM', tol=1E-2, eigvals_only=True):
     """
     Gets the bottom k eigenpairs of the Laplacian matrix
-    :param graph: sparse matrix
+
+    :param graph: undirected NetworkX graph
     :param k: number of bottom k eigenpairs to obtain
     :param which:  he type of k eigenvectors and eigenvalues to find
     :param tol: the precision at which to stop computing the eigenpairs
@@ -49,6 +51,7 @@ def get_laplacian_spectrum(graph, k=np.inf, which='SM', tol=1E-2, eigvals_only=T
 
     :return: the eigenpair information
     """
+
     # get all eigenvalues for small graphs
     if len(graph) < 100:
         lam = nx.laplacian_spectrum(graph)
@@ -64,8 +67,9 @@ def get_laplacian_spectrum(graph, k=np.inf, which='SM', tol=1E-2, eigvals_only=T
 def get_laplacian(graph):
     """
     Gets the Laplacian matrix in sparse CSR format
+
     :param graph: undirected NetworkX graph
-    :return: sparse matrix
+    :return: Scipy sparse Laplacian matrix
     """
     A = nx.to_scipy_sparse_matrix(graph, format='csr', dtype=np.float, nodelist=graph.nodes)
     D = sparse.spdiags(data=A.sum(axis=1).flatten(), diags=[0], m=len(graph), n=len(graph), format='csr')
@@ -74,9 +78,10 @@ def get_laplacian(graph):
     return L
 
 
-# From: https://github.com/beyondbeneath/bezier-curved-edges-networkx
-# User: beyondbeneath
 def curved_edges(G, pos, dist_ratio=0.2, bezier_precision=20, polarity='random'):
+    """
+    Internal function to enable Bezier curved edges. Code originally from 'beyondbeneath' @ https://github.com/beyondbeneath/bezier-curved-edges-networkx
+    """
     # Get nodes into np array
     edges = np.array(G.edges())
     l = edges.shape[0]

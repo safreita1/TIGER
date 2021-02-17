@@ -112,37 +112,15 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">robustness</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../attacks.html">attacks module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cascading.html">cascading module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../defenses.html">defenses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">diffusion module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../experiments.html">experiments package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../experiments.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.attack.html">experiments.attack package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.cascading.html">experiments.cascading package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.defense.html">experiments.defense package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.diffusion.html">experiments.diffusion package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.robustness.html">experiments.robustness package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../experiments.html#module-experiments">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../graphs.html">graphs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../measures.html">measures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulations.html">simulations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../test.html">test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tests.html">tests package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_measures">tests.test_measures module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">TIGER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../attacks.html">Attacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../defenses.html">Defense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cascading.html">Cascading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graphs.html">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -217,18 +195,25 @@
   <div class="section" id="tutorial-2-attacking-a-network">
 <h1>Tutorial 2: Attacking a Network<a class="headerlink" href="#tutorial-2-attacking-a-network" title="Permalink to this headline">¶</a></h1>
 <p>There are two primary ways a network can become damaged: (1) <strong>natural failure</strong> and (2) <strong>targeted attack</strong>. Natural failures typically occur when a piece of equipment breaks down from natural causes. In the study of graphs, this would correspond to the removal of a node or edge in the graph. While random network failures regularly occur, they are typically less severe than targeted attacks. In contrast, targeted attacks carefully select nodes and edges in the network for removal in order to maximally disrupt network functionality. As such, we focus the majority of our attention to targeted attacks.</p>
-<p>We showcase an example attack in Figure 1 on the Kentucky KY-2 water distribution network. The network starts under normal conditions (far left), and at each step an additional node is removed by the attacker (red nodes). After removing only 13 of the 814 nodes, the network is split into two separate regions. By step 27, the network splits into four disconnected regions. In this simulation, and in general, attack strategies rely on node and edge centrality measures to identify candidates. If we look carefully, we observe that certain nodes (and edges) in the network act as key bridges between various network regions. As a result, attacks able to identify these bridges are highly effective in disrupting this network</p>
 <div class="figure align-center" id="id1">
-<a class="reference internal image-reference" href="../_images/node-attack.jpg"><img alt="../_images/node-attack.jpg" src="../_images/node-attack.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">TIGER simulation of an RD node attack on the KY-2 water distribution network. Step 0: network starts under normal conditions; at each step a node is removed by the attacker (red nodes). Step 13, 22 &amp; 27: after removing only a few of the 814 nodes, the network splits into two and three and four disconnected regions, respectively.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<a class="reference internal image-reference" href="../_images/attack-comparison.jpg"><img alt="../_images/attack-comparison.jpg" src="../_images/attack-comparison.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Networks can become damaged through natural failures or targeted attacks. Depending on the severity of the damage, networks can suffer from cascading failures.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<p>Below, we discuss several attack strategies contained in TIGER and then compare their effectiveness on attacking the Kentucky KY-2 water distribution network.</p>
+<p>We showcase an example attack in the figure below on the Kentucky KY-2 water distribution network. The network starts under normal conditions (far left), and at each step an additional node is removed by the attacker (red nodes). After removing only 13 of the 814 nodes, the network is split into two separate regions. By step 27, the network splits into four disconnected regions. In this simulation, and in general, attack strategies rely on node and edge centrality measures to identify candidates. If we look carefully, we observe that certain nodes (and edges) in the network act as key bridges between various network regions. As a result, attacks able to identify these bridges are highly effective in disrupting this network. Below, we discuss several attack strategies contained in TIGER and then compare their effectiveness on attacking the Kentucky KY-2 water distribution network.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/node-attack.jpg"><img alt="../_images/node-attack.jpg" src="../_images/node-attack.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">TIGER simulation of an RD node attack on the KY-2 water distribution network. Step 0: network starts under normal conditions; at each step a node is removed by the attacker (red nodes). Step 13, 22 &amp; 27: after removing only a few of the 814 nodes, the network splits into two and three and four disconnected regions, respectively.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
 <ul class="simple">
 <li><p><strong>Initial degree removal (ID)</strong> targets nodes with the highest degree <span class="math notranslate nohighlight">\($\delta_v\)</span>. This has the effect of reducing the total number of edges in the network as fast as possible. Since this attack only considers its neighbors when making a decision, it is considered a <em>local attack</em>. The benefit of this locality is low computational overhead.</p></li>
 <li><p><strong>Initial betweenness removal (IB)</strong> targets nodes with high betweenness centrality <span class="math notranslate nohighlight">\(b_v\)</span>. This has the effect of destroying as many paths as possible. Since path information is aggregated from across the network, this is considered a <em>global attack</em> strategy. Unfortunately, global information comes with significant computational overhead compared to a local attacks.</p></li>
 <li><p><strong>Recalculated degree (RD)</strong> and <strong>betweenness removal (RB)</strong> follow the same process as ID and IB, respectively, with one additional step to recalculate the degree (or betweenness) distribution after a node is removed. This recalculation often results in a stronger attack, however, recalculating these distributions adds a significant amount of computational overhead to the attack.</p></li>
 </ul>
 <p>In the figure below, we can see the effectiveness of each attack strategy when used to remove <em>nodes</em> and <em>edges</em> from a network, where attack success is measured based on how fractured the network becomes when removing nodes from the network (i.e., largest connected component). We identify three key observations: (i) random node removal (RND) is not an effective strategy on this network structure; (ii) RB is the most effective attack strategy; and (iii) the remaining three attacks are roughly equivalent, falling somewhere between RND and RB. Now lets take a look at how to implement this in code using TIGER. We begin by setting up the attack parameters and creating an attack visualization on the Kentucky KY-2 water distribution network.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/node-attack-comparison.jpg"><img alt="../_images/node-attack-comparison.jpg" src="../_images/node-attack-comparison.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Efficacy of 5 edge attacks (left) and 5 node attacks (right) on the KY-2 water distribution network. The most effective attack (RB) disconnects approximately 50% of the network with less than 30 removed edges (or nodes).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
 <div class="highlight-python notranslate" id="attack-1"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -320,11 +305,6 @@
    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
 </pre></div>
-</div>
-<p>Putting this all together, we can see the effectiveness of each <em>node</em> and <em>edge</em> attack strategy in the figure below, where attack success is measured based on how fractured the network becomes when removing nodes from the network (i.e., largest connected component). We identify three key observations: (i) random node removal (RND) is not an effective strategy on this network structure; (ii) RB is the most effective attack strategy; and (iii) the remaining three attacks are roughly equivalent, falling somewhere between RND and RB.</p>
-<div class="figure align-center" id="id2">
-<a class="reference internal image-reference" href="../_images/node-attack-comparison.jpg"><img alt="../_images/node-attack-comparison.jpg" src="../_images/node-attack-comparison.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Efficacy of 5 edge attacks (left) and 5 node attacks (right) on the KY-2 water distribution network. The most effective attack (RB) disconnects approximately 50% of the network with less than 30 removed edges (or nodes).</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 

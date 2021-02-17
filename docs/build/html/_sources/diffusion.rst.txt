@@ -1,5 +1,5 @@
-diffusion module
-================
+Diffusion
+=========
 
 .. automodule:: diffusion
    :members:

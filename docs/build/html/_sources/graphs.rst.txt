@@ -1,5 +1,5 @@
-graphs module
-=============
+Graph
+=====
 
 .. automodule:: graphs
    :members:

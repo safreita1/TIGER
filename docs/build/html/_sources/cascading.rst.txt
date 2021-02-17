@@ -1,5 +1,5 @@
-cascading module
-================
+Cascading
+=========
 
 .. automodule:: cascading
    :members:

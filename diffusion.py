@@ -13,6 +13,7 @@ class Diffusion(Simulation):
     def __init__(self, graph, model='SIS', runs=10, steps=5000, b=0.00208, d=0.01, c=1, **kwargs):
         """
         Simulates the propagation of a virus using either the SIS or SIR model
+
         :param graph: contact network
         :param model: a string to set the model type (i.e., SIS or SIR)
         :param runs: an integer number of times to run the simulation
@@ -52,6 +53,7 @@ class Diffusion(Simulation):
         """
         Gets the effective string of the virus. This is a factor of the spectral radius (first eigenvalue) of graph,
         the virus birth rate 'b' and the virus death rate 'd'
+
         :return: a float for virus effective strength
         """
 
@@ -98,7 +100,7 @@ class Diffusion(Simulation):
         """
           Keeps track of important simulation information at each step of the simulation
 
-          :param step: current simulation interation
+          :param step: current simulation iteration
           """
 
         self.sim_info[step] = {

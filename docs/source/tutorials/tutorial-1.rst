@@ -1,17 +1,20 @@
 Tutorial 1: Measuring Vulnerability and Robustness
 ********************************************************
-TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure utilizes the graph, adjacency or Laplacian matrix. In the figure below, we show some common robustness measures and their application to measuring network robustness.
+
+TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure uses the graph, adjacency, or Laplacian matrix. In the figure below, we show some common robustness measures from each category.     
 
 .. _fig-coordsys-rect:
 
-.. figure:: ../../../images/robustness_measures.jpg
+.. figure:: ../../../images/measure-comparison.jpg
    :width: 100 %
    :align: center
-       
-   Comparison of TIGER robustness measures. Measures are grouped based on whether they use the graph, adjacency or Laplacian matrix. For each measure, we briefly describe it’s application to measuring network robustness.
+
+   Robustness measures fall into one of three categories, depending on whether it uses the graph, adjacency, or Laplacian matrix.
 
 Comparing Robustness Measures
 -----------------------------------
+
+We select 3 robustness measures, one from each of the above categories, to extensively discuss.
 
 **1. Average vertex betweenness** (:math:`\bar{b}_v`) of a graph :math:`G=(V, E)` is the summation of vertex betweenness :math:`b_u` for every node :math:`u \in V`, where vertex betweenness for node *u* is defined as the number of shortest paths that pass through *u* out of the total possible shortest paths
 
@@ -46,7 +49,7 @@ Since calculting the average vertex betweenness for large graphs is not computat
    avg_vertex_betweenness = run_measure(graph, measure='average_vertex_betweenness_approx', k=10)
    print("Approximate average vertex betweenness:", avg_vertex_betweenness)
 
-Since we are using an approximate version, the results will differ slightly from the full version. However, the advantage is that approximate versions can scale much better to large graphs. Selecting variable *k* is method dependent, however, we set reasonable default values for each method (i.e., just run *run_measure(graph, measure='...')*). We'll do an in-depth comparison on how to practically set these approximation values at the end of this tutorial.
+Since we are using an approximate version, the results will differ slightly from the full version. However, the advantage is that approximate versions can scale much better to large graphs. Selecting variable *k* is method dependent, however, we set reasonable default values for each method. We'll do an in-depth comparison on how to practically set *k* at the end of the tutorial.
 
 
 
@@ -64,6 +67,14 @@ Extending this to the whole graph, we say the *effective graph resistance* *R* i
 .. math:: R = \frac{1}{2}\sum_{i, j}^{n} R_{ij} = n\sum_{i=2}^{n} \frac{1}{\mu_i}
 
 As a robustness measure, effective resistance measures how well connected a network is, where a smaller value indicates a more robust network. In addition, the effective resistance has many desirable properties, including the fact that it strictly decreases when adding edges, and takes into account both the number of paths between node pairs and their length. 
+
+
+.. figure:: ../../../images/robustness_measures.jpg
+   :width: 100 %
+   :align: center
+             
+   Comparison of TIGER robustness measures. Measures are grouped based on whether they use the graph, adjacency or Laplacian matrix. For each measure, we briefly describe it’s application to measuring network robustness.
+
 
 
 Approximate vs Non-Approximate
@@ -169,6 +180,12 @@ In order to run each robustness measure, do the following:
 
 Now that we have the results for all 5 measures at different values of *k*, along with non-approximate results (k=np.inf), we can plot the error between the non-approximate and the approximate robustness measure as a function of *k*.
 
+.. figure:: ../../../images/measurement-comparison.jpg
+   :width: 100 %
+   :align: center
+
+   Error of 5 fast, approximate robustness measures supported by TIGER. Parameter *k* represents the trade-off between speed (low *k*) and precision (high *k*). To measure approximation efficacy, we vary :math:`r\in [5, 300]` in increments of 10 and measure the error between the approximate and original measure averaged over 30 runs on a clustered scale-free graph with 300 nodes.
+
 .. code-block:: python
    :name: measure-comparsion-4
 
@@ -197,14 +214,4 @@ Now that we have the results for all 5 measures at different values of *k*, alon
      os.makedirs(save_dir, exist_ok=True)
      plt.savefig(save_dir + 'approximation_{}_n={},start={},step={}.pdf'.format(result_type, n, start, step))
      plt.show()
-
-
-.. _fig-coordsys-rect:
-
-.. figure:: ../../../images/measurement-comparison.jpg
-   :width: 100 %
-   :align: center
-
-   Error of 5 fast, approximate robustness measures supported by TIGER. Parameter *k* represents the trade-off between speed (low *k*) and precision (high *k*). To measure approximation efficacy, we vary :math:`r\in [5, 300]` in increments of 10 and measure the error between the approximate and original measure averaged over 30 runs on a clustered scale-free graph with 300 nodes.
-
 

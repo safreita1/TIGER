@@ -101,7 +101,7 @@ def add_edge_pr(graph, k=3):
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
-    :return: a list of edges to add
+    :return: a dictionary of the edges to be 'added'
     """
 
     info = defaultdict(list)
@@ -116,7 +116,7 @@ def add_edge_eig(graph, k=3):
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
-    :return: a list of edges to add
+    :return: a dictionary of the edges to be 'added'
     """
 
     info = defaultdict(list)
@@ -146,7 +146,7 @@ def add_edge_rnd(graph, k=3):
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
-    :return: a list of edges to add
+    :return: a dictionary of the edges to be 'added'
     """
 
     graph_ = graph.copy()
@@ -167,8 +167,11 @@ def add_edge_rnd(graph, k=3):
 
 def add_edge_pref(graph, k=3):
     """
+    Adds an edge connecting two nodes with the lowest degrees.
 
-    :return:
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to add
+    :return: a dictionary of the edges to be 'added'
     """
 
     info = defaultdict(list)
@@ -195,8 +198,11 @@ def add_edge_pref(graph, k=3):
 
 def rewire_edge_rnd(graph, k=3):
     """
+    Removes a random edge and adds one using 'add_edge_rnd()'
 
-    :return:
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to rewire
+    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
     """
 
     info = defaultdict(list)
@@ -214,8 +220,11 @@ def rewire_edge_rnd(graph, k=3):
 
 def rewire_edge_rnd_neighbor(graph, k=3):
     """
+    Removes a random edge and adds one using 'add_edge_rnd()'
 
-    :return:
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to rewire
+    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
     """
 
     info = defaultdict(list)
@@ -240,8 +249,11 @@ def rewire_edge_rnd_neighbor(graph, k=3):
 
 def rewire_edge_pref(graph, k=3):
     """
+    Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph
 
-    :return:
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to rewire
+    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
     """
 
     graph_ = graph.copy()
@@ -266,8 +278,11 @@ def rewire_edge_pref(graph, k=3):
 
 def rewire_edge_pref_rnd(graph, k=3):
     """
+    Selects an edge, disconnects the higher degree node, and reconnects to a random one.
 
-    :return:
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to rewire
+    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
     """
 
     graph_ = graph.copy()
@@ -338,7 +353,6 @@ class Defense(Simulation):
     """
     This class simulates a variety of defense techniques on an undirected NetworkX graph
 
-    Attributes:
     :param graph: an undirected NetworkX graph
     :param runs: an integer number of times to run the simulation
     :param steps: an integer number of steps to run a single simulation
@@ -420,7 +434,7 @@ class Defense(Simulation):
         """
          Keeps track of important simulation information at each step of the simulation
 
-         :param step: current simulation interation
+         :param step: current simulation iteration
          """
 
         measure = run_measure(self.graph_, self.prm['robust_measure'])
@@ -453,7 +467,7 @@ class Defense(Simulation):
 
     def run_single_sim(self):
         """
-        Run the attack simulation
+        Run the defense simulation
         """
 
         for step in range(self.prm['steps']):

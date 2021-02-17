@@ -1,5 +1,5 @@
-attacks module
-==============
+Attacks
+=======
 
 .. automodule:: attacks
    :members:

@@ -1,5 +1,5 @@
-defenses module
-===============
+Defense
+=======
 
 .. automodule:: defenses
    :members:

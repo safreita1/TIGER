@@ -115,6 +115,14 @@ def get_node_pr(graph, k=3):
 
 
 def get_node_eig(graph, k=3):
+    """
+    Get k nodes to attack based on top eigenvector centrality entries
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to attack
+    :return: a list of nodes to attack
+    """
+
     centrality = nx.eigenvector_centrality(graph, tol=1E-3, max_iter=500)
     nodes = heapq.nlargest(k, centrality, key=centrality.get)
 
@@ -410,7 +418,6 @@ class Attack(Simulation):
     """
     This class simulates a variety of attack strategies on an undirected NetworkX graph
 
-    Attributes:
     :param graph: an undirected NetworkX graph
     :param runs: an integer number of times to run the simulation
     :param steps: an integer number of steps to run a single simulation
@@ -486,7 +493,7 @@ class Attack(Simulation):
         """
         Keeps track of important simulation information at each step of the simulation
 
-        :param step: current simulation interation
+        :param step: current simulation iteration
         """
 
         measure = run_measure(self.graph_, self.prm['robust_measure'])

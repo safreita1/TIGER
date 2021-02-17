@@ -12,7 +12,6 @@ class Cascading(Simulation):
     """
     This class simulates cascading failures on a network
 
-    Attributes:
     :param graph: an undirected NetworkX graph
     :param runs: an integer number of times to run the simulation
     :param steps: an integer number of steps to run a single simulation
@@ -111,7 +110,7 @@ class Cascading(Simulation):
         """
         Keeps track of important simulation information at each step of the simulation
 
-        :param step: current simulation interation
+        :param step: current simulation iteration
         """
 
         nodes_functioning = set(self.graph.nodes).difference(self.failed)

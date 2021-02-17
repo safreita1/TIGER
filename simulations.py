@@ -68,7 +68,8 @@ class Simulation:
         (3) positioned using a spectral layout.
 
         Then lays out the edges, can be curved, bundled, or straight
-        :return:
+
+        :return: Tuple containing node and edge positions
         """
         edge_pos = None
 
@@ -93,6 +94,7 @@ class Simulation:
     def plot_results(self, results):
         """
         Plots the compiled simulation results
+
         :param results: a list of floats representing each simulation output
         """
         results_norm = [r / len(self.graph) for r in results]
@@ -126,8 +128,9 @@ class Simulation:
     def get_plot_title(self, step):
         """
         Gets the title for each plot
+
         :param step: the current simulation iteration
-        :return: string
+        :return: title string
         """
         if self.child_class() == 'Diffusion':
             title = '{}_epidemic:step={},diffusion={},method={},k={}'.format(self.prm['model'], step, self.prm['diffusion'], self.prm['method'], self.prm['k'])
@@ -149,6 +152,7 @@ class Simulation:
     def plot_graph_transition(self, sim_info):
         """
         Helper function to decide which snapshots to take for network visualization
+
         :param sim_info: the information stored at each step in the simulation
         """
         history = [info['failed'] for step, info in sim_info.items()]
@@ -166,9 +170,9 @@ class Simulation:
     def get_visual_settings(self, step):
         """
         Sets the visual settings for the network visualization
+
         :param step: current iteration of the simulation
-        :return: four lists, each containing a number corresponding to the size or color of each node in the graph
-        + 1 cmap representing color scheme
+        :return: four lists, each containing a number corresponding to the size or color of each node in the graph + cmap representing color scheme
         """
         if self.child_class() == 'Cascading':
             nc, ns = [], []
@@ -219,8 +223,9 @@ class Simulation:
     def draw_graph(self, step):
         """
         Draws the graph
+
         :param step: current iteration of the simulation
-        :return: the node placement
+        :return: matplotlib.collections.PathCollection PathCollection` of the nodes.
         """
         nc, ns, ec, ew, cmap = self.get_visual_settings(step)
 
@@ -240,6 +245,7 @@ class Simulation:
     def plot_network(self, step):
         """
         Plots the compiled simulation results
+
         :param step: current iteration of the simulation
         """
         plt.figure(figsize=(20, 20))
@@ -298,6 +304,7 @@ class Simulation:
     def run_simulation(self):
         """
         Averages the simulation over the number of 'runs'.
+
         :return: a list containing the average value at each 'step' of the simulation.
         """
         print('Running simulation {} times'.format(self.prm['runs']))
@@ -321,10 +328,19 @@ class Simulation:
         return avg_results
 
     def reset_simulation(self):
+        """
+        Implemented by child class
+        """
         pass
 
     def run_single_sim(self):
+        """
+        Implemented by child class
+        """
         pass
 
     def get_effective_strength(self):
+        """
+        Implemented by child class
+        """
         pass

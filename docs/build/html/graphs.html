@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>graphs module &mdash; TIGER 0.0.1 documentation</title>
+  <title>Graph &mdash; TIGER 0.0.1 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="measures module" href="measures.html" />
-    <link rel="prev" title="experiments.robustness package" href="experiments.robustness.html" /> 
+    <link rel="next" title="Utils" href="utils.html" />
+    <link rel="prev" title="Simulation" href="simulations.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -111,37 +111,15 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">robustness</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="attacks.html">attacks module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cascading.html">cascading module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defenses.html">defenses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diffusion.html">diffusion module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="experiments.html">experiments package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="experiments.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="experiments.attack.html">experiments.attack package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.cascading.html">experiments.cascading package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.defense.html">experiments.defense package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.diffusion.html">experiments.diffusion package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="experiments.robustness.html">experiments.robustness package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="experiments.html#module-experiments">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">graphs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="measures.html">measures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulations.html">simulations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_measures">tests.test_measures module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">TIGER</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attacks.html">Attacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defenses.html">Defense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cascading.html">Cascading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulations.html">Simulation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -192,9 +170,9 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="modules.html">robustness</a> &raquo;</li>
+          <li><a href="modules.html">TIGER</a> &raquo;</li>
         
-      <li>graphs module</li>
+      <li>Graph</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -214,11 +192,18 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-graphs">
-<span id="graphs-module"></span><h1>graphs module<a class="headerlink" href="#module-graphs" title="Permalink to this headline">¶</a></h1>
+<span id="graph"></span><h1>Graph<a class="headerlink" href="#module-graphs" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="graphs.as_733">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">as_733</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.as_733" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the ‘as19971108’ graph from: <a class="reference external" href="http://snap.stanford.edu/data/as-733.html">http://snap.stanford.edu/data/as-733.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.barbasi_albert">
@@ -241,27 +226,61 @@
 <dl class="py function">
 <dt id="graphs.c4_graph">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">c4_graph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.c4_graph" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 4 node cycle graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.ca_astro_ph">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">ca_astro_ph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.ca_astro_ph" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/ca-AstroPh.html">https://snap.stanford.edu/data/ca-AstroPh.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.ca_grqc">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">ca_grqc</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.ca_grqc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/ca-GrQc.html">https://snap.stanford.edu/data/ca-GrQc.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.ca_hep_th">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">ca_hep_th</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.ca_hep_th" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/cit-HepTh.html">https://snap.stanford.edu/data/cit-HepTh.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.cit_hep_th">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">cit_hep_th</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.cit_hep_th" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/cit-HepTh.html">https://snap.stanford.edu/data/cit-HepTh.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.clustered_scale_free">
@@ -285,22 +304,50 @@
 <dl class="py function">
 <dt id="graphs.dblp">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">dblp</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.dblp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/com-DBLP.html">https://snap.stanford.edu/data/com-DBLP.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.electrical">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">electrical</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.electrical" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="http://konect.cc/networks/opsahl-powergrid/">http://konect.cc/networks/opsahl-powergrid/</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.email_eu_all">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">email_eu_all</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.email_eu_all" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/email-EuAll.html">https://snap.stanford.edu/data/email-EuAll.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.enron_email">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">enron_email</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.enron_email" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/email-Enron.html">https://snap.stanford.edu/data/email-Enron.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.erdos_reyni">
@@ -323,23 +370,24 @@
 <dl class="py function">
 <dt id="graphs.get_graph_options">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">get_graph_options</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.get_graph_options" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a formatted string containing all of the generators, datasets and custom graphs implemented in TIGER</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>formatted string</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.get_graph_urls">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">get_graph_urls</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.get_graph_urls" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary of the datasets used in TIGER and link to download them</p>
+<dd><p>Returns a dictionary of the datasets used in TIGER and the link to download them</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>dictionary containing links to each dataset</p>
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py function">
-<dt id="graphs.gitub">
-<code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">gitub</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.gitub" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py function">
 <dt id="graphs.graph_loader">
@@ -349,8 +397,8 @@ In order to get a list of available graph options run ‘get_graph_options()’.
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph_type</strong> – a string representing the graph you want to load e.g., ‘ER, WS, BA,
-oregon_1 (must first download), electrical (must first download)</p></li>
+<li><p><strong>graph_type</strong> – a string representing the graph you want to load. For example, ‘ER’, ‘WS’, ‘BA’,
+‘oregon_1’ (must first download), ‘electrical’ (must first download)</p></li>
 <li><p><strong>kwargs</strong> – allows user to specify specific graph model properties</p></li>
 </ul>
 </dd>
@@ -363,67 +411,148 @@ oregon_1 (must first download), electrical (must first download)</p></li>
 <dl class="py function">
 <dt id="graphs.k4_1_graph">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">k4_1_graph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.k4_1_graph" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 4 node diamond graph (1 diagonal edge)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.k4_2_graph">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">k4_2_graph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.k4_2_graph" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 4 node diamond graph (2 diagonal edges), a.k.a. complete graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.karate">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">karate</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.karate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://networkx.org/documentation/stable/reference/generated/networkx.generators.social.karate_club_graph.html">https://networkx.org/documentation/stable/reference/generated/networkx.generators.social.karate_club_graph.html</a>,</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.o4_graph">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">o4_graph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.o4_graph" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 4 node disconnected graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.oregeon_1">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">oregeon_1</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.oregeon_1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/oregon1_010331.html">https://snap.stanford.edu/data/oregon1_010331.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.p2p_gnuetella08">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">p2p_gnuetella08</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.p2p_gnuetella08" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/p2p-Gnutella08.html">https://snap.stanford.edu/data/p2p-Gnutella08.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.p4_graph">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">p4_graph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.p4_graph" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 4 node path graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.roadnet_ca">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">roadnet_ca</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.roadnet_ca" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/roadNet-CA.html">https://snap.stanford.edu/data/roadNet-CA.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.s4_graph">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">s4_graph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.s4_graph" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a 4 node star graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.two_c4_0_bridge">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">two_c4_0_bridge</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.two_c4_0_bridge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns two disconnected 4 node cycle graphs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.two_c4_1_bridge">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">two_c4_1_bridge</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.two_c4_1_bridge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns two 4 node cycle graphs connected by 1 edge</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.two_c4_2_bridge">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">two_c4_2_bridge</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.two_c4_2_bridge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns two 4 node cycle graphs connected by 2 edges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.two_c4_3_bridge">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">two_c4_3_bridge</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.two_c4_3_bridge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns two 4 node cycle graphs connected by 3 edges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.watts_strogatz">
@@ -447,12 +576,26 @@ oregon_1 (must first download), electrical (must first download)</p></li>
 <dl class="py function">
 <dt id="graphs.wdn_ky2">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">wdn_ky2</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.wdn_ky2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://uknowledge.uky.edu/wdst/4/">https://uknowledge.uky.edu/wdst/4/</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="graphs.wiki_vote">
 <code class="sig-prename descclassname"><span class="pre">graphs.</span></code><code class="sig-name descname"><span class="pre">wiki_vote</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.wiki_vote" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the graph from: <a class="reference external" href="https://snap.stanford.edu/data/wiki-Vote.html">https://snap.stanford.edu/data/wiki-Vote.html</a>,
+where we preprocess it to only keep the largest connected component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>undirected NetworkX graph</p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 
@@ -462,8 +605,8 @@ oregon_1 (must first download), electrical (must first download)</p></li>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="measures.html" class="btn btn-neutral float-right" title="measures module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="experiments.robustness.html" class="btn btn-neutral float-left" title="experiments.robustness package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-right" title="Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="simulations.html" class="btn btn-neutral float-left" title="Simulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

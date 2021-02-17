@@ -112,37 +112,15 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorial-5.html">Tutorial 5: Entity Dissemination</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">robustness</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../attacks.html">attacks module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cascading.html">cascading module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../defenses.html">defenses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">diffusion module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../experiments.html">experiments package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../experiments.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.attack.html">experiments.attack package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.cascading.html">experiments.cascading package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.defense.html">experiments.defense package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.diffusion.html">experiments.diffusion package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../experiments.robustness.html">experiments.robustness package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../experiments.html#module-experiments">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../graphs.html">graphs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../measures.html">measures module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simulations.html">simulations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../test.html">test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tests.html">tests package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_attacks">tests.test_attacks module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_defenses">tests.test_defenses module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_measures">tests.test_measures module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests.test_simulations">tests.test_simulations module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tests.html#module-tests">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">TIGER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../attacks.html">Attacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../defenses.html">Defense</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cascading.html">Cascading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graphs.html">Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -216,13 +194,14 @@
             
   <div class="section" id="tutorial-1-measuring-vulnerability-and-robustness">
 <h1>Tutorial 1: Measuring Vulnerability and Robustness<a class="headerlink" href="#tutorial-1-measuring-vulnerability-and-robustness" title="Permalink to this headline">¶</a></h1>
-<p>TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure utilizes the graph, adjacency or Laplacian matrix. In the figure below, we show some common robustness measures and their application to measuring network robustness.</p>
-<div class="figure align-center" id="id2">
-<span id="fig-coordsys-rect"></span><a class="reference internal image-reference" href="../_images/robustness_measures.jpg"><img alt="../_images/robustness_measures.jpg" src="../_images/robustness_measures.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Comparison of TIGER robustness measures. Measures are grouped based on whether they use the graph, adjacency or Laplacian matrix. For each measure, we briefly describe it’s application to measuring network robustness.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p>TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure uses the graph, adjacency, or Laplacian matrix. In the figure below, we show some common robustness measures from each category.</p>
+<div class="figure align-center" id="id1">
+<span id="fig-coordsys-rect"></span><a class="reference internal image-reference" href="../_images/measure-comparison.jpg"><img alt="../_images/measure-comparison.jpg" src="../_images/measure-comparison.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Robustness measures fall into one of three categories, depending on whether it uses the graph, adjacency, or Laplacian matrix.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <div class="section" id="comparing-robustness-measures">
 <h2>Comparing Robustness Measures<a class="headerlink" href="#comparing-robustness-measures" title="Permalink to this headline">¶</a></h2>
+<p>We select 3 robustness measures, one from each of the above categories, to extensively discuss.</p>
 <p><strong>1. Average vertex betweenness</strong> (<span class="math notranslate nohighlight">\(\bar{b}_v\)</span>) of a graph <span class="math notranslate nohighlight">\(G=(V, E)\)</span> is the summation of vertex betweenness <span class="math notranslate nohighlight">\(b_u\)</span> for every node <span class="math notranslate nohighlight">\(u \in V\)</span>, where vertex betweenness for node <em>u</em> is defined as the number of shortest paths that pass through <em>u</em> out of the total possible shortest paths</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\bar{b}_v = \sum_{u\in V}\sum_{s\in V}\sum_{\substack{t\in V \\ s\neq t\neq u}} \frac{n_{s,t}(u)}{n_{s,t}}\end{split}\]</div>
@@ -246,7 +225,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Approximate average vertex betweenness:&quot;</span><span class="p">,</span> <span class="n">avg_vertex_betweenness</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Since we are using an approximate version, the results will differ slightly from the full version. However, the advantage is that approximate versions can scale much better to large graphs. Selecting variable <em>k</em> is method dependent, however, we set reasonable default values for each method (i.e., just run <em>run_measure(graph, measure=’…’)</em>). We’ll do an in-depth comparison on how to practically set these approximation values at the end of this tutorial.</p>
+<p>Since we are using an approximate version, the results will differ slightly from the full version. However, the advantage is that approximate versions can scale much better to large graphs. Selecting variable <em>k</em> is method dependent, however, we set reasonable default values for each method. We’ll do an in-depth comparison on how to practically set <em>k</em> at the end of the tutorial.</p>
 <p><strong>2. Spectral scaling</strong> (<span class="math notranslate nohighlight">\(\xi\)</span>) indicates if a network is simultaneously sparse and highly connected, known as “good expansion” (GE). Intuitively, we can think of a network with GE as a network lacking bridges or bottlenecks. In order to determine if a network has GE, the spectral gap is combined with odd subgraph centrality <span class="math notranslate nohighlight">\(SC_{odd}\)</span>, which measures the number of odd length closed walks a node participates in. Formally, <em>spectral scaling</em> is described as</p>
 <div class="math notranslate nohighlight">
 \[\xi(G) = \sqrt{\frac{1}{n} \sum_{i=1}^{n} \{log[\textbf{u}_1(i)] - [log\textbf{A} + \frac{1}{2} log[SC_{odd}(i)]] \}^2 }\]</div>
@@ -257,6 +236,10 @@ Extending this to the whole graph, we say the <em>effective graph resistance</em
 <div class="math notranslate nohighlight">
 \[R = \frac{1}{2}\sum_{i, j}^{n} R_{ij} = n\sum_{i=2}^{n} \frac{1}{\mu_i}\]</div>
 <p>As a robustness measure, effective resistance measures how well connected a network is, where a smaller value indicates a more robust network. In addition, the effective resistance has many desirable properties, including the fact that it strictly decreases when adding edges, and takes into account both the number of paths between node pairs and their length.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/robustness_measures.jpg"><img alt="../_images/robustness_measures.jpg" src="../_images/robustness_measures.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Comparison of TIGER robustness measures. Measures are grouped based on whether they use the graph, adjacency or Laplacian matrix. For each measure, we briefly describe it’s application to measuring network robustness.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
 </div>
 <div class="section" id="approximate-vs-non-approximate">
 <h2>Approximate vs Non-Approximate<a class="headerlink" href="#approximate-vs-non-approximate" title="Permalink to this headline">¶</a></h2>
@@ -349,6 +332,10 @@ Extending this to the whole graph, we say the <em>effective graph resistance</em
 </pre></div>
 </div>
 <p>Now that we have the results for all 5 measures at different values of <em>k</em>, along with non-approximate results (k=np.inf), we can plot the error between the non-approximate and the approximate robustness measure as a function of <em>k</em>.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/measurement-comparison.jpg"><img alt="../_images/measurement-comparison.jpg" src="../_images/measurement-comparison.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Error of 5 fast, approximate robustness measures supported by TIGER. Parameter <em>k</em> represents the trade-off between speed (low <em>k</em>) and precision (high <em>k</em>). To measure approximation efficacy, we vary <span class="math notranslate nohighlight">\(r\in [5, 300]\)</span> in increments of 10 and measure the error between the approximate and original measure averaged over 30 runs on a clustered scale-free graph with 300 nodes.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
 <div class="highlight-python notranslate" id="measure-comparsion-4"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">measures</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
    <span class="n">num_measures</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measures</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="n">num_measures</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">num_measures</span><span class="o">*</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -374,10 +361,6 @@ Extending this to the whole graph, we say the <em>effective graph resistance</em
   <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_dir</span> <span class="o">+</span> <span class="s1">&#39;approximation_</span><span class="si">{}</span><span class="s1">_n=</span><span class="si">{}</span><span class="s1">,start=</span><span class="si">{}</span><span class="s1">,step=</span><span class="si">{}</span><span class="s1">.pdf&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-</div>
-<div class="figure align-center" id="id3">
-<span id="id1"></span><a class="reference internal image-reference" href="../_images/measurement-comparison.jpg"><img alt="../_images/measurement-comparison.jpg" src="../_images/measurement-comparison.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Error of 5 fast, approximate robustness measures supported by TIGER. Parameter <em>k</em> represents the trade-off between speed (low <em>k</em>) and precision (high <em>k</em>). To measure approximation efficacy, we vary <span class="math notranslate nohighlight">\(r\in [5, 300]\)</span> in increments of 10 and measure the error between the approximate and original measure averaged over 30 runs on a clustered scale-free graph with 300 nodes.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

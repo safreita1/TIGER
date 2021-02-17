@@ -11,8 +11,8 @@ def graph_loader(graph_type, **kwargs):
     Loads any of the available graph models, supported user-downloaded datasets and toy graphs.
     In order to get a list of available graph options run 'get_graph_options()'.
 
-    :param graph_type: a string representing the graph you want to load e.g., 'ER, WS, BA,
-           oregon_1 (must first download), electrical (must first download)
+    :param graph_type: a string representing the graph you want to load. For example, 'ER', 'WS', 'BA',
+           'oregon_1' (must first download), 'electrical' (must first download)
     :param kwargs: allows user to specify specific graph model properties
     :return: an undirected NetworkX graph
     """
@@ -34,7 +34,7 @@ def graph_loader(graph_type, **kwargs):
 
 def get_graph_urls():
     """
-    Returns a dictionary of the datasets used in TIGER and link to download them
+    Returns a dictionary of the datasets used in TIGER and the link to download them
 
     :return: dictionary containing links to each dataset
     """
@@ -42,6 +42,12 @@ def get_graph_urls():
 
 
 def get_graph_options():
+    """
+    Returns a formatted string containing all of the generators, datasets and custom graphs implemented in TIGER
+
+    :return: formatted string
+    """
+
     graph_options = {
         'models': list(models.keys()),
         'datasets': datasets,
@@ -117,6 +123,13 @@ Specific Graphs
 
 
 def wdn_ky2():
+    """
+    Returns the graph from: https://uknowledge.uky.edu/wdst/4/,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.Graph()
 
     with open(graph_dir + 'ky2.txt') as f:
@@ -140,76 +153,180 @@ def wdn_ky2():
 
 
 def as_733():
+    """
+    Returns the 'as19971108' graph from: http://snap.stanford.edu/data/as-733.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "as19971108.txt")
     graph = nx.convert_node_labels_to_integers(graph)
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def p2p_gnuetella08():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/p2p-Gnutella08.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "p2p-Gnutella08.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def ca_grqc():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/ca-GrQc.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "ca-GrQc.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def cit_hep_th():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/cit-HepTh.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "cit-HepTh.txt")  # , create_using=nx.DiGraph()
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def wiki_vote():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/wiki-Vote.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "wiki-Vote.txt")  # , create_using=nx.DiGraph()
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def email_eu_all():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/email-EuAll.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "email-EuAll.txt")  # , create_using=nx.DiGraph()
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def dblp():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/com-DBLP.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "dblp.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
-def gitub():
-    graph = nx.read_edgelist(graph_dir + "github.csv", delimiter=',')
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+# def gitub():
+#     """
+#     Returns the graph from: https://snap.stanford.edu/data/ca-GrQc.html,
+#     where we preprocess it to only keep the largest connected component
+#
+#     :return: undirected NetworkX graph
+#     """
+#
+#     graph = nx.read_edgelist(graph_dir + "github.csv", delimiter=',')
+#     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def ca_astro_ph():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/ca-AstroPh.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "ca-AstroPh.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def ca_hep_th():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/cit-HepTh.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "ca-HepTh.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def enron_email():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/email-Enron.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "email-enron.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def karate():
+    """
+    Returns the graph from: https://networkx.org/documentation/stable/reference/generated/networkx.generators.social.karate_club_graph.html,
+
+    :return: undirected NetworkX graph
+    """
+
     return nx.karate_club_graph()
 
 
 def oregeon_1():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/oregon1_010331.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "as-oregon1.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def electrical():
+    """
+    Returns the graph from: http://konect.cc/networks/opsahl-powergrid/,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_gml(graph_dir + "power.gml", label='id')
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
 
 def roadnet_ca():
+    """
+    Returns the graph from: https://snap.stanford.edu/data/roadNet-CA.html,
+    where we preprocess it to only keep the largest connected component
+
+    :return: undirected NetworkX graph
+    """
+
     graph = nx.read_edgelist(graph_dir + "road-california.txt")
     return graph.subgraph(max(nx.connected_components(graph), key=len))
 
@@ -220,42 +337,84 @@ Custom Graphs
 
 
 def o4_graph():
+    """
+    Returns a 4 node disconnected graph
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_nodes_from([0, 1, 2, 3])
     return G
 
 
 def p4_graph():
+    """
+    Returns a 4 node path graph
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_edges_from([(0, 1), (1, 2), (2, 3)])
     return G
 
 
 def s4_graph():
+    """
+    Returns a 4 node star graph
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_edges_from([(0, 1), (1, 2), (1, 3)])
     return G
 
 
 def c4_graph():
+    """
+    Returns a 4 node cycle graph
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_edges_from([(0, 1), (0, 2), (1, 3), (2, 3)])
     return G
 
 
 def k4_1_graph():
+    """
+    Returns a 4 node diamond graph (1 diagonal edge)
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_edges_from([(0, 1), (0, 2), (0, 3), (1, 3), (2, 3)])
     return G
 
 
 def k4_2_graph():
+    """
+    Returns a 4 node diamond graph (2 diagonal edges), a.k.a. complete graph
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_edges_from([(0, 1), (0, 2), (0, 3), (1, 3), (1, 2), (2, 3)])
     return G
 
 
 def two_c4_0_bridge():
+    """
+    Returns two disconnected 4 node cycle graphs
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_edges_from([(0, 1), (0, 2), (1, 3), (2, 3),
                       (4, 5), (5, 6), (6, 7), (7, 4)])
@@ -263,6 +422,12 @@ def two_c4_0_bridge():
 
 
 def two_c4_1_bridge():
+    """
+    Returns two 4 node cycle graphs connected by 1 edge
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.Graph()
     G.add_edges_from([(0, 1), (0, 2), (1, 3), (2, 3),
                       (4, 5), (5, 6), (6, 7), (7, 4),
@@ -271,6 +436,12 @@ def two_c4_1_bridge():
 
 
 def two_c4_2_bridge():
+    """
+    Returns two 4 node cycle graphs connected by 2 edges
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.MultiGraph()
     G.add_edges_from([(0, 1), (0, 2), (1, 3), (2, 3),
                       (4, 5), (5, 6), (6, 7), (7, 4),
@@ -279,6 +450,12 @@ def two_c4_2_bridge():
 
 
 def two_c4_3_bridge():
+    """
+    Returns two 4 node cycle graphs connected by 3 edges
+
+    :return: undirected NetworkX graph
+    """
+
     G = nx.MultiGraph()
     G.add_edges_from([(0, 1), (0, 2), (1, 3), (2, 3),
                       (4, 5), (5, 6), (6, 7), (7, 4),
@@ -317,7 +494,7 @@ datasets = {
     'wiki_vote': wiki_vote,
     'email_eu_all': email_eu_all,
     'dblp': dblp,
-    'gitub': gitub,
+    # 'gitub': gitub,
     'ca_astro_ph': ca_astro_ph,
     'ca_hep_th': ca_hep_th,
     'enron_email': enron_email,
