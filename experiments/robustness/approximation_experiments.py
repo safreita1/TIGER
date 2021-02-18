@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import sys
 sys.path.insert(0, os.getcwd() + '/../../')
 
-from graphs import graph_loader
-from measures import run_measure
+from graph_tiger.graphs import graph_loader
+from graph_tiger.measures import run_measure
 
 
 def plot_results(x_data, results, result_type, measures, n, start, step):

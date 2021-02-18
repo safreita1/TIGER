@@ -6,8 +6,8 @@ from collections import defaultdict
 import sys
 sys.path.insert(0, os.getcwd() + '/../../')
 
-from graphs import as_733
-from diffusion import Diffusion
+from graph_tiger.graphs import as_733
+from graph_tiger.diffusion import Diffusion
 
 
 def plot_results(graph, params, results):

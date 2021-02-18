@@ -5,8 +5,8 @@ from collections import defaultdict
 
 sys.path.insert(0, os.getcwd() + '/../../')
 
-from graphs import graph_loader
-from defenses import Defense
+from graph_tiger.graphs import graph_loader
+from graph_tiger.defenses import Defense
 
 
 def plot_results(graph, steps, results, title):
@@ -31,7 +31,7 @@ def plot_results(graph, steps, results, title):
 
 
 def main():
-    graph = graph_loader(graph_type='water', seed=1)
+    graph = graph_loader(graph_type='ky2', seed=1)
 
     params = {
         'runs': 10,

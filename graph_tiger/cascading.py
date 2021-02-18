@@ -1,11 +1,11 @@
 import numpy as np
 from collections import defaultdict
 
-from simulations import Simulation
-from graphs import *
-from measures import run_measure
-from attacks import run_attack_method, get_attack_category
-from defenses import run_defense_method, get_defense_category
+from graph_tiger.simulations import Simulation
+from graph_tiger.graphs import *
+from graph_tiger.measures import run_measure
+from graph_tiger.attacks import run_attack_method, get_attack_category
+from graph_tiger.defenses import run_defense_method, get_defense_category
 
 
 class Cascading(Simulation):

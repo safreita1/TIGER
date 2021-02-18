@@ -4,9 +4,7 @@ import urllib.request
 import networkx as nx
 
 
-base_url = 'https://github.com/safreita1/TIGER/tree/master/datasets/'
-
-graph_dir = os.path.dirname(os.path.abspath(__file__)) + '/datasets/'
+graph_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/datasets/'
 os.makedirs(graph_dir, exist_ok=True)
 
 
@@ -43,8 +41,8 @@ def download_dataset(dataset):
 
     :param dataset: a string representing the dataset to download
     """
-    url_path = base_url + dataset + ".txt"
-    local_path = graph_dir + '' + dataset + '.txt'
+    url_path = graph_urls[dataset][0]
+    local_path = graph_dir + '{}.txt'.format(dataset)
 
     if not os.path.exists(local_path):
         urllib.request.urlretrieve(url_path, local_path)
@@ -482,17 +480,22 @@ def two_c4_3_bridge():
 
 
 graph_urls = {
-    'p2p_gnuetella08': ( 'https://snap.stanford.edu/data/p2p-Gnutella08.txt.gz'),
-    'ca_grqc': 'https://snap.stanford.edu/data/ca-GrQc.txt.gz',
-    'cit_hep_th': 'https://snap.stanford.edu/data/M.txt.gz',
-    'wiki_vote': 'https://snap.stanford.edu/data/wiki-Vote.txt.gz',
-    'email_eu_all': 'https://snap.stanford.edu/data/email-EuAll.txt.gz',
-    'dblp': 'https://snap.stanford.edu/data/bigdata/communities/com-dblp.ungraph.txt.gz',
-    'ca_astro_ph': 'https://snap.stanford.edu/data/ca-AstroPh.txt.gz',
-    'ca_hep_th': 'https://snap.stanford.edu/data/cit-HepTh.txt.gz',
-    'enron_email': 'https://snap.stanford.edu/data/email-Enron.txt.gz',
-    'oregon_1': 'https://snap.stanford.edu/data/oregon1_010331.txt.gz',
-    'electrical': 'http://konect.uni-koblenz.de/downloads/tsv/opsahl-powergrid.tar.bz2',
+    'wiki_vote': ('https://github.com/safreita1/TIGER/blob/master/datasets/wiki-Vote.txt', 'https://snap.stanford.edu/data/wiki-Vote.txt.gz'),
+    'p2p_gnuetella08': ('https://github.com/safreita1/TIGER/blob/master/datasets/p2p-Gnutella08.txt', 'https://snap.stanford.edu/data/p2p-Gnutella08.txt.gz'),
+
+    'dblp': ('https://github.com/safreita1/TIGER/blob/master/datasets/dblp.txt', 'https://snap.stanford.edu/data/bigdata/communities/com-dblp.ungraph.txt.gz'),
+    'ca_hep_th': ('https://github.com/safreita1/TIGER/blob/master/datasets/cit-HepTh.txt', 'https://snap.stanford.edu/data/cit-HepTh.txt.gz'),
+    'cit_hep_th': ('https://github.com/safreita1/TIGER/blob/master/datasets/ca-HepTh.txt', 'https://snap.stanford.edu/data/M.txt.gz'),
+    'ca_grqc': ('https://github.com/safreita1/TIGER/blob/master/datasets/ca-GrQc.txt', 'https://snap.stanford.edu/data/ca-GrQc.txt.gz'),
+    'ca_astro_ph': ('https://github.com/safreita1/TIGER/blob/master/datasets/ca-AstroPh.txt', 'https://snap.stanford.edu/data/ca-AstroPh.txt.gz'),
+
+    'email_eu_all': ('https://github.com/safreita1/TIGER/blob/master/datasets/email-EuAll.txt', 'https://snap.stanford.edu/data/email-EuAll.txt.gz'),
+    'enron_email': ('https://github.com/safreita1/TIGER/blob/master/datasets/email-enron.txt', 'https://snap.stanford.edu/data/email-Enron.txt.gz'),
+
+    'ky2': ('https://github.com/safreita1/TIGER/blob/master/datasets/ky2.txt', 'http://www.uky.edu/WDST/KYEPAzip/ky2%20EPANET.zip'),
+    'as_733': ('https://github.com/safreita1/TIGER/blob/master/datasets/as19971108.txt', 'http://snap.stanford.edu/data/as-733.tar.gz'),
+    'oregon_1': ('https://github.com/safreita1/TIGER/blob/master/datasets/as-oregon1.txt', 'https://snap.stanford.edu/data/oregon1_010331.txt.gz'),
+    'electrical': ('https://github.com/safreita1/TIGER/blob/master/datasets/power.gml', 'http://konect.uni-koblenz.de/downloads/tsv/opsahl-powergrid.tar.bz2'),
     # 'roadnet_ca': 'https://snap.stanford.edu/data/roadNet-CA.txt.gz'
 }
 
@@ -512,14 +515,12 @@ datasets = {
     'wiki_vote': wiki_vote,
     'email_eu_all': email_eu_all,
     'dblp': dblp,
-    # 'gitub': gitub,
     'ca_astro_ph': ca_astro_ph,
     'ca_hep_th': ca_hep_th,
     'enron_email': enron_email,
     'karate': karate,
     'oregon_1': oregeon_1,
     'electrical': electrical,
-    # 'roadnet_ca': roadnet_ca
 }
 
 custom = {

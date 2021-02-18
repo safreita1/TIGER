@@ -6,15 +6,16 @@ from collections import defaultdict
 import sys
 sys.path.insert(0, os.getcwd() + '/../../')
 
-from graphs import electrical
-from cascading import Cascading
+from graph_tiger.graphs import electrical
+from graph_tiger.cascading import Cascading
 
 
 def plot_results(graph, params, results, xlabel='Steps', line_label='', experiment=''):
     plt.figure(figsize=(6.4, 4.8))
 
-    title = '{}:step={},l={},r={},k_a={},attack={},k_d={},defense={}'.format(experiment, params['steps'], params['l'], params['r'], params['k_a'],
-                                                                                    params['attack'], params['k_d'], params['defense'])
+    title = '{}:step={},l={},r={},k_a={},attack={},k_d={},defense={}'.format(experiment, params['steps'], params['l'],
+                                                                             params['r'], params['k_a'],  params['attack'],
+                                                                             params['k_d'], params['defense'])
     for strength, result in results.items():
 
         result_norm = [r / len(graph) for r in result]

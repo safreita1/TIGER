@@ -5,18 +5,18 @@ import networkx as nx
 from collections import defaultdict
 from scipy.interpolate import interp1d
 
-from graphs import graph_loader
-from measures import run_measure
-from simulations import Simulation
-from attacks import get_node_ns as get_node_ns_attack
-from attacks import get_node_pr as get_node_pr_attack
-from attacks import get_node_eig as get_node_eig_attack
-from attacks import get_node_rnd as get_node_rnd_attack
-from attacks import get_node_ib as get_node_ib_attack
-from attacks import get_node_rb as get_node_rb_attack
-from attacks import get_node_id as get_node_id_attack
-from attacks import get_node_rd as get_node_rd_attack
-from attacks import get_attack_category, run_attack_method
+from graph_tiger.graphs import graph_loader
+from graph_tiger.measures import run_measure
+from graph_tiger.simulations import Simulation
+from graph_tiger.attacks import get_node_ns as get_node_ns_attack
+from graph_tiger.attacks import get_node_pr as get_node_pr_attack
+from graph_tiger.attacks import get_node_eig as get_node_eig_attack
+from graph_tiger.attacks import get_node_rnd as get_node_rnd_attack
+from graph_tiger.attacks import get_node_ib as get_node_ib_attack
+from graph_tiger.attacks import get_node_rb as get_node_rb_attack
+from graph_tiger.attacks import get_node_id as get_node_id_attack
+from graph_tiger.attacks import get_node_rd as get_node_rd_attack
+from graph_tiger.attacks import get_attack_category, run_attack_method
 
 
 def run_defense_method(graph, method, k=3, seed=None):

@@ -16,6 +16,7 @@ install_requires = ["numpy",
                     "stopit",
                     "datashader",
                     "dask",
+                    "scikit-image",
                     "bezier==2020.5.19"]
 
 
@@ -43,7 +44,7 @@ keywords = ["data-science",
 setup(
   name="graph_tiger",
   packages=find_packages(),
-  version="0.1.0",
+  version="0.1.2",
   license="MIT",
   description="A general purpose library for graph vulnerability and robustness analysis.",
   author="Scott Freitas",

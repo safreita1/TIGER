@@ -13,8 +13,8 @@ from joblib import Parallel, delayed
 import sys
 sys.path.insert(0, os.getcwd() + '/../../')
 
-from graphs import graph_loader
-from measures import run_measure, get_measures
+from graph_tiger.graphs import graph_loader
+from graph_tiger.measures import run_measure, get_measures
 
 
 measure_style = {
