@@ -23,13 +23,13 @@ To quickly get started download [TIGER](https://github.com/safreita1/TIGER.git) 
 
 To use the built-in graph dataset helper functions, do the following:
 1. create a folder called "dataset" in the main directory.
-2. call the function [get_graph_urls()](graphs.py) to get a list of urls containing the datasets used in all our
+2. call the function [get_graph_urls()](graph-tiger/graphs.py) to get a list of urls containing the datasets used in all our
 experiments.
 3. run [wget](https://www.gnu.org/software/wget/) "url goes here" and place the downloaded graph inside the dataset folder.
 
 
 ### Examples
-Inside the [experiments](experiments) folder we provide extensive examples on how to use TIGER.
+Inside the [experiments](graph-tiger/experiments) folder we provide extensive examples on how to use TIGER.
 Below we'll discuss few examples to get you started (all results should auto-populate in a folder called "plots"):
 
 
