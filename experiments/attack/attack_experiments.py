@@ -5,8 +5,8 @@ from collections import defaultdict
 
 sys.path.insert(0, os.getcwd() + '/../../')
 
-from graphs import graph_loader
-from attacks import Attack
+from graph_tiger.graphs import graph_loader
+from graph_tiger.attacks import Attack
 
 
 def plot_results(graph, steps, results, title):

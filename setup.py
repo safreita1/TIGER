@@ -1,24 +1,22 @@
-
 from setuptools import find_packages, setup
 
 install_requires = ["numpy",
                     "networkx",
                     "tqdm",
-                    "python-louvain",
-                    "scikit-learn",
                     "scipy",
-                    "pygsp",
-                    "gensim==3.8.3",
                     "pandas",
-                    "six"]
-
-
-setup_requires = ['pytest-runner']
-
-
-tests_require = ['pytest',
-                 'pytest-cov',
-                 'mock']
+                    "six",
+                    "pillow",
+                    "numba",
+                    "matplotlib",
+                    "fa2",
+                    "onnx",
+                    "PyYAML",
+                    "ipython",
+                    "stopit",
+                    "datashader",
+                    "dask",
+                    "bezier==2020.5.19"]
 
 
 keywords = ["data-science",
@@ -43,7 +41,7 @@ keywords = ["data-science",
 
 
 setup(
-  name="graph-tiger",
+  name="graph_tiger",
   packages=find_packages(),
   version="0.1.0",
   license="MIT",
@@ -51,10 +49,9 @@ setup(
   author="Scott Freitas",
   author_email="safreita1@gmail.com",
   url="https://github.com/safreita1/TIGER",
+  download_url="https://github.com/safreita1/TIGER/archive/0.1.1.tar.gz",
   keywords=keywords,
   install_requires=install_requires,
-  setup_requires=setup_requires,
-  tests_require=tests_require,
   classifiers=["Development Status :: 3 - Alpha",
                "Intended Audience :: Developers",
                "License :: OSI Approved :: MIT License",
