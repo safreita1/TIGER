@@ -201,7 +201,7 @@
 <dd><p>The larger the algebraic connectivity, the more robust the graph.
 This is due to it’s close connection to edge connectivity, where it serves as a lower bound:
 0 &lt; <span class="math notranslate nohighlight">\(u_2\)</span> &lt; node connectivity &lt; edge connectivity. This means that a network with larger algebraic connectivity
-is harder to disconnect <span id="id1">[<a class="reference internal" href="bibliography.html#id55"><span>10</span></a>,<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+is harder to disconnect <span id="id1">[<a class="reference internal" href="bibliography.html#id55"><span>11</span></a>,<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -218,7 +218,7 @@ is harder to disconnect <span id="id1">[<a class="reference internal" href="bibl
 <dd><p>The global clustering coefficient is based on the number of triplets of nodes in the graph,
 and provides an indication of how well nodes tend to cluster together.
 The larger the average global clustering coefficient, the more robust the graph i.e., more triangles –&gt;
-better connected –&gt; more robust graph <span id="id2">[<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+better connected –&gt; more robust graph <span id="id2">[<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -235,7 +235,7 @@ better connected –&gt; more robust graph <span id="id2">[<a class="reference i
 <dd><p>The average distance between all pairs of nodes in the graph.
 The smaller the average shortest path distance, the more robust the graph.
 This can be viewed through the lens of network connectivity i.e.,
-smaller avg. distance –&gt; better connected graph <span id="id3">[<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+smaller avg. distance –&gt; better connected graph <span id="id3">[<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <p>Undefined for disconnected graphs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -253,7 +253,7 @@ smaller avg. distance –&gt; better connected graph <span id="id3">[<a class="r
 <dd><p>Similar to vertex betweenness, edge betweenness is defined as the number of shortest paths
 that pass through an edge <em>e</em> out of the total possible shortest paths.
 The smaller the average edge betweenness, the more robust the graph. We can view this as the
-load of the network being better distributed and less dependent on a few edges <span id="id4">[<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+load of the network being better distributed and less dependent on a few edges <span id="id4">[<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -273,7 +273,7 @@ load of the network being better distributed and less dependent on a few edges <
 <dd><p>The average inverse distance between all pairs of nodes in the graph.
 The larger the average inverse shortest path distance, the more robust the graph.
 This can be viewed through the lens of network connectivity i.e., larger average inverse distance
-–&gt; better connected graph –&gt; more robust graph <span id="id5">[<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+–&gt; better connected graph –&gt; more robust graph <span id="id5">[<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <p>Resolves the issue of not working for disconnected graphs in the avg_distance() function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -291,7 +291,7 @@ This can be viewed through the lens of network connectivity i.e., larger average
 <dd><p>The average vertex betweenness of a graph is the summation of vertex betweenness for every node in the graph.
 The smaller the average vertex betweenness, the more robust the graph. 
 We can view this as the load of the network being better distributed and
-less dependent on a few nodes <span id="id6">[<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+less dependent on a few nodes <span id="id6">[<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -310,7 +310,7 @@ less dependent on a few nodes <span id="id6">[<a class="reference internal" href
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">diameter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.diameter" title="Permalink to this definition">¶</a></dt>
 <dd><p>The diameter of a connected graph is the longest shortest path between all pairs of nodes.
 The smaller the diameter the more robust the graph i.e., smaller diameter –&gt; 
-better connected graph –&gt; more robust graph <span id="id7">[<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+better connected graph –&gt; more robust graph <span id="id7">[<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -326,7 +326,7 @@ better connected graph –&gt; more robust graph <span id="id7">[<a class="refer
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">edge_connectivity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.edge_connectivity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Measures the minimal number of edges that can be removed to disconnect the graph.
 Larger edge connectivity –&gt; harder to disconnect graph –&gt;
-more robust graph <span id="id8">[<a class="reference internal" href="bibliography.html#id32"><span>7</span></a>]</span>.</p>
+more robust graph <span id="id8">[<a class="reference internal" href="bibliography.html#id32"><span>8</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -343,7 +343,7 @@ more robust graph <span id="id8">[<a class="reference internal" href="bibliograp
 <dd><p>This measure views a graph as an electrical circuit where an edge <span class="math notranslate nohighlight">\((i, j)\)</span>
 corresponds to a resister of <span class="math notranslate nohighlight">\(r_{ij} = 1\)</span> Ohm and a node <em>i</em> corresponds to a junction.
 We say the <em>effective graph resistance</em> <em>R</em> is the sum of resistances for all distinct pairs of vertices
-The smaller the effective resistance, the more robust the graph <span id="id9">[<a class="reference internal" href="bibliography.html#id61"><span>6</span></a>,<a class="reference internal" href="bibliography.html#id59"><span>11</span></a>,<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+The smaller the effective resistance, the more robust the graph <span id="id9">[<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>,<a class="reference internal" href="bibliography.html#id61"><span>7</span></a>,<a class="reference internal" href="bibliography.html#id59"><span>12</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -358,7 +358,7 @@ The smaller the effective resistance, the more robust the graph <span id="id9">[
 <dt id="measures.generalized_robustness_index">
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">generalized_robustness_index</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.generalized_robustness_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>This can be considered a fast approximation of spectral scaling. The smaller the value, the more robust the graph.
-Also helps determine if a graph has many bridges (bad for robustness) <span id="id10">[<a class="reference internal" href="bibliography.html#id9"><span>12</span></a>]</span>.</p>
+Also helps determine if a graph has many bridges (bad for robustness) <span id="id10">[<a class="reference internal" href="bibliography.html#id9"><span>14</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -400,7 +400,7 @@ of nodes contained in the largest connected component. The larger the value, the
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">natural_connectivity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.natural_connectivity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Natural connectivity has a physical and structural interpretation that is tied to the connectivity properties
 of a network, identifying alternative pathways in a network through the weighted number of closed walks.
-The larger the natural connectivity (average eigenvalue of adjacency matrix), the more robust the graph <span id="id11">[<a class="reference internal" href="bibliography.html#id46"><span>3</span></a>]</span>.</p>
+The larger the natural connectivity (average eigenvalue of adjacency matrix), the more robust the graph <span id="id11">[<a class="reference internal" href="bibliography.html#id46"><span>4</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -416,7 +416,7 @@ The larger the natural connectivity (average eigenvalue of adjacency matrix), th
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">node_connectivity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.node_connectivity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Measures the minimal number of vertices that can be removed to disconnect the graph.
 Larger vertex (node) connectivity –&gt; harder to disconnect graph
-–&gt; more robust graph <span id="id12">[<a class="reference internal" href="bibliography.html#id32"><span>7</span></a>]</span>.</p>
+–&gt; more robust graph <span id="id12">[<a class="reference internal" href="bibliography.html#id32"><span>8</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -433,7 +433,7 @@ Larger vertex (node) connectivity –&gt; harder to disconnect graph
 <dd><p>The number of spanning trees <em>T</em> is the number of unique spanning trees that can be found in a graph.
 The larger the number of spanning trees, the more robust the graph.
 This can be viewed from the perspective of network connectivity, where a larger set of
-spanning trees means more alternative pathways in the network <span id="id13">[<a class="reference internal" href="bibliography.html#id57"><span>1</span></a>,<a class="reference internal" href="bibliography.html#id3"><span>5</span></a>]</span>.</p>
+spanning trees means more alternative pathways in the network <span id="id13">[<a class="reference internal" href="bibliography.html#id57"><span>1</span></a>,<a class="reference internal" href="bibliography.html#id3"><span>6</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -447,7 +447,7 @@ spanning trees means more alternative pathways in the network <span id="id13">[<
 <dl class="py function">
 <dt id="measures.odd_subgraph_centrality">
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">odd_subgraph_centrality</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.odd_subgraph_centrality" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the number of odd length closed walks that a node participates in <span id="id14">[<a class="reference internal" href="bibliography.html#id54"><span>9</span></a>]</span>.
+<dd><p>Calculates the number of odd length closed walks that a node participates in <span id="id14">[<a class="reference internal" href="bibliography.html#id54"><span>10</span></a>]</span>.
 Used in the calculation of spectral scaling and generalized robustness index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -489,7 +489,7 @@ Used in the calculation of spectral scaling and generalized robustness index.</p
 (<span class="math notranslate nohighlight">\(\lambda_1 - \lambda_2\)</span>) is called the spectral gap <span class="math notranslate nohighlight">\(\lambda_d\)</span>.
 The larger the spectral gap, the more robust the graph.
 Has an advantage over spectral radius since it accounts for
-undesirable bridges in the network <span id="id15">[<a class="reference internal" href="bibliography.html#id6"><span>2</span></a>,<a class="reference internal" href="bibliography.html#id9"><span>12</span></a>]</span>.</p>
+undesirable bridges in the network <span id="id15">[<a class="reference internal" href="bibliography.html#id6"><span>3</span></a>,<a class="reference internal" href="bibliography.html#id9"><span>14</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -505,7 +505,7 @@ undesirable bridges in the network <span id="id15">[<a class="reference internal
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">spectral_radius</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.spectral_radius" title="Permalink to this definition">¶</a></dt>
 <dd><p>The largest eigenvalue <span class="math notranslate nohighlight">\(\lambda_1\)</span> of an adjacency matrix <strong>A</strong> is called the spectral radius.
 The larger the spectral radius, the more robust the graph. This can be viewed from its close relationship to the
-“path” or “loop: capacity in a network <span id="id16">[<a class="reference internal" href="bibliography.html#id2"><span>13</span></a>,<a class="reference internal" href="bibliography.html#id37"><span>4</span></a>]</span>.</p>
+“path” or “loop: capacity in a network <span id="id16">[<a class="reference internal" href="bibliography.html#id37"><span>5</span></a>,<a class="reference internal" href="bibliography.html#id2"><span>17</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>
@@ -519,8 +519,8 @@ The larger the spectral radius, the more robust the graph. This can be viewed fr
 <dl class="py function">
 <dt id="measures.spectral_scaling">
 <code class="sig-prename descclassname"><span class="pre">measures.</span></code><code class="sig-name descname"><span class="pre">spectral_scaling</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#measures.spectral_scaling" title="Permalink to this definition">¶</a></dt>
-<dd><p>Spectral scaling is a combination of spectral gap and subgraph centrality that helps determine if a graph has
-many bridges (bad for robustness). The smaller the value, the more robust the graph <span id="id17">[<a class="reference internal" href="bibliography.html#id43"><span>8</span></a>]</span>.</p>
+<dd><p>Spectral scaling is a combination of the spectral gap and subgraph centrality. Spectral scaling takes into account
+if a graph has many bridges (bad for robustness). The smaller the value, the more robust the graph <span id="id17">[<a class="reference internal" href="bibliography.html#id43"><span>9</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>graph</strong> – undirected NetworkX graph</p>

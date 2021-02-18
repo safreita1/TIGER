@@ -21,7 +21,7 @@ from attacks import get_attack_category, run_attack_method
 
 def run_defense_method(graph, method, k=3, seed=None):
     """
-    Runs a specified defense on an undirected graph, returning a list of nodes to defend
+    Runs a specified defense on an undirected graph, returning a list of nodes to defend.
 
     :param graph: an undirected NetworkX graph
     :param method: a string representing one of the attack methods
@@ -42,7 +42,7 @@ def run_defense_method(graph, method, k=3, seed=None):
 
 def get_defense_methods():
     """
-    Gets a list of available defense methods as a list of functions
+    Gets a list of available defense methods as a list of functions.
 
     :return: a list of all defense functions
     """
@@ -52,7 +52,7 @@ def get_defense_methods():
 
 def get_defense_category(method):
     """
-    Gets the defense category e.g., 'node', 'edge' defense
+    Gets the defense category e.g., 'node', 'edge' defense.
 
     :param method: a string representing the defense method
     :return: a string representing the defense type ('node' or 'edge')
@@ -68,7 +68,7 @@ def get_defense_category(method):
 
 def get_node_ns(graph, k=3):
     """
-    Get k nodes to defend based on the Netshield algorithm: http://tonghanghang.org/pdfs/icdm10_netshield.pdf
+    Get k nodes to defend based on the Netshield algorithm :cite:`tong2010vulnerability,chen2015node`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to defend
@@ -81,7 +81,7 @@ def get_node_ns(graph, k=3):
 
 def get_node_pr(graph, k=3):
     """
-    Get k nodes to defend based on top PageRank entries
+    Get k nodes to defend based on top PageRank entries :cite:`page1999pagerank`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to defend
@@ -106,7 +106,7 @@ def get_node_eig(graph, k=3):
 
 def get_node_ib(graph, k=3, approx=np.inf):
     """
-    Get k nodes to defend based on Initial Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to defend based on Initial Betweenness (IB) Removal :cite:`holme2002attack`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to defend
@@ -121,7 +121,7 @@ def get_node_ib(graph, k=3, approx=np.inf):
 
 def get_node_rb(graph, k=3, approx=np.inf):
     """
-    Get k nodes to defend based on Recalculated Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to defend based on Recalculated Betweenness (RB) Removal :cite:`holme2002attack`
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to defend
@@ -136,7 +136,7 @@ def get_node_rb(graph, k=3, approx=np.inf):
 
 def get_node_id(graph, k=3):
     """
-    Get k nodes to defend based on Initial Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to defend based on Initial Degree (ID) Removal :cite:`holme2002attack`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to defend
@@ -149,7 +149,7 @@ def get_node_id(graph, k=3):
 
 def get_node_rd(graph, k=3):
     """
-    Get k nodes to defend based on Recalculated Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to defend based on Recalculated Degree (RD) Removal :cite:`holme2002attack`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to defend
@@ -175,7 +175,6 @@ def get_node_rnd(graph, k=3):
 def get_central_edges(graph, k, method='eig'):
     """
     Internal function to compute edge PageRank, eigenvector centrality and degree centrality
-    Based on: http://www.cs.cmu.edu/~htong/pdfs/cikm12_tong.pdf
 
     :param graph: undirected NetworkX graph
     :param k: int number of nodes to defend
@@ -210,7 +209,7 @@ def get_central_edges(graph, k, method='eig'):
 
 def add_edge_pr(graph, k=3):
     """
-    Get k edges to defend based on top edge PageRank entries
+    Get k edges to defend based on top edge PageRank entries :cite:`tong2012gelling`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
@@ -225,7 +224,7 @@ def add_edge_pr(graph, k=3):
 
 def add_edge_eig(graph, k=3):
     """
-    Get k edges to defend based on top edge eigenvector centrality entries
+    Get k edges to defend based on top edge eigenvector centrality entries :cite:`tong2012gelling`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
@@ -240,7 +239,7 @@ def add_edge_eig(graph, k=3):
 
 def add_edge_degree(graph, k=3):
     """
-    Add k edges to defend based on top edge degree centrality entries
+    Add k edges to defend based on top edge degree centrality entries :cite:`tong2012gelling`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
@@ -280,7 +279,7 @@ def add_edge_rnd(graph, k=3):
 
 def add_edge_pref(graph, k=3):
     """
-    Adds an edge connecting two nodes with the lowest degrees.
+    Adds an edge connecting two nodes with the lowest degrees :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
@@ -311,7 +310,7 @@ def add_edge_pref(graph, k=3):
 
 def rewire_edge_rnd(graph, k=3):
     """
-    Removes a random edge and adds one using 'add_edge_rnd()'
+    Removes a random edge and adds one randomly :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to rewire
@@ -333,7 +332,7 @@ def rewire_edge_rnd(graph, k=3):
 
 def rewire_edge_rnd_neighbor(graph, k=3):
     """
-    Removes a random edge and adds one using 'add_edge_rnd()'
+    Randomly selects a neighbor of a node and removes the edge; then adds a random edge :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to rewire
@@ -362,7 +361,7 @@ def rewire_edge_rnd_neighbor(graph, k=3):
 
 def rewire_edge_pref(graph, k=3):
     """
-    Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph
+    Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to rewire
@@ -391,7 +390,7 @@ def rewire_edge_pref(graph, k=3):
 
 def rewire_edge_pref_rnd(graph, k=3):
     """
-    Selects an edge, disconnects the higher degree node, and reconnects to a random one.
+    Selects an edge, disconnects the higher degree node, and reconnects to a random one :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to rewire

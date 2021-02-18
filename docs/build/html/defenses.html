@@ -241,7 +241,7 @@
 <dl class="py function">
 <dt id="defenses.add_edge_degree">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_degree</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.add_edge_degree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add k edges to defend based on top edge degree centrality entries</p>
+<dd><p>Add k edges to defend based on top edge degree centrality entries <span id="id3">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -258,7 +258,7 @@
 <dl class="py function">
 <dt id="defenses.add_edge_eig">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.add_edge_eig" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to defend based on top edge eigenvector centrality entries</p>
+<dd><p>Get k edges to defend based on top edge eigenvector centrality entries <span id="id4">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -275,7 +275,7 @@
 <dl class="py function">
 <dt id="defenses.add_edge_pr">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.add_edge_pr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to defend based on top edge PageRank entries</p>
+<dd><p>Get k edges to defend based on top edge PageRank entries <span id="id5">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -292,7 +292,7 @@
 <dl class="py function">
 <dt id="defenses.add_edge_pref">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_pref</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.add_edge_pref" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds an edge connecting two nodes with the lowest degrees.</p>
+<dd><p>Adds an edge connecting two nodes with the lowest degrees <span id="id6">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -326,8 +326,7 @@
 <dl class="py function">
 <dt id="defenses.get_central_edges">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_central_edges</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eig'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_central_edges" title="Permalink to this definition">¶</a></dt>
-<dd><p>Internal function to compute edge PageRank, eigenvector centrality and degree centrality
-Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/cikm12_tong.pdf">http://www.cs.cmu.edu/~htong/pdfs/cikm12_tong.pdf</a></p>
+<dd><p>Internal function to compute edge PageRank, eigenvector centrality and degree centrality</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -345,7 +344,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_defense_category">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_defense_category</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_defense_category" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the defense category e.g., ‘node’, ‘edge’ defense</p>
+<dd><p>Gets the defense category e.g., ‘node’, ‘edge’ defense.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>method</strong> – a string representing the defense method</p>
@@ -359,7 +358,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_defense_methods">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_defense_methods</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_defense_methods" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets a list of available defense methods as a list of functions</p>
+<dd><p>Gets a list of available defense methods as a list of functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>a list of all defense functions</p>
@@ -387,7 +386,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_node_ib">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_ib" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Initial Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to defend based on Initial Betweenness (IB) Removal <span id="id7">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -408,7 +407,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_node_id">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Initial Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to defend based on Initial Degree (ID) Removal <span id="id8">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -425,7 +424,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_node_ns">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on the Netshield algorithm: <a class="reference external" href="http://tonghanghang.org/pdfs/icdm10_netshield.pdf">http://tonghanghang.org/pdfs/icdm10_netshield.pdf</a></p>
+<dd><p>Get k nodes to defend based on the Netshield algorithm <span id="id9">[<a class="reference internal" href="bibliography.html#id2"><span>17</span></a>,<a class="reference internal" href="bibliography.html#id37"><span>5</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -442,7 +441,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_node_pr">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_pr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on top PageRank entries</p>
+<dd><p>Get k nodes to defend based on top PageRank entries <span id="id10">[<a class="reference internal" href="bibliography.html#id84"><span>15</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -459,7 +458,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_node_rb">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_rb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Recalculated Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to defend based on Recalculated Betweenness (RB) Removal <span id="id11">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -480,7 +479,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.get_node_rd">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_rd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Recalculated Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to defend based on Recalculated Degree (RD) Removal <span id="id12">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -519,7 +518,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_pref">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_pref</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_pref" title="Permalink to this definition">¶</a></dt>
-<dd><p>Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph</p>
+<dd><p>Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph <span id="id13">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -536,7 +535,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_pref_rnd">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_pref_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_pref_rnd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Selects an edge, disconnects the higher degree node, and reconnects to a random one.</p>
+<dd><p>Selects an edge, disconnects the higher degree node, and reconnects to a random one <span id="id14">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -553,7 +552,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_rnd">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_rnd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes a random edge and adds one using ‘add_edge_rnd()’</p>
+<dd><p>Removes a random edge and adds one randomly <span id="id15">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -570,7 +569,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.rewire_edge_rnd_neighbor">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_rnd_neighbor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.rewire_edge_rnd_neighbor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes a random edge and adds one using ‘add_edge_rnd()’</p>
+<dd><p>Randomly selects a neighbor of a node and removes the edge; then adds a random edge <span id="id16">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -587,7 +586,7 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="py function">
 <dt id="defenses.run_defense_method">
 <code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">run_defense_method</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.run_defense_method" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs a specified defense on an undirected graph, returning a list of nodes to defend</p>
+<dd><p>Runs a specified defense on an undirected graph, returning a list of nodes to defend.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

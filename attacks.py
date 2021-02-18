@@ -131,7 +131,7 @@ def get_node_eig(graph, k=3):
 
 def get_node_id(graph,  k=3):
     """
-    Get k nodes to attack based on Initial Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to attack based on Initial Degree (ID) Removal :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
@@ -147,7 +147,7 @@ def get_node_id(graph,  k=3):
 
 def get_node_rd(graph, k=3):
     """
-    Get k nodes to attack based on Recalculated Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to attack based on Recalculated Degree (RD) Removal :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
@@ -168,11 +168,12 @@ def get_node_rd(graph, k=3):
 
 def get_node_ib(graph, k=3, approx=np.inf):
     """
-    Get k nodes to attack based on Initial Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to attack based on Initial Betweenness (IB) Removal :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
-    :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation
+    :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n
+    is the number of nodes in the graph
 
     :return: a list of nodes to attack
     """
@@ -185,11 +186,12 @@ def get_node_ib(graph, k=3, approx=np.inf):
 
 def get_node_rb(graph, k=3, approx=np.inf):
     """
-    Get k nodes to attack based on Recalculated Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k nodes to attack based on Recalculated Betweenness (RB) Removal :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
-    :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation
+    :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n
+    is the number of nodes in the graph
 
     :return: a list of nodes to attack
     """
@@ -219,7 +221,7 @@ def get_node_rnd(graph, k=3):
 
 def get_edge_line_ns(graph, k=3):
     """
-    Get k edges to attack using Netshield by transforming the graph into a line graph
+    Get k edges to attack using Netshield by transforming the graph into a line graph :cite:`tong2010vulnerability,tong2012gelling`
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack
@@ -237,7 +239,7 @@ def get_edge_line_ns(graph, k=3):
 
 def get_edge_line_pr(graph, k=3):
     """
-    Get k edges to attack using PageRank by transforming the graph into a line graph
+    Get k edges to attack using PageRank by transforming the graph into a line graph :cite:`tong2012gelling`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack
@@ -251,7 +253,7 @@ def get_edge_line_pr(graph, k=3):
 
 def get_edge_line_eig(graph, k=3):
     """
-    Get k edges to attack using eigenvector centrality by transforming the graph into a line graph
+    Get k edges to attack using eigenvector centrality by transforming the graph into a line graph :cite:`tong2012gelling`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack
@@ -265,7 +267,7 @@ def get_edge_line_eig(graph, k=3):
 
 def get_edge_line_deg(graph, k=3):
     """
-    Get k edges to attack using degree centrality by transforming the graph into a line graph
+    Get k edges to attack using degree centrality by transforming the graph into a line graph :cite:`tong2012gelling`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack
@@ -279,7 +281,7 @@ def get_edge_line_deg(graph, k=3):
 
 def get_edge_id(graph, k=3):
     """
-    Get k edges to attack based on Initial Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k edges to attack based on Initial Degree (ID) Removal :cite:`holme2002attack`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack
@@ -295,7 +297,7 @@ def get_edge_id(graph, k=3):
 
 def get_edge_rd(graph, k=3):
     """
-    Get k edges to attack based on Recalculated Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k edges to attack based on Recalculated Degree (RD) Removal :cite:`holme2002attack`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack
@@ -316,7 +318,7 @@ def get_edge_rd(graph, k=3):
 
 def get_edge_ib(graph, k=3, approx=np.inf):
     """
-    Get k edges to attack based on Initial Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k edges to attack based on Initial Betweenness (IB) Removal :cite:`holme2002attack`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack
@@ -333,7 +335,7 @@ def get_edge_ib(graph, k=3, approx=np.inf):
 
 def get_edge_rb(graph, k=3, approx=np.inf):
     """
-    Get k edges to attack based on Recalculated Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+    Get k edges to attack based on Recalculated Betweenness (RB) Removal :cite:`holme2002attack`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to attack

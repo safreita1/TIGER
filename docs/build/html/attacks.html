@@ -266,7 +266,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_ib">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_ib" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack based on Initial Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k edges to attack based on Initial Betweenness (IB) Removal <span id="id3">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -284,7 +284,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_id">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack based on Initial Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k edges to attack based on Initial Degree (ID) Removal <span id="id4">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -301,7 +301,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_line_deg">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_deg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_deg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack using degree centrality by transforming the graph into a line graph</p>
+<dd><p>Get k edges to attack using degree centrality by transforming the graph into a line graph <span id="id5">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -318,7 +318,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_line_eig">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_eig" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack using eigenvector centrality by transforming the graph into a line graph</p>
+<dd><p>Get k edges to attack using eigenvector centrality by transforming the graph into a line graph <span id="id6">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -335,7 +335,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_line_ns">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack using Netshield by transforming the graph into a line graph</p>
+<dd><p>Get k edges to attack using Netshield by transforming the graph into a line graph <span id="id7">[<a class="reference internal" href="bibliography.html#id2"><span>17</span></a>,<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -352,7 +352,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_line_pr">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_pr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack using PageRank by transforming the graph into a line graph</p>
+<dd><p>Get k edges to attack using PageRank by transforming the graph into a line graph <span id="id8">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -369,7 +369,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_rb">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_rb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack based on Recalculated Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k edges to attack based on Recalculated Betweenness (RB) Removal <span id="id9">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -387,7 +387,7 @@
 <dl class="py function">
 <dt id="attacks.get_edge_rd">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_rd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to attack based on Recalculated Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k edges to attack based on Recalculated Degree (RD) Removal <span id="id10">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -438,17 +438,20 @@
 <dl class="py function">
 <dt id="attacks.get_node_ib">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_ib" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to attack based on Initial Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to attack based on Initial Betweenness (IB) Removal <span id="id11">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
 <li><p><strong>k</strong> – number of nodes to attack</p></li>
-<li><p><strong>approx</strong> – number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation</p></li>
+<li><p><strong>approx</strong> – number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of nodes to attack</p>
+</dl>
+<p>is the number of nodes in the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of nodes to attack</p>
 </dd>
 </dl>
 </dd></dl>
@@ -456,7 +459,7 @@
 <dl class="py function">
 <dt id="attacks.get_node_id">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to attack based on Initial Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to attack based on Initial Degree (ID) Removal <span id="id12">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -507,17 +510,20 @@
 <dl class="py function">
 <dt id="attacks.get_node_rb">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_rb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to attack based on Recalculated Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to attack based on Recalculated Betweenness (RB) Removal <span id="id13">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
 <li><p><strong>k</strong> – number of nodes to attack</p></li>
-<li><p><strong>approx</strong> – number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation</p></li>
+<li><p><strong>approx</strong> – number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of nodes to attack</p>
+</dl>
+<p>is the number of nodes in the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of nodes to attack</p>
 </dd>
 </dl>
 </dd></dl>
@@ -525,7 +531,7 @@
 <dl class="py function">
 <dt id="attacks.get_node_rd">
 <code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_rd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to attack based on Recalculated Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dd><p>Get k nodes to attack based on Recalculated Degree (RD) Removal <span id="id14">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
