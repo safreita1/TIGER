@@ -42,7 +42,7 @@ keywords = ["data-science",
 
 
 setup(
-  name="graph_tiger",
+  name="graph-tiger",
   packages=find_packages(),
   version="0.1.2",
   license="MIT",
@@ -50,7 +50,7 @@ setup(
   author="Scott Freitas",
   author_email="safreita1@gmail.com",
   url="https://github.com/safreita1/TIGER",
-  download_url="https://github.com/safreita1/TIGER/archive/0.1.1.tar.gz",
+  download_url="https://github.com/safreita1/TIGER/archive/0.1.2.tar.gz",
   keywords=keywords,
   install_requires=install_requires,
   classifiers=["Development Status :: 3 - Alpha",
