@@ -122,6 +122,7 @@
 <li class="toctree-l2"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 
             
@@ -362,6 +363,150 @@ Based on: <a class="reference external" href="http://www.cs.cmu.edu/~htong/pdfs/
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>a list of all defense functions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_eig">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_eig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get k nodes to defend based on top eigenvector centrality entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of nodes to defend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_ib">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_ib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get k nodes to defend based on Initial Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+<li><p><strong>approx</strong> – number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n</p></li>
+</ul>
+</dd>
+</dl>
+<p>is the number of nodes in the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of nodes to defend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_id">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get k nodes to defend based on Initial Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of nodes to defend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_ns">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get k nodes to defend based on the Netshield algorithm: <a class="reference external" href="http://tonghanghang.org/pdfs/icdm10_netshield.pdf">http://tonghanghang.org/pdfs/icdm10_netshield.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of nodes to defend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_pr">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_pr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get k nodes to defend based on top PageRank entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of nodes to defend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_rb">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_rb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get k nodes to defend based on Recalculated Betweenness Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+<li><p><strong>approx</strong> – number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n</p></li>
+</ul>
+</dd>
+</dl>
+<p>is the number of nodes in the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of nodes to defend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_rd">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get k nodes to defend based on Recalculated Degree Removal: <a class="reference external" href="https://arxiv.org/pdf/cond-mat/0202410.pdf">https://arxiv.org/pdf/cond-mat/0202410.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of nodes to defend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="defenses.get_node_rnd">
+<code class="sig-prename descclassname"><span class="pre">defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#defenses.get_node_rnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomly select k distinct nodes to defend</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – an undirected NetworkX graph</p></li>
+<li><p><strong>k</strong> – number of nodes to defend</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of nodes to defend</p>
 </dd>
 </dl>
 </dd></dl>

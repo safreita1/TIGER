@@ -5,10 +5,17 @@ import networkx as nx
 from collections import defaultdict
 from scipy.interpolate import interp1d
 
-from simulations import Simulation
 from graphs import graph_loader
 from measures import run_measure
-from attacks import get_node_ns, get_node_pr, get_node_eig, get_node_rnd, get_node_id, get_node_ib
+from simulations import Simulation
+from attacks import get_node_ns as get_node_ns_attack
+from attacks import get_node_pr as get_node_pr_attack
+from attacks import get_node_eig as get_node_eig_attack
+from attacks import get_node_rnd as get_node_rnd_attack
+from attacks import get_node_ib as get_node_ib_attack
+from attacks import get_node_rb as get_node_rb_attack
+from attacks import get_node_id as get_node_id_attack
+from attacks import get_node_rd as get_node_rd_attack
 from attacks import get_attack_category, run_attack_method
 
 
@@ -57,6 +64,112 @@ def get_defense_category(method):
         category = categories[method]
 
     return category
+
+
+def get_node_ns(graph, k=3):
+    """
+    Get k nodes to defend based on the Netshield algorithm: http://tonghanghang.org/pdfs/icdm10_netshield.pdf
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+
+    :return: a list of nodes to defend
+    """
+
+    return get_node_ns_attack(graph, k)
+
+
+def get_node_pr(graph, k=3):
+    """
+    Get k nodes to defend based on top PageRank entries
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+
+    :return: a list of nodes to defend
+    """
+
+    return get_node_pr_attack(graph, k)
+
+
+def get_node_eig(graph, k=3):
+    """
+    Get k nodes to defend based on top eigenvector centrality entries
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+    :return: a list of nodes to defend
+    """
+
+    return get_node_eig_attack(graph, k)
+
+
+def get_node_ib(graph, k=3, approx=np.inf):
+    """
+    Get k nodes to defend based on Initial Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+    :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n
+    is the number of nodes in the graph
+
+    :return: a list of nodes to defend
+    """
+
+    return get_node_ib_attack(graph, k, approx)
+
+
+def get_node_rb(graph, k=3, approx=np.inf):
+    """
+    Get k nodes to defend based on Recalculated Betweenness Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+    :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n
+    is the number of nodes in the graph
+
+    :return: a list of nodes to defend
+    """
+
+    return get_node_rb_attack(graph, k, approx)
+
+
+def get_node_id(graph, k=3):
+    """
+    Get k nodes to defend based on Initial Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+
+    :return: a list of nodes to defend
+    """
+
+    return get_node_id_attack(graph, k)
+
+
+def get_node_rd(graph, k=3):
+    """
+    Get k nodes to defend based on Recalculated Degree Removal: https://arxiv.org/pdf/cond-mat/0202410.pdf
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+
+    :return: a list of nodes to defend
+    """
+
+    return get_node_rd_attack(graph, k)
+
+
+def get_node_rnd(graph, k=3):
+    """
+    Randomly select k distinct nodes to defend
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of nodes to defend
+
+    :return: a list of nodes to defend
+    """
+    return get_node_rnd_attack(graph, k)
 
 
 def get_central_edges(graph, k, method='eig'):

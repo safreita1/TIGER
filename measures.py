@@ -17,6 +17,7 @@ def run_measure(graph, measure, k=np.inf):
     :param timeout: allows the user to stop running the measure after 'x' seconds.
     :return: a float representing the robustness of the graph, or None if it times out or an error occurs
     """
+
     try:
         if k is not np.inf:
             result = measures[measure](graph, k)
@@ -40,6 +41,7 @@ def get_measures():
 
     :return: list of strings
     """
+
     return list(measures.keys())
 
 
@@ -62,65 +64,81 @@ Graph Connectivity Measures
 
 def node_connectivity(graph):
     """
-    Larger vertex (node) connectivity -> harder to disconnect graph -> more robust graph.
+    Measures the minimal number of vertices that can be removed to disconnect the graph.
+    Larger vertex (node) connectivity --> harder to disconnect graph
+    --> more robust graph :cite:`esfahanian2013connectivity`.
 
     :param graph: undirected NetworkX graph
     :return: an integer
     """
+
     return nx.algorithms.node_connectivity(graph)
 
 
 def edge_connectivity(graph):
     """
-    Larger edge connectivity -> harder to disconnect graph -> more robust graph.
+    Measures the minimal number of edges that can be removed to disconnect the graph.
+    Larger edge connectivity --> harder to disconnect graph -->
+    more robust graph :cite:`esfahanian2013connectivity`.
 
     :param graph: undirected NetworkX graph
     :return: an integer
     """
+
     return nx.algorithms.edge_connectivity(graph)
 
 
 def avg_distance(graph):
     """
+    The average distance between all pairs of nodes in the graph.
     The smaller the average shortest path distance, the more robust the graph.
-    This can be viewed through the lens of network connectivity i.e.,  smaller avg. distance -> better connected graph
+    This can be viewed through the lens of network connectivity i.e.,
+    smaller avg. distance --> better connected graph :cite:`ellens2013graph`.
+
     Undefined for disconnected graphs.
 
     :param graph: undirected NetworkX graph
     :return: a float
     """
+
     return round(nx.average_shortest_path_length(graph), 2)
 
 
 def avg_inverse_distance(graph):
     """
+    The average inverse distance between all pairs of nodes in the graph.
     The larger the average inverse shortest path distance, the more robust the graph.
-    This can be viewed through the lens of network connectivity i.e., larger avg. inverse distance -> better connected graph
-    -> more robust graph.
+    This can be viewed through the lens of network connectivity i.e., larger average inverse distance
+    --> better connected graph --> more robust graph :cite:`ellens2013graph`.
+
     Resolves the issue of not working for disconnected graphs in the avg_distance() function.
-    Undefined for disconnected graphs.
 
     :param graph: undirected NetworkX graph
     :return: a float
     """
+
     return round(nx.global_efficiency(graph), 2)
 
 
 def diameter(graph):
     """
-    Measures the graph's diameter i.e., longest shortest path in the network.
-    The smaller the diameter the more robust the graph i.e., smaller diameter -> better connected graph -> more robust graph
+    The diameter of a connected graph is the longest shortest path between all pairs of nodes.
+    The smaller the diameter the more robust the graph i.e., smaller diameter --> 
+    better connected graph --> more robust graph :cite:`ellens2013graph`.
 
     :param graph: undirected NetworkX graph
     :return: an integer
     """
+
     return nx.diameter(graph)
 
 
 def avg_vertex_betweenness(graph, k=np.inf):
     """
-    The smaller the average vertex betweenness, the more robust the graph. We can view this as the
-    load of the network being better distributed and less dependent on a few nodes.
+    The average vertex betweenness of a graph is the summation of vertex betweenness for every node in the graph.
+    The smaller the average vertex betweenness, the more robust the graph. 
+    We can view this as the load of the network being better distributed and
+    less dependent on a few nodes :cite:`ellens2013graph`.
 
     :param graph: undirected NetworkX graph
     :param k: the number of nodes used to approximate betweenness centrality (k=10% of nodes is usually good)
@@ -135,8 +153,10 @@ def avg_vertex_betweenness(graph, k=np.inf):
 
 def avg_edge_betweenness(graph, k=np.inf):
     """
+    Similar to vertex betweenness, edge betweenness is defined as the number of shortest paths
+    that pass through an edge *e* out of the total possible shortest paths.
     The smaller the average edge betweenness, the more robust the graph. We can view this as the
-    load of the network being better distributed and less dependent on a few edges.
+    load of the network being better distributed and less dependent on a few edges :cite:`ellens2013graph`.
 
     :param graph: undirected NetworkX graph
     :param k: the number of nodes used to approximate betweenness centrality (k=10% of nodes is usually good)
@@ -155,8 +175,10 @@ def avg_edge_betweenness(graph, k=np.inf):
 
 def average_clustering_coefficient(graph):
     """
-    The larger the average global clustering coefficient, the more robust the graph i.e., more triangles ->
-    better connected -> more robust graph
+    The global clustering coefficient is based on the number of triplets of nodes in the graph,
+    and provides an indication of how well nodes tend to cluster together.
+    The larger the average global clustering coefficient, the more robust the graph i.e., more triangles -->
+    better connected --> more robust graph :cite:`ellens2013graph`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -166,7 +188,8 @@ def average_clustering_coefficient(graph):
 
 def largest_connected_component(graph):
     """
-    The larger the value, the more robust the graph.
+    This measure provides an indication of a graph's connectivity by measuring the fraction
+    of nodes contained in the largest connected component. The larger the value, the more robust the graph.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -182,8 +205,9 @@ Adjacency Matrix Spectral Measures
 
 def spectral_radius(graph):
     """
-    The larger the spectral radius (largest eigenvalue of adjacency matrix), the more robust the graph. T
-    his can be viewed from its close relationship to the `path' or 'loop' capacity in a network.
+    The largest eigenvalue :math:`\lambda_1` of an adjacency matrix **A** is called the spectral radius.
+    The larger the spectral radius, the more robust the graph. This can be viewed from its close relationship to the
+    "path" or "loop: capacity in a network :cite:`chen2015node,tong2010vulnerability`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -198,9 +222,11 @@ def spectral_radius(graph):
 
 def spectral_gap(graph):
     """
-     The larger the spectral gap (difference largest and second largest eigenvalue of adjacency matrix.),
-     the more robust the graph. Has an advantage over spectral radius since it can take into account
-     undesirable bridges in the network, lowering the graph's robustness.
+    The difference between the largest and second largest eigenvalues of the adjacency matrix
+    (:math:`\lambda_1 - \lambda_2`) is called the spectral gap :math:`\lambda_d`.
+    The larger the spectral gap, the more robust the graph.
+    Has an advantage over spectral radius since it accounts for
+    undesirable bridges in the network :cite:`chan2016optimizing,malliaros2012fast`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -215,9 +241,9 @@ def spectral_gap(graph):
 
 def natural_connectivity(graph, k=np.inf):
     """
-    The larger the natural connectivity (average eigenvalue of adjacency matrix), the more robust the graph.
-    This can be seen through the relationship to the number of closed walks,
-    which naturally captures the notion of network connectivity and alternative  paths in a network.
+    Natural connectivity has a physical and structural interpretation that is tied to the connectivity properties
+    of a network, identifying alternative pathways in a network through the weighted number of closed walks.
+    The larger the natural connectivity (average eigenvalue of adjacency matrix), the more robust the graph :cite:`chan2014make`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -232,12 +258,13 @@ def natural_connectivity(graph, k=np.inf):
 
 def odd_subgraph_centrality(i, lam, u):
     """
-    Used in the calculation of spectral scaling.
+    Calculates the number of odd length closed walks that a node participates in :cite:`estrada2005spectral`.
+    Used in the calculation of spectral scaling and generalized robustness index.
 
     :param i: node index
     :param lam: largest eigenvalue
     :param u: largest eigenvector
-    :return:
+    :return: a float
     """
 
     sc = 0
@@ -249,7 +276,8 @@ def odd_subgraph_centrality(i, lam, u):
 
 def spectral_scaling(graph, k=np.inf):
     """
-    The smaller the value, the more robust the graph. Helps determine if a graph has many bridges (bad for robustness).
+    Spectral scaling is a combination of the spectral gap and subgraph centrality. Spectral scaling takes into account
+    if a graph has many bridges (bad for robustness). The smaller the value, the more robust the graph :cite:`estrada2006network`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -275,7 +303,7 @@ def spectral_scaling(graph, k=np.inf):
 def generalized_robustness_index(graph, k=30):
     """
     This can be considered a fast approximation of spectral scaling. The smaller the value, the more robust the graph.
-    Also helps determine if a graph has many bridges (bad for robustness).
+    Also helps determine if a graph has many bridges (bad for robustness) :cite:`malliaros2012fast`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -292,8 +320,8 @@ def algebraic_connectivity(graph):
     """
     The larger the algebraic connectivity, the more robust the graph.
     This is due to it's close connection to edge connectivity, where it serves as a lower bound:
-    0 < u_2 < node connectivity < edge connectivity. This means that a network with larger algebraic connectivity
-    is harder to disconnect.
+    0 < :math:`u_2` < node connectivity < edge connectivity. This means that a network with larger algebraic connectivity
+    is harder to disconnect :cite:`fiedler1973algebraic,ellens2013graph`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -307,9 +335,10 @@ def algebraic_connectivity(graph):
 
 def num_spanning_trees(graph, k=np.inf):
     """
+    The number of spanning trees *T* is the number of unique spanning trees that can be found in a graph.
     The larger the number of spanning trees, the more robust the graph.
-    This can be viewed from the perspective of network connectivity, where
-    a larger set of spanning trees means more alternative pathways in the network.
+    This can be viewed from the perspective of network connectivity, where a larger set of
+    spanning trees means more alternative pathways in the network :cite:`baras2009efficient,ellens2013graph`.
 
     :param graph: undirected NetworkX graph
     :return: a float
@@ -323,7 +352,10 @@ def num_spanning_trees(graph, k=np.inf):
 
 def effective_resistance(graph, k=np.inf):
     """
-    The smaller the effective resistance, the more robust the graph.
+    This measure views a graph as an electrical circuit where an edge :math:`(i, j)`
+    corresponds to a resister of :math:`r_{ij} = 1` Ohm and a node *i* corresponds to a junction.
+    We say the *effective graph resistance* *R* is the sum of resistances for all distinct pairs of vertices
+    The smaller the effective resistance, the more robust the graph :cite:`ellens2013graph,ellens2011effective,ghosh2008minimizing`.
 
     :param graph: undirected NetworkX graph
     :return: a float

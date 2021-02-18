@@ -13,6 +13,7 @@ Welcome to TIGER's documentation!
    intro
    tutorials/tutorials
    modules
+   bibliography
 
 Indices and tables
 ==================
