@@ -52,9 +52,33 @@ If you find *TIGER* useful in your research, please consider citing the followin
 
 **Vulnerability and Robustness Measures**
 
-
-
 * **[Vertex Connectivity](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.danmf.DANMF)** from Ye *et al.*: [Deep Autoencoder-like Nonnegative Matrix Factorization for Community Detection](https://github.com/benedekrozemberczki/DANMF/blob/master/18DANMF.pdf) (CIKM 2018)
+* **[Edge Connectivity]()**
+* **[Diameter]()**
+* **[Average Distance]()**
+* **[Efficiency]()**
+* **[Average Vertex Betweenness]()**
+* **[Approximate Average Vertex Betweenness]()**
+* **[Approximate Average Edge Betweenness]()**
+* **[Average Clustering Coefficient]()**
+* **[Largest Connected Component]()**
+* **[Spectral Radius]()**
+* **[Spectral Gap]()**
+* **[Natural Connectivity]()**
+* **[Approximate Natural Connectivity]()**
+* **[Spectral Scaling]()**
+* **[Generalized Robustness Index]()**
+* **[Algebraic Connectivity]()**
+* **[Number of Spanning Trees]()**
+* **[Effective Resistance]()**
+* **[Approximate Effective Resistance]()**
+* **[]()**
+* **[]()**
+* **[]()**
+* **[]()**
+* **[]()**
+* **[]()**
+
 
 **Attack and Defense Strategies**
 
