@@ -22,7 +22,6 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pip install pytest-github-actions-annotate-failures
-          pip install codecov
           pip install numpy
           pip install networkx
           pip install tqdm
@@ -42,8 +41,7 @@ jobs:
           pip install scikit-image
           BEZIER_NO_EXTENSION=true \
           pip install --upgrade bezier --no-binary=bezier
-      - name: Test Coverage
+
+      - name: Run Pytests
         run: |
-          codecov
-      - name: Coverage Report
-        uses: codecov/codecov-action@v1
+          pytest
