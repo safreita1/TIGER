@@ -41,8 +41,8 @@ In the figure below, we can see the effectiveness of each attack strategy when u
    import matplotlib.pyplot as plt
    from collections import defaultdict
 
-   from attacks import Attack
-   from graphs import graph_loader
+   from graph_tiger.attacks import Attack
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader(graph_type='water', seed=1)
  

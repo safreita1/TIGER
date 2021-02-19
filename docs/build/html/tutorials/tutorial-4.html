@@ -88,9 +88,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -208,8 +208,8 @@
 </div>
 <p>To help users visualize cascading failures induced by targeted attacks, we enable them to create visuals like the figure above, where we overload 4 nodes selected by the ID attack strategy on the US power grid dataset (<span class="math notranslate nohighlight">\(l_max=0.8\)</span>). Nodesize represents capacity i.e., larger size <span class="math notranslate nohighlight">\(\rightarrow\)</span> higher capacity, and color indicates the load of each node on a gradient scale from blue (low load) to red (high load); dark red indicates node failure (overloaded). Time step 1 shows the network under normal conditions; at step 50 we observe a series of failures originating from the bottom of the network; by step 70 most of the network has collapsed.</p>
 <p>To run a cascading failure simulations and create the visual, we just have to write a few lines of code:</p>
-<div class="highlight-python notranslate" id="cascading-failure-1"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cascading</span> <span class="kn">import</span> <span class="n">Cascading</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<div class="highlight-python notranslate" id="cascading-failure-1"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.cascading</span> <span class="kn">import</span> <span class="n">Cascading</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="s1">&#39;electrical&#39;</span><span class="p">)</span>
 

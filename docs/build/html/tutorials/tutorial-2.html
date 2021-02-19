@@ -88,9 +88,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -220,8 +220,8 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
-<span class="kn">from</span> <span class="nn">attacks</span> <span class="kn">import</span> <span class="n">Attack</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.attacks</span> <span class="kn">import</span> <span class="n">Attack</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 

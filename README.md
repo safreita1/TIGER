@@ -1,3 +1,4 @@
+![Version](https://img.shields.io/pypi/v/graph-tiger?color=dark)
 [![Documentation Status](https://readthedocs.org/projects/graph-tiger/badge/?version=latest)](https://graph-tiger.readthedocs.io/en/latest/?badge=latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![arXiv](https://img.shields.io/badge/arXiv-2006.05648-<COLOR>.svg)](https://arxiv.org/pdf/2006.05648.pdf)
@@ -5,8 +6,12 @@
 
 ![TIGER Library](images/TIGER.jpg)
 
-TIGER is an open-sourced Python toolbox containing 22 graph **robustness measures** with both original and fast 
-approximate versions; 17 **attack strategies**; 15 heuristic and optimization based **defense techniques**; and 4 **simulation tools**.
+**TIGER** is a Python toolbox to conduct graph vulnerability and robustness research. For additional information, please take a look at the   **[Documentation](https://graph-tiger.readthedocs.io/)** and relevant **[Paper](https://arxiv.org/pdf/2006.05648.pdf)**.
+
+ 
+**TIGER** contains state-of-the-art methods to help users conduct graph vulnerability and robustness analysis on graph structured data.
+It contains 22 graph **robustness measures** with both original and fast approximate versions; 
+17 **attack strategies**; 15 heuristic and optimization based **defense techniques**; and 4 **simulation tools**.
 Specifically, TIGER is specifically designed to help users:
 
 1. **Quantify** network *vulnerability* and *robustness*, 
@@ -14,28 +19,74 @@ Specifically, TIGER is specifically designed to help users:
 3. **Augment** a network's structure to resist *attacks* and recover from *failure* 
 4. **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda). 
 
+--------------------------------------------------------------------------------
 
 ### Setup
-TIGER was designed for the Linux environment using Python 3, however, we don't foresee any issues running
-it on Mac or Windows. 
-To quickly get started download [TIGER](https://github.com/safreita1/TIGER.git) and create a new Anaconda environment using the provided 
-[YAML](environment.yml) file.
+To quickly get started, install TIGER using pip
 
-To use the built-in graph dataset helper functions, do the following:
-1. create a folder called "dataset" in the main directory.
-2. call the function [get_graph_urls()](graph_tiger/graphs.py) to get a list of urls containing the datasets used in all our
-experiments.
-3. run [wget](https://www.gnu.org/software/wget/) "url goes here" and place the downloaded graph inside the dataset folder.
+```sh
+$ pip install graph-tiger
+``` 
+
+Alternatively, you can clone [TIGER](https://github.com/safreita1/TIGER.git) and create a new Anaconda environment 
+using the [YAML](environment.yml) file.
+
+--------------------------------------------------------------------------------
+
+### Citing
+
+If you find *TIGER* useful in your research, please consider citing the following paper:
+
+```bibtex
+@article{freitas2020evaluating,
+    title={Evaluating Graph Vulnerability and Robustness using TIGER},
+    author={Freitas, Scott and Chau, Duen Horng},
+    journal={arXiv preprint arXiv:2006.05648},
+    year={2020}
+}
+```
+
+--------------------------------------------------------------------------------
+
+### Techniques Included
+
+**Vulnerability and Robustness Measures**
 
 
-### Examples
-Inside the [experiments](experiments) folder we provide extensive examples on how to use TIGER.
-Below we'll discuss few examples to get you started (all results should auto-populate in a folder called "plots"):
+
+* **[Vertex Connectivity](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.danmf.DANMF)** from Ye *et al.*: [Deep Autoencoder-like Nonnegative Matrix Factorization for Community Detection](https://github.com/benedekrozemberczki/DANMF/blob/master/18DANMF.pdf) (CIKM 2018)
+
+**Attack and Defense Strategies**
+
+
+
+
+**Simulation Frameworks**
+SIS
+SIR
+Cascading failure
+
+
+--------------------------------------------------------------------------------
+
+### Detailed Tutorials and Examples
+To help you get started we provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.readthedocs.io/)**;
+each tutorial covers an aspect of TIGER's core functionality: 
+
+Tutorial 1. [Measuring Graph Vulnerability and Robustness](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-1.html)
+
+Tutorial 2. [Attacking a Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-2.html)
+
+Tutorial 3. [Defending A Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-3.html)
+
+Tutorial 4. [Simulating Cascading Failures on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-4.html)
+
+Tutorial 5. [Simulating Entity Dissemination on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-5.html)
 
 
 #### EX 1. Calculate graph robustness (e.g., spectral radius, effective resistance)
-    from measures import run_measure
-    from graphs import graph_loader
+    from graph_tiger.measures import run_measure
+    from graph_tiger.graphs import graph_loader
     
     graph = graph_loader(graph_type='BA', n=1000, seed=1)
     
@@ -45,20 +96,11 @@ Below we'll discuss few examples to get you started (all results should auto-pop
     effective_resistance = run_measure(graph, measure='effective_resistance')
     print("Effective resistance:", effective_resistance)
         
-        
-#### EX 2. Calculate approximate graph robustness (e.g., effective resistance k=30 eigenvalues)
-    from measures import run_measure
-    from graphs import graph_loader
-    
-    graph = graph_loader(graph_type='BA', n=1000, seed=1)
-    
-    effective_resistance = run_measure(graph, measure='effective_resistance', k=30)
-    print("Effective resistance (k=30):", effective_resistance)
     
 
-### EX 3. Run a cascading failure simulation on a Barabasi Albert graph
-    from cascading import Cascading
-    from graphs import graph_loader
+### EX 2. Run a cascading failure simulation on a Barabasi Albert graph
+    from graph_tiger.cascading import Cascading
+    from graph_tiger.graphs import graph_loader
     
     graph = graph_loader('BA', n=400, seed=1)
     
@@ -99,11 +141,11 @@ Step 0: Network pre-attack | Step 6: Beginning of cascading failure | Step 99: C
 ![](images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)  |  ![](images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)  |  ![](images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)
     
     
-![](images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg)
+[comment]: ![](images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg)
     
-### EX 4. Run an SIS virus simulation on a Barabasi Albert graph
-    from diffusion import Diffusion
-    from graphs import graph_loader
+### EX 3. Run an SIS virus simulation on a Barabasi Albert graph
+    from graph_tiger.diffusion import Diffusion
+    from graph_tiger.graphs import graph_loader
     
     graph = graph_loader('BA', n=400, seed=1)
     
@@ -140,4 +182,9 @@ Step 0: Virus infected network |Step 80: Partially infected network | Step 4999:
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg)  |![](images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg)  |  ![](images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg)
 
-![](images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg)
+[comment]: ![](images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg)
+
+--------------------------------------------------------------------------------
+**License**
+
+[MIT License](LICENSE)

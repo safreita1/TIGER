@@ -24,8 +24,8 @@ To run a cascading failure simulations and create the visual, we just have to wr
 .. code-block:: python
    :name: cascading-failure-1
 
-   from cascading import Cascading
-   from graphs import graph_loader
+   from graph_tiger.cascading import Cascading
+   from graph_tiger.graphs import graph_loader
    
    graph = graph_loader('electrical')
 

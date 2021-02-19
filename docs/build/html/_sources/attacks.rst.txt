@@ -1,7 +1,7 @@
 Attacks
 =======
 
-.. automodule:: attacks
+.. automodule:: graph_tiger.attacks
    :members:
    :undoc-members:
    :show-inheritance:

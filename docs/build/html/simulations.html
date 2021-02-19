@@ -87,9 +87,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -192,30 +192,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-simulations">
-<span id="simulation"></span><h1>Simulation<a class="headerlink" href="#module-simulations" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-graph_tiger.simulations">
+<span id="simulation"></span><h1>Simulation<a class="headerlink" href="#module-graph_tiger.simulations" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="simulations.Simulation">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">simulations.</span></code><code class="sig-name descname"><span class="pre">Simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">graph_tiger.simulations.</span></code><code class="sig-name descname"><span class="pre">Simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The parent class for all simulation classes i.e., attack, defense, cascading failure and diffusion models.
 Provides a shared set of functions, largely for network visualization and plotting of results</p>
 <dl class="py method">
-<dt id="simulations.Simulation.child_class">
-<code class="sig-name descname"><span class="pre">child_class</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.child_class" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.child_class">
+<code class="sig-name descname"><span class="pre">child_class</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.child_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the child class name
 :return: string</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.create_simulation_gif">
-<code class="sig-name descname"><span class="pre">create_simulation_gif</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.create_simulation_gif" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.create_simulation_gif">
+<code class="sig-name descname"><span class="pre">create_simulation_gif</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.create_simulation_gif" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws and saves the network simulation to an MP4 file</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.draw_graph">
-<code class="sig-name descname"><span class="pre">draw_graph</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.draw_graph" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.draw_graph">
+<code class="sig-name descname"><span class="pre">draw_graph</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.draw_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws the graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -228,14 +228,14 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.get_effective_strength">
-<code class="sig-name descname"><span class="pre">get_effective_strength</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.get_effective_strength" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.get_effective_strength">
+<code class="sig-name descname"><span class="pre">get_effective_strength</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_effective_strength" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implemented by child class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.get_graph_coordinates">
-<code class="sig-name descname"><span class="pre">get_graph_coordinates</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.get_graph_coordinates" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.get_graph_coordinates">
+<code class="sig-name descname"><span class="pre">get_graph_coordinates</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_graph_coordinates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the graph coordinates, which can be:
 (1) set in the graph itself with the ‘pos’ tag on the vertices,
 (2) positioned according to the force atlas2 algorithm,
@@ -249,8 +249,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.get_plot_title">
-<code class="sig-name descname"><span class="pre">get_plot_title</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.get_plot_title" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.get_plot_title">
+<code class="sig-name descname"><span class="pre">get_plot_title</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_plot_title" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the title for each plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -263,8 +263,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.get_visual_settings">
-<code class="sig-name descname"><span class="pre">get_visual_settings</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.get_visual_settings" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.get_visual_settings">
+<code class="sig-name descname"><span class="pre">get_visual_settings</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_visual_settings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the visual settings for the network visualization</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -277,8 +277,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.plot_graph_transition">
-<code class="sig-name descname"><span class="pre">plot_graph_transition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.plot_graph_transition" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.plot_graph_transition">
+<code class="sig-name descname"><span class="pre">plot_graph_transition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_graph_transition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function to decide which snapshots to take for network visualization</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -288,8 +288,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.plot_network">
-<code class="sig-name descname"><span class="pre">plot_network</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.plot_network" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.plot_network">
+<code class="sig-name descname"><span class="pre">plot_network</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_network" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the compiled simulation results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -299,8 +299,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.plot_results">
-<code class="sig-name descname"><span class="pre">plot_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.plot_results" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.plot_results">
+<code class="sig-name descname"><span class="pre">plot_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the compiled simulation results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -310,14 +310,14 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.reset_simulation">
-<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.reset_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.reset_simulation">
+<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.reset_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implemented by child class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.run_simulation">
-<code class="sig-name descname"><span class="pre">run_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.run_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.run_simulation">
+<code class="sig-name descname"><span class="pre">run_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.run_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Averages the simulation over the number of ‘runs’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -327,8 +327,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="simulations.Simulation.run_single_sim">
-<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simulations.Simulation.run_single_sim" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.simulations.Simulation.run_single_sim">
+<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.run_single_sim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implemented by child class</p>
 </dd></dl>
 

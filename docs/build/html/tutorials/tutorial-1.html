@@ -88,9 +88,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -207,8 +207,8 @@
 <div class="math notranslate nohighlight">
 \[\begin{split}\bar{b}_v = \sum_{u\in V}\sum_{s\in V}\sum_{\substack{t\in V \\ s\neq t\neq u}} \frac{n_{s,t}(u)}{n_{s,t}}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(n_{s, t}(u)\)</span> is the number of shortest paths betweeen <em>s</em> and <em>t</em> that pass through <em>t</em> and <span class="math notranslate nohighlight">\(n_{s, t}\)</span> is the total number of shortest paths between <em>s</em> and <em>t</em>. Average vertex betweenness has a natural connection to graph robustness since it measures the average load on vertices in the network. The smaller the average the more robust the network, since load is more evenly distributed across nodes. In order to calculate this for measure for a graph, you can simply run the following:</p>
-<div class="highlight-python notranslate" id="average-vertex-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<div class="highlight-python notranslate" id="average-vertex-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -217,8 +217,8 @@
 </pre></div>
 </div>
 <p>Since calculting the average vertex betweenness for large graphs is not computationally feasible, we can find a “close” approximate version by running the following code</p>
-<div class="highlight-python notranslate" id="average-vertex-approx-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<div class="highlight-python notranslate" id="average-vertex-approx-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -298,7 +298,7 @@ Extending this to the whole graph, we say the <em>effective graph resistance</em
 </div>
 <p>In order to run each robustness measure, do the following:</p>
 <div class="highlight-python notranslate" id="measure-comparison-3"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_analysis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">runs</span><span class="p">,</span> <span class="n">k_start</span><span class="p">,</span> <span class="n">k_step</span><span class="p">,</span> <span class="n">measures</span><span class="p">):</span>
-   <span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+   <span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
    <span class="n">graphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;CSF&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runs</span><span class="p">)]</span>  <span class="c1"># generate 30 random `clustered scale free` graphs</span>
 

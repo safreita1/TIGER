@@ -33,8 +33,8 @@ To help users evaluate the effectiveness of defense techniques, we compare 5 edg
    import matplotlib.pyplot as plt
    from collections import defaultdict
 
-   from graphs import graph_loader
-   from defenses import Defense
+   from graph_tiger.graphs import graph_loader
+   from graph_tiger.defenses import Defense
 
    def plot_results(graph, steps, results, title):
        plt.figure(figsize=(6.4, 4.8))

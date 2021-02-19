@@ -1,7 +1,7 @@
 Tutorial 1: Measuring Vulnerability and Robustness
 ********************************************************
 
-TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure uses the graph, adjacency, or Laplacian matrix. In the figure below, we show some common robustness measures from each category.     
+TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure uses the graph, adjacency, or Laplacian matrix. In the figure below, we show some common robustness measures from each category.
 
 .. _fig-coordsys-rect:
 
@@ -26,8 +26,8 @@ where :math:`n_{s, t}(u)` is the number of shortest paths betweeen *s* and *t* t
 .. code-block:: python
    :name: average-vertex-example
 
-   from measures import run_measure
-   from graphs import graph_loader
+   from graph_tiger.measures import run_measure
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader(graph_type='BA', n=1000, seed=1)
 
@@ -41,8 +41,8 @@ Since calculting the average vertex betweenness for large graphs is not computat
 .. code-block:: python
    :name: average-vertex-approx-example
 
-   from measures import run_measure
-   from graphs import graph_loader
+   from graph_tiger.measures import run_measure
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader(graph_type='BA', n=1000, seed=1)
             
@@ -145,7 +145,7 @@ In order to run each robustness measure, do the following:
    :name: measure-comparison-3
 
    def run_analysis(n, runs, k_start, k_step, measures):
-      from graphs import graph_loader
+      from graph_tiger.graphs import graph_loader
 
       graphs = [graph_loader(graph_type='CSF', n=n, seed=s) for s in range(runs)]  # generate 30 random `clustered scale free` graphs
 

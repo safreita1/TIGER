@@ -87,9 +87,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -192,12 +192,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-attacks">
-<span id="attacks"></span><h1>Attacks<a class="headerlink" href="#module-attacks" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-graph_tiger.attacks">
+<span id="attacks"></span><h1>Attacks<a class="headerlink" href="#module-graph_tiger.attacks" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="attacks.Attack">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">Attack</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defense</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.Attack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="simulations.html#simulations.Simulation" title="simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">simulations.Simulation</span></code></a></p>
+<dt id="graph_tiger.attacks.Attack">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">Attack</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defense</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.Attack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="simulations.html#graph_tiger.simulations.Simulation" title="graph_tiger.simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">graph_tiger.simulations.Simulation</span></code></a></p>
 <p>This class simulates a variety of attack strategies on an undirected NetworkX graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -214,20 +214,20 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="attacks.Attack.reset_simulation">
-<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#attacks.Attack.reset_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.Attack.reset_simulation">
+<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.Attack.reset_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resets the simulation between each run</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="attacks.Attack.run_single_sim">
-<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#attacks.Attack.run_single_sim" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.Attack.run_single_sim">
+<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.Attack.run_single_sim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the attack simulation</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="attacks.Attack.track_simulation">
-<code class="sig-name descname"><span class="pre">track_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.Attack.track_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.Attack.track_simulation">
+<code class="sig-name descname"><span class="pre">track_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.Attack.track_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps track of important simulation information at each step of the simulation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -239,8 +239,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_attack_category">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_attack_category</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_attack_category" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_attack_category">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_attack_category</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_attack_category" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the attack category e.g., ‘node’, ‘edge’ attack</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -253,8 +253,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_attack_methods">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_attack_methods</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_attack_methods" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_attack_methods">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_attack_methods</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_attack_methods" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a list of available attach methods as a list of functions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -264,8 +264,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_ib">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_ib" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_ib">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_ib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack based on Initial Betweenness (IB) Removal <span id="id3">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -282,8 +282,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_id">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_id" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_id">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack based on Initial Degree (ID) Removal <span id="id4">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -299,8 +299,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_line_deg">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_deg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_deg" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_line_deg">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_deg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_line_deg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack using degree centrality by transforming the graph into a line graph <span id="id5">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -316,8 +316,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_line_eig">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_eig" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_line_eig">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_line_eig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack using eigenvector centrality by transforming the graph into a line graph <span id="id6">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -333,8 +333,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_line_ns">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_ns" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_line_ns">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_line_ns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack using Netshield by transforming the graph into a line graph <span id="id7">[<a class="reference internal" href="bibliography.html#id2"><span>17</span></a>,<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -350,8 +350,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_line_pr">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_line_pr" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_line_pr">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_line_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_line_pr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack using PageRank by transforming the graph into a line graph <span id="id8">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -367,8 +367,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_rb">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_rb" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_rb">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_rb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack based on Recalculated Betweenness (RB) Removal <span id="id9">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -385,8 +385,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_rd">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_rd" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_rd">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_rd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k edges to attack based on Recalculated Degree (RD) Removal <span id="id10">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -402,8 +402,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_edge_rnd">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_edge_rnd" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_edge_rnd">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_edge_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_edge_rnd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly select k edges to attack</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -419,8 +419,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_eig">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_eig" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_eig">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_eig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k nodes to attack based on top eigenvector centrality entries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -436,8 +436,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_ib">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_ib" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_ib">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_ib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k nodes to attack based on Initial Betweenness (IB) Removal <span id="id11">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -457,8 +457,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_id">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_id" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_id">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k nodes to attack based on Initial Degree (ID) Removal <span id="id12">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -474,8 +474,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_ns">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_ns" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_ns">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_ns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k nodes to attack based on the Netshield algorithm: <a class="reference external" href="http://tonghanghang.org/pdfs/icdm10_netshield.pdf">http://tonghanghang.org/pdfs/icdm10_netshield.pdf</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -491,8 +491,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_pr">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_pr" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_pr">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_pr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k nodes to attack based on top PageRank entries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -508,8 +508,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_rb">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_rb" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_rb">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_rb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k nodes to attack based on Recalculated Betweenness (RB) Removal <span id="id13">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -529,8 +529,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_rd">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_rd" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_rd">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_rd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get k nodes to attack based on Recalculated Degree (RD) Removal <span id="id14">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -546,8 +546,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.get_node_rnd">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.get_node_rnd" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.get_node_rnd">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">get_node_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.get_node_rnd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly select k distinct nodes to attack</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -563,13 +563,13 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="attacks.main">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#attacks.main" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.main">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="attacks.run_attack_method">
-<code class="sig-prename descclassname"><span class="pre">attacks.</span></code><code class="sig-name descname"><span class="pre">run_attack_method</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#attacks.run_attack_method" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.attacks.run_attack_method">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.attacks.</span></code><code class="sig-name descname"><span class="pre">run_attack_method</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.attacks.run_attack_method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a specified attack on an undirected graph, returning a list of nodes to attack</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

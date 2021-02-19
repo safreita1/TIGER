@@ -18,8 +18,8 @@ Now that we have a little background, lets dive into the code required to set up
 .. code-block:: python
    :name: sis-simulation
 
-   from diffusion import Diffusion
-   from graphs import graph_loader
+   from graph_tiger.diffusion import Diffusion
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader('as_733')
 
@@ -71,7 +71,7 @@ Running multiple simulations for comparison only takes a few lines of code:
    import matplotlib.pyplot as plt
    from collections import defaultdict
 
-   from diffusion import Diffusion
+   from graph_tiger.diffusion import Diffusion
 
    # baseline
    sis_params = {

@@ -88,9 +88,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -202,8 +202,8 @@
 </div>
 <p>Each node in the SIS model can be in one of two states, infected <em>I</em> or susceptible <em>S</em>.  At each time step <em>t</em>, an infected node <em>v</em> has a probability <span class="math notranslate nohighlight">\(\beta\)</span> of infecting each of it’s uninfected neighbors <span class="math notranslate nohighlight">\(u\in N(v)\)</span>. After this, each infected node <em>v</em> has a probability <span class="math notranslate nohighlight">\(\delta\)</span> of healing and becoming susceptible again. The relationship between the birth rate <span class="math notranslate nohighlight">\(\beta\)</span>, death rate <span class="math notranslate nohighlight">\(\delta\)</span> and the spectral radius <span class="math notranslate nohighlight">\(\lambda_1\)</span> of the graph has been a widely studied topic. It’s been shown that the spectral radius of a graph is closely tied to the epidemic threshold <span class="math notranslate nohighlight">\(\tau\)</span> of a network in an SIS model. In particular, <span class="math notranslate nohighlight">\(\frac{\beta}{\delta} &lt; \tau=\frac{1}{\lambda_{1}}\)</span>. This means for a given virus strength <em>s</em>, an epidemic is more likely to occur on a graph with larger <span class="math notranslate nohighlight">\(\lambda_1\)</span>. As such, we say that a virus has an effective strength <span class="math notranslate nohighlight">\(s = \lambda_1 \cdot b / d\)</span>, where a larger <em>s</em> means a stronger virus.</p>
 <p>Now that we have a little background, lets dive into the code required to set up the simulation and create the above visualization.</p>
-<div class="highlight-python notranslate" id="sis-simulation"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">diffusion</span> <span class="kn">import</span> <span class="n">Diffusion</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<div class="highlight-python notranslate" id="sis-simulation"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.diffusion</span> <span class="kn">import</span> <span class="n">Diffusion</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="s1">&#39;as_733&#39;</span><span class="p">)</span>
 
@@ -246,7 +246,7 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
-<span class="kn">from</span> <span class="nn">diffusion</span> <span class="kn">import</span> <span class="n">Diffusion</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.diffusion</span> <span class="kn">import</span> <span class="n">Diffusion</span>
 
 <span class="c1"># baseline</span>
 <span class="n">sis_params</span> <span class="o">=</span> <span class="p">{</span>

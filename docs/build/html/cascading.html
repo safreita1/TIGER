@@ -87,9 +87,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="intro.html#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="intro.html#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -192,12 +192,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-cascading">
-<span id="cascading"></span><h1>Cascading<a class="headerlink" href="#module-cascading" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-graph_tiger.cascading">
+<span id="cascading"></span><h1>Cascading<a class="headerlink" href="#module-graph_tiger.cascading" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="cascading.Cascading">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">cascading.</span></code><code class="sig-name descname"><span class="pre">Cascading</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascading.Cascading" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="simulations.html#simulations.Simulation" title="simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">simulations.Simulation</span></code></a></p>
+<dt id="graph_tiger.cascading.Cascading">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">graph_tiger.cascading.</span></code><code class="sig-name descname"><span class="pre">Cascading</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.cascading.Cascading" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="simulations.html#graph_tiger.simulations.Simulation" title="graph_tiger.simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">graph_tiger.simulations.Simulation</span></code></a></p>
 <p>This class simulates cascading failures on a network</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -213,20 +213,20 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="cascading.Cascading.reset_simulation">
-<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cascading.Cascading.reset_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.cascading.Cascading.reset_simulation">
+<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.cascading.Cascading.reset_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resets the simulation between each run</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="cascading.Cascading.run_single_sim">
-<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cascading.Cascading.run_single_sim" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.cascading.Cascading.run_single_sim">
+<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.cascading.Cascading.run_single_sim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the attack simulation</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="cascading.Cascading.track_simulation">
-<code class="sig-name descname"><span class="pre">track_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascading.Cascading.track_simulation" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.cascading.Cascading.track_simulation">
+<code class="sig-name descname"><span class="pre">track_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.cascading.Cascading.track_simulation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps track of important simulation information at each step of the simulation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -238,8 +238,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="cascading.main">
-<code class="sig-prename descclassname"><span class="pre">cascading.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cascading.main" title="Permalink to this definition">¶</a></dt>
+<dt id="graph_tiger.cascading.main">
+<code class="sig-prename descclassname"><span class="pre">graph_tiger.cascading.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.cascading.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

@@ -87,9 +87,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background-motivation">Background &amp; Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citing">Citing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-1-measuring-graph-robustness">Example 1: Measuring graph robustness</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-2-measuring-approximate-graph-robustness">Example 2: Measuring approximate graph robustness</a></li>
@@ -199,32 +199,41 @@
 <li><p>Augment a network’s structure to resist attacks and recover from failure.</p></li>
 <li><p>Regulate the dissemination of entities on a network (e.g., viruses, propaganda).</p></li>
 </ul>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="background-motivation">
+<h2>Background &amp; Motivation<a class="headerlink" href="#background-motivation" title="Permalink to this headline">¶</a></h2>
 <p>First mentioned as early as the 1970’s, network robustness has a rich and diverse history spanning numerous fields of engineering and science. This diversity of research has generated a variety of unique perspectives, providing fresh insight into challenging problems while equipping researchers with fundamental knowledge for their investigations. While the fields of study are diverse, they are linked by a common definition of <strong>robustness</strong>, which is defined as a measure of a network’s ability to continue functioning when part of the network is naturally damaged or targeted for attack.</p>
 <p>The study of network robustness is critical to the understanding of complex interconnected systems. For example, consider an example of a power grid network that is susceptible to both natural <em>failures</em> and targeted <em>attacks</em>. A natural failure occurs when a <em>single</em> power substation fails due to erosion of parts or natural disasters. However, when one substation fails, additional load is routed to alternative substations, potentially causing a series of <em>cascading failures</em>. Not all failures originate from natural causes, some come from <em>targeted</em> attacks, such as enemy states hacking into the grid to sabotage key equipment to maximally damage the operations of the electrical grid. A natural counterpart to network robustness is <strong>vulnerability</strong>, defined as <em>measure of a network’s susceptibility to the dissemination of entities across the network</em>, such as how quickly a virus spreads across a computer network.</p>
-</div>
-<div class="section" id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
 <p>Unfortunately, the nature of cross-disciplinary research also comes with significant challenges. Oftentimes important discoveries made in one field are not quickly disseminated, leading to missed innovation opportunities. We believe a unified and easy-to-use software framework is key to standardizing the study of network robustness, helping accelerate reproducible research and dissemination of ideas.</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>TIGER was designed for the Linux environment using Python 3, however, we don’t foresee any issues running it on Mac or Windows. To quickly get started you can install TIGER using:</p>
-<p>Or you can git clone TIGER from <a class="reference external" href="https://github.com/safreita1/TIGER">https://github.com/safreita1/TIGER</a> and create an Anaconda environment using the environment.yml file.</p>
-<p>To use the built-in graph dataset helper functions, do the following:</p>
-<p>create a folder called “dataset” in the main directory.
-call the function get_graph_urls() to get a list of urls containing the datasets used in all our experiments.
-run wget “url goes here” and place the downloaded graph inside the dataset folder.</p>
+<p>To quickly get started, install TIGER using pip</p>
+<p><code class="docutils literal notranslate"><span class="pre">`sh</span>
+<span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">graph-tiger</span>
+<span class="pre">`</span></code></p>
+<p>Alternatively, you can git clone [TIGER](<a class="reference external" href="https://github.com/safreita1/TIGER.git">https://github.com/safreita1/TIGER.git</a>) and create a new Anaconda environment
+using the provided [YAML](environment.yml) file.</p>
+</div>
+<div class="section" id="citing">
+<h2>Citing<a class="headerlink" href="#citing" title="Permalink to this headline">¶</a></h2>
+<p>If you find <strong>TIGER</strong> useful in your research, please consider citing the following paper:</p>
+<dl class="simple">
+<dt>&#64;article{freitas2020evaluating,</dt><dd><p>title={Evaluating Graph Vulnerability and Robustness using TIGER},
+author={Freitas, Scott and Chau, Duen Horng},
+journal={arXiv preprint arXiv:2006.05648},
+year={2020}</p>
+</dd>
+</dl>
+<p>}</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>We provide detailed tutorials on how to user TIGER in the Tutorials section. Below we look at a few simple examples to get you started.</p>
+<p>We provide detailed tutorials on how to user TIGER in the Tutorials section. Below we look at a few simple examples to quickly get you started.</p>
 <div class="section" id="example-1-measuring-graph-robustness">
 <h3>Example 1: Measuring graph robustness<a class="headerlink" href="#example-1-measuring-graph-robustness" title="Permalink to this headline">¶</a></h3>
-<p>How to measure graph robustness using the spectral methods: <a class="reference internal" href="measures.html#measures.spectral_radius" title="measures.spectral_radius"><code class="xref py py-func docutils literal notranslate"><span class="pre">measures.spectral_radius()</span></code></a> and <a class="reference internal" href="measures.html#measures.effective_resistance" title="measures.effective_resistance"><code class="xref py py-func docutils literal notranslate"><span class="pre">measures.effective_resistance()</span></code></a>.</p>
-<div class="highlight-python notranslate" id="robustness-example-1"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<p>How to measure graph robustness using the spectral methods: <code class="xref py py-func docutils literal notranslate"><span class="pre">measures.spectral_radius()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">measures.effective_resistance()</span></code>.</p>
+<div class="highlight-python notranslate" id="robustness-example-1"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -238,9 +247,9 @@ run wget “url goes here” and place the downloaded graph inside the dataset f
 </div>
 <div class="section" id="example-2-measuring-approximate-graph-robustness">
 <h3>Example 2: Measuring approximate graph robustness<a class="headerlink" href="#example-2-measuring-approximate-graph-robustness" title="Permalink to this headline">¶</a></h3>
-<p>How to measure <em>approximate</em> graph robustness using spectral method: <a class="reference internal" href="measures.html#measures.effective_resistance" title="measures.effective_resistance"><code class="xref py py-func docutils literal notranslate"><span class="pre">measures.effective_resistance()</span></code></a>.</p>
-<div class="highlight-python notranslate" id="robustness-example-2"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<p>How to measure <em>approximate</em> graph robustness using spectral method: <code class="xref py py-func docutils literal notranslate"><span class="pre">measures.effective_resistance()</span></code>.</p>
+<div class="highlight-python notranslate" id="robustness-example-2"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.measures</span> <span class="kn">import</span> <span class="n">run_measure</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -252,8 +261,8 @@ run wget “url goes here” and place the downloaded graph inside the dataset f
 <div class="section" id="example-3-cascading-failure-simulation">
 <h3>Example 3: Cascading Failure Simulation<a class="headerlink" href="#example-3-cascading-failure-simulation" title="Permalink to this headline">¶</a></h3>
 <p>In this example, we run a cascading failure simulation on a Barabasi Albert (BA) graph. In the network, node size represents load capacity (i.e., larger size -&gt; higher capacity), and color indicates the load of each node on a gradient scale from blue (low load) to red (high load); dark red indicates node failure (overloaded). Below, we show a TIGER cascading failure simulation on a BA graph when 30 nodes in the network randomly fail (untargeted attack).</p>
-<div class="highlight-python notranslate" id="cascading-failure-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cascading</span> <span class="kn">import</span> <span class="n">Cascading</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<div class="highlight-python notranslate" id="cascading-failure-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.cascading</span> <span class="kn">import</span> <span class="n">Cascading</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -290,28 +299,28 @@ run wget “url goes here” and place the downloaded graph inside the dataset f
 <span class="n">cascading</span><span class="o">.</span><span class="n">plot_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-center" id="id8">
-<span id="fig-coordsys-rect"></span><a class="reference internal image-reference" href="_images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg"><img alt="_images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" src="_images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Time step 0: shows the network under normal operating conditions.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg"><img alt="_images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" src="_images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Time step 0: shows the network under normal operating conditions.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id9">
-<span id="id1"></span><a class="reference internal image-reference" href="_images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg"><img alt="_images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" src="_images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Step 5: we observe a series of failures across the network.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg"><img alt="_images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" src="_images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Step 5: we observe a series of failures across the network.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id10">
-<span id="id2"></span><a class="reference internal image-reference" href="_images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg"><img alt="_images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" src="_images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Step 99: most of the network has collapsed.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg"><img alt="_images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" src="_images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Step 99: most of the network has collapsed.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id11">
-<span id="id3"></span><a class="reference internal image-reference" href="_images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg"><img alt="_images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg" src="_images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Graph connectivity over time (measured by graph’s largest connected component) during attack.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="_images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg"><img alt="_images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg" src="_images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Graph connectivity over time (measured by graph’s largest connected component) during attack.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="example-4-sis-model-network-vaccination">
 <h3>Example 4: SIS Model Network Vaccination<a class="headerlink" href="#example-4-sis-model-network-vaccination" title="Permalink to this headline">¶</a></h3>
 <p>In this example, we run a computer virus simulation (SIS infection model) on a BA graph. The network starts off highly infected, and the goal is to vaccinate critical nodes to reduce disease resurgence. Using the Netshield techniqe, we select 5 nodes to vaccinate to maximally reduce the infection.</p>
-<div class="highlight-python notranslate" id="sis-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">diffusion</span> <span class="kn">import</span> <span class="n">Diffusion</span>
-<span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
+<div class="highlight-python notranslate" id="sis-example"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.diffusion</span> <span class="kn">import</span> <span class="n">Diffusion</span>
+<span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
 <span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -343,21 +352,21 @@ run wget “url goes here” and place the downloaded graph inside the dataset f
 <span class="n">diffusion</span><span class="o">.</span><span class="n">plot_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-center" id="id12">
-<span id="id4"></span><a class="reference internal image-reference" href="_images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg"><img alt="_images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg" src="_images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Step 0: A highly infected network with 4 nodes “vaccinated” according to Netshield defense.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="_images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg"><img alt="_images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg" src="_images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Step 0: A highly infected network with 4 nodes “vaccinated” according to Netshield defense.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id13">
-<span id="id5"></span><a class="reference internal image-reference" href="_images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg"><img alt="_images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg" src="_images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Step 80: The computer virus begins to remit.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="_images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg"><img alt="_images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg" src="_images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Step 80: The computer virus begins to remit.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id14">
-<span id="id6"></span><a class="reference internal image-reference" href="_images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg"><img alt="_images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg" src="_images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Step 4999: The virus is nearly contained.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="_images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg"><img alt="_images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg" src="_images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Step 4999: The virus is nearly contained.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id15">
-<span id="id7"></span><a class="reference internal image-reference" href="_images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg"><img alt="_images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg" src="_images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">A plot of the number of infected nodes in the network at each time stamp.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<div class="figure align-center" id="id8">
+<a class="reference internal image-reference" href="_images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg"><img alt="_images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg" src="_images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">A plot of the number of infected nodes in the network at each time stamp.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

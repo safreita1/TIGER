@@ -8,36 +8,45 @@ Introduction
 - Augment a network's structure to resist attacks and recover from failure.
 - Regulate the dissemination of entities on a network (e.g., viruses, propaganda).
 
-Background
-**********
+Background & Motivation
+***********************
 
 First mentioned as early as the 1970's, network robustness has a rich and diverse history spanning numerous fields of engineering and science. This diversity of research has generated a variety of unique perspectives, providing fresh insight into challenging problems while equipping researchers with fundamental knowledge for their investigations. While the fields of study are diverse, they are linked by a common definition of **robustness**, which is defined as a measure of a network's ability to continue functioning when part of the network is naturally damaged or targeted for attack.
 
-The study of network robustness is critical to the understanding of complex interconnected systems. For example, consider an example of a power grid network that is susceptible to both natural *failures* and targeted *attacks*. A natural failure occurs when a *single* power substation fails due to erosion of parts or natural disasters. However, when one substation fails, additional load is routed to alternative substations, potentially causing a series of *cascading failures*. Not all failures originate from natural causes, some come from *targeted* attacks, such as enemy states hacking into the grid to sabotage key equipment to maximally damage the operations of the electrical grid. A natural counterpart to network robustness is **vulnerability**, defined as *measure of a network's susceptibility to the dissemination of entities across the network*, such as how quickly a virus spreads across a computer network. 
+The study of network robustness is critical to the understanding of complex interconnected systems. For example, consider an example of a power grid network that is susceptible to both natural *failures* and targeted *attacks*. A natural failure occurs when a *single* power substation fails due to erosion of parts or natural disasters. However, when one substation fails, additional load is routed to alternative substations, potentially causing a series of *cascading failures*. Not all failures originate from natural causes, some come from *targeted* attacks, such as enemy states hacking into the grid to sabotage key equipment to maximally damage the operations of the electrical grid. A natural counterpart to network robustness is **vulnerability**, defined as *measure of a network's susceptibility to the dissemination of entities across the network*, such as how quickly a virus spreads across a computer network.
 
-Motivation
-**********
 Unfortunately, the nature of cross-disciplinary research also comes with significant challenges. Oftentimes important discoveries made in one field are not quickly disseminated, leading to missed innovation opportunities. We believe a unified and easy-to-use software framework is key to standardizing the study of network robustness, helping accelerate reproducible research and dissemination of ideas.
 
 
 Installation
 ************
-TIGER was designed for the Linux environment using Python 3, however, we don't foresee any issues running it on Mac or Windows. To quickly get started you can install TIGER using:
+To quickly get started, install TIGER using pip
+
+```sh
+$ pip install graph-tiger
+```
+
+Alternatively, you can git clone [TIGER](https://github.com/safreita1/TIGER.git) and create a new Anaconda environment
+using the provided [YAML](environment.yml) file.
 
 
-Or you can git clone TIGER from https://github.com/safreita1/TIGER and create an Anaconda environment using the environment.yml file.
+Citing
+******
 
-To use the built-in graph dataset helper functions, do the following:
+If you find **TIGER** useful in your research, please consider citing the following paper:
 
-create a folder called "dataset" in the main directory.
-call the function get_graph_urls() to get a list of urls containing the datasets used in all our experiments.
-run wget "url goes here" and place the downloaded graph inside the dataset folder.
+@article{freitas2020evaluating,
+    title={Evaluating Graph Vulnerability and Robustness using TIGER},
+    author={Freitas, Scott and Chau, Duen Horng},
+    journal={arXiv preprint arXiv:2006.05648},
+    year={2020}
+}
 
 
 Examples
 ********
 
-We provide detailed tutorials on how to user TIGER in the Tutorials section. Below we look at a few simple examples to get you started.
+We provide detailed tutorials on how to user TIGER in the Tutorials section. Below we look at a few simple examples to quickly get you started.
 
 
 Example 1: Measuring graph robustness
@@ -46,10 +55,10 @@ Example 1: Measuring graph robustness
 How to measure graph robustness using the spectral methods: :func:`measures.spectral_radius` and :func:`measures.effective_resistance`.
 
 .. code-block:: python
-   :name: robustness-example-1 
+   :name: robustness-example-1
 
-   from measures import run_measure
-   from graphs import graph_loader
+   from graph_tiger.measures import run_measure
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader(graph_type='BA', n=1000, seed=1)
 
@@ -68,8 +77,8 @@ How to measure *approximate* graph robustness using spectral method: :func:`meas
 .. code-block:: python
    :name: robustness-example-2
 
-   from measures import run_measure
-   from graphs import graph_loader
+   from graph_tiger.measures import run_measure
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader(graph_type='BA', n=1000, seed=1)
 
@@ -81,13 +90,13 @@ How to measure *approximate* graph robustness using spectral method: :func:`meas
 Example 3: Cascading Failure Simulation
 ---------------------------------------
 
-In this example, we run a cascading failure simulation on a Barabasi Albert (BA) graph. In the network, node size represents load capacity (i.e., larger size -> higher capacity), and color indicates the load of each node on a gradient scale from blue (low load) to red (high load); dark red indicates node failure (overloaded). Below, we show a TIGER cascading failure simulation on a BA graph when 30 nodes in the network randomly fail (untargeted attack). 
+In this example, we run a cascading failure simulation on a Barabasi Albert (BA) graph. In the network, node size represents load capacity (i.e., larger size -> higher capacity), and color indicates the load of each node on a gradient scale from blue (low load) to red (high load); dark red indicates node failure (overloaded). Below, we show a TIGER cascading failure simulation on a BA graph when 30 nodes in the network randomly fail (untargeted attack).
 
 .. code-block:: python
    :name: cascading-failure-example
 
-   from cascading import Cascading
-   from graphs import graph_loader
+   from graph_tiger.cascading import Cascading
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader('BA', n=400, seed=1)
 
@@ -124,39 +133,31 @@ In this example, we run a cascading failure simulation on a Barabasi Albert (BA)
    cascading.plot_results(results)
 
 
-.. _fig-coordsys-rect:
-
 .. figure:: ../../images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
    :width: 100 %
    :align: center
-   
+
    Time step 0: shows the network under normal operating conditions.
 
-
-.. _fig-coordsys-rect:
 
 .. figure:: ../../images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
    :width: 100 %
    :align: center
-   
+
    Step 5: we observe a series of failures across the network.
 
-
-.. _fig-coordsys-rect:
 
 .. figure:: ../../images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
    :width: 100 %
    :align: center
-   
+
    Step 99: most of the network has collapsed.
 
-
-.. _fig-coordsys-rect:
 
 .. figure:: ../../images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg
    :width: 100 %
    :align: center
-   
+
    Graph connectivity over time (measured by graph's largest connected component) during attack.
 
 
@@ -168,8 +169,8 @@ In this example, we run a computer virus simulation (SIS infection model) on a B
 .. code-block:: python
    :name: sis-example
 
-   from diffusion import Diffusion
-   from graphs import graph_loader
+   from graph_tiger.diffusion import Diffusion
+   from graph_tiger.graphs import graph_loader
 
    graph = graph_loader('BA', n=400, seed=1)
 
@@ -202,39 +203,32 @@ In this example, we run a computer virus simulation (SIS infection model) on a B
 
 
 
-.. _fig-coordsys-rect:
 
 .. figure:: ../../images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg
    :width: 100 %
    :align: center
-   
+
    Step 0: A highly infected network with 4 nodes "vaccinated" according to Netshield defense.
 
-
-.. _fig-coordsys-rect:
 
 .. figure:: ../../images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg
    :width: 100 %
    :align: center
-   
-   Step 80: The computer virus begins to remit. 
 
+   Step 80: The computer virus begins to remit.
 
-.. _fig-coordsys-rect:
 
 .. figure:: ../../images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg
    :width: 100 %
    :align: center
-   
+
    Step 4999: The virus is nearly contained.
 
-
-.. _fig-coordsys-rect:
 
 .. figure:: ../../images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg
    :width: 100 %
    :align: center
-   
+
    A plot of the number of infected nodes in the network at each time stamp.
 
 
