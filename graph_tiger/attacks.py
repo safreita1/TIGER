@@ -476,7 +476,7 @@ class Attack(Simulation):
 
         # defended nodes or edges
         if self.prm['defense'] is not None and self.prm['k_d'] > 0:
-            from defenses import get_defense_category, run_defense_method
+            from graph_tiger.defenses import get_defense_category, run_defense_method
 
             if get_defense_category(self.prm['defense']) == 'node':
                 self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.prm['seed'])

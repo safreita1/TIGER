@@ -17,5 +17,4 @@ dask
 scikit-image
 bezier==2020.5.19
 sphinx
-sphinx_rtd_theme
 sphinxcontrib-bibtex

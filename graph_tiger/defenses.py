@@ -425,7 +425,9 @@ categories = {
     'pr_node': 'node',
     'eig_node': 'node',
     'id_node': 'node',
+    'rd_node': 'node',
     'ib_node': 'node',
+    'rb_node': 'node',
     'rnd_node': 'node',
 
     'add_edge_pr': 'edge',
@@ -446,7 +448,9 @@ methods = {
     'pr_node': get_node_pr,
     'eig_node': get_node_eig,
     'id_node': get_node_id,
+    'rd_node': get_node_rd,
     'ib_node': get_node_ib,
+    'rb_node': get_node_rb,
     'rnd_node': get_node_rnd,
 
     'add_edge_pr': add_edge_pr,

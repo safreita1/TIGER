@@ -72,20 +72,54 @@ If you find *TIGER* useful in your research, please consider citing the followin
 * **[Number of Spanning Trees]()**
 * **[Effective Resistance]()**
 * **[Approximate Effective Resistance]()**
-* **[]()**
-* **[]()**
-* **[]()**
-* **[]()**
-* **[]()**
-* **[]()**
 
 
-**Attack and Defense Strategies**
 
+**Defense Strategies**
+* **[Vaccinate Node: Netshield]()**
+* **[Vaccinate Node: PageRank]()**
+* **[Vaccinate Node: Eigenvector Centrality]()**
+* **[Vaccinate Node: Initial Degree (ID) Removal]()**
+* **[Vaccinate Node: Recalculated Degree (RD) Removal]()**
+* **[Vaccinate Node: Initial Betweenness (IB) Removal]()**
+* **[Vaccinate Node: Recalculated Betweenness (RB) Removal]()**
+* **[Vaccinate Node: Random Selection]()**
 
+* **[Add Edge: PageRank]()**
+* **[Add Edge: Eigenvector Centrality]()**
+* **[Add Edge: Degree Centrality]()**
+* **[Add Edge: Random Selection]()**
+* **[Add Edge: Preferential]()**
+
+* **[Rewire Edge: Random]()**
+* **[Rewire Edge: Random Neighbor]()**
+* **[Rewire Edge: Preferential]()**
+* **[Rewire Edge: Preferential Random]()**
+
+**Attack Strategies**
+* **[Remove Node: Netshield]()**
+* **[Remove Node: PageRank]()**
+* **[Remove Node: Eigenvector Centrality]()**
+* **[Remove Node: Initial Degree (ID) Removal]()**
+* **[Remove Node: Recalculated Degree (RD) Removal]()**
+* **[Remove Node: Initial Betweenness (IB) Removal]()**
+* **[Remove Node: Recalculated Betweenness (RB) Removal]()**
+* **[Remove Node: Random Selection]()**
+
+* **[Remove Edge: Netshield Line]()**
+* **[Remove Edge: PageRank Line]()**
+* **[Remove Edge: Eigenvector Centrality Line]()**
+* **[Remove Edge: Degree Line]()**
+* **[Remove Edge: Initial Betweenness (IB) Removal]()**
+* **[Remove Edge: Recalculated Betweenness (RB) Removal]()**
+* **[Remove Edge: Initial Degree (ID) Removal]()**
+* **[Remove Edge: Recalculated Degree (RD) Removal]()**
 
 
 **Simulation Frameworks**
+* **[Susceptible-Infected-Susceptible (SIS)]()**
+* **[Susceptible-Infected-Recovered (SIR)]()**
+* **[]()**
 SIS
 SIR
 Cascading failure
