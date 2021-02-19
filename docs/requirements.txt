@@ -15,7 +15,6 @@ stopit
 datashader
 dask
 scikit-image
-bezier==2020.5.19
 sphinx
 sphinxcontrib-bibtex
 pytest

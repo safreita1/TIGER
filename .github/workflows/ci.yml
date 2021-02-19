@@ -22,8 +22,27 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pip install pytest-github-actions-annotate-failures
+          pip install numpy
+          pip install networkx
+          pip install tqdm
+          pip install scipy
+          pip install pandas
+          pip install six
+          pip install pillow
+          pip install numba
+          pip install matplotlib
+          pip install fa2
+          pip install onnx
+          pip install PyYAML
+          pip install ipython
+          pip install stopit
+          pip install datashader
+          pip install dask
+          pip install scikit-image
           BEZIER_NO_EXTENSION=true \
           pip install --upgrade bezier --no-binary=bezier
+
+
           python setup.py install
       - name: Run tests with pytest
         run: |
