@@ -1,8 +1,8 @@
 import numpy as np
 
-from graphs import karate
-from cascading import Cascading
-from diffusion import Diffusion
+from graph_tiger.graphs import karate
+from graph_tiger.cascading import Cascading
+from graph_tiger.diffusion import Diffusion
 
 
 def test_sis_model():
@@ -25,24 +25,24 @@ def test_sis_model():
 
     graph = karate()
 
-    ds = Diffusion(graph, params)
+    ds = Diffusion(graph, **params)
     increased_diffusion = ds.run_simulation()
 
     params['diffusion'] = None
     params['method'] = None
     params['k'] = 0
 
-    ds = Diffusion(graph, params)
+    ds = Diffusion(graph, **params)
     baseline_diffusion = ds.run_simulation()
 
     params['diffusion'] = 'min'
     params['method'] = 'ns_node'
     params['k'] = 4
 
-    ds = Diffusion(graph, params)
+    ds = Diffusion(graph, **params)
     decreased_diffusion = ds.run_simulation()
 
-    assert sum(decreased_diffusion) < sum(baseline_diffusion) < sum(increased_diffusion)
+    assert (sum(decreased_diffusion) < sum(baseline_diffusion) < sum(increased_diffusion))
 
 
 def test_sir_model():
@@ -65,21 +65,21 @@ def test_sir_model():
 
     graph = karate()
 
-    ds = Diffusion(graph, params)
+    ds = Diffusion(graph, **params)
     increased_diffusion = ds.run_simulation()
 
     params['diffusion'] = None
     params['method'] = None
     params['k'] = 0
 
-    ds = Diffusion(graph, params)
+    ds = Diffusion(graph, **params)
     baseline_diffusion = ds.run_simulation()
 
     params['diffusion'] = 'min'
     params['method'] = 'ns_node'
     params['k'] = 4
 
-    ds = Diffusion(graph, params)
+    ds = Diffusion(graph, **params)
     decreased_diffusion = ds.run_simulation()
 
     assert sum(decreased_diffusion) < sum(baseline_diffusion) < sum(increased_diffusion)
@@ -109,13 +109,13 @@ def test_cascading():
 
     graph = karate()
 
-    cf = Cascading(graph, params)
+    cf = Cascading(graph, **params)
     attacked = cf.run_simulation()
 
     params['k_a'] = 0
     params['attack'] = None
 
-    cf = Cascading(graph, params)
+    cf = Cascading(graph, **params)
     baseline = cf.run_simulation()
 
     params['k_a'] = 4
@@ -124,10 +124,10 @@ def test_cascading():
     params['k_d'] = 4
     params['defense'] = 'pr_node'
 
-    cf = Cascading(graph, params)
+    cf = Cascading(graph, **params)
     defended = cf.run_simulation()
 
-    assert sum(attacked) < sum(defended) <= sum(baseline)
+    assert (sum(attacked) <= sum(defended) <= sum(baseline))
 
 
 def main():

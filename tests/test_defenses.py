@@ -1,7 +1,7 @@
 import numpy as np
 
-from graphs import karate
-from defenses import run_defense_method, get_defense_methods, get_defense_category
+from graph_tiger.graphs import karate
+from graph_tiger.defenses import run_defense_method, get_defense_methods, get_defense_category
 
 
 def test_defense_strength():
@@ -34,7 +34,9 @@ def test_method_selection():
         'pr_node': [33, 0, 32, 2],
         'eig_node': [33, 0, 2, 32],
         'id_node': [33, 0, 32, 2],
+        'rd_node': [33, 0, 32, 1],
         'ib_node': [0, 33, 32, 2],
+        'rb_node': [0, 33, 32, 2],
         'rnd_node': [14, 19, 3, 27],
 
         'add_edge_pr': {
@@ -90,11 +92,11 @@ def test_method_selection():
 
         # print(method, values)
         if get_defense_category(method) == 'node':
-            assert values == ground_truth[method]
+            assert (values == ground_truth[method])
         else:
             assert np.array_equal(values['added'], ground_truth[method]['added'])
             if 'removed' in values:
-                assert np.array_equal(values['removed'], ground_truth[method]['removed'])
+                assert (np.array_equal(values['removed'], ground_truth[method]['removed']))
 
 
 def main():

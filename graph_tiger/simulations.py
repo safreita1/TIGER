@@ -19,15 +19,15 @@ class Simulation:
     """
     The parent class for all simulation classes i.e., attack, defense, cascading failure and diffusion models.
     Provides a shared set of functions, largely for network visualization and plotting of results
+
+    :param graph: undirected NetworkX graph
+    :param runs: number of times to run the simulation
+    :param steps: number of time steps to run each simulation
+    :param kwargs: optional parameters to change visualization settings
     """
     def __init__(self, graph, runs, steps, **kwargs):
-        """
-
-        :param graph: undirected NetworkX graph
-        :param runs: number of times to run the simulation
-        :param steps: number of time steps to run each simulation
-        :param kwargs: optional parameters to change visualization settings
-        """
+        # TODO: efficiency improvement--store edge and node difference rather than whole graph twice
+        self.graph_og = graph.copy()
         self.graph = graph
 
         self.prm = {

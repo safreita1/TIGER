@@ -61,79 +61,131 @@ If you find *TIGER* useful in your research, please consider citing the followin
 
 --------------------------------------------------------------------------------
 
-### Implemented Techniques
+### Techniques Implemented
 
 **Vulnerability and Robustness Measures:**
 
-* **[Vertex Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.node_connectivity)** from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
-* **[Edge Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.edge_connectivity)** from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
-* **[Diameter](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.diameter)** from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
-* **[Average Distance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_distance)** from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
-* **[Average Inverse Distance (Efficiency)](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_inverse_distance)** from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013) 
-* **[Average Vertex Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_vertex_betweenness)** from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
-* **[Approximate Average Vertex Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_vertex_betweenness)** from Brandes *et al.* [Centrality Estimation in Large Networks](https://www.worldscientific.com/doi/10.1142/S0218127407018403) (International Journal of Bifurcation and Chaos 2007)
-* **[Average Edge Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_edge_betweenness)** from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
-* **[Approximate Average Edge Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_edge_betweenness)** from Brandes *et al.* [Centrality Estimation in Large Networks](https://www.worldscientific.com/doi/10.1142/S0218127407018403) (International Journal of Bifurcation and Chaos 2007)
+* **[Vertex Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.node_connectivity)** 
+from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
+* **[Edge Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.edge_connectivity)** 
+from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
+* **[Diameter](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.diameter)** 
+from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
+* **[Average Distance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_distance)** 
+from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
+* **[Average Inverse Distance (Efficiency)](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_inverse_distance)** 
+from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013) 
+* **[Average Vertex Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_vertex_betweenness)** 
+from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
+* **[Approximate Average Vertex Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_vertex_betweenness)** 
+from Brandes *et al.* [Centrality Estimation in Large Networks](https://www.worldscientific.com/doi/10.1142/S0218127407018403) (International Journal of Bifurcation and Chaos 2007)
+* **[Average Edge Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_edge_betweenness)** 
+from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/pdf/1311.5064.pdf) (arXiv 2013)
+* **[Approximate Average Edge Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_edge_betweenness)** 
+from Brandes *et al.* [Centrality Estimation in Large Networks](https://www.worldscientific.com/doi/10.1142/S0218127407018403) (International Journal of Bifurcation and Chaos 2007)
 * **[Average Clustering Coefficient](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.average_clustering_coefficient)**
 * **[Largest Connected Component](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.largest_connected_component)**
-* **[Spectral Radius](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_radius)** from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
-* **[Spectral Gap](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_gap)** from Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
-* **[Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)** from Jun *et al.* [Natural connectivity of complex networks](https://iopscience.iop.org/article/10.1088/0256-307X/27/7/078902) (Chinese Physics Letters 2010)
+* **[Spectral Radius](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_radius)** 
+from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
+* **[Spectral Gap](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_gap)** 
+from Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
+* **[Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)** 
+from Jun *et al.* [Natural connectivity of complex networks](https://iopscience.iop.org/article/10.1088/0256-307X/27/7/078902) (Chinese Physics Letters 2010)
 * **[Approximate Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)**
-* **[Spectral Scaling](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_scaling)** from Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
-* **[Generalized Robustness Index](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.generalized_robustness_index)** from Malliaros *et al.* [Fast Robustness Estimation in Large Social Graphs: Communities and Anomaly Detection](https://epubs.siam.org/doi/10.1137/1.9781611972825.81) (SM 2012)
-* **[Algebraic Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.algebraic_connectivity)** from Chan *et al.* [Optimizing network robustness by edge rewiring: a general framework](https://link.springer.com/article/10.1007/s10618-015-0447-5) (DMKD 2016)
-* **[Number of Spanning Trees](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.num_spanning_trees)** from Baras *et al.* [Efficient and robust communication topologies for distributed decision making in networked systems]() (CDC 2009)
+* **[Spectral Scaling](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_scaling)** 
+from Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
+* **[Generalized Robustness Index](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.generalized_robustness_index)** 
+from Malliaros *et al.* [Fast Robustness Estimation in Large Social Graphs: Communities and Anomaly Detection](https://epubs.siam.org/doi/10.1137/1.9781611972825.81) (SM 2012)
+* **[Algebraic Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.algebraic_connectivity)** 
+from Chan *et al.* [Optimizing network robustness by edge rewiring: a general framework](https://link.springer.com/article/10.1007/s10618-015-0447-5) (DMKD 2016)
+* **[Number of Spanning Trees](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.num_spanning_trees)** 
+from Baras *et al.* [Efficient and robust communication topologies for distributed decision making in networked systems]() (CDC 2009)
 * **[Approximate Number of Spanning Trees](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.num_spanning_trees)**
-* **[Effective Resistance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.effective_resistance)** Klein [Resistance distance](https://link.springer.com/article/10.1007/BF01164627) (Journal of Mathematical Chemistry 1993)
+* **[Effective Resistance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.effective_resistance)** 
+Klein [Resistance distance](https://link.springer.com/article/10.1007/BF01164627) (Journal of Mathematical Chemistry 1993)
 * **[Approximate Effective Resistance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.effective_resistance)**
 
 
 **Attack Strategies:**
-* **[Remove Node: Netshield](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_ns)** from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
-* **[Remove Node: PageRank](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_pr)** from Page *et al.* [The PageRank Citation Ranking: Bringing Order to the Web](http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf)
-* **[Remove Node: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_eig)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Node: Initial Degree (ID)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_id)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Node: Recalculated Degree (RD)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rd)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Node: Initial Betweenness (IB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_ib)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Node: Recalculated Betweenness (RB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rb)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Node: Random](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rnd)** from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Remove Node: Netshield](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_ns)** 
+from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
+* **[Remove Node: PageRank](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_pr)** 
+from Page *et al.* [The PageRank Citation Ranking: Bringing Order to the Web](http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf)
+* **[Remove Node: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_eig)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Node: Initial Degree (ID)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_id)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Node: Recalculated Degree (RD)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rd)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Node: Initial Betweenness (IB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_ib)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Node: Recalculated Betweenness (RB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rb)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Node: Random](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rnd)** 
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
 * **[Remove Edge: Netshield Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_ns)**
-* **[Remove Edge: PageRank Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_pr)** from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
-* **[Remove Edge: Eigenvector Centrality Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_eig)** from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
-* **[Remove Edge: Degree Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_deg)**  from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
-* **[Remove Edge: Random](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rnd)** from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
-* **[Remove Edge: Initial Betweenness (IB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_ib)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Edge: Recalculated Betweenness (RB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rb)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Edge: Initial Degree (ID) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_id)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Remove Edge: Recalculated Degree (RD) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rd)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-
+* **[Remove Edge: PageRank Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_pr)** 
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Remove Edge: Eigenvector Centrality Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_eig)** 
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Remove Edge: Degree Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_deg)**  
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Remove Edge: Random](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rnd)** 
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Remove Edge: Initial Betweenness (IB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_ib)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Edge: Recalculated Betweenness (RB)](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rb)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Edge: Initial Degree (ID) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_id)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Remove Edge: Recalculated Degree (RD) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rd)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
 
 
 **Defense Strategies:**
-* **[Vaccinate Node: Netshield](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_ns)** from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
-* **[Vaccinate Node: PageRank](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_pr)** from Page *et al.* [The PageRank Citation Ranking: Bringing Order to the Web](http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf)
-* **[Vaccinate Node: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_eig)** from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
-* **[Vaccinate Node: Initial Degree (ID)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_id)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Vaccinate Node: Recalculated Degree (RD)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rd)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Vaccinate Node: Initial Betweenness (IB)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_ib)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
-* **[Vaccinate Node: Recalculated Betweenness (RB)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rb)** from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Vaccinate Node: Netshield](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_ns)** 
+from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
+* **[Vaccinate Node: PageRank](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_pr)** 
+from Page *et al.* [The PageRank Citation Ranking: Bringing Order to the Web](http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf)
+* **[Vaccinate Node: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_eig)** 
+from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
+* **[Vaccinate Node: Initial Degree (ID)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_id)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Vaccinate Node: Recalculated Degree (RD)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rd)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Vaccinate Node: Initial Betweenness (IB)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_ib)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
+* **[Vaccinate Node: Recalculated Betweenness (RB)](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rb)** 
+from Holme *et al.* [Attack vulnerability of complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.056109) (Physical Review E 2002)
 * **[Vaccinate Node: Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rnd)**
-* **[Add Edge: PageRank](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_pr)** from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
-* **[Add Edge: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_eig)** from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
-* **[Add Edge: Degree Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_degree)** from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
-* **[Add Edge: Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_rnd)**  Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
-* **[Add Edge: Preferential](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_pref)**  Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
-* **[Rewire Edge: Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_rnd)**  Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
-* **[Rewire Edge: Random Neighbor](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_rnd_neighbor)**  Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
-* **[Rewire Edge: Preferential](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_pref)**  Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
-* **[Rewire Edge: Preferential Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_pref_rnd)**  Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
+* **[Add Edge: PageRank](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_pr)** 
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Add Edge: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_eig)** 
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Add Edge: Degree Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_degree)** 
+from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+* **[Add Edge: Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_rnd)**  
+Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
+* **[Add Edge: Preferential](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_pref)**  
+Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
+* **[Rewire Edge: Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_rnd)**  
+Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
+* **[Rewire Edge: Random Neighbor](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_rnd_neighbor)**  
+Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
+* **[Rewire Edge: Preferential](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_pref)**  
+Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
+* **[Rewire Edge: Preferential Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_pref_rnd)**  
+Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
 
 
 **Simulation Frameworks:**
-* **[Susceptible-Infected-Susceptible (SIS) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** from Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
-* **[Susceptible-Infected-Recovered (SIR) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** from Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
-* **[Cascading Failure Model](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)** from Xia *et al.* [A model for cascading failures in complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.69.045104) (Physical Review E 2004)
+* **[Cascading Failure Model](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)** 
+from Xia *et al.* [A model for cascading failures in complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.69.045104) (Physical Review E 2004)
+* **[Susceptible-Infected-Susceptible (SIS) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
+from Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+* **[Susceptible-Infected-Recovered (SIR) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
+from Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+
 
 --------------------------------------------------------------------------------
 

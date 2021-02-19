@@ -1,9 +1,9 @@
 import numpy as np
 
-from graphs import o4_graph, p4_graph, c4_graph, k4_1_graph, k4_2_graph
-from graphs import two_c4_0_bridge, two_c4_1_bridge, two_c4_2_bridge, two_c4_3_bridge
+from graph_tiger.graphs import o4_graph, p4_graph, c4_graph, k4_1_graph, k4_2_graph
+from graph_tiger.graphs import two_c4_0_bridge, two_c4_1_bridge, two_c4_2_bridge, two_c4_3_bridge
 
-from measures import run_measure
+from graph_tiger.measures import run_measure
 
 
 def test_measures():
@@ -40,5 +40,12 @@ def test_measures():
             if value is not None: value = round(value, 2)
 
             # print(idx, measure_name, value)
-            assert value, graph_values[idx]
+            assert (value, graph_values[idx])
 
+
+def main():
+    test_measures()
+
+
+if __name__ == '__main__':
+    main()

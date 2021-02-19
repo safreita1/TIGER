@@ -1,5 +1,5 @@
-from graphs import karate
-from attacks import run_attack_method, get_attack_methods
+from graph_tiger.graphs import karate
+from graph_tiger.attacks import run_attack_method, get_attack_methods
 
 
 def test_attack_strength():
@@ -54,7 +54,7 @@ def test_method_selection():
 
         # print(method, values)
         if 'rnd' not in method:
-            assert values == ground_truth[method]
+            assert (values == ground_truth[method])
 
 
 def main():
