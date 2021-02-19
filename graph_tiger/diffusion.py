@@ -10,19 +10,20 @@ from graph_tiger.defenses import run_defense_method, get_defense_category
 
 
 class Diffusion(Simulation):
-    def __init__(self, graph, model='SIS', runs=10, steps=5000, b=0.00208, d=0.01, c=1, **kwargs):
-        """
-        Simulates the propagation of a virus using either the SIS or SIR model
+    """
+    Simulates the propagation of a virus using either the SIS or SIR model
 
-        :param graph: contact network
-        :param model: a string to set the model type (i.e., SIS or SIR)
-        :param runs: an integer number of times to run the simulation
-        :param steps: an integer number of steps to run a single simulation
-        :param b: float representing birth rate of virus (probability of transmitting disease to each neighbor)
-        :param d: float representing death rate of virus (probability of each infected node healing)
-        :param c: fraction of initially infected nodes
-        :param **kwargs: see parent class Simulation for additional options
-        """
+    :param graph: contact network
+    :param model: a string to set the model type (i.e., SIS or SIR)
+    :param runs: an integer number of times to run the simulation
+    :param steps: an integer number of steps to run a single simulation
+    :param b: float representing birth rate of virus (probability of transmitting disease to each neighbor)
+    :param d: float representing death rate of virus (probability of each infected node healing)
+    :param c: fraction of initially infected nodes
+    :param **kwargs: see parent class Simulation for additional options
+    """
+
+    def __init__(self, graph, model='SIS', runs=10, steps=5000, b=0.00208, d=0.01, c=1, **kwargs):
         super().__init__(graph, runs, steps, **kwargs)
 
         self.prm.update({

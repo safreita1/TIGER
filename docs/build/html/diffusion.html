@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Diffusion &mdash; TIGER 0.0.1 documentation</title>
+  <title>Diffusion &mdash; TIGER 0.1.3 documentation</title>
   
 
   
@@ -198,6 +198,22 @@
 <dt id="graph_tiger.diffusion.Diffusion">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">graph_tiger.diffusion.</span></code><code class="sig-name descname"><span class="pre">Diffusion</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SIS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.00208</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.diffusion.Diffusion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="simulations.html#graph_tiger.simulations.Simulation" title="graph_tiger.simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">graph_tiger.simulations.Simulation</span></code></a></p>
+<p>Simulates the propagation of a virus using either the SIS or SIR model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – contact network</p></li>
+<li><p><strong>model</strong> – a string to set the model type (i.e., SIS or SIR)</p></li>
+<li><p><strong>runs</strong> – an integer number of times to run the simulation</p></li>
+<li><p><strong>steps</strong> – an integer number of steps to run a single simulation</p></li>
+<li><p><strong>b</strong> – float representing birth rate of virus (probability of transmitting disease to each neighbor)</p></li>
+<li><p><strong>d</strong> – float representing death rate of virus (probability of each infected node healing)</p></li>
+<li><p><strong>c</strong> – fraction of initially infected nodes</p></li>
+<li><p><strong>**kwargs</strong> – <p>see parent class Simulation for additional options</p>
+</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="graph_tiger.diffusion.Diffusion.get_effective_strength">
 <code class="sig-name descname"><span class="pre">get_effective_strength</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.diffusion.Diffusion.get_effective_strength" title="Permalink to this definition">¶</a></dt>

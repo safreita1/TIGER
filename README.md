@@ -33,6 +33,22 @@ using the [YAML](environment.yml) file.
 
 --------------------------------------------------------------------------------
 
+### Tutorials
+To help you get started we provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.readthedocs.io/)**;
+each tutorial covers an aspect of TIGER's core functionality: 
+
+Tutorial 1. [Measuring Graph Vulnerability and Robustness](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-1.html)
+
+Tutorial 2. [Attacking a Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-2.html)
+
+Tutorial 3. [Defending A Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-3.html)
+
+Tutorial 4. [Simulating Cascading Failures on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-4.html)
+
+Tutorial 5. [Simulating Entity Dissemination on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-5.html)
+
+--------------------------------------------------------------------------------
+
 ### Citing
 
 If you find *TIGER* useful in your research, please consider citing the following paper:
@@ -52,95 +68,78 @@ If you find *TIGER* useful in your research, please consider citing the followin
 
 **Vulnerability and Robustness Measures**
 
-* **[Vertex Connectivity](https://karateclub.readthedocs.io/en/latest/modules/root.html#karateclub.community_detection.overlapping.danmf.DANMF)** from Ye *et al.*: [Deep Autoencoder-like Nonnegative Matrix Factorization for Community Detection](https://github.com/benedekrozemberczki/DANMF/blob/master/18DANMF.pdf) (CIKM 2018)
-* **[Edge Connectivity]()**
-* **[Diameter]()**
-* **[Average Distance]()**
-* **[Efficiency]()**
-* **[Average Vertex Betweenness]()**
-* **[Approximate Average Vertex Betweenness]()**
-* **[Approximate Average Edge Betweenness]()**
-* **[Average Clustering Coefficient]()**
-* **[Largest Connected Component]()**
-* **[Spectral Radius]()**
-* **[Spectral Gap]()**
-* **[Natural Connectivity]()**
-* **[Approximate Natural Connectivity]()**
-* **[Spectral Scaling]()**
-* **[Generalized Robustness Index]()**
-* **[Algebraic Connectivity]()**
-* **[Number of Spanning Trees]()**
-* **[Effective Resistance]()**
-* **[Approximate Effective Resistance]()**
+* **[Vertex Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.node_connectivity)** from Ye *et al.*: [Deep Autoencoder-like Nonnegative Matrix Factorization for Community Detection](https://github.com/benedekrozemberczki/DANMF/blob/master/18DANMF.pdf) (CIKM 2018)
+* **[Edge Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.edge_connectivity)**
+* **[Diameter](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.diameter)**
+* **[Average Distance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_distance)**
+* **[Average Inverse Distance (Efficiency)](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_inverse_distance)**
+* **[Average Vertex Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_vertex_betweenness)**
+* **[Approximate Average Vertex Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_vertex_betweenness)**
+* **[Average Edge Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_edge_betweenness)**
+* **[Approximate Average Edge Betweenness](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.avg_edge_betweenness)**
+* **[Average Clustering Coefficient](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.average_clustering_coefficient)**
+* **[Largest Connected Component](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.largest_connected_component)**
+* **[Spectral Radius](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_radius)**
+* **[Spectral Gap](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_gap)**
+* **[Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)**
+* **[Approximate Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)**
+* **[Spectral Scaling](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_scaling)**
+* **[Generalized Robustness Index](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.generalized_robustness_index)**
+* **[Algebraic Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.algebraic_connectivity)**
+* **[Number of Spanning Trees](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.num_spanning_trees)**
+* **[Approximate Number of Spanning Trees](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.num_spanning_trees)**
+* **[Effective Resistance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.effective_resistance)**
+* **[Approximate Effective Resistance](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.effective_resistance)**
 
+
+**Attack Strategies**
+* **[Remove Node: Netshield](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_ns)**
+* **[Remove Node: PageRank](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_pr)**
+* **[Remove Node: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_eig)**
+* **[Remove Node: Initial Degree (ID) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_id)**
+* **[Remove Node: Recalculated Degree (RD) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rd)**
+* **[Remove Node: Initial Betweenness (IB) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_ib)**
+* **[Remove Node: Recalculated Betweenness (RB) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rb)**
+* **[Remove Node: Random Selection](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_node_rnd)**
+* **[Remove Edge: Netshield Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_ns)**
+* **[Remove Edge: PageRank Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_pr)**
+* **[Remove Edge: Eigenvector Centrality Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_eig)**
+* **[Remove Edge: Degree Line](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_line_deg)**
+* **[Remove Edge: Initial Betweenness (IB) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_ib)**
+* **[Remove Edge: Recalculated Betweenness (RB) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rb)**
+* **[Remove Edge: Initial Degree (ID) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_id)**
+* **[Remove Edge: Recalculated Degree (RD) Removal](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rd)**
+* **[Remove Edge: Random Selection](https://graph-tiger.readthedocs.io/en/latest/attacks.html#graph_tiger.attacks.get_edge_rnd)**
 
 
 **Defense Strategies**
-* **[Vaccinate Node: Netshield]()**
-* **[Vaccinate Node: PageRank]()**
-* **[Vaccinate Node: Eigenvector Centrality]()**
-* **[Vaccinate Node: Initial Degree (ID) Removal]()**
-* **[Vaccinate Node: Recalculated Degree (RD) Removal]()**
-* **[Vaccinate Node: Initial Betweenness (IB) Removal]()**
-* **[Vaccinate Node: Recalculated Betweenness (RB) Removal]()**
-* **[Vaccinate Node: Random Selection]()**
-
-* **[Add Edge: PageRank]()**
-* **[Add Edge: Eigenvector Centrality]()**
-* **[Add Edge: Degree Centrality]()**
-* **[Add Edge: Random Selection]()**
-* **[Add Edge: Preferential]()**
-
-* **[Rewire Edge: Random]()**
-* **[Rewire Edge: Random Neighbor]()**
-* **[Rewire Edge: Preferential]()**
-* **[Rewire Edge: Preferential Random]()**
-
-**Attack Strategies**
-* **[Remove Node: Netshield]()**
-* **[Remove Node: PageRank]()**
-* **[Remove Node: Eigenvector Centrality]()**
-* **[Remove Node: Initial Degree (ID) Removal]()**
-* **[Remove Node: Recalculated Degree (RD) Removal]()**
-* **[Remove Node: Initial Betweenness (IB) Removal]()**
-* **[Remove Node: Recalculated Betweenness (RB) Removal]()**
-* **[Remove Node: Random Selection]()**
-
-* **[Remove Edge: Netshield Line]()**
-* **[Remove Edge: PageRank Line]()**
-* **[Remove Edge: Eigenvector Centrality Line]()**
-* **[Remove Edge: Degree Line]()**
-* **[Remove Edge: Initial Betweenness (IB) Removal]()**
-* **[Remove Edge: Recalculated Betweenness (RB) Removal]()**
-* **[Remove Edge: Initial Degree (ID) Removal]()**
-* **[Remove Edge: Recalculated Degree (RD) Removal]()**
+* **[Vaccinate Node: Netshield](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_ns)**
+* **[Vaccinate Node: PageRank](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_pr)**
+* **[Vaccinate Node: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_eig)**
+* **[Vaccinate Node: Initial Degree (ID) Removal](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_id)**
+* **[Vaccinate Node: Recalculated Degree (RD) Removal](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rd)**
+* **[Vaccinate Node: Initial Betweenness (IB) Removal](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_ib)**
+* **[Vaccinate Node: Recalculated Betweenness (RB) Removal](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rb)**
+* **[Vaccinate Node: Random Selection](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.get_node_rnd)**
+* **[Add Edge: PageRank](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_pr)**
+* **[Add Edge: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_eig)**
+* **[Add Edge: Degree Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_degree)**
+* **[Add Edge: Random Selection](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_rnd)**
+* **[Add Edge: Preferential](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_pref)**
+* **[Rewire Edge: Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_rnd)**
+* **[Rewire Edge: Random Neighbor](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_rnd_neighbor)**
+* **[Rewire Edge: Preferential](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_pref)**
+* **[Rewire Edge: Preferential Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.rewire_edge_pref_rnd)**
 
 
 **Simulation Frameworks**
-* **[Susceptible-Infected-Susceptible (SIS)]()**
-* **[Susceptible-Infected-Recovered (SIR)]()**
-* **[]()**
-SIS
-SIR
-Cascading failure
-
+* **[Susceptible-Infected-Susceptible (SIS) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)**
+* **[Susceptible-Infected-Recovered (SIR) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)**
+* **[Cascading Failure Model](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)**
 
 --------------------------------------------------------------------------------
 
-### Detailed Tutorials and Examples
-To help you get started we provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.readthedocs.io/)**;
-each tutorial covers an aspect of TIGER's core functionality: 
-
-Tutorial 1. [Measuring Graph Vulnerability and Robustness](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-1.html)
-
-Tutorial 2. [Attacking a Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-2.html)
-
-Tutorial 3. [Defending A Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-3.html)
-
-Tutorial 4. [Simulating Cascading Failures on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-4.html)
-
-Tutorial 5. [Simulating Entity Dissemination on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-5.html)
-
+### Quick Examples
 
 #### EX 1. Calculate graph robustness (e.g., spectral radius, effective resistance)
     from graph_tiger.measures import run_measure
@@ -243,6 +242,6 @@ Step 0: Virus infected network |Step 80: Partially infected network | Step 4999:
 [comment]: ![](images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg)
 
 --------------------------------------------------------------------------------
-**License**
+### License
 
 [MIT License](LICENSE)
