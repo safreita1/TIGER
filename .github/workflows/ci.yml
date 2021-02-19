@@ -42,8 +42,6 @@ jobs:
           BEZIER_NO_EXTENSION=true \
           pip install --upgrade bezier --no-binary=bezier
 
-
-          python setup.py install
       - name: Run tests with pytest
         run: |
           pytest --exitfirst --verbose --failed-first \
