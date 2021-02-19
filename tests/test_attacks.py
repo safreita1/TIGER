@@ -40,7 +40,7 @@ def test_method_selection():
         'deg_line_edge': [(32, 33), (0, 2), (0, 1), (31, 33)],
         'id_edge': [(32, 33), (0, 2), (0, 1), (2, 32)],
         'rd_edge': [(32, 33), (0, 2), (0, 1), (2, 32)],
-        'ib_edge': [(0, 31), (0, 6), (0, 5), (0, 2)],
+        'ib_edge': ([(0, 31), (0, 6), (0, 5), (0, 2)],  [(0, 31), (0, 5), (0, 6), (0, 2)]),
         'rb_edge': [(0, 31), (0, 2), (0, 8), (13, 33)],
     }
 
@@ -53,8 +53,10 @@ def test_method_selection():
         values = run_attack_method(graph, method=method, k=k, seed=1)
 
         # print(method, values)
-        if 'rnd' not in method:
+        if 'rnd' not in method and method != 'ib_edge':
             assert (values == ground_truth[method])
+        elif method == 'ib_edge':
+            assert (values == ground_truth[method][0] or values == ground_truth[method][1])
 
 
 def main():
