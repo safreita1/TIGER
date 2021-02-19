@@ -6,18 +6,16 @@
 
 ![TIGER Library](images/TIGER.jpg)
 
-**TIGER** is a Python toolbox to conduct graph vulnerability and robustness research. For additional information, please take a look at the   **[Documentation](https://graph-tiger.readthedocs.io/)** and relevant **[Paper](https://arxiv.org/pdf/2006.05648.pdf)**.
-
- 
-**TIGER** contains state-of-the-art methods to help users conduct graph vulnerability and robustness analysis on graph structured data.
-It contains 22 graph **robustness measures** with both original and fast approximate versions; 
-17 **attack strategies**; 15 heuristic and optimization based **defense techniques**; and 4 **simulation tools**.
-Specifically, TIGER is specifically designed to help users:
+**TIGER** is a Python toolbox to conduct graph vulnerability and robustness research. TIGER contains numerous 
+state-of-the-art methods to help users conduct graph vulnerability and robustness analysis on graph structured data.
+Specifically, TIGER helps users:
 
 1. **Quantify** network *vulnerability* and *robustness*, 
 2. **Simulate** a variety of network attacks, cascading failures and spread of dissemination of entities
 3. **Augment** a network's structure to resist *attacks* and recover from *failure* 
 4. **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda). 
+
+For additional information, take a look at the **[Documentation](https://graph-tiger.readthedocs.io/)** and **[Paper](https://arxiv.org/pdf/2006.05648.pdf)**.
 
 --------------------------------------------------------------------------------
 
@@ -34,18 +32,18 @@ using the [YAML](environment.yml) file.
 --------------------------------------------------------------------------------
 
 ### Tutorials
-To help you get started we provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.readthedocs.io/)**;
-each tutorial covers an aspect of TIGER's core functionality: 
+To help get started we provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.readthedocs.io/)**;
+each tutorial covers a core aspect of TIGER's functionality: 
 
-Tutorial 1. [Measuring Graph Vulnerability and Robustness](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-1.html)
+**Tutorial 1:** [Measuring Graph Vulnerability and Robustness](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-1.html)
 
-Tutorial 2. [Attacking a Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-2.html)
+**Tutorial 2:** [Attacking a Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-2.html)
 
-Tutorial 3. [Defending A Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-3.html)
+**Tutorial 3:** [Defending A Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-3.html)
 
-Tutorial 4. [Simulating Cascading Failures on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-4.html)
+**Tutorial 4:** [Simulating Cascading Failures on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-4.html)
 
-Tutorial 5. [Simulating Entity Dissemination on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-5.html)
+**Tutorial 5:** [Simulating Entity Dissemination on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-5.html)
 
 --------------------------------------------------------------------------------
 
