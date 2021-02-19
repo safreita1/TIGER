@@ -18,7 +18,7 @@ install_requires = ["numpy",
                     "datashader",
                     "dask",
                     "scikit-image",
-                    "bezier==2021.2.12"]
+                    "bezier==2020.5.19"]
 
 
 keywords = ["data-science",
