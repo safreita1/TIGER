@@ -1,3 +1,4 @@
+[![Run Python Tests](https://github.com/safreita1/TIGER/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/safreita1/TIGER/actions/workflows/ci.yml)
 ![Version](https://img.shields.io/pypi/v/graph-tiger?color=dark)
 [![Documentation Status](https://readthedocs.org/projects/graph-tiger/badge/?version=latest)](https://graph-tiger.readthedocs.io/en/latest/?badge=latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
