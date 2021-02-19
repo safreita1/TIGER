@@ -22,6 +22,7 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pip install pytest-github-actions-annotate-failures
+          BEZIER_NO_EXTENSION=true \
           pip install --upgrade bezier --no-binary=bezier
           python setup.py install
       - name: Run tests with pytest
