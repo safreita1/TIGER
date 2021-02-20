@@ -106,7 +106,7 @@ def watts_strogatz(n, m=4, p=0.05, seed=None):
     return nx.generators.connected_watts_strogatz_graph(n=n, k=m, p=p, seed=seed)
 
 
-def barbasi_albert(n, m=3, seed=None):
+def barabasi_albert(n, m=3, seed=None):
     """
     Returns a Barabasi Albert NetworkX graph
 
@@ -502,7 +502,7 @@ graph_urls = {
 models = {
     'ER': erdos_reyni,
     'WS': watts_strogatz,
-    'BA': barbasi_albert,
+    'BA': barabasi_albert,
     'CSF': clustered_scale_free
 }
 

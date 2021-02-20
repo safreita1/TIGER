@@ -6,7 +6,7 @@ from scipy.linalg import eigh
 from scipy.sparse.linalg import eigsh
 
 
-def use_gpu():
+def gpu_available():
     from pip._internal.utils.misc import get_installed_distributions
 
     gpu = False
@@ -29,7 +29,7 @@ def get_sparse_graph(graph):
     return nx.to_scipy_sparse_matrix(graph, format='csr', dtype=np.float, nodelist=graph.nodes)
 
 
-def get_adjacency_spectrum(graph, k=np.inf, eigvals_only=False, which='LA'):
+def get_adjacency_spectrum(graph, k=np.inf, eigvals_only=False, which='LA', use_gpu=False):
     """
     Gets the top k eigenpairs of the adjacency matrix
 
@@ -48,24 +48,27 @@ def get_adjacency_spectrum(graph, k=np.inf, eigvals_only=False, which='LA'):
     else:
         A = nx.to_scipy_sparse_matrix(graph, format='csr', dtype=np.float, nodelist=graph.nodes)
 
-        if not use_gpu():
-            eigpairs = eigsh(A, k=min(k, len(graph) - 1), which=which, return_eigenvectors=not eigvals_only)
-        else:
+        if gpu_available() and use_gpu:
             import cupy as cp
             import cupyx.scipy.sparse.linalg as cp_linalg
 
             A_gpu = cp.sparse.csr_matrix(A)
             eigpairs = cp_linalg.eigsh(A_gpu, k=min(k, len(graph) - 1), which=which, return_eigenvectors=not eigvals_only)
 
-            if len(eigpairs) > 1:
+            if type(eigpairs) is tuple:
+                eigpairs = list(eigpairs)
                 eigpairs[0], eigpairs[1] = cp.asnumpy(eigpairs[0]), cp.asnumpy(eigpairs[1])
             else:
                 eigpairs = cp.asnumpy(eigpairs)
 
+        else:
+            if use_gpu: print('Warning: GPU requested, but not available')
+            eigpairs = eigsh(A, k=min(k, len(graph) - 1), which=which, return_eigenvectors=not eigvals_only)
+
     return eigpairs
 
 
-def get_laplacian_spectrum(graph, k=np.inf, which='SM', tol=1E-2, eigvals_only=True):
+def get_laplacian_spectrum(graph, k=np.inf, which='SM', tol=1E-2, eigvals_only=True, use_gpu=False):
     """
     Gets the bottom k eigenpairs of the Laplacian matrix
 
@@ -77,6 +80,8 @@ def get_laplacian_spectrum(graph, k=np.inf, which='SM', tol=1E-2, eigvals_only=T
 
     :return: the eigenpair information
     """
+
+    if use_gpu: print('Warning: GPU requested, but not available for Laplacian measures')
 
     # get all eigenvalues for small graphs
     if len(graph) < 100:

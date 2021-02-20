@@ -7,7 +7,7 @@ from graph_tiger.utils import get_adjacency_spectrum, get_laplacian_spectrum
 
 
 @stopit.threading_timeoutable()
-def run_measure(graph, measure, k=np.inf):
+def run_measure(graph, measure, k=np.inf, use_gpu=False):
     """
     Evaluates graph robustness according to a specified measure
 
@@ -19,11 +19,7 @@ def run_measure(graph, measure, k=np.inf):
     """
 
     try:
-        if k is not np.inf:
-            result = measures[measure](graph, k)
-        else:
-            result = measures[measure](graph)
-
+        result = measures[measure](graph, k=k, use_gpu=use_gpu)
         return result
 
     except stopit.TimeoutException:
@@ -62,7 +58,7 @@ Graph Connectivity Measures
 #     return connected
 
 
-def node_connectivity(graph):
+def node_connectivity(graph, **kwargs):
     """
     Measures the minimal number of vertices that can be removed to disconnect the graph.
     Larger vertex (node) connectivity --> harder to disconnect graph
@@ -75,7 +71,7 @@ def node_connectivity(graph):
     return nx.algorithms.node_connectivity(graph)
 
 
-def edge_connectivity(graph):
+def edge_connectivity(graph, **kwargs):
     """
     Measures the minimal number of edges that can be removed to disconnect the graph.
     Larger edge connectivity --> harder to disconnect graph -->
@@ -88,7 +84,7 @@ def edge_connectivity(graph):
     return nx.algorithms.edge_connectivity(graph)
 
 
-def avg_distance(graph):
+def avg_distance(graph, **kwargs):
     """
     The average distance between all pairs of nodes in the graph.
     The smaller the average shortest path distance, the more robust the graph.
@@ -104,7 +100,7 @@ def avg_distance(graph):
     return round(nx.average_shortest_path_length(graph), 2)
 
 
-def avg_inverse_distance(graph):
+def avg_inverse_distance(graph, **kwargs):
     """
     The average inverse distance between all pairs of nodes in the graph.
     The larger the average inverse shortest path distance, the more robust the graph.
@@ -120,7 +116,7 @@ def avg_inverse_distance(graph):
     return round(nx.global_efficiency(graph), 2)
 
 
-def diameter(graph):
+def diameter(graph, **kwargs):
     """
     The diameter of a connected graph is the longest shortest path between all pairs of nodes.
     The smaller the diameter the more robust the graph i.e., smaller diameter --> 
@@ -133,7 +129,7 @@ def diameter(graph):
     return nx.diameter(graph)
 
 
-def avg_vertex_betweenness(graph, k=np.inf):
+def avg_vertex_betweenness(graph, k=np.inf, **kwargs):
     """
     The average vertex betweenness of a graph is the summation of vertex betweenness for every node in the graph.
     The smaller the average vertex betweenness, the more robust the graph. 
@@ -151,7 +147,7 @@ def avg_vertex_betweenness(graph, k=np.inf):
     return round(avg_betw, 2)
 
 
-def avg_edge_betweenness(graph, k=np.inf):
+def avg_edge_betweenness(graph, k=np.inf, **kwargs):
     """
     Similar to vertex betweenness, edge betweenness is defined as the number of shortest paths
     that pass through an edge *e* out of the total possible shortest paths.
@@ -173,7 +169,7 @@ def avg_edge_betweenness(graph, k=np.inf):
         return 0
 
 
-def average_clustering_coefficient(graph):
+def average_clustering_coefficient(graph, **kwargs):
     """
     The global clustering coefficient is based on the number of triplets of nodes in the graph,
     and provides an indication of how well nodes tend to cluster together.
@@ -186,7 +182,7 @@ def average_clustering_coefficient(graph):
     return round(nx.average_clustering(graph), 2)
 
 
-def largest_connected_component(graph):
+def largest_connected_component(graph, **kwargs):
     """
     This measure provides an indication of a graph's connectivity by measuring the fraction
     of nodes contained in the largest connected component. The larger the value, the more robust the graph.
@@ -203,16 +199,17 @@ Adjacency Matrix Spectral Measures
 """
 
 
-def spectral_radius(graph):
+def spectral_radius(graph, use_gpu=False, **kwargs):
     """
     The largest eigenvalue :math:`\lambda_1` of an adjacency matrix **A** is called the spectral radius.
     The larger the spectral radius, the more robust the graph. This can be viewed from its close relationship to the
     "path" or "loop" capacity in a network :cite:`chen2015node,tong2010vulnerability`.
 
     :param graph: undirected NetworkX graph
+    :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
-    lam = get_adjacency_spectrum(graph, k=1, which='LA', eigvals_only=True)
+    lam = get_adjacency_spectrum(graph, k=1, which='LA', eigvals_only=True, use_gpu=use_gpu)
 
     idx = lam.argsort()[::-1]  # sort descending algebraic
     lam = lam[idx]
@@ -220,7 +217,7 @@ def spectral_radius(graph):
     return round(lam[0], 2)
 
 
-def spectral_gap(graph):
+def spectral_gap(graph, use_gpu=False, **kwargs):
     """
     The difference between the largest and second largest eigenvalues of the adjacency matrix
     (:math:`\lambda_1 - \lambda_2`) is called the spectral gap :math:`\lambda_d`.
@@ -229,9 +226,10 @@ def spectral_gap(graph):
     undesirable bridges in the network :cite:`chan2016optimizing,malliaros2012fast`.
 
     :param graph: undirected NetworkX graph
+    :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
-    lam = get_adjacency_spectrum(graph, k=2, which='LA', eigvals_only=True)
+    lam = get_adjacency_spectrum(graph, k=2, which='LA', eigvals_only=True, use_gpu=use_gpu)
 
     idx = lam.argsort()[::-1]  # sort descending algebraic
     lam = lam[idx]
@@ -239,16 +237,17 @@ def spectral_gap(graph):
     return round(lam[0] - lam[1], 2)
 
 
-def natural_connectivity(graph, k=np.inf):
+def natural_connectivity(graph, k=np.inf, use_gpu=False, **kwargs):
     """
     Natural connectivity has a physical and structural interpretation that is tied to the connectivity properties
     of a network, identifying alternative pathways in a network through the weighted number of closed walks.
     The larger the natural connectivity (average eigenvalue of adjacency matrix), the more robust the graph :cite:`chan2014make`.
 
     :param graph: undirected NetworkX graph
+    :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
-    lam = get_adjacency_spectrum(graph, k=k, which='LA', eigvals_only=True)
+    lam = get_adjacency_spectrum(graph, k=k, which='LA', eigvals_only=True, use_gpu=use_gpu)
 
     idx = lam.argsort()[::-1]  # sort descending algebraic
     lam = lam[idx]
@@ -274,15 +273,16 @@ def odd_subgraph_centrality(i, lam, u):
     return sc
 
 
-def spectral_scaling(graph, k=np.inf):
+def spectral_scaling(graph, k=np.inf, use_gpu=False, **kwargs):
     """
     Spectral scaling is a combination of the spectral gap and subgraph centrality. Spectral scaling takes into account
     if a graph has many bridges. The smaller the value, the more robust the graph :cite:`estrada2006network`.
 
     :param graph: undirected NetworkX graph
+    :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
-    lam, u = get_adjacency_spectrum(graph, k=k, which='LM', eigvals_only=False)
+    lam, u = get_adjacency_spectrum(graph, k=k, which='LM', eigvals_only=False, use_gpu=use_gpu)
 
     idx = np.abs(lam).argsort()[::-1]  # sort descending magnitude
     lam = lam[idx]
@@ -300,15 +300,16 @@ def spectral_scaling(graph, k=np.inf):
     return sc
 
 
-def generalized_robustness_index(graph, k=30):
+def generalized_robustness_index(graph, k=30, use_gpu=False, **kwargs):
     """
     This can be considered a fast approximation of spectral scaling. The smaller the value, the more robust the graph.
     Also helps determine if a graph has many bridges (bad for robustness) :cite:`malliaros2012fast`.
 
     :param graph: undirected NetworkX graph
+    :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
-    return spectral_scaling(graph, k=k)
+    return spectral_scaling(graph, k=k, use_gpu=use_gpu, kwargs=kwargs)
 
 
 '''
@@ -316,8 +317,8 @@ Laplacian Spectral Measures
 '''
 
 
-def algebraic_connectivity(graph):
-    """
+def algebraic_connectivity(graph, **kwargs):
+    r"""
     The larger the algebraic connectivity, the more robust the graph.
     This is due to it's close connection to edge connectivity, where it serves as a lower bound:
     0 < :math:`u_2` < node connectivity < edge connectivity. This means that a network with larger algebraic connectivity
@@ -326,14 +327,14 @@ def algebraic_connectivity(graph):
     :param graph: undirected NetworkX graph
     :return: a float
     """
-    lam = get_laplacian_spectrum(graph, k=2)
+    lam = get_laplacian_spectrum(graph, k=2, use_gpu=kwargs['use_gpu'])
 
     alg_connect = round(lam[1], 2)
 
     return alg_connect
 
 
-def num_spanning_trees(graph, k=np.inf):
+def num_spanning_trees(graph, k=np.inf, **kwargs):
     """
     The number of spanning trees *T* is the number of unique spanning trees that can be found in a graph.
     The larger the number of spanning trees, the more robust the graph.
@@ -343,14 +344,14 @@ def num_spanning_trees(graph, k=np.inf):
     :param graph: undirected NetworkX graph
     :return: a float
     """
-    lam = get_laplacian_spectrum(graph, k=k)
+    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs['use_gpu'])
 
     num_trees = round(np.prod(lam[1:]) / len(graph), 2)
 
     return num_trees
 
 
-def effective_resistance(graph, k=np.inf):
+def effective_resistance(graph, k=np.inf, **kwargs):
     """
     This measure views a graph as an electrical circuit where an edge :math:`(i, j)`
     corresponds to a resister of :math:`r_{ij} = 1` Ohm and a node *i* corresponds to a junction.
@@ -360,7 +361,7 @@ def effective_resistance(graph, k=np.inf):
     :param graph: undirected NetworkX graph
     :return: a float
     """
-    lam = get_laplacian_spectrum(graph, k=k)
+    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs['use_gpu'])
 
     resistance = round(len(graph) * np.sum(1.0 / lam[1:]), 2)
 
