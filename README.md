@@ -5,7 +5,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2006.05648-<COLOR>.svg)](https://arxiv.org/pdf/2006.05648.pdf)
 
 
-![TIGER Library](images/TIGER.jpg)
+![TIGER Library](images/tiger-logo.jpg)
 
 **TIGER** is a Python toolbox to conduct graph vulnerability and robustness research. TIGER contains numerous 
 state-of-the-art methods to help users conduct graph vulnerability and robustness analysis on graph structured data.

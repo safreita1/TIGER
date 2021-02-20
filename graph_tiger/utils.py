@@ -6,6 +6,18 @@ from scipy.linalg import eigh
 from scipy.sparse.linalg import eigsh
 
 
+def use_gpu():
+    from pip._internal.utils.misc import get_installed_distributions
+
+    gpu = False
+    installed_packages = [package.project_name for package in get_installed_distributions()]
+
+    if any("cupy" in s for s in installed_packages):
+        gpu = True
+
+    return gpu
+
+
 def get_sparse_graph(graph):
     """
     Returns a sparse adjacency matrix in CSR format
@@ -32,9 +44,23 @@ def get_adjacency_spectrum(graph, k=np.inf, eigvals_only=False, which='LA'):
     if len(graph) < 100:
         A = nx.adjacency_matrix(graph).todense()
         eigpairs = eigh(A, eigvals_only=eigvals_only)
+
     else:
         A = nx.to_scipy_sparse_matrix(graph, format='csr', dtype=np.float, nodelist=graph.nodes)
-        eigpairs = eigsh(A, k=min(k, len(graph) - 1), which=which, return_eigenvectors=not eigvals_only)
+
+        if not use_gpu():
+            eigpairs = eigsh(A, k=min(k, len(graph) - 1), which=which, return_eigenvectors=not eigvals_only)
+        else:
+            import cupy as cp
+            import cupyx.scipy.sparse.linalg as cp_linalg
+
+            A_gpu = cp.sparse.csr_matrix(A)
+            eigpairs = cp_linalg.eigsh(A_gpu, k=min(k, len(graph) - 1), which=which, return_eigenvectors=not eigvals_only)
+
+            if len(eigpairs) > 1:
+                eigpairs[0], eigpairs[1] = cp.asnumpy(eigpairs[0]), cp.asnumpy(eigpairs[1])
+            else:
+                eigpairs = cp.asnumpy(eigpairs)
 
     return eigpairs
 
