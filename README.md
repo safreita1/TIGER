@@ -191,16 +191,16 @@ from Ellens *et al.* [Graph measures and network robustness](https://arxiv.org/p
 from Brandes *et al.* [Centrality Estimation in Large Networks](https://www.worldscientific.com/doi/10.1142/S0218127407018403) (International Journal of Bifurcation and Chaos 2007)
 * **[Average Clustering Coefficient](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.average_clustering_coefficient)**
 * **[Largest Connected Component](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.largest_connected_component)**
-* **[Spectral Radius](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_radius)** 
+* **[Spectral Radius](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_radius)** (**GPU Accelerated: :heavy_check_mark:**)
 from Tong *et al.* [On the Vulnerability of Large Graphs](http://people.seas.harvard.edu/~babis/netshield-icdm10.pdf) (ICDM 2010)
-* **[Spectral Gap](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_gap)** 
+* **[Spectral Gap](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_gap)** (**GPU Accelerated: :heavy_check_mark:**)
 from Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
-* **[Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)** 
+* **[Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)** (**GPU Accelerated: :heavy_check_mark:**)
 from Jun *et al.* [Natural connectivity of complex networks](https://iopscience.iop.org/article/10.1088/0256-307X/27/7/078902) (Chinese Physics Letters 2010)
-* **[Approximate Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)**
+* **[Approximate Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)** (**GPU Accelerated: :heavy_check_mark:**)
 * **[Spectral Scaling](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_scaling)** (**GPU Accelerated: :heavy_check_mark:**)
 from Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
-* **[Generalized Robustness Index](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.generalized_robustness_index)** 
+* **[Generalized Robustness Index](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.generalized_robustness_index)** (**GPU Accelerated: :heavy_check_mark:**)
 from Malliaros *et al.* [Fast Robustness Estimation in Large Social Graphs: Communities and Anomaly Detection](https://epubs.siam.org/doi/10.1137/1.9781611972825.81) (SM 2012)
 * **[Algebraic Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.algebraic_connectivity)** 
 from Chan *et al.* [Optimizing network robustness by edge rewiring: a general framework](https://link.springer.com/article/10.1007/s10618-015-0447-5) (DMKD 2016)
