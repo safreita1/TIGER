@@ -17,10 +17,7 @@ graph structured data. Specifically, ``TIGER`` helps users:
 - **Augment** a network's structure to resist attacks and recover from failure.
 - **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda).
 
-TIGER contains a wide range of techniques across conferences and journals in data mining (`ICDM <http://icdm.bigke.org/>`_, `CIKM <http://www.cikmconference.org/>`_,
-`SDM <https://www.siam.org/conferences/cm/conference/sdm21>`_, `DMKD <https://www.springer.com/journal/10618>`_),
-and the natural sciences (`Physica A <https://www.journals.elsevier.com/physica-a-statistical-mechanics-and-its-applications>`_,
-`Physical Review E <https://journals.aps.org/pre/>`_, `EPJ <https://www.epj.org/>`_). For additional information, take a look at our paper:
+For additional information, take a look at our paper:
 
 `Evaluating Graph Vulnerability and Robustness using TIGER <https://arxiv.org/pdf/2006.05648.pdf>`_.
 `Freitas, Scott <https://scottfreitas.com>`_, and Chau, Duen Horng.
