@@ -11,7 +11,7 @@ from graph_tiger.defenses import run_defense_method, get_defense_category
 
 class Diffusion(Simulation):
     """
-    Simulates the propagation of a virus using either the SIS or SIR model
+    Simulates the propagation of a virus using either the SIS or SIR model :cite`kermack1927contribution`.
 
     :param graph: contact network
     :param model: a string to set the model type (i.e., SIS or SIR)

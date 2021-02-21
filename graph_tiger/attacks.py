@@ -66,7 +66,7 @@ def get_attack_category(method):
 
 def get_node_ns(graph, k=3):
     """
-    Get k nodes to attack based on the Netshield algorithm: http://tonghanghang.org/pdfs/icdm10_netshield.pdf
+    Get k nodes to attack based on the Netshield algorithm :cite`tong2010vulnerability`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
@@ -100,7 +100,7 @@ def get_node_ns(graph, k=3):
 
 def get_node_pr(graph, k=3):
     """
-    Get k nodes to attack based on top PageRank entries
+    Get k nodes to attack based on top PageRank entries :cite`page1999pagerank`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack

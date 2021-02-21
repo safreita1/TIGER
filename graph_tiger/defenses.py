@@ -68,7 +68,7 @@ def get_defense_category(method):
 
 def get_node_ns(graph, k=3):
     """
-    Get k nodes to defend based on the Netshield algorithm :cite:`tong2010vulnerability,chen2015node`.
+    Get k nodes to defend based on the Netshield algorithm :cite:`tong2010vulnerability`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to defend
