@@ -1,12 +1,31 @@
+:github_url: https://github.com/safreita1/TIGER
+
 Introduction
 ============
 
-``TIGER`` is a Python **T**\ oolbox for  evaluat\ **I**\ ing  **G**\ raph vuln\ **E**\ rability and **R**\ obustness that allows users to (1) measure graph vulnerability and robustness, (2) attack networks using a variety of offensive techniques, (3) defend a network using a variety of heuristic and optimization based defense techniques. ``TIGER`` is specifically designed to help users:
+.. figure:: ../../images/tiger-logo.jpg
+   :width: 100 %
+   :align: center
 
-- Quantify network vulnerability and robustness.
-- Simulate a variety of network attacks, cascading failures and spread of dissemination of entities.
-- Augment a network's structure to resist attacks and recover from failure.
-- Regulate the dissemination of entities on a network (e.g., viruses, propaganda).
+
+``TIGER`` is a Python **T**\ oolbox for  evaluat\ **I**\ ing  **G**\ raph vuln\ **E**\ rability and **R**\ obustness.
+TIGER contains numerous state-of-the-art methods to help users conduct graph vulnerability and robustness analysis on
+graph structured data. Specifically, ``TIGER`` helps users:
+
+- **Quantify** network vulnerability and robustness.
+- **Simulate** a variety of network attacks, cascading failures and spread of dissemination of entities.
+- **Augment** a network's structure to resist attacks and recover from failure.
+- **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda).
+
+TIGER contains a wide range of techniques across conferences and journals in data mining (`ICDM <http://icdm.bigke.org/>`_, `CIKM <http://www.cikmconference.org/>`_,
+`SDM <https://www.siam.org/conferences/cm/conference/sdm21>`_, `DMKD <https://www.springer.com/journal/10618>`_),
+and the natural sciences (`Physica A <https://www.journals.elsevier.com/physica-a-statistical-mechanics-and-its-applications>`_,
+`Physical Review E <https://journals.aps.org/pre/>`_, `EPJ <https://www.epj.org/>`_). For additional information, take a look at our paper:
+
+`Evaluating Graph Vulnerability and Robustness using TIGER <https://arxiv.org/pdf/2006.05648.pdf>`_.
+`Freitas, Scott <https://scottfreitas.com>`_, and Chau, Duen Horng.
+*arXiv, 2020.*
+
 
 Background & Motivation
 ***********************
@@ -20,27 +39,27 @@ Unfortunately, the nature of cross-disciplinary research also comes with signifi
 
 Installation
 ************
-To quickly get started, install TIGER using pip
+To quickly get started, install TIGER using pip:
 
-```sh
-$ pip install graph-tiger
-```
+``pip install graph-tiger``
 
-Alternatively, you can git clone [TIGER](https://github.com/safreita1/TIGER.git) and create a new Anaconda environment
-using the provided [YAML](environment.yml) file.
+Alternatively, you can git clone `TIGER <https://github.com/safreita1/TIGER.git>`_ and create a new Anaconda environment
+using the provided `YAML <https://github.com/safreita1/TIGER/blob/master/environment.yml>`_ file.
 
 
 Citing
 ******
 
-If you find **TIGER** useful in your research, please consider citing the following paper:
 
-@article{freitas2020evaluating,
-    title={Evaluating Graph Vulnerability and Robustness using TIGER},
-    author={Freitas, Scott and Chau, Duen Horng},
-    journal={arXiv preprint arXiv:2006.05648},
-    year={2020}
-}
+.. code-block:: latex
+
+   @article{freitas2020evaluating,
+             title = {Evaluating Graph Vulnerability and Robustness using TIGER},
+             author = {Freitas, Scott and Chau, Duen Horng},
+             journal={arXiv preprint arXiv:2006.05648},
+             year = {2020},
+    }
+
 
 
 Examples

@@ -12,14 +12,15 @@
 #
 import os
 import sys
+import datetime
 sys.path.insert(0, os.path.abspath('../../'))
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'TIGER'
-copyright = '2021, Scott Freitas'
 author = 'Scott Freitas'
+copyright = '{}, {}'.format(datetime.datetime.now().year, author)
 
 # The full version, including alpha/beta/rc tags
 release = '0.1.3'
@@ -53,7 +54,7 @@ html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
    'analytics_id': 'UA-XXXXXXX-1',  #  Provided by Google in your dashboard
    'analytics_anonymize_ip': False,
-   'logo_only': False,
+   'logo_only': True,
    'display_version': True,
    'prev_next_buttons_location': 'bottom',
    'style_external_links': False,
@@ -70,4 +71,5 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
+html_logo = '../../images/tiger-logo.jpg'
 html_static_path = ['_static']

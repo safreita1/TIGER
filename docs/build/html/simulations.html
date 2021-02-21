@@ -53,9 +53,12 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> TIGER
+            <a href="index.html">
           
 
+          
+            
+            <img src="_static/tiger-logo.jpg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -200,6 +203,16 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The parent class for all simulation classes i.e., attack, defense, cascading failure and diffusion models.
 Provides a shared set of functions, largely for network visualization and plotting of results</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – undirected NetworkX graph</p></li>
+<li><p><strong>runs</strong> – number of times to run the simulation</p></li>
+<li><p><strong>steps</strong> – number of time steps to run each simulation</p></li>
+<li><p><strong>kwargs</strong> – optional parameters to change visualization settings</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="graph_tiger.simulations.Simulation.child_class">
 <code class="sig-name descname"><span class="pre">child_class</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.child_class" title="Permalink to this definition">¶</a></dt>

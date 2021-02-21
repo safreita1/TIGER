@@ -16,10 +16,14 @@ Specifically, TIGER helps users:
 3. **Augment** a network's structure to resist *attacks* and recover from *failure* 
 4. **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda). 
 
+TIGER contains a wide range of techniques across conferences and journals in data mining ([ICDM](http://icdm.bigke.org/), 
+[CIKM](http://www.cikmconference.org/), [SDM](https://www.siam.org/conferences/cm/conference/sdm21), [DMKD](https://www.springer.com/journal/10618)), 
+and the natural sciences ([Physica A](https://www.journals.elsevier.com/physica-a-statistical-mechanics-and-its-applications), 
+[Physical Review E](https://journals.aps.org/pre/), [EPJ](https://www.epj.org/)). 
 For additional information, take a look at the **[Documentation](https://graph-tiger.readthedocs.io/)** and our paper:
 
 [**Evaluating Graph Vulnerability and Robustness using TIGER**](https://arxiv.org/pdf/2006.05648.pdf).
-[**Freitas, Scott**](https://scottfreitas.com), and Duen Horng Chau.
+[**Freitas, Scott**](https://scottfreitas.com), and Chau, Duen Horng.
 *arXiv, 2020.*
 
 --------------------------------------------------------------------------------
@@ -205,7 +209,7 @@ Step 0: Virus infected network |Step 80: Partially infected network | Step 4999:
 * **[Spectral Scaling](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_scaling)** (**GPU Accelerated: :heavy_check_mark:**)
 <br> Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
 * **[Generalized Robustness Index](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.generalized_robustness_index)** (**GPU Accelerated: :heavy_check_mark:**)
-<br> Malliaros *et al.* [Fast Robustness Estimation in Large Social Graphs: Communities and Anomaly Detection](https://epubs.siam.org/doi/10.1137/1.9781611972825.81) (SM 2012)
+<br> Malliaros *et al.* [Fast Robustness Estimation in Large Social Graphs: Communities and Anomaly Detection](https://epubs.siam.org/doi/10.1137/1.9781611972825.81) (SDM 2012)
 * **[Algebraic Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.algebraic_connectivity)** 
 <br> Chan *et al.* [Optimizing network robustness by edge rewiring: a general framework](https://link.springer.com/article/10.1007/s10618-015-0447-5) (DMKD 2016)
 * **[Number of Spanning Trees](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.num_spanning_trees)** 

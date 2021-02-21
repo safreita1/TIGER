@@ -53,9 +53,12 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> TIGER
+            <a href="index.html">
           
 
+          
+            
+            <img src="_static/tiger-logo.jpg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -165,6 +168,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -177,7 +182,10 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/safreita1/TIGER" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
@@ -192,13 +200,25 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">TIGER</span></code> is a Python <strong>T</strong>oolbox for  evaluat<strong>I</strong>ing  <strong>G</strong>raph vuln<strong>E</strong>rability and <strong>R</strong>obustness that allows users to (1) measure graph vulnerability and robustness, (2) attack networks using a variety of offensive techniques, (3) defend a network using a variety of heuristic and optimization based defense techniques. <code class="docutils literal notranslate"><span class="pre">TIGER</span></code> is specifically designed to help users:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/tiger-logo.jpg"><img alt="_images/tiger-logo.jpg" src="_images/tiger-logo.jpg" style="width: 100%;" /></a>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">TIGER</span></code> is a Python <strong>T</strong>oolbox for  evaluat<strong>I</strong>ing  <strong>G</strong>raph vuln<strong>E</strong>rability and <strong>R</strong>obustness.
+TIGER contains numerous state-of-the-art methods to help users conduct graph vulnerability and robustness analysis on
+graph structured data. Specifically, <code class="docutils literal notranslate"><span class="pre">TIGER</span></code> helps users:</p>
 <ul class="simple">
-<li><p>Quantify network vulnerability and robustness.</p></li>
-<li><p>Simulate a variety of network attacks, cascading failures and spread of dissemination of entities.</p></li>
-<li><p>Augment a network’s structure to resist attacks and recover from failure.</p></li>
-<li><p>Regulate the dissemination of entities on a network (e.g., viruses, propaganda).</p></li>
+<li><p><strong>Quantify</strong> network vulnerability and robustness.</p></li>
+<li><p><strong>Simulate</strong> a variety of network attacks, cascading failures and spread of dissemination of entities.</p></li>
+<li><p><strong>Augment</strong> a network’s structure to resist attacks and recover from failure.</p></li>
+<li><p><strong>Regulate</strong> the dissemination of entities on a network (e.g., viruses, propaganda).</p></li>
 </ul>
+<p>TIGER contains a wide range of techniques across conferences and journals in data mining (<a class="reference external" href="http://icdm.bigke.org/">ICDM</a>, <a class="reference external" href="http://www.cikmconference.org/">CIKM</a>,
+<a class="reference external" href="https://www.siam.org/conferences/cm/conference/sdm21">SDM</a>, <a class="reference external" href="https://www.springer.com/journal/10618">DMKD</a>),
+and the natural sciences (<a class="reference external" href="https://www.journals.elsevier.com/physica-a-statistical-mechanics-and-its-applications">Physica A</a>,
+<a class="reference external" href="https://journals.aps.org/pre/">Physical Review E</a>, <a class="reference external" href="https://www.epj.org/">EPJ</a>). For additional information, take a look at our paper:</p>
+<p><a class="reference external" href="https://arxiv.org/pdf/2006.05648.pdf">Evaluating Graph Vulnerability and Robustness using TIGER</a>.
+<a class="reference external" href="https://scottfreitas.com">Freitas, Scott</a>, and Chau, Duen Horng.
+<em>arXiv, 2020.</em></p>
 <div class="section" id="background-motivation">
 <h2>Background &amp; Motivation<a class="headerlink" href="#background-motivation" title="Permalink to this headline">¶</a></h2>
 <p>First mentioned as early as the 1970’s, network robustness has a rich and diverse history spanning numerous fields of engineering and science. This diversity of research has generated a variety of unique perspectives, providing fresh insight into challenging problems while equipping researchers with fundamental knowledge for their investigations. While the fields of study are diverse, they are linked by a common definition of <strong>robustness</strong>, which is defined as a measure of a network’s ability to continue functioning when part of the network is naturally damaged or targeted for attack.</p>
@@ -207,24 +227,21 @@
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>To quickly get started, install TIGER using pip</p>
-<p><code class="docutils literal notranslate"><span class="pre">`sh</span>
-<span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">graph-tiger</span>
-<span class="pre">`</span></code></p>
-<p>Alternatively, you can git clone [TIGER](<a class="reference external" href="https://github.com/safreita1/TIGER.git">https://github.com/safreita1/TIGER.git</a>) and create a new Anaconda environment
-using the provided [YAML](environment.yml) file.</p>
+<p>To quickly get started, install TIGER using pip:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">graph-tiger</span></code></p>
+<p>Alternatively, you can git clone <a class="reference external" href="https://github.com/safreita1/TIGER.git">TIGER</a> and create a new Anaconda environment
+using the provided <a class="reference external" href="https://github.com/safreita1/TIGER/blob/master/environment.yml">YAML</a> file.</p>
 </div>
 <div class="section" id="citing">
 <h2>Citing<a class="headerlink" href="#citing" title="Permalink to this headline">¶</a></h2>
-<p>If you find <strong>TIGER</strong> useful in your research, please consider citing the following paper:</p>
-<dl class="simple">
-<dt>&#64;article{freitas2020evaluating,</dt><dd><p>title={Evaluating Graph Vulnerability and Robustness using TIGER},
-author={Freitas, Scott and Chau, Duen Horng},
-journal={arXiv preprint arXiv:2006.05648},
-year={2020}</p>
-</dd>
-</dl>
-<p>}</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>@article<span class="nb">{</span>freitas2020evaluating,
+          title = <span class="nb">{</span>Evaluating Graph Vulnerability and Robustness using TIGER<span class="nb">}</span>,
+          author = <span class="nb">{</span>Freitas, Scott and Chau, Duen Horng<span class="nb">}</span>,
+          journal=<span class="nb">{</span>arXiv preprint arXiv:2006.05648<span class="nb">}</span>,
+          year = <span class="nb">{</span>2020<span class="nb">}</span>,
+ <span class="nb">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
