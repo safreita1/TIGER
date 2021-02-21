@@ -16,7 +16,11 @@ Specifically, TIGER helps users:
 3. **Augment** a network's structure to resist *attacks* and recover from *failure* 
 4. **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda). 
 
-For additional information, take a look at the **[Documentation](https://graph-tiger.readthedocs.io/)** and **[Paper](https://arxiv.org/pdf/2006.05648.pdf)**.
+For additional information, take a look at the **[Documentation](https://graph-tiger.readthedocs.io/)** and our paper:
+
+[**Evaluating Graph Vulnerability and Robustness using TIGER**](https://arxiv.org/pdf/2006.05648.pdf).
+[**Freitas, Scott**](https://scottfreitas.com), and Duen Horng Chau.
+*arXiv, 2020.*
 
 --------------------------------------------------------------------------------
 
