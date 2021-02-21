@@ -198,7 +198,7 @@ from Estrada [Network robustness to targeted attacks. The interplay of expansibi
 * **[Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)** 
 from Jun *et al.* [Natural connectivity of complex networks](https://iopscience.iop.org/article/10.1088/0256-307X/27/7/078902) (Chinese Physics Letters 2010)
 * **[Approximate Natural Connectivity](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.natural_connectivity)**
-* **[Spectral Scaling](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_scaling)** (GPU Accelerated: :heavy_check_mark:)
+* **[Spectral Scaling](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.spectral_scaling)** (**GPU Accelerated: :heavy_check_mark:**)
 from Estrada [Network robustness to targeted attacks. The interplay of expansibility and degree distribution](https://link.springer.com/article/10.1140/epjb/e2006-00330-7) (European Physical Journal B 2006)
 * **[Generalized Robustness Index](https://graph-tiger.readthedocs.io/en/latest/measures.html#graph_tiger.measures.generalized_robustness_index)** 
 from Malliaros *et al.* [Fast Robustness Estimation in Large Social Graphs: Communities and Anomaly Detection](https://epubs.siam.org/doi/10.1137/1.9781611972825.81) (SM 2012)
