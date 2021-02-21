@@ -269,7 +269,7 @@ from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](htt
 * **[Add Edge: Eigenvector Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_eig)** 
 from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
 * **[Add Edge: Degree Centrality](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_degree)** 
-from Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
+Tong *et al.* [Gelling, and melting, large graphs by edge manipulation](https://dl.acm.org/doi/10.1145/2396761.2396795) (CIKM 2012)
 * **[Add Edge: Random](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_rnd)**  
 Beygelzimer *et al.* [Improving network robustness by edge modification](https://www.sciencedirect.com/science/article/pii/S0378437105003523) (Physica A 2005)
 * **[Add Edge: Preferential](https://graph-tiger.readthedocs.io/en/latest/defenses.html#graph_tiger.defenses.add_edge_pref)**  
