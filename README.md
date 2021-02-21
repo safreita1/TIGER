@@ -16,10 +16,13 @@ Specifically, TIGER helps users:
 3. **Augment** a network's structure to resist *attacks* and recover from *failure* 
 4. **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda). 
 
-TIGER contains a wide range of techniques across conferences and journals in data mining ([ICDM](http://icdm.bigke.org/), 
+<!---TIGER contains a wide range of techniques across conferences and journals in data mining ([ICDM](http://icdm.bigke.org/), 
 [CIKM](http://www.cikmconference.org/), [SDM](https://www.siam.org/conferences/cm/conference/sdm21), [DMKD](https://www.springer.com/journal/10618)), 
 and the natural sciences ([Physica A](https://www.journals.elsevier.com/physica-a-statistical-mechanics-and-its-applications), 
 [Physical Review E](https://journals.aps.org/pre/), [EPJ](https://www.epj.org/)). 
+-->
+TIGER contains a wide range of techniques across conferences and journals in data mining (e.g., ICDM, CIKM, SDM), 
+and the natural sciences (e.g., Physica A, Physical Review E). 
 For additional information, take a look at the **[Documentation](https://graph-tiger.readthedocs.io/)** and our paper:
 
 [**Evaluating Graph Vulnerability and Robustness using TIGER**](https://arxiv.org/pdf/2006.05648.pdf).
