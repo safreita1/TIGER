@@ -21,8 +21,7 @@ Specifically, TIGER helps users:
 and the natural sciences ([Physica A](https://www.journals.elsevier.com/physica-a-statistical-mechanics-and-its-applications), 
 [Physical Review E](https://journals.aps.org/pre/), [EPJ](https://www.epj.org/)). 
 -->
-TIGER contains a wide range of techniques across conferences and journals in data mining (e.g., ICDM, CIKM, SDM), 
-and the natural sciences (e.g., Physica A, Physical Review E). 
+
 For additional information, take a look at the **[Documentation](https://graph-tiger.readthedocs.io/)** and our paper:
 
 [**Evaluating Graph Vulnerability and Robustness using TIGER**](https://arxiv.org/pdf/2006.05648.pdf).
