@@ -286,11 +286,11 @@ Beygelzimer *et al.* [Improving network robustness by edge modification](https:/
 
 **Simulation Frameworks:**
 * **[Cascading Failure Model](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)** 
-from Xia *et al.* [A model for cascading failures in complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.69.045104) (Physical Review E 2004)
+<br> Xia *et al.* [A model for cascading failures in complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.69.045104) (Physical Review E 2004)
 * **[Susceptible-Infected-Susceptible (SIS) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
-from Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+<br> Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
 * **[Susceptible-Infected-Recovered (SIR) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
-from Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+<br> Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
 
 --------------------------------------------------------------------------------
 
