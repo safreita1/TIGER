@@ -48,7 +48,7 @@ with open(os.path.join(cwd, 'README.md'), encoding='utf-8') as f:
 setup(
   name="graph-tiger",
   packages=find_packages(),
-  version="0.1.4",
+  version="0.1.5",
   license="MIT",
   description="A general purpose library for graph vulnerability and robustness analysis.",
   # long_description=long_description,
@@ -56,7 +56,7 @@ setup(
   author="Scott Freitas",
   author_email="safreita1@gmail.com",
   url="https://github.com/safreita1/TIGER",
-  download_url="https://github.com/safreita1/TIGER/archive/0.1.4.tar.gz",
+  download_url="https://github.com/safreita1/TIGER/archive/0.1.5.tar.gz",
   keywords=keywords,
   install_requires=install_requires,
   classifiers=["Development Status :: 3 - Alpha",

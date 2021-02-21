@@ -53,7 +53,7 @@ def get_adjacency_spectrum(graph, k=np.inf, eigvals_only=False, which='LA', use_
             import cupyx.scipy.sparse.linalg as cp_linalg
 
             A_gpu = cp.sparse.csr_matrix(A)
-            eigpairs = cp_linalg.eigsh(A_gpu, k=min(k, len(graph) - 1), which=which, return_eigenvectors=not eigvals_only)
+            eigpairs = cp_linalg.eigsh(A_gpu, k=min(k, len(graph) - 3), which=which, return_eigenvectors=not eigvals_only)
 
             if type(eigpairs) is tuple:
                 eigpairs = list(eigpairs)
