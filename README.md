@@ -62,11 +62,11 @@ We provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.rea
 If you find *TIGER* useful in your research, please consider citing the following paper:
 
 ```bibtex
-@article{freitas2020evaluating,
+@article{freitas2021evaluating,
     title={Evaluating Graph Vulnerability and Robustness using TIGER},
-    author={Freitas, Scott and Chau, Duen Horng},
-    journal={arXiv preprint arXiv:2006.05648},
-    year={2020}
+    author={Freitas, Scott, Yang, Diyi, Kumar, Srijan, Tong, Hanghang and Chau, Duen Horng},
+    journal={ACM International Conference on Information and Knowledge Management},
+    year={2021}
 }
 ```
 
