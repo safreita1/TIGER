@@ -64,7 +64,7 @@ If you find *TIGER* useful in your research, please consider citing the followin
 ```bibtex
 @article{freitas2021evaluating,
     title={Evaluating Graph Vulnerability and Robustness using TIGER},
-    author={Freitas, Scott, Yang, Diyi, Kumar, Srijan, Tong, Hanghang and Chau, Duen Horng},
+    author={Freitas, Scott and Yang, Diyi and Kumar, Srijan and Tong, Hanghang and Chau, Duen Horng},
     journal={ACM International Conference on Information and Knowledge Management},
     year={2021}
 }
