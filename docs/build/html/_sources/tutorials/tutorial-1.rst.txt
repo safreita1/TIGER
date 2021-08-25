@@ -1,7 +1,6 @@
 Tutorial 1: Measuring Vulnerability and Robustness
 ********************************************************
 
-Robustness is defined as a measure of a network's ability to continue functioning when part of the network is naturally damaged or targeted for attack :cite`ellens2013graph,chan2016optimizing,beygelzimer2005improving`.
 TIGER contains numerous robustness measures, grouped into one of three categories depending on whether the measure uses the graph, adjacency, or Laplacian matrix. In the figure below, we show some common robustness measures from each category.
 
 .. _fig-coordsys-rect:
