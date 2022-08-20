@@ -133,16 +133,16 @@ class Simulation:
         :return: title string
         """
         if self.child_class() == 'Diffusion':
-            title = '{}_epidemic:step={},diffusion={},method={},k={}'.format(self.prm['model'], step, self.prm['diffusion'], self.prm['method'], self.prm['k'])
+            title = '{}_epidemic--step={},diffusion={},method={},k={}'.format(self.prm['model'], step, self.prm['diffusion'], self.prm['method'], self.prm['k'])
 
         elif self.child_class() == 'Cascading':
-            title = 'Cascading:step={},l={},r={},k_a={},attack={},k_d={},defense={}'.format(step, self.prm['l'], self.prm['r'], self.prm['k_a'],
+            title = 'Cascading--step={},l={},r={},k_a={},attack={},k_d={},defense={}'.format(step, self.prm['l'], self.prm['r'], self.prm['k_a'],
                                                                                             self.prm['attack'], self.prm['k_d'], self.prm['defense'])
         elif self.child_class() == 'Attack':
-            title = 'Attack:step={},attack={},k_d={},defense={}'.format(step, self.prm['attack'], self.prm['k_d'], self.prm['defense'])
+            title = 'Attack--step={},attack={},k_d={},defense={}'.format(step, self.prm['attack'], self.prm['k_d'], self.prm['defense'])
 
         elif self.child_class() == 'Defense':
-            title = 'Defense:step={},attack={},k_a={},defense={}'.format(step, self.prm['attack'], self.prm['k_a'], self.prm['defense'])
+            title = 'Defense--step={},attack={},k_a={},defense={}'.format(step, self.prm['attack'], self.prm['k_a'], self.prm['defense'])
 
         else:
             title = ''
