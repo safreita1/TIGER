@@ -19,6 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install wheel
           pip install pytest
           pip install pytest-cov
           pip install pytest-github-actions-annotate-failures
@@ -32,7 +33,7 @@ jobs:
           pip install numba
           pip install matplotlib
           pip install fa2
-          pip install onnx
+          pip install onnx==1.10.1
           pip install PyYAML
           pip install ipython
           pip install stopit
