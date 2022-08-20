@@ -72,8 +72,8 @@ def experiment_redundancy(graph):
 
         if idx == 2:
             params['plot_transition'] = True
-            params['gif_animation'] = True
-            params['gif_snaps'] = True
+            params['gif_animation'] = False
+            params['gif_snaps'] = False
         else:
             params['plot_transition'] = False
             params['gif_animation'] = False

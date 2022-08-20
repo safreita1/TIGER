@@ -25,8 +25,8 @@ and the natural sciences ([Physica A](https://www.journals.elsevier.com/physica-
 For additional information, take a look at the **[Documentation](https://graph-tiger.readthedocs.io/)** and our paper:
 
 [**Evaluating Graph Vulnerability and Robustness using TIGER**](https://arxiv.org/pdf/2006.05648.pdf).
-[**Freitas, Scott**](https://scottfreitas.com), and Chau, Duen Horng.
-*arXiv, 2020.*
+[**Scott Freitas**](https://scottfreitas.com), Diyi Yang, Srijan Kumar, Hanghang Tong, and Duen Horng (Polo) Chau.
+*CIKM Resource Track, 2021.*
 
 --------------------------------------------------------------------------------
 
@@ -62,11 +62,11 @@ We provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.rea
 If you find *TIGER* useful in your research, please consider citing the following paper:
 
 ```bibtex
-@article{freitas2020evaluating,
+@article{freitas2021evaluating,
     title={Evaluating Graph Vulnerability and Robustness using TIGER},
-    author={Freitas, Scott and Chau, Duen Horng},
-    journal={arXiv preprint arXiv:2006.05648},
-    year={2020}
+    author={Freitas, Scott and Yang, Diyi and Kumar, Srijan and Tong, Hanghang and Chau, Duen Horng},
+    journal={ACM International Conference on Information and Knowledge Management},
+    year={2021}
 }
 ```
 

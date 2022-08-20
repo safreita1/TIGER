@@ -10,7 +10,7 @@ from graph_tiger.defenses import run_defense_method, get_defense_category
 
 class Cascading(Simulation):
     """
-    This class simulates cascading failures on a network :cite`crucitti2004model`.
+    This class simulates cascading failures on a network :cite:`crucitti2004model`.
 
     :param graph: an undirected NetworkX graph
     :param runs: an integer number of times to run the simulation
