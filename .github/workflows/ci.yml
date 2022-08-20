@@ -38,7 +38,7 @@ jobs:
           pip install numba
           pip install matplotlib
           pip install fa2
-          pip install onnx
+          pip install onnx==1.1.0
           pip install PyYAML
           pip install ipython
           pip install stopit
