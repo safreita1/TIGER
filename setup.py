@@ -12,14 +12,14 @@ install_requires = ["wheel",
                     "numba",
                     "matplotlib",
                     "fa2",
-                    "onnx==1.10.1",
+                    "onnx",
                     "PyYAML",
                     "ipython",
                     "stopit",
                     "datashader",
                     "dask",
                     "scikit-image",
-                    "bezier==2020.5.19",
+                    "bezier",
                     "ffmpeg"]
 
 
