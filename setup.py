@@ -1,7 +1,8 @@
 import os
 from setuptools import find_packages, setup
 
-install_requires = ["numpy",
+install_requires = ["wheel",
+                    "numpy",
                     "networkx",
                     "tqdm",
                     "scipy",
