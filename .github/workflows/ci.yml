@@ -40,6 +40,7 @@ jobs:
           pip install datashader
           pip install dask
           pip install scikit-image
+          pip install ffmpeg
           BEZIER_NO_EXTENSION=true \
           pip install --upgrade bezier --no-binary=bezier
 

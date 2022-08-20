@@ -44,7 +44,7 @@ In the figure below, we can see the effectiveness of each attack strategy when u
    from graph_tiger.attacks import Attack
    from graph_tiger.graphs import graph_loader
 
-   graph = graph_loader(graph_type='water', seed=1)
+   graph = graph_loader(graph_type='ky2', seed=1)
  
    params = {
         'runs': 1,
@@ -64,7 +64,7 @@ In the figure below, we can see the effectiveness of each attack strategy when u
     }
 
     print("Creating example visualization")
-    a = Attack(graph, \**params)
+    a = Attack(graph, **params)
     a.run_simulation()
 
 

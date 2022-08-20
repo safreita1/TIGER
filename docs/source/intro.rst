@@ -212,7 +212,7 @@ In this example, we run a computer virus simulation (SIS infection model) on a B
        'fa_iter': 2000
    }
 
-   diffusion = Diffusion(graph, \**sis_params)
+   diffusion = Diffusion(graph, **sis_params)
    results = diffusion.run_simulation()
 
    diffusion.plot_results(results)

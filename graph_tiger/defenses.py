@@ -606,7 +606,7 @@ class Defense(Simulation):
 
 
 def main():
-    graph = graph_loader(graph_type='water', seed=1)
+    graph = graph_loader(graph_type='ky2', seed=1)
 
     params = {
         'runs': 1,

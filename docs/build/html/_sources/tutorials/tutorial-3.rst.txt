@@ -56,7 +56,7 @@ To help users evaluate the effectiveness of defense techniques, we compare 5 edg
        plt.show()
        plt.clf()
 
-      graph = graph_loader(graph_type='water', seed=1)
+      graph = graph_loader(graph_type='ky2', seed=1)
 
    params = {
         'runs': 10,
