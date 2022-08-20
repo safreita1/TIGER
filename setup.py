@@ -11,14 +11,15 @@ install_requires = ["numpy",
                     "numba",
                     "matplotlib",
                     "fa2",
-                    "onnx",
+                    "onnx==1.10.1",
                     "PyYAML",
                     "ipython",
                     "stopit",
                     "datashader",
                     "dask",
                     "scikit-image",
-                    "bezier==2020.5.19"]
+                    "bezier==2020.5.19",
+                    "ffmpeg"]
 
 
 keywords = ["data-science",
