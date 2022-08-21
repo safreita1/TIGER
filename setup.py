@@ -21,11 +21,7 @@ install_requires = [
                     "dask",
                     "bezier",
                     "ffmpeg"
-                    # "pytest",
-                    # "pytest-cov",
-                    # "pytest-github-actions-annotate-failures"
                     ]
-
 
 
 keywords = ["data-science",

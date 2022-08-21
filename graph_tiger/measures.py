@@ -1,6 +1,7 @@
 import math
 import stopit
 import numpy as np
+np.seterr(divide='ignore')
 import networkx as nx
 
 from graph_tiger.utils import get_adjacency_spectrum, get_laplacian_spectrum

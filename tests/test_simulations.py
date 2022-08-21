@@ -42,7 +42,7 @@ def test_sis_model():
     ds = Diffusion(graph, **params)
     decreased_diffusion = ds.run_simulation()
 
-    assert (sum(decreased_diffusion) < sum(baseline_diffusion) < sum(increased_diffusion))
+    assert sum(decreased_diffusion) < sum(baseline_diffusion) < sum(increased_diffusion)
 
 
 def test_sir_model():
@@ -127,7 +127,7 @@ def test_cascading():
     cf = Cascading(graph, **params)
     defended = cf.run_simulation()
 
-    assert (sum(attacked) <= sum(defended) <= sum(baseline))
+    assert sum(attacked) <= sum(defended) <= sum(baseline)
 
 
 def main():

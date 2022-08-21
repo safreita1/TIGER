@@ -35,8 +35,7 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pip install pytest-github-actions-annotate-failures
-
-
-      - name: Run Pytests
+      # Run PyTests
+      - name: Run PyTests
         run: |
           python -m pytest
