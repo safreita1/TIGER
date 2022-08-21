@@ -1,70 +1,36 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Defense &mdash; TIGER 0.1.3 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Cascading" href="cascading.html" />
     <link rel="prev" title="Attacks" href="attacks.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
-            <a href="index.html" class="icon icon-home"> TIGER
-          
-
-          
+            <a href="index.html">
+            <img src="_static/tiger-logo.jpg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -72,19 +38,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#background-motivation">Background &amp; Motivation</a></li>
@@ -125,79 +80,37 @@
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">TIGER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="modules.html">TIGER</a> &raquo;</li>
-        
       <li>Defense</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/defenses.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="module-graph_tiger.defenses">
-<span id="defense"></span><h1>Defense<a class="headerlink" href="#module-graph_tiger.defenses" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="module-graph_tiger.defenses">
+<span id="defense"></span><h1>Defense<a class="headerlink" href="#module-graph_tiger.defenses" title="Permalink to this heading"></a></h1>
 <dl class="py class">
-<dt id="graph_tiger.defenses.Defense">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">Defense</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defense</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="simulations.html#graph_tiger.simulations.Simulation" title="graph_tiger.simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">graph_tiger.simulations.Simulation</span></code></a></p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.Defense">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">Defense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defense</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="simulations.html#graph_tiger.simulations.Simulation" title="graph_tiger.simulations.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a></p>
 <p>This class simulates a variety of defense techniques on an undirected NetworkX graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -214,20 +127,20 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="graph_tiger.defenses.Defense.reset_simulation">
-<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense.reset_simulation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.Defense.reset_simulation">
+<span class="sig-name descname"><span class="pre">reset_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense.reset_simulation" title="Permalink to this definition"></a></dt>
 <dd><p>Resets the simulation between each run</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.defenses.Defense.run_single_sim">
-<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense.run_single_sim" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.Defense.run_single_sim">
+<span class="sig-name descname"><span class="pre">run_single_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense.run_single_sim" title="Permalink to this definition"></a></dt>
 <dd><p>Run the defense simulation</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.defenses.Defense.track_simulation">
-<code class="sig-name descname"><span class="pre">track_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense.track_simulation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.Defense.track_simulation">
+<span class="sig-name descname"><span class="pre">track_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.Defense.track_simulation" title="Permalink to this definition"></a></dt>
 <dd><p>Keeps track of important simulation information at each step of the simulation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -239,9 +152,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.add_edge_degree">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_degree</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_degree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add k edges to defend based on top edge degree centrality entries <span id="id3">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.add_edge_degree">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">add_edge_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_degree" title="Permalink to this definition"></a></dt>
+<dd><p>Add k edges to defend based on top edge degree centrality entries <span id="id3">[<a class="reference internal" href="bibliography.html#id41" title="Hanghang Tong, B Aditya Prakash, Tina Eliassi-Rad, Michalis Faloutsos, and Christos Faloutsos. Gelling, and melting, large graphs by edge manipulation. In Proceedings of the 21st ACM international conference on Information and knowledge management, 245–254. 2012.">18</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -256,9 +169,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.add_edge_eig">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_eig" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to defend based on top edge eigenvector centrality entries <span id="id4">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.add_edge_eig">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">add_edge_eig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_eig" title="Permalink to this definition"></a></dt>
+<dd><p>Get k edges to defend based on top edge eigenvector centrality entries <span id="id4">[<a class="reference internal" href="bibliography.html#id41" title="Hanghang Tong, B Aditya Prakash, Tina Eliassi-Rad, Michalis Faloutsos, and Christos Faloutsos. Gelling, and melting, large graphs by edge manipulation. In Proceedings of the 21st ACM international conference on Information and knowledge management, 245–254. 2012.">18</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -273,9 +186,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.add_edge_pr">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_pr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k edges to defend based on top edge PageRank entries <span id="id5">[<a class="reference internal" href="bibliography.html#id41"><span>16</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.add_edge_pr">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">add_edge_pr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_pr" title="Permalink to this definition"></a></dt>
+<dd><p>Get k edges to defend based on top edge PageRank entries <span id="id5">[<a class="reference internal" href="bibliography.html#id41" title="Hanghang Tong, B Aditya Prakash, Tina Eliassi-Rad, Michalis Faloutsos, and Christos Faloutsos. Gelling, and melting, large graphs by edge manipulation. In Proceedings of the 21st ACM international conference on Information and knowledge management, 245–254. 2012.">18</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -290,9 +203,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.add_edge_pref">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_pref</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_pref" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds an edge connecting two nodes with the lowest degrees <span id="id6">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.add_edge_pref">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">add_edge_pref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_pref" title="Permalink to this definition"></a></dt>
+<dd><p>Adds an edge connecting two nodes with the lowest degrees <span id="id6">[<a class="reference internal" href="bibliography.html#id5" title="Alina Beygelzimer, Geoffrey Grinstein, Ralph Linsker, and Irina Rish. Improving network robustness by edge modification. Physica A: Statistical Mechanics and its Applications, 357(3-4):593–612, 2005.">2</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -307,8 +220,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.add_edge_rnd">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">add_edge_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_rnd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.add_edge_rnd">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">add_edge_rnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.add_edge_rnd" title="Permalink to this definition"></a></dt>
 <dd><p>Add k random edges to the graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -324,8 +237,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_central_edges">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_central_edges</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eig'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_central_edges" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_central_edges">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_central_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eig'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_central_edges" title="Permalink to this definition"></a></dt>
 <dd><p>Internal function to compute edge PageRank, eigenvector centrality and degree centrality</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -342,8 +255,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_defense_category">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_defense_category</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_defense_category" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_defense_category">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_defense_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_defense_category" title="Permalink to this definition"></a></dt>
 <dd><p>Gets the defense category e.g., ‘node’, ‘edge’ defense.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -356,8 +269,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_defense_methods">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_defense_methods</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_defense_methods" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_defense_methods">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_defense_methods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_defense_methods" title="Permalink to this definition"></a></dt>
 <dd><p>Gets a list of available defense methods as a list of functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -367,8 +280,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_eig">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_eig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_eig" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_eig">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_eig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_eig" title="Permalink to this definition"></a></dt>
 <dd><p>Get k nodes to defend based on top eigenvector centrality entries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -384,9 +297,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_ib">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_ib</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_ib" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Initial Betweenness (IB) Removal <span id="id7">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_ib">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_ib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_ib" title="Permalink to this definition"></a></dt>
+<dd><p>Get k nodes to defend based on Initial Betweenness (IB) Removal <span id="id7">[<a class="reference internal" href="bibliography.html#id4" title="Petter Holme, Beom Jun Kim, Chang No Yoon, and Seung Kee Han. Attack vulnerability of complex networks. Physical review E, 65(5):056109, 2002.">14</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -405,9 +318,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_id">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Initial Degree (ID) Removal <span id="id8">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_id">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_id" title="Permalink to this definition"></a></dt>
+<dd><p>Get k nodes to defend based on Initial Degree (ID) Removal <span id="id8">[<a class="reference internal" href="bibliography.html#id4" title="Petter Holme, Beom Jun Kim, Chang No Yoon, and Seung Kee Han. Attack vulnerability of complex networks. Physical review E, 65(5):056109, 2002.">14</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -422,9 +335,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_ns">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_ns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on the Netshield algorithm <span id="id9">[<a class="reference internal" href="bibliography.html#id2"><span>17</span></a>,<a class="reference internal" href="bibliography.html#id37"><span>5</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_ns">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_ns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_ns" title="Permalink to this definition"></a></dt>
+<dd><p>Get k nodes to defend based on the Netshield algorithm <span id="id9">[<a class="reference internal" href="bibliography.html#id2" title="Hanghang Tong, B Aditya Prakash, Charalampos Tsourakakis, Tina Eliassi-Rad, Christos Faloutsos, and Duen Horng Chau. On the vulnerability of large graphs. In 2010 IEEE International Conference on Data Mining, 1091–1096. IEEE, 2010.">19</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -439,9 +352,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_pr">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_pr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_pr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on top PageRank entries <span id="id10">[<a class="reference internal" href="bibliography.html#id84"><span>15</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_pr">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_pr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_pr" title="Permalink to this definition"></a></dt>
+<dd><p>Get k nodes to defend based on top PageRank entries <span id="id10">[<a class="reference internal" href="bibliography.html#id85" title="Lawrence Page, Sergey Brin, Rajeev Motwani, and Terry Winograd. The pagerank citation ranking: bringing order to the web. Technical Report, Stanford InfoLab, 1999.">17</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -456,9 +369,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_rb">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_rb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Recalculated Betweenness (RB) Removal <span id="id11">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span></p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_rb">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_rb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_rb" title="Permalink to this definition"></a></dt>
+<dd><p>Get k nodes to defend based on Recalculated Betweenness (RB) Removal <span id="id11">[<a class="reference internal" href="bibliography.html#id4" title="Petter Holme, Beom Jun Kim, Chang No Yoon, and Seung Kee Han. Attack vulnerability of complex networks. Physical review E, 65(5):056109, 2002.">14</a>]</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -477,9 +390,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_rd">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_rd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get k nodes to defend based on Recalculated Degree (RD) Removal <span id="id12">[<a class="reference internal" href="bibliography.html#id4"><span>13</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_rd">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_rd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_rd" title="Permalink to this definition"></a></dt>
+<dd><p>Get k nodes to defend based on Recalculated Degree (RD) Removal <span id="id12">[<a class="reference internal" href="bibliography.html#id4" title="Petter Holme, Beom Jun Kim, Chang No Yoon, and Seung Kee Han. Attack vulnerability of complex networks. Physical review E, 65(5):056109, 2002.">14</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -494,8 +407,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.get_node_rnd">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">get_node_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_rnd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.get_node_rnd">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">get_node_rnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.get_node_rnd" title="Permalink to this definition"></a></dt>
 <dd><p>Randomly select k distinct nodes to defend</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -511,14 +424,14 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.main">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.main" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.main">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.main" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.rewire_edge_pref">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_pref</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_pref" title="Permalink to this definition">¶</a></dt>
-<dd><p>Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph <span id="id13">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.rewire_edge_pref">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">rewire_edge_pref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_pref" title="Permalink to this definition"></a></dt>
+<dd><p>Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph <span id="id13">[<a class="reference internal" href="bibliography.html#id5" title="Alina Beygelzimer, Geoffrey Grinstein, Ralph Linsker, and Irina Rish. Improving network robustness by edge modification. Physica A: Statistical Mechanics and its Applications, 357(3-4):593–612, 2005.">2</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -533,9 +446,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.rewire_edge_pref_rnd">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_pref_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_pref_rnd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Selects an edge, disconnects the higher degree node, and reconnects to a random one <span id="id14">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.rewire_edge_pref_rnd">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">rewire_edge_pref_rnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_pref_rnd" title="Permalink to this definition"></a></dt>
+<dd><p>Selects an edge, disconnects the higher degree node, and reconnects to a random one <span id="id14">[<a class="reference internal" href="bibliography.html#id5" title="Alina Beygelzimer, Geoffrey Grinstein, Ralph Linsker, and Irina Rish. Improving network robustness by edge modification. Physica A: Statistical Mechanics and its Applications, 357(3-4):593–612, 2005.">2</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -550,9 +463,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.rewire_edge_rnd">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_rnd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_rnd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes a random edge and adds one randomly <span id="id15">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.rewire_edge_rnd">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">rewire_edge_rnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_rnd" title="Permalink to this definition"></a></dt>
+<dd><p>Removes a random edge and adds one randomly <span id="id15">[<a class="reference internal" href="bibliography.html#id5" title="Alina Beygelzimer, Geoffrey Grinstein, Ralph Linsker, and Irina Rish. Improving network robustness by edge modification. Physica A: Statistical Mechanics and its Applications, 357(3-4):593–612, 2005.">2</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -567,9 +480,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.rewire_edge_rnd_neighbor">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">rewire_edge_rnd_neighbor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_rnd_neighbor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Randomly selects a neighbor of a node and removes the edge; then adds a random edge <span id="id16">[<a class="reference internal" href="bibliography.html#id5"><span>2</span></a>]</span>.</p>
+<dt class="sig sig-object py" id="graph_tiger.defenses.rewire_edge_rnd_neighbor">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">rewire_edge_rnd_neighbor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.rewire_edge_rnd_neighbor" title="Permalink to this definition"></a></dt>
+<dd><p>Randomly selects a neighbor of a node and removes the edge; then adds a random edge <span id="id16">[<a class="reference internal" href="bibliography.html#id5" title="Alina Beygelzimer, Geoffrey Grinstein, Ralph Linsker, and Irina Rish. Improving network robustness by edge modification. Physica A: Statistical Mechanics and its Applications, 357(3-4):593–612, 2005.">2</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -584,8 +497,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="graph_tiger.defenses.run_defense_method">
-<code class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></code><code class="sig-name descname"><span class="pre">run_defense_method</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.run_defense_method" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.defenses.run_defense_method">
+<span class="sig-prename descclassname"><span class="pre">graph_tiger.defenses.</span></span><span class="sig-name descname"><span class="pre">run_defense_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.defenses.run_defense_method" title="Permalink to this definition"></a></dt>
 <dd><p>Runs a specified defense on an undirected graph, returning a list of nodes to defend.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -602,67 +515,48 @@
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cascading.html" class="btn btn-neutral float-right" title="Cascading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="attacks.html" class="btn btn-neutral float-left" title="Attacks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cascading.html" class="btn btn-neutral float-right" title="Cascading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Scott Freitas.
-
-    </p>
+    <p>&#169; Copyright 2022, Scott Freitas.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

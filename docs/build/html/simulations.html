@@ -1,70 +1,36 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Simulation &mdash; TIGER 0.1.3 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Graph" href="graphs.html" />
     <link rel="prev" title="Diffusion" href="diffusion.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
-            <a href="index.html" class="icon icon-home"> TIGER
-          
-
-          
+            <a href="index.html">
+            <img src="_static/tiger-logo.jpg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -72,19 +38,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="intro.html#background-motivation">Background &amp; Motivation</a></li>
@@ -125,97 +80,65 @@
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">TIGER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="modules.html">TIGER</a> &raquo;</li>
-        
       <li>Simulation</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/simulations.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="module-graph_tiger.simulations">
-<span id="simulation"></span><h1>Simulation<a class="headerlink" href="#module-graph_tiger.simulations" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="module-graph_tiger.simulations">
+<span id="simulation"></span><h1>Simulation<a class="headerlink" href="#module-graph_tiger.simulations" title="Permalink to this heading"></a></h1>
 <dl class="py class">
-<dt id="graph_tiger.simulations.Simulation">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">graph_tiger.simulations.</span></code><code class="sig-name descname"><span class="pre">Simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graph_tiger.simulations.</span></span><span class="sig-name descname"><span class="pre">Simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The parent class for all simulation classes i.e., attack, defense, cascading failure and diffusion models.
 Provides a shared set of functions, largely for network visualization and plotting of results</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> – undirected NetworkX graph</p></li>
+<li><p><strong>runs</strong> – number of times to run the simulation</p></li>
+<li><p><strong>steps</strong> – number of time steps to run each simulation</p></li>
+<li><p><strong>kwargs</strong> – optional parameters to change visualization settings</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.child_class">
-<code class="sig-name descname"><span class="pre">child_class</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.child_class" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.child_class">
+<span class="sig-name descname"><span class="pre">child_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.child_class" title="Permalink to this definition"></a></dt>
 <dd><p>Gets the child class name
 :return: string</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.create_simulation_gif">
-<code class="sig-name descname"><span class="pre">create_simulation_gif</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.create_simulation_gif" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.create_simulation_gif">
+<span class="sig-name descname"><span class="pre">create_simulation_gif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.create_simulation_gif" title="Permalink to this definition"></a></dt>
 <dd><p>Draws and saves the network simulation to an MP4 file</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.draw_graph">
-<code class="sig-name descname"><span class="pre">draw_graph</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.draw_graph" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.draw_graph">
+<span class="sig-name descname"><span class="pre">draw_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.draw_graph" title="Permalink to this definition"></a></dt>
 <dd><p>Draws the graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -228,14 +151,14 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.get_effective_strength">
-<code class="sig-name descname"><span class="pre">get_effective_strength</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_effective_strength" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.get_effective_strength">
+<span class="sig-name descname"><span class="pre">get_effective_strength</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_effective_strength" title="Permalink to this definition"></a></dt>
 <dd><p>Implemented by child class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.get_graph_coordinates">
-<code class="sig-name descname"><span class="pre">get_graph_coordinates</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_graph_coordinates" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.get_graph_coordinates">
+<span class="sig-name descname"><span class="pre">get_graph_coordinates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_graph_coordinates" title="Permalink to this definition"></a></dt>
 <dd><p>Gets the graph coordinates, which can be:
 (1) set in the graph itself with the ‘pos’ tag on the vertices,
 (2) positioned according to the force atlas2 algorithm,
@@ -249,8 +172,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.get_plot_title">
-<code class="sig-name descname"><span class="pre">get_plot_title</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_plot_title" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.get_plot_title">
+<span class="sig-name descname"><span class="pre">get_plot_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_plot_title" title="Permalink to this definition"></a></dt>
 <dd><p>Gets the title for each plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -263,8 +186,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.get_visual_settings">
-<code class="sig-name descname"><span class="pre">get_visual_settings</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_visual_settings" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.get_visual_settings">
+<span class="sig-name descname"><span class="pre">get_visual_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.get_visual_settings" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the visual settings for the network visualization</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -277,8 +200,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.plot_graph_transition">
-<code class="sig-name descname"><span class="pre">plot_graph_transition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_graph_transition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.plot_graph_transition">
+<span class="sig-name descname"><span class="pre">plot_graph_transition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_graph_transition" title="Permalink to this definition"></a></dt>
 <dd><p>Helper function to decide which snapshots to take for network visualization</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -288,8 +211,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.plot_network">
-<code class="sig-name descname"><span class="pre">plot_network</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_network" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.plot_network">
+<span class="sig-name descname"><span class="pre">plot_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_network" title="Permalink to this definition"></a></dt>
 <dd><p>Plots the compiled simulation results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -299,8 +222,8 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.plot_results">
-<code class="sig-name descname"><span class="pre">plot_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_results" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.plot_results">
+<span class="sig-name descname"><span class="pre">plot_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.plot_results" title="Permalink to this definition"></a></dt>
 <dd><p>Plots the compiled simulation results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -310,14 +233,14 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.reset_simulation">
-<code class="sig-name descname"><span class="pre">reset_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.reset_simulation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.reset_simulation">
+<span class="sig-name descname"><span class="pre">reset_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.reset_simulation" title="Permalink to this definition"></a></dt>
 <dd><p>Implemented by child class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.run_simulation">
-<code class="sig-name descname"><span class="pre">run_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.run_simulation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.run_simulation">
+<span class="sig-name descname"><span class="pre">run_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.run_simulation" title="Permalink to this definition"></a></dt>
 <dd><p>Averages the simulation over the number of ‘runs’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -327,74 +250,55 @@ Provides a shared set of functions, largely for network visualization and plotti
 </dd></dl>
 
 <dl class="py method">
-<dt id="graph_tiger.simulations.Simulation.run_single_sim">
-<code class="sig-name descname"><span class="pre">run_single_sim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.run_single_sim" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="graph_tiger.simulations.Simulation.run_single_sim">
+<span class="sig-name descname"><span class="pre">run_single_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graph_tiger.simulations.Simulation.run_single_sim" title="Permalink to this definition"></a></dt>
 <dd><p>Implemented by child class</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="graphs.html" class="btn btn-neutral float-right" title="Graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="diffusion.html" class="btn btn-neutral float-left" title="Diffusion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="graphs.html" class="btn btn-neutral float-right" title="Graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Scott Freitas.
-
-    </p>
+    <p>&#169; Copyright 2022, Scott Freitas.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

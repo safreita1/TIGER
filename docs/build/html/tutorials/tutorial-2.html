@@ -1,71 +1,37 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Tutorial 2: Attacking a Network &mdash; TIGER 0.1.3 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tutorial 3: Defending a Network" href="tutorial-3.html" />
     <link rel="prev" title="Tutorial 1: Measuring Vulnerability and Robustness" href="tutorial-1.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> TIGER
-          
-
-          
+            <a href="../index.html">
+            <img src="../_static/tiger-logo.jpg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -73,19 +39,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#background-motivation">Background &amp; Motivation</a></li>
@@ -126,95 +81,59 @@
 <li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">TIGER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
-        
       <li>Tutorial 2: Attacking a Network</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/tutorials/tutorial-2.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="tutorial-2-attacking-a-network">
-<h1>Tutorial 2: Attacking a Network<a class="headerlink" href="#tutorial-2-attacking-a-network" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="tutorial-2-attacking-a-network">
+<h1>Tutorial 2: Attacking a Network<a class="headerlink" href="#tutorial-2-attacking-a-network" title="Permalink to this heading"></a></h1>
 <p>There are two primary ways a network can become damaged: (1) <strong>natural failure</strong> and (2) <strong>targeted attack</strong>. Natural failures typically occur when a piece of equipment breaks down from natural causes. In the study of graphs, this would correspond to the removal of a node or edge in the graph. While random network failures regularly occur, they are typically less severe than targeted attacks. In contrast, targeted attacks carefully select nodes and edges in the network for removal in order to maximally disrupt network functionality. As such, we focus the majority of our attention to targeted attacks.</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../_images/attack-comparison.jpg"><img alt="../_images/attack-comparison.jpg" src="../_images/attack-comparison.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Networks can become damaged through natural failures or targeted attacks. Depending on the severity of the damage, networks can suffer from cascading failures.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Networks can become damaged through natural failures or targeted attacks. Depending on the severity of the damage, networks can suffer from cascading failures.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>We showcase an example attack in the figure below on the Kentucky KY-2 water distribution network. The network starts under normal conditions (far left), and at each step an additional node is removed by the attacker (red nodes). After removing only 13 of the 814 nodes, the network is split into two separate regions. By step 27, the network splits into four disconnected regions. In this simulation, and in general, attack strategies rely on node and edge centrality measures to identify candidates. If we look carefully, we observe that certain nodes (and edges) in the network act as key bridges between various network regions. As a result, attacks able to identify these bridges are highly effective in disrupting this network. Below, we discuss several attack strategies contained in TIGER and then compare their effectiveness on attacking the Kentucky KY-2 water distribution network.</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="../_images/node-attack.jpg"><img alt="../_images/node-attack.jpg" src="../_images/node-attack.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">TIGER simulation of an RD node attack on the KY-2 water distribution network. Step 0: network starts under normal conditions; at each step a node is removed by the attacker (red nodes). Step 13, 22 &amp; 27: after removing only a few of the 814 nodes, the network splits into two and three and four disconnected regions, respectively.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">TIGER simulation of an RD node attack on the KY-2 water distribution network. Step 0: network starts under normal conditions; at each step a node is removed by the attacker (red nodes). Step 13, 22 &amp; 27: after removing only a few of the 814 nodes, the network splits into two and three and four disconnected regions, respectively.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <ul class="simple">
 <li><p><strong>Initial degree removal (ID)</strong> targets nodes with the highest degree <span class="math notranslate nohighlight">\($\delta_v\)</span>. This has the effect of reducing the total number of edges in the network as fast as possible. Since this attack only considers its neighbors when making a decision, it is considered a <em>local attack</em>. The benefit of this locality is low computational overhead.</p></li>
 <li><p><strong>Initial betweenness removal (IB)</strong> targets nodes with high betweenness centrality <span class="math notranslate nohighlight">\(b_v\)</span>. This has the effect of destroying as many paths as possible. Since path information is aggregated from across the network, this is considered a <em>global attack</em> strategy. Unfortunately, global information comes with significant computational overhead compared to a local attacks.</p></li>
 <li><p><strong>Recalculated degree (RD)</strong> and <strong>betweenness removal (RB)</strong> follow the same process as ID and IB, respectively, with one additional step to recalculate the degree (or betweenness) distribution after a node is removed. This recalculation often results in a stronger attack, however, recalculating these distributions adds a significant amount of computational overhead to the attack.</p></li>
 </ul>
 <p>In the figure below, we can see the effectiveness of each attack strategy when used to remove <em>nodes</em> and <em>edges</em> from a network, where attack success is measured based on how fractured the network becomes when removing nodes from the network (i.e., largest connected component). We identify three key observations: (i) random node removal (RND) is not an effective strategy on this network structure; (ii) RB is the most effective attack strategy; and (iii) the remaining three attacks are roughly equivalent, falling somewhere between RND and RB. Now lets take a look at how to implement this in code using TIGER. We begin by setting up the attack parameters and creating an attack visualization on the Kentucky KY-2 water distribution network.</p>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="../_images/node-attack-comparison.jpg"><img alt="../_images/node-attack-comparison.jpg" src="../_images/node-attack-comparison.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Efficacy of 5 edge attacks (left) and 5 node attacks (right) on the KY-2 water distribution network. The most effective attack (RB) disconnects approximately 50% of the network with less than 30 removed edges (or nodes).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Efficacy of 5 edge attacks (left) and 5 node attacks (right) on the KY-2 water distribution network. The most effective attack (RB) disconnects approximately 50% of the network with less than 30 removed edges (or nodes).</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <div class="highlight-python notranslate" id="attack-1"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -223,7 +142,7 @@
 <span class="kn">from</span> <span class="nn">graph_tiger.attacks</span> <span class="kn">import</span> <span class="n">Attack</span>
 <span class="kn">from</span> <span class="nn">graph_tiger.graphs</span> <span class="kn">import</span> <span class="n">graph_loader</span>
 
-<span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graph_loader</span><span class="p">(</span><span class="n">graph_type</span><span class="o">=</span><span class="s1">&#39;ky2&#39;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
      <span class="s1">&#39;runs&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -243,7 +162,7 @@
  <span class="p">}</span>
 
  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating example visualization&quot;</span><span class="p">)</span>
- <span class="n">a</span> <span class="o">=</span> <span class="n">Attack</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> \<span class="o">**</span><span class="n">params</span><span class="p">)</span>
+ <span class="n">a</span> <span class="o">=</span> <span class="n">Attack</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
  <span class="n">a</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -307,67 +226,48 @@
    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="tutorial-3.html" class="btn btn-neutral float-right" title="Tutorial 3: Defending a Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="tutorial-1.html" class="btn btn-neutral float-left" title="Tutorial 1: Measuring Vulnerability and Robustness" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial-3.html" class="btn btn-neutral float-right" title="Tutorial 3: Defending a Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Scott Freitas.
-
-    </p>
+    <p>&#169; Copyright 2022, Scott Freitas.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

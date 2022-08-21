@@ -1,71 +1,37 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Tutorial 5: Entity Dissemination &mdash; TIGER 0.1.3 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="TIGER" href="../modules.html" />
     <link rel="prev" title="Tutorial 4: Cascading Failures" href="tutorial-4.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: white" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> TIGER
-          
-
-          
+            <a href="../index.html">
+            <img src="../_static/tiger-logo.jpg" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -73,19 +39,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../intro.html#background-motivation">Background &amp; Motivation</a></li>
@@ -126,80 +81,40 @@
 <li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">TIGER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
-        
       <li>Tutorial 5: Entity Dissemination</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/tutorials/tutorial-5.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="tutorial-5-entity-dissemination">
-<h1>Tutorial 5: Entity Dissemination<a class="headerlink" href="#tutorial-5-entity-dissemination" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="tutorial-5-entity-dissemination">
+<h1>Tutorial 5: Entity Dissemination<a class="headerlink" href="#tutorial-5-entity-dissemination" title="Permalink to this heading"></a></h1>
 <p>A critical concept in entity dissemination is <em>network diffusion</em>, which attempts to capture the underlying mechanism enabling network propagation. In order to augment this diffusion process, TIGER leverages the defense techniques in the previous tutorial for use with two prominent diffusion models: the flu-like susceptible-infected-susceptible (SIS) model, and the vaccinated-like susceptible-infected-recovered (SIR) model. For example, to <em>minimize</em> the ability of viruses to spread we can monitor (remove) nodes in the graph to reduce graph connectivity. On the other hand, if want to <em>maximize</em> network diffusion e.g., marketing campaign, we can use defense techniques like edge rewiring or addition to increase graph connectivity. Below, we highlight the SIS infectious disease model and how TIGER’s defense techniques can help contain a simulated outbreak.</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../_images/sis-diffusion.jpg"><img alt="../_images/sis-diffusion.jpg" src="../_images/sis-diffusion.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Visualizing a computer virus simulation that follows the SIS infection model (effective strength $s=3.21$) on the <em>Oregon-1 Autonomous System</em> network. Top: defending only 5 nodes with <em>Netshield</em>, the number of infected entities is reduced to nearly zero. Bottom: without any defense, the virus remains endemic.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Visualizing a computer virus simulation that follows the SIS infection model (effective strength $s=3.21$) on the <em>Oregon-1 Autonomous System</em> network. Top: defending only 5 nodes with <em>Netshield</em>, the number of infected entities is reduced to nearly zero. Bottom: without any defense, the virus remains endemic.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>Each node in the SIS model can be in one of two states, infected <em>I</em> or susceptible <em>S</em>.  At each time step <em>t</em>, an infected node <em>v</em> has a probability <span class="math notranslate nohighlight">\(\beta\)</span> of infecting each of it’s uninfected neighbors <span class="math notranslate nohighlight">\(u\in N(v)\)</span>. After this, each infected node <em>v</em> has a probability <span class="math notranslate nohighlight">\(\delta\)</span> of healing and becoming susceptible again. The relationship between the birth rate <span class="math notranslate nohighlight">\(\beta\)</span>, death rate <span class="math notranslate nohighlight">\(\delta\)</span> and the spectral radius <span class="math notranslate nohighlight">\(\lambda_1\)</span> of the graph has been a widely studied topic. It’s been shown that the spectral radius of a graph is closely tied to the epidemic threshold <span class="math notranslate nohighlight">\(\tau\)</span> of a network in an SIS model. In particular, <span class="math notranslate nohighlight">\(\frac{\beta}{\delta} &lt; \tau=\frac{1}{\lambda_{1}}\)</span>. This means for a given virus strength <em>s</em>, an epidemic is more likely to occur on a graph with larger <span class="math notranslate nohighlight">\(\lambda_1\)</span>. As such, we say that a virus has an effective strength <span class="math notranslate nohighlight">\(s = \lambda_1 \cdot b / d\)</span>, where a larger <em>s</em> means a stronger virus.</p>
 <p>Now that we have a little background, lets dive into the code required to set up the simulation and create the above visualization.</p>
 <div class="highlight-python notranslate" id="sis-simulation"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graph_tiger.diffusion</span> <span class="kn">import</span> <span class="n">Diffusion</span>
@@ -236,10 +151,12 @@
 </pre></div>
 </div>
 <p>To assist users in summarizing simulation results over many configurations, we enable them to create plots like the figure below, which show results for 5 SIS effective virus strengths <span class="math notranslate nohighlight">\(s = \{0, 3.21, 6.42, 9.63, 12.84\}\)</span> over a period of 5000 steps.</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="../_images/sis-vaccination.jpg"><img alt="../_images/sis-vaccination.jpg" src="../_images/sis-vaccination.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">SIS simulation with 5 virus strengths on the Oregon-1 Autonomous System network. No defense (left), Netshield defense (right).</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">SIS simulation with 5 virus strengths on the Oregon-1 Autonomous System network. No defense (left), Netshield defense (right).</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>Running multiple simulations for comparison only takes a few lines of code:</p>
 <div class="highlight-python notranslate" id="sis-comparison"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -352,67 +269,48 @@
    <span class="n">plot_results</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../modules.html" class="btn btn-neutral float-right" title="TIGER" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="tutorial-4.html" class="btn btn-neutral float-left" title="Tutorial 4: Cascading Failures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../modules.html" class="btn btn-neutral float-right" title="TIGER" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Scott Freitas.
-
-    </p>
+    <p>&#169; Copyright 2022, Scott Freitas.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

@@ -149,28 +149,28 @@ In this example, we run a cascading failure simulation on a Barabasi Albert (BA)
    cascading.plot_results(results)
 
 
-.. figure:: ../../images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
+.. figure:: ../../images/Cascading--step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
    :width: 100 %
    :align: center
 
    Time step 0: shows the network under normal operating conditions.
 
 
-.. figure:: ../../images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
+.. figure:: ../../images/Cascading--step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
    :width: 100 %
    :align: center
 
    Step 5: we observe a series of failures across the network.
 
 
-.. figure:: ../../images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
+.. figure:: ../../images/Cascading--step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg
    :width: 100 %
    :align: center
 
    Step 99: most of the network has collapsed.
 
 
-.. figure:: ../../images/Cascading:step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg
+.. figure:: ../../images/Cascading--step=100,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None_results.jpg
    :width: 100 %
    :align: center
 
@@ -220,28 +220,28 @@ In this example, we run a computer virus simulation (SIS infection model) on a B
 
 
 
-.. figure:: ../../images/SIS_epidemic:step=0,diffusion=min,method=ns_node,k=5.jpg
+.. figure:: ../../images/SIS_epidemic--step=0,diffusion=min,method=ns_node,k=5.jpg
    :width: 100 %
    :align: center
 
    Step 0: A highly infected network with 4 nodes "vaccinated" according to Netshield defense.
 
 
-.. figure:: ../../images/SIS_epidemic:step=80,diffusion=min,method=ns_node,k=5.jpg
+.. figure:: ../../images/SIS_epidemic--step=80,diffusion=min,method=ns_node,k=5.jpg
    :width: 100 %
    :align: center
 
    Step 80: The computer virus begins to remit.
 
 
-.. figure:: ../../images/SIS_epidemic:step=4999,diffusion=min,method=ns_node,k=5.jpg
+.. figure:: ../../images/SIS_epidemic--step=4999,diffusion=min,method=ns_node,k=5.jpg
    :width: 100 %
    :align: center
 
    Step 4999: The virus is nearly contained.
 
 
-.. figure:: ../../images/SIS_epidemic:step=5000,diffusion=min,method=ns_node,k=5_results.jpg
+.. figure:: ../../images/SIS_epidemic--step=5000,diffusion=min,method=ns_node,k=5_results.jpg
    :width: 100 %
    :align: center
 

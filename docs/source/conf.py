@@ -10,6 +10,13 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+"""
+To build the docs, make sure these 3 libraries are installed
+1.pip install sphinx
+2. pip install sphinxcontrib-bibtex
+3. pip install sphinx-rtd-theme
+Then, inside the "docs" folder, run "make html".
+"""
 import os
 import sys
 import datetime
