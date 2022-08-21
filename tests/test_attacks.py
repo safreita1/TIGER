@@ -54,6 +54,7 @@ def test_method_selection():
 
         # print(method, values)
         if 'rnd' not in method and method != 'ib_edge':
+            print(method)
             assert (values == ground_truth[method])
         elif method == 'ib_edge':
             assert (values == ground_truth[method][0] or values == ground_truth[method][1])
