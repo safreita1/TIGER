@@ -1,7 +1,7 @@
 import os
 from setuptools import find_packages, setup
 
-setup_requires = ["Cython", "pandas", "numpy", "pythran", "scikit-image"]
+setup_requires = ["Cython", "pandas", "numpy<=1.22.4", "pythran", "scikit-image"]
 
 install_requires = [
                     "joblib",
