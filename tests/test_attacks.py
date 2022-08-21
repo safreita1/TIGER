@@ -1,6 +1,11 @@
 from graph_tiger.graphs import karate
 from graph_tiger.attacks import run_attack_method, get_attack_methods
 
+try:
+    from typing import Literal
+except ImportError:
+    from typing_extensions import Literal
+
 
 def test_attack_strength():
     """
