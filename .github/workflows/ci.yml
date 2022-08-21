@@ -31,6 +31,17 @@ jobs:
         run: |
           pip install wheel
           pip install setuptools==61.2.0
+          pip install Cython
+          pip install datashader
+          pip install scikit-image
+          pip install tqdm
+          pip install stopit
+          pip install matplotlib
+          pip install networkx
+          pip install pillow
+          pip install fa2
+          pip install bezier
+          pip install ffmpeg
       # Install library dependencies
       - name: Install library dependencies
         run: python setup.py install
