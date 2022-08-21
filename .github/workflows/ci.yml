@@ -26,6 +26,9 @@ jobs:
       # Display the Python version being used
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      # Install Python Wheel
+      - name: Install Python Wheel
+        run: pip install wheel
       # Install library dependencies
       - name: Install library dependencies
         run: python setup.py install
