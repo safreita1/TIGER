@@ -1,11 +1,9 @@
 import os
 from setuptools import find_packages, setup
 
-setup_requires = ["numpy<=1.22.4", "pandas", "Cython", "pythran", "scikit-image"]
+setup_requires = ["wheel", "numpy<=1.22.4", "pandas", "Cython", "pythran", "scikit-image"]
 
-install_requires = ["wheel",
-                    "joblib",
-                    "Cython",
+install_requires = ["joblib",
                     "networkx",
                     "tqdm",
                     "scipy",
