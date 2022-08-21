@@ -7,19 +7,12 @@ from fa2 import ForceAtlas2
 import matplotlib.pyplot as plt
 from collections import defaultdict
 from scipy.interpolate import interp1d
-try:
-    from typing import Literal
-except ImportError:
-    from typing_extensions import Literal
-
 from datashader.bundling import hammer_bundle
 from matplotlib.animation import FuncAnimation
 from matplotlib.collections import LineCollection
 from matplotlib.colors import LinearSegmentedColormap
 
 from graph_tiger.utils import get_sparse_graph, curved_edges
-
-
 
 
 class Simulation:
