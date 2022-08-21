@@ -1,24 +1,16 @@
 import os
 from setuptools import find_packages, setup
 
-setup_requires = ["Cython", "pandas", "numpy<=1.22.4", "pythran", "scikit-image"]
+setup_requires = ["Cython", "datashader", "scikit-image"]
 
 install_requires = [
-                    "joblib",
-                    "tqdm",
-                    "six",
-                    "stopit",
-                    "pandas",
-                    "networkx",
-                    "scipy",
-                    "pillow",
-                    "matplotlib==3.5.3",
-                    "fa2",
-                    "onnx==1.10.0",
-                    "PyYAML",
-                    "ipython",
                     "datashader",
-                    "dask",
+                    "tqdm",
+                    "stopit",
+                    "matplotlib",
+                    "networkx",
+                    "pillow",
+                    "fa2",
                     "bezier",
                     "ffmpeg"
                     ]
@@ -66,5 +58,5 @@ setup(
     classifiers=["Development Status :: 3 - Alpha",
                  "Intended Audience :: Developers",
                  "License :: OSI Approved :: MIT License",
-                 "Programming Language :: Python :: 3.6"],
+                 "Programming Language :: Python :: 3.8"],
 )

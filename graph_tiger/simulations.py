@@ -121,7 +121,7 @@ class Simulation:
         plt.xlabel('Steps')
         plt.title(self.child_class())
         plt.savefig(os.path.join(self.save_dir, self.get_plot_title(self.prm['steps']) + '_results.pdf'))
-        plt.show()
+        # plt.show()
 
         plt.clf()
 
@@ -255,7 +255,7 @@ class Simulation:
         plt.axis('image')
         title = self.get_plot_title(step)
         plt.savefig(os.path.join(self.save_dir, title + '.pdf'))
-        plt.show()
+        # plt.show()
 
         plt.clf()
 
