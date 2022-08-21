@@ -40,7 +40,10 @@ def test_measures():
             if value is not None: value = round(value, 2)
 
             print(idx, measure_name, value, graph_values[idx])
-            assert value == graph_values[idx]
+            if value is not None:
+                assert graph_values[idx] - 0.01 <= value <= graph_values[idx] + 0.01
+            else:
+                assert graph_values[idx] == value
 
 
 def main():
