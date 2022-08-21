@@ -30,6 +30,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install numpy
+          pip install pandas
+          pip install Cython
+          pip install pythran
+          pip install scikit-image
       - name: Install packages
         run: python setup.py install
 #      - name: Install dependencies
