@@ -15,40 +15,51 @@ jobs:
         # Run in all these versions of Python
         python-version: [3.7, 3.8, 3.9]
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Python 3
-        uses: actions/setup-python@v1
+      # Checkout the latest code from the repo
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      # Setup which version of Python to use
+      - name: Set Up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.6
-      - name: Install dependencies
+          python-version: ${{ matrix.python-version }}
+      # Display the Python version being used
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install packages
+        run: python setup.py install
+#      - name: Install dependencies
+#        run: |
+#          python -m pip install --upgrade pip
+#          pip install joblib
+#          pip install wheel
+#          pip install pytest
+#          pip install pytest-cov
+#          pip install pytest-github-actions-annotate-failures
+#          pip install numpy
+#          pip install networkx
+#          pip install tqdm
+#          pip install scipy
+#          pip install pandas
+#          pip install six
+#          pip install pillow
+#          pip install numba
+#          pip install matplotlib
+#          pip install fa2
+#          pip install onnx==1.10.0
+#          pip install PyYAML
+#          pip install ipython
+#          pip install stopit
+#          pip install datashader
+#          pip install dask
+#          pip install scikit-image
+#          pip install ffmpeg
+#          BEZIER_NO_EXTENSION=true \
+#          pip install --upgrade bezier --no-binary=bezier
+      - name: Install pytest
         run: |
           python -m pip install --upgrade pip
-          pip install joblib
-          pip install wheel
           pip install pytest
-          pip install pytest-cov
-          pip install pytest-github-actions-annotate-failures
-          pip install numpy
-          pip install networkx
-          pip install tqdm
-          pip install scipy
-          pip install pandas
-          pip install six
-          pip install pillow
-          pip install numba
-          pip install matplotlib==3.6
-          pip install fa2
-          pip install onnx==1.10.0
-          pip install PyYAML
-          pip install ipython
-          pip install stopit
-          pip install datashader
-          pip install dask
-          pip install scikit-image
-          pip install ffmpeg
-          BEZIER_NO_EXTENSION=true \
-          pip install --upgrade bezier --no-binary=bezier
-
-      - name: Run Pytests
+      - name: Run tests
         run: |
           pytest
