@@ -41,7 +41,7 @@ def test_measures():
 
             print(idx, measure_name, value, graph_values[idx])
             if value is not None:
-                assert graph_values[idx] - 0.01 <= value <= graph_values[idx] + 0.01
+                assert graph_values[idx] - 0.02 <= value <= graph_values[idx] + 0.02
             else:
                 assert graph_values[idx] == value
 
