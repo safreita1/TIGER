@@ -1,3 +1,4 @@
+pandas>=1.2
 sphinx
 sphinxcontrib-bibtex
 sphinx-rtd-theme
