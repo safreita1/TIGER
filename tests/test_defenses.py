@@ -30,7 +30,7 @@ def test_method_selection():
     """
 
     ground_truth = {  # karate graph top 4 nodes to be monitored or top 4 edges to added/rewired
-        'ns_node': [33, 0, 2, 32],
+        'ns_node': ([33, 0, 2, 32], [33, 2, 0, 32]),
         'pr_node': [33, 0, 32, 2],
         'eig_node': [33, 0, 2, 32],
         'id_node': [33, 0, 32, 2],
@@ -92,7 +92,10 @@ def test_method_selection():
 
         # print(method, values)
         if get_defense_category(method) == 'node':
-            assert (values == ground_truth[method])
+            if method == 'ns_node':
+                assert (values == ground_truth[method][0] or values == ground_truth[method][1])
+            else:
+                assert (values == ground_truth[method])
         else:
             assert np.array_equal(values['added'], ground_truth[method]['added'])
             if 'removed' in values:
