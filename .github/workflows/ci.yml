@@ -36,7 +36,7 @@ jobs:
           pip install six
           pip install pillow
           pip install numba
-          pip install matplotlib<=3.6
+          pip install matplotlib
           pip install fa2
           pip install onnx==1.10.0
           pip install PyYAML
