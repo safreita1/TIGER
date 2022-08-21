@@ -1,24 +1,24 @@
 import os
 from setuptools import find_packages, setup
 
-setup_requires = ["numpy==1.22.4", "pandas", "Cython", "pythran", "scikit-image"]
+setup_requires = ["Cython", "pandas", "numpy", "pythran", "scikit-image"]
 
 install_requires = ["joblib",
-                    "networkx",
                     "tqdm",
-                    "scipy",
                     "six",
+                    "stopit",
+                    "pandas",
+                    "networkx",
+                    "scipy",
                     "pillow",
-                    "numba",
-                    "matplotlib<=3.6",
+                    "matplotlib",
                     "fa2",
-                    "onnx==1.10.0",
+                    "onnx",
                     "PyYAML",
                     "ipython",
-                    "stopit",
                     "datashader",
                     "dask",
-                    "bezier==2020.5.19",
+                    "bezier",
                     "ffmpeg"]
 
 
