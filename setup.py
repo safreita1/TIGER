@@ -3,7 +3,8 @@ from setuptools import find_packages, setup
 
 setup_requires = ["Cython", "pandas", "numpy", "pythran", "scikit-image"]
 
-install_requires = ["joblib",
+install_requires = [
+                    "joblib",
                     "tqdm",
                     "six",
                     "stopit",
@@ -13,13 +14,18 @@ install_requires = ["joblib",
                     "pillow",
                     "matplotlib==3.5.3",
                     "fa2",
-                    "onnx",
+                    "onnx==1.10.0",
                     "PyYAML",
                     "ipython",
                     "datashader",
                     "dask",
                     "bezier",
-                    "ffmpeg"]
+                    "ffmpeg"
+                    # "pytest",
+                    # "pytest-cov",
+                    # "pytest-github-actions-annotate-failures"
+                    ]
+
 
 
 keywords = ["data-science",

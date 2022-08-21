@@ -26,8 +26,10 @@ jobs:
       # Display the Python version being used
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      # Install library dependencies
       - name: Install library dependencies
         run: python setup.py install
+      # Install library dependencies
       - name: Install Pytest dependencies
         run: |
           pip install pytest
@@ -37,4 +39,4 @@ jobs:
 
       - name: Run Pytests
         run: |
-          pytest
+          python -m pytest
