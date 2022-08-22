@@ -28,19 +28,20 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       # Install Python Wheel
       - name: Install library dependencies
-        run: |
-          python -m pip install --upgrade pip setuptools wheel
-          pip install Cython
-          pip install ffmpeg
-          pip install datashader
-          pip install scikit-image
-          pip install tqdm
-          pip install stopit
-          pip install matplotlib
-          pip install networkx
-          pip install pillow
-          pip install fa2
-          pip install bezier
+        run: python setup.py install
+#        run: |
+#          python -m pip install --upgrade pip setuptools wheel
+#          pip install Cython
+#          pip install ffmpeg
+#          pip install datashader
+#          pip install scikit-image
+#          pip install tqdm
+#          pip install stopit
+#          pip install matplotlib
+#          pip install networkx
+#          pip install pillow
+#          pip install fa2
+#          pip install bezier
       # Display the Python version being used
       - name: Display library versions
         run: pip list
@@ -52,4 +53,7 @@ jobs:
       # Run PyTests
       - name: Run PyTests
         run: |
-          python -m pytest
+          python -m pytest tests/test_attacks.py
+          python -m pytest tests/test_defenses.py
+          python -m pytest tests/test_measures.py
+          python -m pytest tests/test_simulations.py

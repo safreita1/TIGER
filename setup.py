@@ -1,20 +1,10 @@
 import os
+import sys
+import subprocess
 from setuptools import find_packages, setup
 
-setup_requires = ["Cython", "datashader", "scikit-image"]
-
-install_requires = [
-                    "datashader",
-                    "tqdm",
-                    "stopit",
-                    "matplotlib",
-                    "networkx",
-                    "pillow",
-                    "fa2",
-                    "bezier",
-                    "ffmpeg"
-                    ]
-
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
+                       "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg"])
 
 keywords = ["data-science",
             "machine-learning",
@@ -53,8 +43,6 @@ setup(
     url="https://github.com/safreita1/TIGER",
     download_url="https://github.com/safreita1/TIGER/archive/0.1.6.tar.gz",
     keywords=keywords,
-    setup_requires=setup_requires,
-    install_requires=install_requires,
     classifiers=["Development Status :: 3 - Alpha",
                  "Intended Audience :: Developers",
                  "License :: OSI Approved :: MIT License",
