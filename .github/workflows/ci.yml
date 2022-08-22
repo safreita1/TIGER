@@ -54,17 +54,3 @@ jobs:
           python -m pytest tests/test_defenses.py
           python -m pytest tests/test_measures.py
           python -m pytest tests/test_simulations.py
-
-      # Install
-      - name: Install dependencies
-        run: |
-          pip install setuptools wheel twine
-
-      # Build and publish distribution to TestPyPi
-      - name: Build and publish
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        run: |
-          python setup.py sdist
-          twine upload dist/*

@@ -1,0 +1,47 @@
+name: Upload
+
+# Only trigger, when the "Tests" workflow succeeded
+on:
+  workflow_run:
+    workflows: ["Tests"]
+    types:
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the latest code from the repo
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      # Setup Python
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+
+      # Display the Python version being used
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      # Install Python dependencies
+      - name: Install library dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python setup.py install
+
+      # Install Twine
+      - name: Install Twine dependencies
+        run: |
+          pip install setuptools wheel twine
+
+      # Build and publish distribution to TestPyPi
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        run: |
+          python setup.py sdist
+          twine upload dist/*
