@@ -40,7 +40,6 @@ jobs:
       # Run PyTests
       - name: Run PyTests
         run: |
-      #  python -m pytest
           python -m pytest tests/test_attacks.py
           python -m pytest tests/test_defenses.py
           python -m pytest tests/test_measures.py
