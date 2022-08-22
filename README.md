@@ -1,5 +1,6 @@
 [![Run Python Tests](https://github.com/safreita1/TIGER/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/safreita1/TIGER/actions/workflows/ci.yml)
 ![Version](https://img.shields.io/pypi/v/graph-tiger?color=dark)
+[![Python 3](https://img.shields.io/badge/python-3.6|3.7|3.8-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Documentation Status](https://readthedocs.org/projects/graph-tiger/badge/?version=latest)](https://graph-tiger.readthedocs.io/en/latest/?badge=latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![arXiv](https://img.shields.io/badge/arXiv-2006.05648-<COLOR>.svg)](https://arxiv.org/pdf/2006.05648.pdf)
