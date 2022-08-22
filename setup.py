@@ -35,6 +35,7 @@ setup(
     packages=find_packages(),
     version="0.1.6",
     license="MIT",
+    # python_requires='3.6, 3.7, 3.8',
     description="A general purpose library for graph vulnerability and robustness analysis.",
     # long_description=long_description,
     # long_description_content_type='text/markdown',
