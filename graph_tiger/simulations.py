@@ -248,7 +248,7 @@ class Simulation:
 
         :param step: current iteration of the simulation
         """
-        plt.figure(figsize=(20, 20))
+        fig = plt.figure(figsize=(20, 20))
 
         self.draw_graph(step)
 
@@ -256,7 +256,7 @@ class Simulation:
         title = self.get_plot_title(step)
         plt.savefig(os.path.join(self.save_dir, title + '.pdf'))
         # plt.show()
-
+        plt.close(fig)
         plt.clf()
 
     def create_simulation_gif(self):
@@ -266,9 +266,6 @@ class Simulation:
         fig = plt.figure(figsize=(20, 20))
         nodes = self.draw_graph(step=0)
 
-        snap_dir = os.path.join(self.save_dir, 'gif_snaps/')
-        os.makedirs(snap_dir, exist_ok=True)
-
         def update(step):
             nc, ns, _, _, _ = self.get_visual_settings(step)
 
@@ -276,6 +273,9 @@ class Simulation:
             nodes.set_sizes(ns)
 
             if self.prm['gif_snaps']:
+                snap_dir = os.path.join(self.save_dir, 'gif_snaps/')
+                os.makedirs(snap_dir, exist_ok=True)
+
                 plt.savefig(snap_dir + 'step_{}.pdf'.format(step))
 
             return nodes,
