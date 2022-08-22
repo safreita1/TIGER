@@ -9,34 +9,42 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
         # Run in all these versions of Python
         python-version: [3.6, 3.7, 3.8]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
       # Checkout the latest code from the repo
       - name: Checkout repo
         uses: actions/checkout@v2
-      # Setup which version of Python to use
+
+      # Setup Python
       - name: Set Up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+
       # Display the Python version being used
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+
       # Install Python Wheel
       - name: Install library dependencies
         run: python setup.py install
+
       # Display the Python version being used
       - name: Display library versions
         run: pip list
+
+      # Install Pytest dependencies
       - name: Install Pytest dependencies
         run: |
           pip install pytest
           pip install pytest-cov
           pip install pytest-github-actions-annotate-failures
+
       # Run PyTests
       - name: Run PyTests
         run: |
