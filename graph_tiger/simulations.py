@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 from scipy.interpolate import interp1d
 from datashader.bundling import hammer_bundle
-from matplotlib.animation import FuncAnimation
+from matplotlib import animation
 from matplotlib.collections import LineCollection
 from matplotlib.colors import LinearSegmentedColormap
 
@@ -293,11 +293,12 @@ class Simulation:
             interval = 20
             fps = 1
 
-        anim = FuncAnimation(fig, update, frames=frames, interval=interval, blit=not self.prm['gif_snaps'], repeat=False)
+        anim = animation.FuncAnimation(fig, update, frames=frames, interval=interval, blit=not self.prm['gif_snaps'], repeat=False)
+        writer = animation.FFMpegWriter(fps=fps, extra_args=['-vcodec', 'libx264'])
 
         title = self.get_plot_title(self.prm['steps'])
         gif_path = os.path.join(self.save_dir, title + '.mp4')
-        anim.save(gif_path, fps=fps, extra_args=['-vcodec', 'libx264'])
+        anim.save(gif_path, writer=writer)
 
         plt.clf()
 
