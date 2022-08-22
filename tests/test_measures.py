@@ -8,7 +8,7 @@ from graph_tiger.measures import run_measure
 
 def test_measures():
 
-    measure_ground_truth = {  # graph order: o4, p4, c4, k4_1, K4_2, c4_0, c4_1, c4_2, c4_3
+    ground_truth = {  # graph order: o4, p4, c4, k4_1, K4_2, c4_0, c4_1, c4_2, c4_3
         'node_connectivity': [0, 1, 2, 2, 3, 0, 1, 1, 1],
         'edge_connectivity': [0, 1, 2, 2, 3, 0, 1, 1, 1],
         'diameter': [None, 3, 2, 2, 1, None, 5, 5, 5],
@@ -22,8 +22,11 @@ def test_measures():
         'spectral_radius': [0, 1.62, 2, 2.56, 3, 2, 2.34, 2.9, 3.65],
         'spectral_gap': [0, 1, 2, 2.56, 4, 0, 0.53, 1.19, 2],
         'natural_connectivity': [0, 0.65, 0.87, 1.29, 1.67, 0.87, 0.97, 1.28, 1.81],
-        'spectral_scaling': [None, 7.16, 7.26, 0.17, 0.09, None, None, 7.01, 6.9],
-        'generalized_robustness_index': [None, 7.16, 7.26, 0.17, 0.09, None, None, 7.01, 6.9],
+        # different Python versions have different results
+        'spectral_scaling': ([None, 7.16, 7.26, 0.17, 0.09, None, None, 7.01, 6.9],
+                             [None, 7.18, 7.28, 0.17, 0.09, None, None, 7.04, 6.93],),
+        'generalized_robustness_index': ([None, 7.16, 7.26, 0.17, 0.09, None, None, 7.01, 6.9],
+                                         [None, 7.18, 7.28, 0.17, 0.09, None, None, 7.04, 6.93],),
 
         'algebraic_connectivity': [0, 0.59, 2, 2, 4, 0, 0.29, 0.4, 0.45],
         'number_spanning_trees': [0, 1, 4, 8, 16, 0, 16, 32, 48],
@@ -33,17 +36,24 @@ def test_measures():
     graphs = [o4_graph(), p4_graph(), c4_graph(), k4_1_graph(), k4_2_graph(),
               two_c4_0_bridge(), two_c4_1_bridge(), two_c4_2_bridge(), two_c4_3_bridge()]
 
-    for measure_name, graph_values in measure_ground_truth.items():
+    for measure, gt in ground_truth.items():
         for idx, graph in enumerate(graphs):
 
-            value = run_measure(graph, measure_name)
+            value = run_measure(graph, measure)
             if value is not None: value = round(value, 2)
 
-            print(idx, measure_name, value, graph_values[idx])
-            if value is not None:
-                assert graph_values[idx] - 0.1 <= value <= graph_values[idx] + 0.1
+            # print(idx, measure, value, gt[idx])
+            # different results locally versus Github CI
+            if measure == 'spectral_scaling' or measure == 'generalized_robustness_index':
+                if value is None:
+                    assert gt[0][idx] == value or gt[1][idx] == value
+                else:
+                    assert gt[0][idx] - 0.1 <= value <= gt[0][idx] + 0.1 or ground_truth[1][idx] - 0.1 <= value <= gt[1][idx] + 0.1
             else:
-                assert graph_values[idx] == value
+                if value is None:
+                    assert gt[idx] == value
+                else:
+                    assert gt[idx] - 0.1 <= value <= gt[idx] + 0.1
 
 
 def main():
