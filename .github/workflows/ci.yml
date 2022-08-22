@@ -27,10 +27,10 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
       # Install Python Wheel
-      - name: Install Python Wheel
+      - name: Install library dependencies
         run: |
           pip install wheel
-          pip install setuptools==61.2.0
+          pip install setuptools>=61.2.0
           pip install Cython
           pip install datashader
           pip install scikit-image
@@ -42,10 +42,9 @@ jobs:
           pip install fa2
           pip install bezier
           pip install ffmpeg
-      # Install library dependencies
-      - name: Install library dependencies
-        run: python setup.py install
-      # Install library dependencies
+      # Display the Python version being used
+      - name: Display library versions
+        run: pip list
       - name: Install Pytest dependencies
         run: |
           pip install pytest
