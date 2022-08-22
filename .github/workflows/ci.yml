@@ -29,8 +29,7 @@ jobs:
       # Install Python Wheel
       - name: Install library dependencies
         run: |
-          pip install wheel
-          pip install setuptools>=61.2.0
+          python -m pip install --upgrade pip setuptools wheel
           pip install Cython
           pip install ffmpeg
           pip install datashader
