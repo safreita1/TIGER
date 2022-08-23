@@ -9,10 +9,9 @@ from collections import defaultdict
 from scipy.interpolate import interp1d
 from datashader.bundling import hammer_bundle
 from matplotlib import animation
-from matplotlib.collections import LineCollection
 from matplotlib.colors import LinearSegmentedColormap
 
-from graph_tiger.utils import get_sparse_graph, curved_edges
+from graph_tiger.utils import get_sparse_graph
 
 
 class Simulation:
