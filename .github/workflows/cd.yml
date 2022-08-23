@@ -1,11 +1,14 @@
 name: Upload
 
-# Only trigger, when the "Tests" workflow succeeded
+# Only trigger, when the "Tests" workflow succeeds, and a new tag is released
 on:
   workflow_run:
     workflows: ["Tests"]
     types:
       - completed
+    tags:
+      - '*'
+
 
 jobs:
   upload:
@@ -41,8 +44,8 @@ jobs:
       - name: Build and publish
         env:
           TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          TWINE_REPOSITORY: testpypi
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          TWINE_REPOSITORY: pypi
         run: |
           python setup.py sdist
           twine upload --skip-existing dist/graph-tiger-*.tar.gz

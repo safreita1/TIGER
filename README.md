@@ -40,7 +40,9 @@ $ pip install graph-tiger
 ``` 
 
 Alternatively, you can clone [TIGER](https://github.com/safreita1/TIGER.git), create a new Anaconda environment,
-and install the library by running ```python setup.py install ```.
+and install the library by running ```python setup.py install```.
+
+To verify that everything works as expected, you can run the tests cases using ```python -m pytest tests/```.
 
 --------------------------------------------------------------------------------
 

@@ -3,10 +3,10 @@ import sys
 import subprocess
 from setuptools import find_packages, setup
 
-version = "0.1.73"
+version = "0.1.6"
 
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
-                       "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg"])
+                       "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg", "pytest"])
 
 keywords = ["data-science",
             "machine-learning",
