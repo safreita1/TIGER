@@ -1,14 +1,11 @@
 name: Upload
 
-# Only trigger, when the "Tests" workflow succeeds, and a new tag is released
+# Only trigger, when the "Tests" workflow succeeds
 on:
   workflow_run:
     workflows: ["Tests"]
     types:
       - completed
-    tags:
-      - '*'
-
 
 jobs:
   upload:
