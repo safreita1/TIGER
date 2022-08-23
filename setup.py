@@ -3,6 +3,8 @@ import sys
 import subprocess
 from setuptools import find_packages, setup
 
+version = "0.1.7"
+
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
                        "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg"])
 
@@ -33,16 +35,13 @@ with open(os.path.join(cwd, 'README.md'), encoding='utf-8') as f:
 setup(
     name="graph-tiger",
     packages=find_packages(),
-    version="0.1.6",
+    version=version,
     license="MIT",
-    # python_requires='3.6, 3.7, 3.8',
     description="A general purpose library for graph vulnerability and robustness analysis.",
-    # long_description=long_description,
-    # long_description_content_type='text/markdown',
     author="Scott Freitas",
     author_email="safreita1@gmail.com",
     url="https://github.com/safreita1/TIGER",
-    download_url="https://github.com/safreita1/TIGER/archive/0.1.6.tar.gz",
+    download_url="https://github.com/safreita1/TIGER/archive/{}.tar.gz".format(version),
     keywords=keywords,
     classifiers=["Development Status :: 3 - Alpha",
                  "Intended Audience :: Developers",

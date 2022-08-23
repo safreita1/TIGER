@@ -8,7 +8,7 @@ on:
       - completed
 
 jobs:
-  notify:
+  upload:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,4 +45,4 @@ jobs:
           TWINE_REPOSITORY: testpypi
         run: |
           python setup.py sdist bdist_wheel
-          twine upload dist/*
+          twine upload --skip-existing dist/*
