@@ -3,8 +3,8 @@ import sys
 import subprocess
 from setuptools import find_packages, setup
 
-# run "git tag <version>" and update version here when releasing new package
-version = "0.1.6"
+# run "git tag <version>" and "git push origin master <version> and update version here when releasing new package
+version = "0.1.7"
 
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
                        "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg", "pytest"])
