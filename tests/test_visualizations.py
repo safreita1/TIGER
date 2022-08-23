@@ -96,30 +96,6 @@ def test_force_atlas():
     run_test(params)
 
 
-def test_curved_edges():
-    params = {
-        'model': 'SIS',
-        'b': 0.00208,
-        'd': 0.01,
-        'c': 1,
-        'runs': 10,
-        'steps': 5000,
-        'seed': 1,
-
-        'diffusion': 'max',
-        'method': 'add_edge_random',
-        'k': 15,
-
-        'edge_style': 'curved',
-        'node_style': 'force_atlas',
-        'fa_iter': 200,
-        'plot_transition': True,
-        'gif_animation': False
-    }
-
-    run_test(params)
-
-
 def test_edge_bundling():
     params = {
         'model': 'SIS',
@@ -149,7 +125,6 @@ def main():
     test_transition()
     test_gif_snaps()
     test_force_atlas()
-    test_curved_edges()
     test_edge_bundling()
 
 

@@ -3,7 +3,7 @@ import sys
 import subprocess
 from setuptools import find_packages, setup
 
-# run "git tag <version>" when releasing new package
+# run "git tag <version>" when releasing new package to push to PyPi
 version = "0.1.7"
 
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
