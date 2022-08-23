@@ -39,8 +39,8 @@ To quickly get started, install TIGER using pip
 $ pip install graph-tiger
 ``` 
 
-Alternatively, you can clone [TIGER](https://github.com/safreita1/TIGER.git) and create a new Anaconda environment 
-using the [YAML](environment.yml) file.
+Alternatively, you can clone [TIGER](https://github.com/safreita1/TIGER.git), create a new Anaconda environment,
+and install the library by running ```python setup.py install ```.
 
 --------------------------------------------------------------------------------
 
