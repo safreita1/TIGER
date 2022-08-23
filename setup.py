@@ -3,7 +3,7 @@ import sys
 import subprocess
 from setuptools import find_packages, setup
 
-version = "0.1.7"
+version = "0.1.71"
 
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
                        "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg"])
