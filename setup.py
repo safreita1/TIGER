@@ -3,8 +3,8 @@ import sys
 import subprocess
 from setuptools import find_packages, setup
 
-# run "git tag <version>" when releasing new package to push to PyPi
-version = "0.1.7"
+# run "git tag <version>" and then "git push origin master <version> when releasing new package to push to PyPi
+version = "0.1.8"
 
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
                        "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg", "pytest"])
