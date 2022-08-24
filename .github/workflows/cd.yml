@@ -6,6 +6,8 @@ on:
     workflows: ["Tests"]
     types:
       - completed
+    tags:
+      - '*'
 
 jobs:
   upload:
