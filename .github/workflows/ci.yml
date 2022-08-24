@@ -13,8 +13,8 @@ jobs:
     strategy:
       matrix:
         # Run in all these versions of Python
-        python-version: [3.8]
-        os: [ubuntu-latest]
+        python-version: [3.7, 3.8]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
       # Checkout the latest code from the repo
       - name: Checkout repo
@@ -54,8 +54,4 @@ jobs:
       # Run PyTests
       - name: Run PyTests
         run: |
-          python -m pytest tests/test_attacks.py
-          python -m pytest tests/test_defenses.py
-          python -m pytest tests/test_measures.py
-          python -m pytest tests/test_simulations.py
-          python -m pytest tests/test_visualizations.py
+          python -m pytest tests/
