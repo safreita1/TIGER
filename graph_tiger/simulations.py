@@ -291,12 +291,15 @@ class Simulation:
             interval = 20
             fps = 1
 
-        anim = animation.FuncAnimation(fig, update, frames=frames, interval=interval, blit=not self.prm['gif_snaps'], repeat=False)
-        writer = animation.FFMpegWriter(fps=fps, extra_args=['-vcodec', 'libx264'])
+        if platform.system() != 'Windows':
+            anim = animation.FuncAnimation(fig, update, frames=frames, interval=interval, blit=not self.prm['gif_snaps'], repeat=False)
+            writer = animation.FFMpegWriter(fps=fps, extra_args=['-vcodec', 'libx264'])
 
-        title = self.get_plot_title(self.prm['steps'])
-        gif_path = os.path.join(self.save_dir, title + '.mp4')
-        anim.save(gif_path, writer=writer)
+            title = self.get_plot_title(self.prm['steps'])
+            gif_path = os.path.join(self.save_dir, title + '.mp4')
+            anim.save(gif_path, writer=writer)
+        else:
+            print('Warning: Animated video functionality not supported on Windows; snapshot images are available.')
 
         plt.clf()
 
