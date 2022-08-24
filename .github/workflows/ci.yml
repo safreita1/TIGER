@@ -20,6 +20,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      # Install ffmpeg on current OS
+      - uses: FedericoCarboni/setup-ffmpeg@v1
+        id: setup-ffmpeg
+
       # Setup Python
       - name: Set Up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
