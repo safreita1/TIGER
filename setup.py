@@ -6,8 +6,9 @@ from setuptools import find_packages, setup
 # run "git tag <version>" and then "git push origin master <version> when releasing new package to push to PyPi
 version = "0.1.9"
 
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'install', "Cython", "datashader", "scikit-image",
-                       "tqdm", "stopit", "matplotlib", "networkx", "pillow", "fa2", "bezier", "ffmpeg", "pytest"])
+subprocess.run(['pip', 'install', 'install', "Cython", "datashader", "scikit-image", "tqdm", "stopit", "matplotlib",
+                "networkx", "pillow", "fa2", "bezier", "--no-binary=bezier", "ffmpeg", "pytest"],
+               env=dict(os.environ, BEZIER_NO_EXTENSION="true"))
 
 keywords = ["data-science",
             "machine-learning",
