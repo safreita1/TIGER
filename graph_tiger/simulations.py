@@ -252,8 +252,9 @@ class Simulation:
         title = self.get_plot_title(step)
         plt.savefig(os.path.join(self.save_dir, title + '.pdf'))
         # plt.show()
-        plt.close(fig)
         plt.clf()
+        # plt.close(fig)
+
 
     def create_simulation_gif(self):
         """

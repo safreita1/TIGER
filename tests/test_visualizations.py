@@ -15,7 +15,7 @@ def test_animation():
         'd': 0.01,
         'c': 1,
         'runs': 10,
-        'steps': 5000,
+        'steps': 500,
         'seed': 1,
 
         'diffusion': 'max',
@@ -36,7 +36,7 @@ def test_transition():
         'd': 0.01,
         'c': 1,
         'runs': 10,
-        'steps': 5000,
+        'steps': 500,
         'seed': 1,
 
         'diffusion': 'max',
@@ -57,7 +57,7 @@ def test_gif_snaps():
         'd': 0.01,
         'c': 1,
         'runs': 10,
-        'steps': 5000,
+        'steps': 500,
         'seed': 1,
 
         'diffusion': 'max',
@@ -74,12 +74,12 @@ def test_gif_snaps():
 
 def test_force_atlas():
     params = {
-        'model': 'SIS',
+        'model': 'SIR',
         'b': 0.00208,
         'd': 0.01,
         'c': 1,
         'runs': 10,
-        'steps': 5000,
+        'steps': 500,
         'seed': 1,
 
         'diffusion': 'max',
@@ -103,7 +103,7 @@ def test_edge_bundling():
         'd': 0.01,
         'c': 1,
         'runs': 10,
-        'steps': 5000,
+        'steps': 500,
         'seed': 1,
 
         'diffusion': 'max',
