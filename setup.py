@@ -7,8 +7,7 @@ from setuptools import find_packages, setup
 version = "0.1.9"
 
 subprocess.run(['pip', 'install', 'install', "Cython", "datashader", "scikit-image", "tqdm", "stopit", "matplotlib",
-                "networkx", "pillow", "fa2", "bezier", "--no-binary=bezier", "ffmpeg", "pytest"],
-               env=dict(os.environ, BEZIER_NO_EXTENSION="true"))
+                "networkx", "pillow", "fa2", "ffmpeg", "pytest"])
 
 keywords = ["data-science",
             "machine-learning",

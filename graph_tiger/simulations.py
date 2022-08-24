@@ -9,10 +9,9 @@ from collections import defaultdict
 from scipy.interpolate import interp1d
 from datashader.bundling import hammer_bundle
 from matplotlib import animation
-from matplotlib.collections import LineCollection
 from matplotlib.colors import LinearSegmentedColormap
 
-from graph_tiger.utils import get_sparse_graph, curved_edges
+from graph_tiger.utils import get_sparse_graph
 
 
 class Simulation:
@@ -229,10 +228,7 @@ class Simulation:
         """
         nc, ns, ec, ew, cmap = self.get_visual_settings(step)
 
-        if self.prm['edge_style'] == 'curved':
-            plt.gca().add_collection(LineCollection(curved_edges(self.graph, self.node_pos), linewidth=ew, color=ec))
-
-        elif self.prm['edge_style'] == 'bundled':
+        if self.prm['edge_style'] == 'bundled':
             plt.plot(self.edge_pos.x, self.edge_pos.y, zorder=1, linewidth=ew, color=ec)
 
         else:
