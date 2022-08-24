@@ -4,7 +4,7 @@ import subprocess
 from setuptools import find_packages, setup
 
 # run "git tag <version>" and then "git push origin master <version> when releasing a package to PyPi
-version = "0.2.0"
+version = "0.2.2"
 
 subprocess.run(['pip', 'install', 'install', "Cython", "datashader", "scikit-image", "tqdm", "stopit", "matplotlib",
                 "networkx", "pillow", "fa2", "ffmpeg", "pytest"])
