@@ -8,7 +8,7 @@ version = "0.2.3"
 subprocess.run(['pip', 'install', 'install', 'Cython', 'datashader', 'scikit-image', 'tqdm', 'stopit', 'matplotlib',
                 'networkx', 'pillow', 'fa2', 'pytest'])
 
-subprocess.run(['conda', 'install', 'install', 'ffmpeg'])
+subprocess.run(['conda', 'install', 'ffmpeg'])
 
 keywords = ["data-science",
             "machine-learning",
