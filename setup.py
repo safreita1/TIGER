@@ -1,13 +1,14 @@
 import os
-import sys
 import subprocess
 from setuptools import find_packages, setup
 
 # run "git tag <version>" and then "git push origin master <version> when releasing a package to PyPi
-version = "0.2.2"
+version = "0.2.3"
 
-subprocess.run(['pip', 'install', 'install', "Cython", "datashader", "scikit-image", "tqdm", "stopit", "matplotlib",
-                "networkx", "pillow", "fa2", "ffmpeg", "pytest"])
+subprocess.run(['pip', 'install', 'install', 'Cython', 'datashader', 'scikit-image', 'tqdm', 'stopit', 'matplotlib',
+                'networkx', 'pillow', 'fa2', 'pytest'])
+
+subprocess.run(['conda', 'install', 'install', 'ffmpeg'])
 
 keywords = ["data-science",
             "machine-learning",
