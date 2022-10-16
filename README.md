@@ -11,7 +11,7 @@
 
 **TIGER** is a Python toolbox to conduct graph vulnerability and robustness research. TIGER contains numerous 
 state-of-the-art methods to help users conduct graph vulnerability and robustness analysis on graph structured data.
-Specifically, TIGER helps users:
+Specifically, TIGER helps users: 
 
 1. **Quantify** network *vulnerability* and *robustness*, 
 2. **Simulate** a variety of network attacks, cascading failures and spread of dissemination of entities
