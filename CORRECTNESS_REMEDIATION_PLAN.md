@@ -94,6 +94,7 @@ Measure names use standard graph-theoretic definitions. Exact defaults must be e
 | GRA-05 | Medium | graph readers | Preserve or explicitly convert directionality according to dataset definitions. | Directed-source fixtures have documented graph type. |
 | PKG-01 | High | `setup.py` | Remove nested `pip install` and the accidental package named `install`; declare runtime and optional dependencies through package metadata. | Wheel/sdist build in an isolated environment without network side effects. |
 | PKG-02 | High | package metadata and CI | Support current stable Python releases through 3.14. | Core tests pass on Python 3.8 through 3.14 and visualization tests pass on Python 3.14. |
+| PKG-03 | High | `graph_tiger/measures.py` | Remove the `stopit` dependency on unavailable `pkg_resources`. | Timeout behavior and all core imports pass on modern Python. |
 | UTL-01 | High | `graph_tiger/utils.py` | Replace deprecated NetworkX sparse APIs, `np.float`, and pip private APIs. | Supported modern NumPy, SciPy, NetworkX, and pip versions import and run. |
 | API-01 | Medium | public dispatchers | Validate unknown methods, invalid probabilities, negative sizes, and impossible budgets consistently. | Boundary tests assert one documented exception policy. |
 | VIZ-01 | Medium | visualization paths | Use real node labels in coordinates/status mappings and normalize only measures whose definitions require it. | Arbitrary-label graphs render correctly; non-count measures are not divided by `N`. |

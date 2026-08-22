@@ -11,6 +11,7 @@
 ### Changed
 
 - The visualization dependency stack now uses the current ForceAtlas2 package and is tested on Python 3.14 without legacy NumPy or Cython installation pins.
+- Replaced the obsolete `stopit`/`pkg_resources` runtime path with a standard-library timeout wrapper compatible with modern Python.
 - Crucitti simulations report average network efficiency and expose overloaded nodes and per-edge efficiencies in each recorded state.
 
 ## 0.3.0 - Correctness remediation

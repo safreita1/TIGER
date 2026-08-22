@@ -1,37 +1,49 @@
 import math
-import stopit
 import numpy as np
 import networkx as nx
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from scipy.special import logsumexp
 
 from graph_tiger.utils import get_adjacency_spectrum, get_laplacian_spectrum
 
 
-@stopit.threading_timeoutable()
-def run_measure(graph, measure, k=np.inf, use_gpu=False):
+def run_measure(graph, measure, k=np.inf, use_gpu=False, timeout=None):
     """
     Evaluates graph robustness according to a specified measure
 
     :param graph: undirected NetworkX graph to measure
     :param measure: string containing the robustness measure to evaluate
     :param k: an integer for fast approximation of certain robustness measures. small k = fast, large k = precise
-    :param timeout: allows the user to stop running the measure after 'x' seconds.
-    :return: a float representing the robustness of the graph, or None if it times out or an error occurs
+    :param timeout: optional number of seconds to wait for the measure.
+    :return: a float representing the robustness of the graph, or None if it times out or a NetworkX error occurs
     """
 
     if measure not in measures:
         raise ValueError("measure '{}' is not implemented".format(measure))
+    if timeout is not None and timeout < 0:
+        raise ValueError('timeout must be nonnegative')
+
+    executor = None
 
     try:
-        return measures[measure](graph, k=k, use_gpu=use_gpu)
+        if timeout is None:
+            return measures[measure](graph, k=k, use_gpu=use_gpu)
 
-    except stopit.TimeoutException:
+        executor = ThreadPoolExecutor(max_workers=1)
+        result = executor.submit(measures[measure], graph, k=k, use_gpu=use_gpu)
+        return result.result(timeout=timeout)
+
+    except FutureTimeoutError:
         print('timed out', measure)
         return None
 
     except nx.NetworkXException as e:
         print('error', e, measure)
         return None
+
+    finally:
+        if executor is not None:
+            executor.shutdown(wait=False)
 
 
 def get_measures():

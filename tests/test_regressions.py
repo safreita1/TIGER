@@ -1,7 +1,10 @@
 import json
+import time
 
 import networkx as nx
 import numpy as np
+
+import graph_tiger.measures as tiger_measures
 
 from graph_tiger.attacks import Attack, get_node_ns, run_attack_method
 from graph_tiger.cascading import Cascading
@@ -589,6 +592,21 @@ def test_cascading_timeline_length():
     assert len(results) == params['steps'] + 1
 
 
+
+def test_measure_timeout_uses_standard_library():
+    def slow_measure(graph, **kwargs):
+        time.sleep(0.1)
+        return len(graph)
+
+    tiger_measures.measures['slow_measure'] = slow_measure
+
+    try:
+        value = tiger_measures.run_measure(nx.path_graph(3), 'slow_measure', timeout=0.01)
+    finally:
+        del tiger_measures.measures['slow_measure']
+
+    assert value is None
+
 def test_standard_average_vertex_betweenness():
     value = run_measure(p4_graph(), 'average_vertex_betweenness')
 
@@ -706,6 +724,7 @@ def main():
     test_legacy_cascading_redistributes_failed_load_once()
     test_legacy_cascading_redistributes_to_functioning_neighbors()
     test_cascading_timeline_length()
+    test_measure_timeout_uses_standard_library()
     test_standard_average_vertex_betweenness()
     test_large_path_exact_laplacian_measures()
     test_measure_direct_calls_and_empty_graph()

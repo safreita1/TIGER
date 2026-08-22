@@ -47,8 +47,7 @@ setup(
         "networkx>=2.6",
         "numpy>=1.20",
         "pandas>=1.3",
-        "scipy>=1.7",
-        "stopit>=1.1.2"
+        "scipy>=1.7"
     ],
     extras_require={
         "test": ["pytest>=7", "pytest-cov>=4"],
