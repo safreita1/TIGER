@@ -2,7 +2,7 @@ import os
 from setuptools import find_packages, setup
 
 # run "git tag <version>" and then "git push origin master <version> when releasing a package to PyPi
-version = "0.3.0"
+version = "0.4.0"
 
 keywords = ["data-science",
             "machine-learning",
@@ -52,7 +52,7 @@ setup(
     ],
     extras_require={
         "test": ["pytest>=7", "pytest-cov>=4"],
-        "visualization": ["dask>=2022", "datashader>=0.13", "fa2", "numpy<2", "pillow>=8", "scikit-image>=0.19"]
+        "visualization": ["dask>=2022", "datashader>=0.13", "fa2", "pillow>=8", "scikit-image>=0.19"]
     },
     classifiers=["Development Status :: 3 - Alpha",
                  "Intended Audience :: Developers",
@@ -61,5 +61,8 @@ setup(
                  "Programming Language :: Python :: 3.8",
                  "Programming Language :: Python :: 3.9",
                  "Programming Language :: Python :: 3.10",
-                 "Programming Language :: Python :: 3.11"]
+                 "Programming Language :: Python :: 3.11",
+                 "Programming Language :: Python :: 3.12",
+                 "Programming Language :: Python :: 3.13",
+                 "Programming Language :: Python :: 3.14"]
 )

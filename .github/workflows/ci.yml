@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
 
     steps:
       - name: Checkout repo
@@ -42,7 +42,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.14'
 
       - name: Install ffmpeg
         uses: FedericoCarboni/setup-ffmpeg@v3
@@ -50,8 +50,7 @@ jobs:
       - name: Install package and visualization dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install 'Cython<3' 'numpy<2'
-          python -m pip install -e '.[test,visualization]' --no-build-isolation
+          python -m pip install -e '.[test,visualization]'
 
       - name: Run visualization tests
         run: python -m pytest tests/test_visualizations.py
