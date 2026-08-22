@@ -410,6 +410,118 @@ def test_motter_lai_initial_load_and_capacity():
         assert cf.capacity[n] == (1 + params['r']) * expected[n]
 
 
+
+def test_crucitti_reference_transition():
+    params = get_simulation_params()
+    params.update({
+        'steps': 1,
+        'model': 'crucitti',
+        'l': 0.8,
+        'r': 0.2,
+        'k_a': 1,
+        'attack': 'id_node',
+        'k_d': 0,
+        'defense': None
+    })
+
+    graph = nx.cycle_graph(4)
+    edges = set(graph.edges)
+    cf = Cascading(graph, **params)
+    results = cf.run_single_sim()
+
+    functioning = set(graph.nodes).difference(cf.failed)
+    graph_functioning = cf.graph.subgraph(functioning)
+    center = max(graph_functioning.nodes, key=graph_functioning.degree)
+
+    assert len(cf.failed) == 1
+    assert cf.sim_info[1]['failed'] == 1
+    assert cf.sim_info[1]['overloaded'] == {center}
+    assert np.isclose(results[0], 5 / 6)
+    assert np.isclose(results[1], 1 / 2)
+
+    for u, v in graph_functioning.edges:
+        assert np.isclose(cf.graph[u][v]['efficiency'], 0.6)
+
+    assert set(graph.edges) == edges
+    assert all('efficiency' not in data for _, _, data in graph.edges(data=True))
+
+
+def test_crucitti_restores_edge_efficiency():
+    params = get_simulation_params()
+    params.update({
+        'model': 'crucitti',
+        'l': 0.8,
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    cf = Cascading(nx.path_graph(3), **params)
+    cf.load = {0: 0, 1: 2, 2: 0}
+    cf.capacity = {0: 1, 1: 1, 2: 1}
+
+    changed = cf.run_crucitti_step()
+
+    assert changed
+    assert cf.failed == set()
+    assert all(cf.graph[u][v]['efficiency'] == 0.5 for u, v in cf.graph.edges)
+
+    changed = cf.run_crucitti_step()
+
+    assert changed
+    assert all(cf.graph[u][v]['efficiency'] == 1 for u, v in cf.graph.edges)
+    assert not cf.run_crucitti_step()
+
+
+def test_crucitti_uses_weighted_efficient_paths():
+    params = get_simulation_params()
+    params.update({
+        'model': 'crucitti',
+        'l': 0.8,
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    cf = Cascading(nx.complete_graph(3), **params)
+    cf.graph[0][2]['efficiency'] = 0.25
+
+    graph = cf.get_efficiency_graph(cf.graph)
+    load = cf.get_load(graph, weight='distance')
+    efficiency = cf.get_efficiency(cf.graph)
+
+    assert load[1] == 1
+    assert np.isclose(efficiency, 5 / 6)
+
+
+def test_crucitti_validates_parameters():
+    invalid = [
+        {'r': 0, 'attack': None, 'k_a': 0},
+        {'r': 0.2, 'attack': 'id_edge', 'k_a': 1}
+    ]
+
+    for update in invalid:
+        params = get_simulation_params()
+        params.update({
+            'model': 'crucitti',
+            'l': 0.8,
+            'k_d': 0,
+            'defense': None
+        })
+        params.update(update)
+
+        raised = False
+        try:
+            Cascading(nx.cycle_graph(4), **params)
+        except ValueError:
+            raised = True
+
+        assert raised
+
 def test_legacy_cascading_redistributes_failed_load_once():
     params = get_simulation_params()
     params.update({
@@ -587,6 +699,10 @@ def main():
     test_cascading_uses_requested_seed()
     test_cascading_edge_attack_preserves_input_graph()
     test_motter_lai_initial_load_and_capacity()
+    test_crucitti_reference_transition()
+    test_crucitti_restores_edge_efficiency()
+    test_crucitti_uses_weighted_efficient_paths()
+    test_crucitti_validates_parameters()
     test_legacy_cascading_redistributes_failed_load_once()
     test_legacy_cascading_redistributes_to_functioning_neighbors()
     test_cascading_timeline_length()
