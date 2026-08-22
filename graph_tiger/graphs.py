@@ -4,9 +4,9 @@ import urllib.request
 import networkx as nx
 
 
-graph_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/datasets/'
-os.makedirs(graph_dir, exist_ok=True)
-
+bundled_graph_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/datasets/'
+cache_graph_dir = os.path.join(os.path.expanduser('~'), '.graph_tiger', 'datasets') + '/'
+graph_dir = bundled_graph_dir if os.path.isdir(bundled_graph_dir) else cache_graph_dir
 
 def graph_loader(graph_type, **kwargs):
     """
@@ -22,15 +22,15 @@ def graph_loader(graph_type, **kwargs):
         graph = models[graph_type](**kwargs)
 
     elif graph_type in datasets:
-        download_dataset(graph_type)
+        if graph_type in graph_urls:
+            download_dataset(graph_type)
         graph = datasets[graph_type]()
 
     elif graph_type in custom.keys():
         graph = custom[graph_type]()
 
     else:
-        print("Graph not supported. Select from one of the following graphs: {}".format(get_graph_options()))
-        graph = None
+        raise ValueError("Graph not supported. Select from one of the following graphs: {}".format(get_graph_options()))
 
     return graph
 
@@ -41,10 +41,14 @@ def download_dataset(dataset):
 
     :param dataset: a string representing the dataset to download
     """
+    if dataset not in graph_urls:
+        raise ValueError("dataset '{}' is bundled and does not require downloading".format(dataset))
+
     url_path = graph_urls[dataset][0]
     local_path = graph_dir + url_path.split('datasets/')[1]
 
     if not os.path.exists(local_path):
+        os.makedirs(graph_dir, exist_ok=True)
         urllib.request.urlretrieve(url_path, local_path)
 
 
@@ -66,7 +70,7 @@ def get_graph_options():
 
     graph_options = {
         'models': list(models.keys()),
-        'datasets': datasets,
+        'datasets': list(datasets.keys()),
         'custom': list(custom.keys())
     }
 
@@ -94,7 +98,7 @@ def erdos_reyni(n, p=None, seed=None):
 
 def watts_strogatz(n, m=4, p=0.05, seed=None):
     """
-    Returns a Watts Strogatz NetworkX graph
+    Returns an ordinary Watts Strogatz NetworkX graph
 
     :param n: number of nodes
     :param m: each node is joined with its k nearest neighbors in a ring topology
@@ -103,7 +107,7 @@ def watts_strogatz(n, m=4, p=0.05, seed=None):
     :return: a NetworkX graph
     """
 
-    return nx.generators.connected_watts_strogatz_graph(n=n, k=m, p=p, seed=seed)
+    return nx.generators.watts_strogatz_graph(n=n, k=m, p=p, seed=seed)
 
 
 def barabasi_albert(n, m=3, seed=None):
@@ -165,7 +169,7 @@ def wdn_ky2():
                 graph.nodes[name]['pos'] = [x_pos, y_pos]
 
     graph = nx.convert_node_labels_to_integers(graph)
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def as_733():
@@ -178,7 +182,7 @@ def as_733():
 
     graph = nx.read_edgelist(graph_dir + "as19971108.txt")
     graph = nx.convert_node_labels_to_integers(graph)
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def p2p_gnuetella08():
@@ -189,8 +193,8 @@ def p2p_gnuetella08():
     :return: undirected NetworkX graph
     """
 
-    graph = nx.read_edgelist(graph_dir + "p2p-Gnutella08.txt")
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    graph = nx.read_edgelist(graph_dir + "p2p-Gnutella08.txt", create_using=nx.DiGraph()).to_undirected()
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def ca_grqc():
@@ -202,7 +206,7 @@ def ca_grqc():
     """
 
     graph = nx.read_edgelist(graph_dir + "ca-GrQc.txt")
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def cit_hep_th():
@@ -213,8 +217,8 @@ def cit_hep_th():
     :return: undirected NetworkX graph
     """
 
-    graph = nx.read_edgelist(graph_dir + "cit-HepTh.txt")  # , create_using=nx.DiGraph()
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    graph = nx.read_edgelist(graph_dir + "cit-HepTh.txt", create_using=nx.DiGraph()).to_undirected()
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def wiki_vote():
@@ -225,8 +229,8 @@ def wiki_vote():
     :return: undirected NetworkX graph
     """
 
-    graph = nx.read_edgelist(graph_dir + "wiki-Vote.txt")  # , create_using=nx.DiGraph()
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    graph = nx.read_edgelist(graph_dir + "wiki-Vote.txt", create_using=nx.DiGraph()).to_undirected()
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def email_eu_all():
@@ -237,8 +241,8 @@ def email_eu_all():
     :return: undirected NetworkX graph
     """
 
-    graph = nx.read_edgelist(graph_dir + "email-EuAll.txt")  # , create_using=nx.DiGraph()
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    graph = nx.read_edgelist(graph_dir + "email-EuAll.txt", create_using=nx.DiGraph()).to_undirected()
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def dblp():
@@ -250,7 +254,7 @@ def dblp():
     """
 
     graph = nx.read_edgelist(graph_dir + "dblp.txt")
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 # def gitub():
@@ -262,7 +266,7 @@ def dblp():
 #     """
 #
 #     graph = nx.read_edgelist(graph_dir + "github.csv", delimiter=',')
-#     return graph.subgraph(max(nx.connected_components(graph), key=len))
+#     return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def ca_astro_ph():
@@ -274,7 +278,7 @@ def ca_astro_ph():
     """
 
     graph = nx.read_edgelist(graph_dir + "ca-AstroPh.txt")
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def ca_hep_th():
@@ -286,7 +290,7 @@ def ca_hep_th():
     """
 
     graph = nx.read_edgelist(graph_dir + "ca-HepTh.txt")
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def enron_email():
@@ -298,7 +302,7 @@ def enron_email():
     """
 
     graph = nx.read_edgelist(graph_dir + "email-enron.txt")
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def karate():
@@ -320,7 +324,7 @@ def oregeon_1():
     """
 
     graph = nx.read_edgelist(graph_dir + "as-oregon1.txt")
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 def electrical():
@@ -332,7 +336,7 @@ def electrical():
     """
 
     graph = nx.read_gml(graph_dir + "power.gml", label='id')
-    return graph.subgraph(max(nx.connected_components(graph), key=len))
+    return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 # def roadnet_ca():
@@ -344,7 +348,7 @@ def electrical():
 #     """
 #
 #     graph = nx.read_edgelist(graph_dir + "road-california.txt")
-#     return graph.subgraph(max(nx.connected_components(graph), key=len))
+#     return graph.subgraph(max(nx.connected_components(graph), key=len)).copy()
 
 
 """
@@ -484,8 +488,8 @@ graph_urls = {
     'p2p_gnuetella08': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/p2p-Gnutella08.txt', 'https://snap.stanford.edu/data/p2p-Gnutella08.txt.gz'),
 
     'dblp': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/dblp.txt', 'https://snap.stanford.edu/data/bigdata/communities/com-dblp.ungraph.txt.gz'),
-    'ca_hep_th': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/cit-HepTh.txt', 'https://snap.stanford.edu/data/cit-HepTh.txt.gz'),
-    'cit_hep_th': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/ca-HepTh.txt', 'https://snap.stanford.edu/data/M.txt.gz'),
+    'ca_hep_th': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/ca-HepTh.txt', 'https://snap.stanford.edu/data/ca-HepTh.txt.gz'),
+    'cit_hep_th': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/cit-HepTh.txt', 'https://snap.stanford.edu/data/cit-HepTh.txt.gz'),
     'ca_grqc': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/ca-GrQc.txt', 'https://snap.stanford.edu/data/ca-GrQc.txt.gz'),
     'ca_astro_ph': ('https://raw.githubusercontent.com/safreita1/TIGER/master/datasets/ca-AstroPh.txt', 'https://snap.stanford.edu/data/ca-AstroPh.txt.gz'),
 

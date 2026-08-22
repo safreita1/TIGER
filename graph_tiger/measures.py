@@ -1,35 +1,49 @@
 import math
-import stopit
 import numpy as np
-np.seterr(divide='ignore')
 import networkx as nx
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
+from scipy.special import logsumexp
 
 from graph_tiger.utils import get_adjacency_spectrum, get_laplacian_spectrum
 
 
-@stopit.threading_timeoutable()
-def run_measure(graph, measure, k=np.inf, use_gpu=False):
+def run_measure(graph, measure, k=np.inf, use_gpu=False, timeout=None):
     """
     Evaluates graph robustness according to a specified measure
 
     :param graph: undirected NetworkX graph to measure
     :param measure: string containing the robustness measure to evaluate
     :param k: an integer for fast approximation of certain robustness measures. small k = fast, large k = precise
-    :param timeout: allows the user to stop running the measure after 'x' seconds.
-    :return: a float representing the robustness of the graph, or None if it times out or an error occurs
+    :param timeout: optional number of seconds to wait for the measure.
+    :return: a float representing the robustness of the graph, or None if it times out or a NetworkX error occurs
     """
 
-    try:
-        result = measures[measure](graph, k=k, use_gpu=use_gpu)
-        return result
+    if measure not in measures:
+        raise ValueError("measure '{}' is not implemented".format(measure))
+    if timeout is not None and timeout < 0:
+        raise ValueError('timeout must be nonnegative')
 
-    except stopit.TimeoutException:
+    executor = None
+
+    try:
+        if timeout is None:
+            return measures[measure](graph, k=k, use_gpu=use_gpu)
+
+        executor = ThreadPoolExecutor(max_workers=1)
+        result = executor.submit(measures[measure], graph, k=k, use_gpu=use_gpu)
+        return result.result(timeout=timeout)
+
+    except FutureTimeoutError:
         print('timed out', measure)
         return None
 
-    except Exception as e:
+    except nx.NetworkXException as e:
         print('error', e, measure)
         return None
+
+    finally:
+        if executor is not None:
+            executor.shutdown(wait=False)
 
 
 def get_measures():
@@ -142,7 +156,11 @@ def avg_vertex_betweenness(graph, k=np.inf, **kwargs):
     :return: a float
     """
 
-    node_centralities = nx.betweenness_centrality(graph, k=min(len(graph), k), normalized=False, endpoints=True)
+    if len(graph) == 0:
+        return 0
+
+    samples = None if np.isinf(k) or k >= len(graph) else int(k)
+    node_centralities = nx.betweenness_centrality(graph, k=samples, normalized=False, endpoints=False)
     avg_betw = sum(list(node_centralities.values())) / len(node_centralities)
 
     return round(avg_betw, 2)
@@ -160,7 +178,8 @@ def avg_edge_betweenness(graph, k=np.inf, **kwargs):
     :return: a float
     """
 
-    edge_centralities = nx.edge_betweenness_centrality(graph, k=min(len(graph), k), normalized=False)
+    samples = None if np.isinf(k) or k >= len(graph) else int(k)
+    edge_centralities = nx.edge_betweenness_centrality(graph, k=samples, normalized=False)
 
     if len(edge_centralities) > 0:
         avg_betweenness = sum(list(edge_centralities.values())) / len(edge_centralities)
@@ -180,19 +199,22 @@ def average_clustering_coefficient(graph, **kwargs):
     :param graph: undirected NetworkX graph
     :return: a float
     """
-    return round(nx.average_clustering(graph), 2)
+    return round(nx.average_clustering(graph), 2) if len(graph) > 0 else 0
 
 
 def largest_connected_component(graph, **kwargs):
     """
-    This measure provides an indication of a graph's connectivity by measuring the fraction
+    This measure provides an indication of a graph's connectivity by measuring the number
     of nodes contained in the largest connected component. The larger the value, the more robust the graph.
 
     :param graph: undirected NetworkX graph
-    :return: a float
+    :return: an integer
     """
-    lcc = sorted(nx.connected_components(graph), key=len, reverse=True)[0]
-    return len(graph.subgraph(lcc))
+    if len(graph) == 0:
+        return 0
+
+    lcc = max(nx.connected_components(graph), key=len)
+    return len(lcc)
 
 
 """
@@ -210,6 +232,9 @@ def spectral_radius(graph, use_gpu=False, **kwargs):
     :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
+    if len(graph) == 0:
+        return 0
+
     lam = get_adjacency_spectrum(graph, k=1, which='LA', eigvals_only=True, use_gpu=use_gpu)
 
     idx = lam.argsort()[::-1]  # sort descending algebraic
@@ -230,6 +255,9 @@ def spectral_gap(graph, use_gpu=False, **kwargs):
     :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
+    if len(graph) < 2:
+        return 0
+
     lam = get_adjacency_spectrum(graph, k=2, which='LA', eigvals_only=True, use_gpu=use_gpu)
 
     idx = lam.argsort()[::-1]  # sort descending algebraic
@@ -248,12 +276,12 @@ def natural_connectivity(graph, k=np.inf, use_gpu=False, **kwargs):
     :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
+    if len(graph) == 0:
+        return 0
+
     lam = get_adjacency_spectrum(graph, k=k, which='LA', eigvals_only=True, use_gpu=use_gpu)
 
-    idx = lam.argsort()[::-1]  # sort descending algebraic
-    lam = lam[idx]
-
-    return round(math.log(sum(np.exp(lam.real)) / len(lam)), 2)
+    return round(logsumexp(lam.real) - math.log(len(graph)), 2)
 
 
 def odd_subgraph_centrality(i, lam, u):
@@ -328,11 +356,12 @@ def algebraic_connectivity(graph, **kwargs):
     :param graph: undirected NetworkX graph
     :return: a float
     """
-    lam = get_laplacian_spectrum(graph, k=2, use_gpu=kwargs['use_gpu'])
+    if len(graph) < 2:
+        return 0
 
-    alg_connect = round(lam[1], 2)
+    lam = get_laplacian_spectrum(graph, k=2, use_gpu=kwargs.get('use_gpu', False))
 
-    return alg_connect
+    return round(lam[1], 2)
 
 
 def num_spanning_trees(graph, k=np.inf, **kwargs):
@@ -345,11 +374,17 @@ def num_spanning_trees(graph, k=np.inf, **kwargs):
     :param graph: undirected NetworkX graph
     :return: a float
     """
-    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs['use_gpu'])
+    if len(graph) == 0:
+        return 0
+    if len(graph) == 1:
+        return 1
+    if not nx.is_connected(graph):
+        return 0
 
-    num_trees = round(np.prod(lam[1:]) / len(graph), 2)
+    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs.get('use_gpu', False))
+    num_trees = np.prod(lam[1:]) / len(graph)
 
-    return num_trees
+    return round(float(num_trees), 2)
 
 
 def effective_resistance(graph, k=np.inf, **kwargs):
@@ -362,13 +397,15 @@ def effective_resistance(graph, k=np.inf, **kwargs):
     :param graph: undirected NetworkX graph
     :return: a float
     """
-    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs['use_gpu'])
+    if len(graph) <= 1:
+        return 0
+    if not nx.is_connected(graph):
+        return np.inf
 
-    resistance = round(len(graph) * np.sum(1.0 / lam[1:]), 2)
+    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs.get('use_gpu', False))
+    resistance = len(graph) * np.sum(1.0 / lam[1:])
 
-    if resistance < 0: resistance = np.inf
-
-    return resistance
+    return round(float(resistance), 2)
 
 
 measures = {

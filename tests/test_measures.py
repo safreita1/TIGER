@@ -14,9 +14,7 @@ def test_measures():
         'diameter': [None, 3, 2, 2, 1, None, 5, 5, 5],
         'average_distance': [None, 1.67, 1.33, 1.17, 1, None, 2.29, 2.29, 2.29],
         'average_inverse_distance': [0, 0.72, 0.83, 0.92, 1.0, 0.36, 0.58, 0.58, 0.58],
-        # different Python versions have different results
-        'average_vertex_betweenness': ([0, 4, 3.5, 3.25, 3, 3.5, 11.5, 11.5, 11.5],
-                                       [0, 4, 3.5, 3.25, 3, 3.5, 11.5, None, None]),
+        'average_vertex_betweenness': [0, 1, 0.5, 0.25, 0, 0.5, 4.5, 4.5, 4.5],
         'average_edge_betweenness': ([0, 3.33, 2.0, 1.4, 1, 2, 7.11, 6.4, 5.82],
                                      [0, 3.33, 2.0, 1.4, 1, 2, 7.11, 7.11, 7.11]),
         'average_clustering_coefficient': [0, 0, 0, 0.83, 1, 0, 0, None, None],
@@ -47,8 +45,8 @@ def test_measures():
 
             # print(idx, measure, value, gt[idx])
             # different results locally versus Github CI
-            if measure == 'average_vertex_betweenness' or measure == 'average_edge_betweenness' \
-                    or measure == 'spectral_scaling' or measure == 'generalized_robustness_index':
+            if measure == 'average_edge_betweenness' or measure == 'spectral_scaling' \
+                    or measure == 'generalized_robustness_index':
                 if value is None:
                     assert gt[0][idx] == value or gt[1][idx] == value
                 else:

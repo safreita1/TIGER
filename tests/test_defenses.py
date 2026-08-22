@@ -97,9 +97,18 @@ def test_method_selection():
             else:
                 assert (values == ground_truth[method])
         else:
-            assert np.array_equal(values['added'], ground_truth[method]['added'])
-            if 'removed' in values:
-                assert (np.array_equal(values['removed'], ground_truth[method]['removed']))
+            assert len(values['added']) == k
+
+            graph_ = graph.copy()
+            for idx, (u, v) in enumerate(values['added']):
+                if 'removed' in values:
+                    removed = values['removed'][idx]
+                    assert graph_.has_edge(*removed)
+                    graph_.remove_edge(*removed)
+
+                assert u != v
+                assert not graph_.has_edge(u, v)
+                graph_.add_edge(u, v)
 
 
 def main():

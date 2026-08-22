@@ -1,6 +1,6 @@
 [![Run Python Tests](https://github.com/safreita1/TIGER/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/safreita1/TIGER/actions/workflows/ci.yml)
 ![Version](https://img.shields.io/pypi/v/graph-tiger?color=dark)
-[![Python 3](https://img.shields.io/badge/python-3.6|3.7|3.8-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python 3](https://img.shields.io/badge/python-3.8|3.9|3.10|3.11|3.12|3.13|3.14-blue.svg)](https://www.python.org/downloads/)
 [![Python 3](https://img.shields.io/badge/OS-Ubuntu|Mac|Windows-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Documentation Status](https://readthedocs.org/projects/graph-tiger/badge/?version=latest)](https://graph-tiger.readthedocs.io/en/latest/?badge=latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -94,17 +94,20 @@ If you find *TIGER* useful in your research, please consider citing the followin
     
 
 ### EX 2. Run a cascading failure simulation on a Barabasi Albert graph
+
+Use `model='motter_lai'` for permanent overload failures or `model='crucitti'` for dynamic edge-efficiency congestion. Crucitti results are average network efficiencies and are already normalized.
+
     from graph_tiger.cascading import Cascading
     from graph_tiger.graphs import graph_loader
     
     graph = graph_loader('BA', n=400, seed=1)
     
     params = {
+        'model': 'motter_lai',
         'runs': 1,
         'steps': 100,
         'seed': 1,
 
-        'l': 0.8,
         'r': 0.2,
         'c': int(0.1 * len(graph)),
     
@@ -131,7 +134,7 @@ If you find *TIGER* useful in your research, please consider citing the followin
     
     cascading.plot_results(results)
     
-Step 0: Network pre-attack | Step 6: Beginning of cascading failure | Step 99: Collapse of network
+Step 0: Initial attacked state | Step 6: Beginning of cascading failure | Step 100: Final simulated state
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)  |  ![](images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)  |  ![](images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)
     
@@ -300,11 +303,13 @@ Beygelzimer *et al.* [Improving network robustness by edge modification](https:/
 
 **Simulation Frameworks:**
 * **[Cascading Failure Model](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)** 
-<br> Crucitti *et al.* [A model for cascading failures in complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.69.045104) (Physical Review E 2004)
+<br> Motter and Lai [Cascade-based attacks on complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.66.065102) (Physical Review E 2002)
 * **[Susceptible-Infected-Susceptible (SIS) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
-<br> Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+<br> Pastor-Satorras and Vespignani [Epidemic spreading in scale-free networks](https://doi.org/10.1103/PhysRevLett.86.3200) (Physical Review Letters 2001)
 * **[Susceptible-Infected-Recovered (SIR) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
 <br> Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+
+TIGER implements SIS and SIR as synchronous, discrete-time stochastic processes on a contact network.
 
 --------------------------------------------------------------------------------
 
