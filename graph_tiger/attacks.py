@@ -484,7 +484,7 @@ class Attack(Simulation):
 
         # attacked nodes or edges
         if self.prm['attack'] is not None and self.prm['steps'] > 0:
-            self.attacked = run_attack_method(self.graph_, self.prm['attack'], self.prm['steps'], approx=self.prm['attack_approx'], seed=self.prm['seed'])
+            self.attacked = run_attack_method(self.graph_, self.prm['attack'], self.prm['steps'], approx=self.prm['attack_approx'], seed=self.get_random_seed())
 
         elif self.prm['attack'] is not None:
             print(self.prm['attack'], "not available or k <= 0")
@@ -494,10 +494,10 @@ class Attack(Simulation):
             from graph_tiger.defenses import get_defense_category, run_defense_method
 
             if get_defense_category(self.prm['defense']) == 'node':
-                self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.prm['seed'])
+                self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.get_random_seed())
 
             elif get_defense_category(self.prm['defense']) == 'edge':
-                protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.prm['seed'])
+                protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.get_random_seed())
 
                 self.graph_.add_edges_from(protected['added'])
                 if 'removed' in protected:
@@ -519,24 +519,23 @@ class Attack(Simulation):
 
         ccs = list(nx.connected_components(self.graph_))
         ccs.sort(key=len, reverse=True)
-
-        m = interp1d([0, len(ccs)], [0.15, 1])
+        m = interp1d([0, len(ccs)], [0.15, 1]) if len(ccs) > 0 else None
 
         status = {}
         for n in self.graph:
+            status[n] = 0
             for idx, cc in enumerate(ccs):
-                if n in self.attacked[0:step]:
+                if n in self.attacked[0:step] and n not in self.protected:
                     status[n] = 1
                     break
                 elif n in cc:
                     status[n] = float(m(idx))
                     break
-                else:
-                    status[n] = 0
 
+        failed = set(self.attacked[0:step]).difference(self.protected)
         self.sim_info[step] = {
             'status':  list(status.values()),
-            'failed': len(self.attacked[0:step]),
+            'failed': len(failed),
             'measure': measure,
             'protected': self.protected
         }

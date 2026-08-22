@@ -79,11 +79,11 @@ class Diffusion(Simulation):
         if self.prm['diffusion'] == 'min' and self.prm['k'] > 0:
 
             if get_attack_category(self.prm['method']) == 'node':
-                self.vaccinated = set(run_attack_method(self.graph, self.prm['method'], self.prm['k'], seed=self.prm['seed']))
+                self.vaccinated = set(run_attack_method(self.graph, self.prm['method'], self.prm['k'], seed=self.get_random_seed()))
                 self.infected = self.infected.difference(self.vaccinated)
 
             elif get_attack_category(self.prm['method']) == 'edge':
-                edge_info = run_attack_method(self.graph, self.prm['method'], self.prm['k'], seed=self.prm['seed'])
+                edge_info = run_attack_method(self.graph, self.prm['method'], self.prm['k'], seed=self.get_random_seed())
                 self.graph.remove_edges_from(edge_info)
             else:
                 print(self.prm['method'], 'not available')
@@ -92,7 +92,7 @@ class Diffusion(Simulation):
         elif self.prm['diffusion'] == 'max' and self.prm['k'] > 0:
 
             if get_defense_category(self.prm['method']) == 'edge':
-                edge_info = run_defense_method(self.graph, self.prm['method'], self.prm['k'], seed=self.prm['seed'])
+                edge_info = run_defense_method(self.graph, self.prm['method'], self.prm['k'], seed=self.get_random_seed())
 
                 self.graph.add_edges_from(edge_info['added'])
                 if 'removed' in edge_info:
@@ -155,10 +155,10 @@ class Diffusion(Simulation):
                 nbrs = self.graph.neighbors(node)
                 nbrs = set(nbrs).difference(self.infected).difference(self.vaccinated)
 
-                nbrs_infected = set([n for n in nbrs if self.random.random() <= self.prm['b']])
+                nbrs_infected = set([n for n in nbrs if self.random.random() < self.prm['b']])
                 infected_new = infected_new.union(nbrs_infected)
 
-            cured = set([n for n in self.infected if self.random.random() <= self.prm['d']])
+            cured = set([n for n in self.infected if self.random.random() < self.prm['d']])
 
             self.infected = self.infected.union(infected_new)
             self.infected = self.infected.difference(cured)

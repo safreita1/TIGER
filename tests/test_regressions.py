@@ -3,7 +3,7 @@ import json
 import networkx as nx
 import numpy as np
 
-from graph_tiger.attacks import get_node_ns, run_attack_method
+from graph_tiger.attacks import Attack, get_node_ns, run_attack_method
 from graph_tiger.cascading import Cascading
 from graph_tiger.defenses import Defense, run_defense_method
 from graph_tiger.diffusion import Diffusion
@@ -67,6 +67,55 @@ def test_random_methods_use_local_seed():
     assert first_defense['added'] != second_defense['added']
 
 
+
+def test_simulation_resets_advance_reproducible_random_streams():
+    params = get_simulation_params()
+    params.update({
+        'steps': 3,
+        'attack': 'rnd_node',
+        'defense': None,
+        'k_d': 0,
+        'robust_measure': 'largest_connected_component'
+    })
+
+    first_attack = Attack(nx.path_graph(20), **params)
+    first_attack_sample = first_attack.attacked.copy()
+    first_attack.reset_simulation()
+    second_attack_sample = first_attack.attacked.copy()
+
+    repeated_attack = Attack(nx.path_graph(20), **params)
+    repeated_attack_sample = repeated_attack.attacked.copy()
+    repeated_attack.reset_simulation()
+    repeated_second_attack_sample = repeated_attack.attacked.copy()
+
+    assert first_attack_sample == repeated_attack_sample
+    assert second_attack_sample == repeated_second_attack_sample
+    assert first_attack_sample != second_attack_sample
+
+    params.update({
+        'model': 'SIS',
+        'b': 0.1,
+        'd': 0.1,
+        'c': 0.25,
+        'diffusion': None,
+        'method': None,
+        'k': 0
+    })
+
+    first_diffusion = Diffusion(nx.path_graph(20), **params)
+    first_infected = first_diffusion.infected.copy()
+    first_diffusion.reset_simulation()
+    second_infected = first_diffusion.infected.copy()
+
+    repeated_diffusion = Diffusion(nx.path_graph(20), **params)
+    repeated_first_infected = repeated_diffusion.infected.copy()
+    repeated_diffusion.reset_simulation()
+    repeated_second_infected = repeated_diffusion.infected.copy()
+
+    assert first_infected == repeated_first_infected
+    assert second_infected == repeated_second_infected
+    assert first_infected != second_infected
+
 def test_random_edge_addition_rejects_complete_graph():
     raised = False
     try:
@@ -75,6 +124,22 @@ def test_random_edge_addition_rejects_complete_graph():
         raised = True
 
     assert raised
+
+
+def test_defense_tracks_fully_failed_graph():
+    params = get_simulation_params()
+    params.update({
+        'steps': 1,
+        'k_a': 2,
+        'attack': 'id_node',
+        'k_d': 0,
+        'defense': None
+    })
+
+    df = Defense(nx.path_graph(2), **params)
+
+    assert df.sim_info[0]['failed'] == 2
+    assert df.sim_info[0]['measure'] == 0
 
 def test_defense_removes_unprotected_attacked_nodes():
     params = get_simulation_params()
@@ -505,7 +570,9 @@ def main():
     test_netshield_preserves_node_labels()
     test_attack_and_defense_validate_budgets()
     test_random_methods_use_local_seed()
+    test_simulation_resets_advance_reproducible_random_streams()
     test_random_edge_addition_rejects_complete_graph()
+    test_defense_tracks_fully_failed_graph()
     test_defense_removes_unprotected_attacked_nodes()
     test_defense_uses_requested_budget()
     test_defense_edge_attack_removes_edges()

@@ -102,7 +102,7 @@ class Cascading(Simulation):
             return nx.betweenness_centrality(graph, normalized=False, endpoints=False)
 
         return nx.betweenness_centrality(graph, k=int(self.prm['c']), normalized=False,
-                                         endpoints=False, seed=self.prm['seed'])
+                                         endpoints=False, seed=self.get_random_seed())
 
     def reset_simulation(self):
         """
@@ -127,7 +127,7 @@ class Cascading(Simulation):
         # attacked nodes or edges
         if self.prm['attack'] is not None and self.prm['k_a'] > 0:
             attacked = run_attack_method(self.graph, self.prm['attack'], self.prm['k_a'],
-                                         approx=self.prm['attack_approx'], seed=self.prm['seed'])
+                                         approx=self.prm['attack_approx'], seed=self.get_random_seed())
 
             if get_attack_category(self.prm['attack']) == 'node':
                 self.failed = set(attacked)
@@ -144,13 +144,13 @@ class Cascading(Simulation):
 
             if get_defense_category(self.prm['defense']) == 'node':
                 self.protected = set(run_defense_method(self.graph, self.prm['defense'],
-                                                        self.prm['k_d'], seed=self.prm['seed']))
+                                                        self.prm['k_d'], seed=self.get_random_seed()))
                 for n in self.protected:
                     self.capacity[n] = 2 * self.capacity[n]
 
             elif get_defense_category(self.prm['defense']) == 'edge':
                 edge_info = run_defense_method(self.graph, self.prm['defense'],
-                                               self.prm['k_d'], seed=self.prm['seed'])
+                                               self.prm['k_d'], seed=self.get_random_seed())
 
                 if 'removed' in edge_info:
                     self.graph.remove_edges_from(edge_info['removed'])

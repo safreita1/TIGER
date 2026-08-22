@@ -57,6 +57,13 @@ class Simulation:
         self.random = random.Random(self.prm['seed'])
         self.rng = np.random.RandomState(self.prm['seed'])
 
+    def get_random_seed(self):
+        """
+        Return the next reproducible seed for a child operation.
+        """
+
+        return int(self.rng.randint(0, np.iinfo(np.int32).max))
+
     def child_class(self):
         """
         Gets the child class name

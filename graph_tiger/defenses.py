@@ -569,7 +569,7 @@ class Defense(Simulation):
 
         # attacked nodes or edges
         if self.prm['attack'] is not None and self.prm['k_a'] > 0:
-            self.attacked = run_attack_method(self.graph_, self.prm['attack'], self.prm['k_a'], approx=self.prm['attack_approx'], seed=self.prm['seed'])
+            self.attacked = run_attack_method(self.graph_, self.prm['attack'], self.prm['k_a'], approx=self.prm['attack_approx'], seed=self.get_random_seed())
 
             if get_attack_category(self.prm['attack']) == 'edge':
                 self.graph_.remove_edges_from(self.attacked)
@@ -579,7 +579,7 @@ class Defense(Simulation):
 
         # defended nodes or edges
         if self.prm['defense'] is not None and self.prm['k_d'] > 0:
-            self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.prm['seed'])
+            self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.get_random_seed())
 
         elif self.prm['defense'] is not None:
             print(self.prm['defense'], "not available or k <= 0")
@@ -605,24 +605,23 @@ class Defense(Simulation):
 
         ccs = list(nx.connected_components(self.graph_))
         ccs.sort(key=len, reverse=True)
-
-        m = interp1d([0, len(ccs)], [0.15, 1])
+        m = interp1d([0, len(ccs)], [0.15, 1]) if len(ccs) > 0 else None
 
         status = {}
         for n in self.graph:
+            status[n] = 0
             for idx, cc in enumerate(ccs):
-                if n in self.attacked[0:step]:
+                if n in self.attacked and n not in self.protected:
                     status[n] = 1
                     break
                 elif n in cc:
                     status[n] = float(m(idx))
                     break
-                else:
-                    status[n] = 0
 
+        lcc = len(ccs[0]) if len(ccs) > 0 else 0
         self.sim_info[step] = {
             'status':  list(status.values()),
-            'failed': len(self.graph_) - len(max(ccs)),
+            'failed': len(self.graph) - lcc,
             'measure': measure,
             'protected': self.protected,
             'edges_added': self.protected['added'][0:step] if 'added' in self.protected else [],
