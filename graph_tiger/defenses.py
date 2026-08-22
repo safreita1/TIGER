@@ -521,19 +521,14 @@ class Defense(Simulation):
             self.attacked = run_attack_method(self.graph_, self.prm['attack'], self.prm['k_a'], approx=self.prm['attack_approx'], seed=self.prm['seed'])
 
             if get_attack_category(self.prm['attack']) == 'edge':
-                self.graph_.remove_nodes_from(self.attacked)
+                self.graph_.remove_edges_from(self.attacked)
 
         elif self.prm['attack'] is not None:
             print(self.prm['attack'], "not available or k <= 0")
 
         # defended nodes or edges
-        if self.prm['defense'] is not None and self.prm['steps'] > 0:
-
-            if get_defense_category(self.prm['defense']) == 'node':
-                self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['steps'], seed=self.prm['seed'])
-
-            elif get_defense_category(self.prm['defense']) == 'edge':
-                self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['steps'], seed=self.prm['seed'])
+        if self.prm['defense'] is not None and self.prm['k_d'] > 0:
+            self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.prm['seed'])
 
         elif self.prm['defense'] is not None:
             print(self.prm['defense'], "not available or k <= 0")
@@ -541,7 +536,7 @@ class Defense(Simulation):
         # remove attacked nodes after checking that they are not defended
         if get_attack_category(self.prm['attack']) == 'node':
             if get_defense_category(self.prm['defense']) == 'node':
-                diff = set(self.protected) - set(self.attacked)
+                diff = set(self.attacked) - set(self.protected)
                 self.graph_.remove_nodes_from(diff)
             else:
                 self.graph_.remove_nodes_from(self.attacked)
@@ -587,19 +582,19 @@ class Defense(Simulation):
         """
 
         for step in range(self.prm['steps']):
-            if step < len(self.protected) and len(self.protected) > 0 and get_defense_category(self.prm['defense']) == 'edge':
+            if get_defense_category(self.prm['defense']) == 'edge' and step < len(self.protected['added']):
                 self.track_simulation(step)
+
+                if 'removed' in self.protected and step < len(self.protected['removed']):
+                    u, v = self.protected['removed'][step]
+                    self.graph_.remove_edge(u, v)
 
                 u, v = self.protected['added'][step]
                 self.graph_.add_edge(u, v)
 
-                if 'removed' in self.protected[step]:
-                    u, v = self.protected['removed'][step]
-                    self.graph.remove_edge(u, v)
-
             else:
                 self.track_simulation(step)
-                print("Ending defense simulation early, not an 'edge' defense or out of {}s".format(get_attack_category(self.prm['defense'])))
+                print("Ending defense simulation early, not an 'edge' defense or out of {}s".format(get_defense_category(self.prm['defense'])))
 
         results = [v['measure'] if v['measure'] is not None else 0 for k, v in self.sim_info.items()]
         return results
