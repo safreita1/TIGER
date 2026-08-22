@@ -185,7 +185,7 @@ The setup commit adds direct tests for:
 
 ## Implementation status
 
-Completed on `codex/correctness-remediation` for the 0.3.0 release candidate.
+Completed on `codex/correctness-remediation` for the 0.4.0 release candidate.
 
 - Phases 0 through 8 and every issue ID in the ledger are implemented.
 - The core suite passes on Python 3.8 through 3.14.
