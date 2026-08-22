@@ -4,11 +4,9 @@ import platform
 import numpy as np
 import pandas as pd
 import networkx as nx
-from fa2 import ForceAtlas2
 import matplotlib.pyplot as plt
 from collections import defaultdict
 from scipy.interpolate import interp1d
-from datashader.bundling import hammer_bundle
 from matplotlib import animation
 from matplotlib.colors import LinearSegmentedColormap
 
@@ -79,11 +77,16 @@ class Simulation:
         """
         edge_pos = None
 
-        node_pos = {idx: v['pos'] for idx, (k, v) in enumerate(dict(self.graph.nodes).items()) if 'pos' in v}   # check graph for coords
+        node_pos = {k: v['pos'] for k, v in dict(self.graph.nodes).items() if 'pos' in v}   # check graph for coords
         node_pos = node_pos if len(node_pos) == len(self.graph) else None
 
         # node positions
         if self.prm['node_style'] == 'force_atlas' and node_pos is None:
+            try:
+                from fa2 import ForceAtlas2
+            except ImportError:
+                raise ImportError("ForceAtlas2 layout requires the 'visualization' extra")
+
             force = ForceAtlas2(outboundAttractionDistribution=True, edgeWeightInfluence=0, scalingRatio=6.0, verbose=False)
             node_pos = force.forceatlas2_networkx_layout(self.graph, pos=None, iterations=self.prm['fa_iter'])
 
@@ -92,6 +95,11 @@ class Simulation:
 
         # edge positions
         if self.prm['edge_style'] == 'bundled':
+            try:
+                from datashader.bundling import hammer_bundle
+            except ImportError:
+                raise ImportError("edge bundling requires the 'visualization' extra")
+
             pos = pd.DataFrame.from_dict(node_pos, orient='index', columns=['x', 'y']).rename_axis('name').reset_index()
             edge_pos = hammer_bundle(pos, nx.to_pandas_edgelist(self.graph))
 
@@ -103,12 +111,13 @@ class Simulation:
 
         :param results: a list of floats representing each simulation output
         """
-        results_norm = [r / len(self.graph) for r in results]
+        normalize = self.child_class() == 'Diffusion' or self.prm.get('robust_measure') == 'largest_connected_component'
+        results_plot = [r / len(self.graph_og) for r in results] if normalize and len(self.graph_og) > 0 else results
 
         plt.figure(figsize=(6.4, 4.8))
 
         if self.child_class() == 'Diffusion':
-            plt.plot(results_norm, label="Effective strength: {}".format(self.get_effective_strength()))
+            plt.plot(results_plot, label="Effective strength: {}".format(self.get_effective_strength()))
 
             if self.prm['model'] == 'SIS':
                 plt.ylabel('Infected Nodes')
@@ -120,9 +129,10 @@ class Simulation:
             plt.ylim(0.001, 1)
 
         elif self.child_class() == 'Cascading' or self.child_class() == 'Attack' or self.child_class() == 'Defense':
-            plt.plot(results_norm)
+            plt.plot(results_plot)
             plt.ylabel(self.prm['robust_measure'])
-            plt.ylim(0, 1)
+            if normalize:
+                plt.ylim(0, 1)
 
         plt.xlabel('Steps')
         plt.title(self.child_class())
@@ -168,9 +178,9 @@ class Simulation:
         middle = start - int((start - end) / 2)
         mid_step, _ = min(enumerate(history), key=lambda x: abs(x[1] - middle))
 
-        steps_to_plot = [0, 1, 2, mid_step, self.prm['steps'] - 1]
+        steps_to_plot = [0, 1, 2, mid_step, self.prm['steps']]
 
-        for step in steps_to_plot:
+        for step in sorted(set([step for step in steps_to_plot if step in sim_info])):
             self.plot_network(step=step)
 
     def get_visual_settings(self, step):
@@ -185,15 +195,21 @@ class Simulation:
             ew = 1
             ec = 'gray'
 
-            for idx, load in enumerate(self.sim_info[step]['status']):
-                cval = interp1d([0, self.prm['max_val']], [20, 1500])
-                ns.append(float(cval(self.capacity[idx])))
-
-                if load <= self.capacity[idx]:
-                    cval = interp1d([0, self.capacity[idx]], [0, 0.8])
-                    nc.append(float(cval(load)))
+            for node, load in zip(self.graph_og.nodes, self.sim_info[step]['status']):
+                capacity = self.capacity[node]
+                if self.prm['max_val'] > 0:
+                    cval = interp1d([0, self.prm['max_val']], [20, 1500])
+                    ns.append(float(cval(capacity)))
                 else:
+                    ns.append(20)
+
+                if capacity > 0 and load <= capacity:
+                    cval = interp1d([0, capacity], [0, 0.8])
+                    nc.append(float(cval(load)))
+                elif load > capacity:
                     nc.append(1)
+                else:
+                    nc.append(0)
 
             cmap = plt.get_cmap('jet', 5)
 
@@ -202,8 +218,8 @@ class Simulation:
             ew = 0.1
             ec = '#1F76B4'
 
-            for idx, s in enumerate(self.sim_info[step]['status']):
-                if idx in self.sim_info[0]['protected']:
+            for node, s in zip(self.graph_og.nodes, self.sim_info[step]['status']):
+                if node in self.sim_info[step]['protected']:
                     nc.append(0.5)
                     ns.append(200)
                 elif s == 1:
@@ -285,15 +301,15 @@ class Simulation:
             return nodes,
 
         if self.child_class() == 'Diffusion':
-            frames = iter(list(range(0, self.prm['steps'], 10)))
+            frames = iter(list(range(0, self.prm['steps'] + 1, 10)))
             interval = 20
             fps = 5
         elif self.child_class() == 'Cascading':
-            frames = self.prm['steps']
+            frames = self.prm['steps'] + 1
             interval = 20
             fps = 3
         else:
-            frames = self.prm['steps']
+            frames = self.prm['steps'] + 1
             interval = 20
             fps = 1
 

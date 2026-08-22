@@ -62,6 +62,7 @@ class Cascading(Simulation):
 
         self.capacity_og = self.get_load(self.graph_og)
         self.max_val = max(self.capacity_og.values(), default=0) * (1.0 + self.prm['r'])
+        self.prm['max_val'] = self.max_val
 
         self.protected = set()
         self.failed = set()

@@ -7,7 +7,7 @@ from graph_tiger.attacks import get_node_ns, run_attack_method
 from graph_tiger.cascading import Cascading
 from graph_tiger.defenses import Defense, run_defense_method
 from graph_tiger.diffusion import Diffusion
-from graph_tiger.graphs import get_graph_options, graph_loader, p4_graph
+from graph_tiger.graphs import get_graph_options, get_graph_urls, graph_loader, p4_graph
 from graph_tiger.measures import algebraic_connectivity, largest_connected_component, run_measure
 
 
@@ -459,6 +459,29 @@ def test_graph_options_are_json_serializable():
     assert 'karate' in options['datasets']
 
 
+def test_graph_dataset_sources_match_names():
+    urls = get_graph_urls()
+
+    assert urls['ca_hep_th'][0].endswith('datasets/ca-HepTh.txt')
+    assert urls['cit_hep_th'][0].endswith('datasets/cit-HepTh.txt')
+
+
+def test_watts_strogatz_uses_standard_generator():
+    expected = nx.watts_strogatz_graph(n=20, k=4, p=0.2, seed=1)
+    graph = graph_loader('WS', n=20, m=4, p=0.2, seed=1)
+
+    assert set(graph.edges) == set(expected.edges)
+
+
+def test_unknown_graph_raises_value_error():
+    raised = False
+    try:
+        graph_loader('unknown_graph')
+    except ValueError:
+        raised = True
+
+    assert raised
+
 def test_graph_loader_loads_karate_offline():
     graph = graph_loader('karate')
 
@@ -494,6 +517,9 @@ def main():
     test_unknown_measure_raises_value_error()
     test_natural_connectivity_uses_graph_order()
     test_graph_options_are_json_serializable()
+    test_graph_dataset_sources_match_names()
+    test_watts_strogatz_uses_standard_generator()
+    test_unknown_graph_raises_value_error()
     test_graph_loader_loads_karate_offline()
 
 
