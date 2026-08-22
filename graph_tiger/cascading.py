@@ -109,6 +109,8 @@ class Cascading(Simulation):
         Resets the simulation between each run.
         """
 
+        self.begin_reset()
+
         self.graph = self.graph_og.copy()
         self.protected = set()
         self.failed = set()

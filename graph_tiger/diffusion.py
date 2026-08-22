@@ -69,6 +69,8 @@ class Diffusion(Simulation):
         Resets the simulation between each run
         """
 
+        self.begin_reset()
+
         self.graph = self.graph_og.copy()
         self.vaccinated = set()
         self.sim_info = defaultdict()

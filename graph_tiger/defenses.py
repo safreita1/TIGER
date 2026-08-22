@@ -562,6 +562,8 @@ class Defense(Simulation):
         Resets the simulation between each run
         """
 
+        self.begin_reset()
+
         self.graph_ = self.graph.copy()
         self.attacked = []
         self.protected = []

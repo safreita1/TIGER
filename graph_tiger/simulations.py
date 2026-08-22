@@ -54,8 +54,18 @@ class Simulation:
         self.sim_info = defaultdict()
         self.sparse_graph = get_sparse_graph(self.graph)
 
+        self._reset_rng = np.random.RandomState(self.prm['seed'])
         self.random = random.Random(self.prm['seed'])
         self.rng = np.random.RandomState(self.prm['seed'])
+
+    def begin_reset(self):
+        """
+        Start the next reproducible simulation run.
+        """
+
+        seed = int(self._reset_rng.randint(0, np.iinfo(np.int32).max))
+        self.random = random.Random(seed)
+        self.rng = np.random.RandomState(seed)
 
     def get_random_seed(self):
         """
