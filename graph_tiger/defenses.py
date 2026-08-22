@@ -365,22 +365,16 @@ def rewire_edge_rnd_neighbor(graph, k=3, rng=None):
     rng = np.random if rng is None else rng
     graph_ = graph.copy()
     info = defaultdict(list)
-    nodes = [n for n in graph_.nodes if graph_.degree(n) > 0]
-
-    if k > len(nodes):
-        raise ValueError('k exceeds the number of nodes with neighbors')
-
-    idx = rng.choice(len(nodes), k, replace=False)
-    selected = [nodes[i] for i in np.atleast_1d(idx)]
     removed_seen = set()
 
-    for u in selected:
-        nbrs = [v for v in graph_.neighbors(u) if frozenset((u, v)) not in removed_seen]
-        if len(nbrs) == 0:
+    for _ in range(k):
+        candidates = [(u, v) for u in graph_.nodes for v in graph_.neighbors(u)
+                      if frozenset((u, v)) not in removed_seen]
+
+        if len(candidates) == 0:
             raise ValueError('not enough distinct neighbor edges are available')
 
-        v = nbrs[int(rng.choice(len(nbrs)))]
-        removed = (u, v)
+        removed = candidates[int(rng.choice(len(candidates)))]
         graph_.remove_edge(*removed)
         removed_seen.add(frozenset(removed))
 
@@ -391,7 +385,6 @@ def rewire_edge_rnd_neighbor(graph, k=3, rng=None):
         info['added'].append(added)
 
     return info
-
 
 def rewire_edge_pref(graph, k=3, rng=None):
     """

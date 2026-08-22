@@ -9,6 +9,7 @@ from graph_tiger.defenses import Defense, run_defense_method
 from graph_tiger.diffusion import Diffusion
 from graph_tiger.graphs import get_graph_options, get_graph_urls, graph_loader, p4_graph
 from graph_tiger.measures import algebraic_connectivity, largest_connected_component, run_measure
+from graph_tiger.simulations import Simulation
 
 
 def get_simulation_params():
@@ -459,6 +460,17 @@ def test_graph_options_are_json_serializable():
     assert 'karate' in options['datasets']
 
 
+def test_graph_coordinates_preserve_node_labels():
+    graph = nx.Graph()
+    graph.add_node('left', pos=[0, 0])
+    graph.add_node('right', pos=[1, 0])
+    graph.add_edge('left', 'right')
+
+    simulation = Simulation(graph, runs=1, steps=1)
+    node_pos, _ = simulation.get_graph_coordinates()
+
+    assert set(node_pos) == {'left', 'right'}
+
 def test_graph_dataset_sources_match_names():
     urls = get_graph_urls()
 
@@ -517,6 +529,7 @@ def main():
     test_unknown_measure_raises_value_error()
     test_natural_connectivity_uses_graph_order()
     test_graph_options_are_json_serializable()
+    test_graph_coordinates_preserve_node_labels()
     test_graph_dataset_sources_match_names()
     test_watts_strogatz_uses_standard_generator()
     test_unknown_graph_raises_value_error()

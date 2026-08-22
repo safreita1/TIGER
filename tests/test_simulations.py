@@ -1,5 +1,3 @@
-import numpy as np
-
 from graph_tiger.graphs import karate
 from graph_tiger.cascading import Cascading
 from graph_tiger.diffusion import Diffusion
@@ -87,13 +85,12 @@ def test_sir_model():
 
 def test_cascading():
     params = {
+        'model': 'motter_lai',
         'runs': 10,
         'steps': 30,
 
         'l': 0.8,
         'r': 0.5,
-        'capacity_approx': np.inf,
-
         'k_a': 4,
         'attack': 'rnd_node',
 

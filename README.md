@@ -100,11 +100,11 @@ If you find *TIGER* useful in your research, please consider citing the followin
     graph = graph_loader('BA', n=400, seed=1)
     
     params = {
+        'model': 'motter_lai',
         'runs': 1,
         'steps': 100,
         'seed': 1,
 
-        'l': 0.8,
         'r': 0.2,
         'c': int(0.1 * len(graph)),
     
@@ -131,7 +131,7 @@ If you find *TIGER* useful in your research, please consider citing the followin
     
     cascading.plot_results(results)
     
-Step 0: Network pre-attack | Step 6: Beginning of cascading failure | Step 99: Collapse of network
+Step 0: Initial attacked state | Step 6: Beginning of cascading failure | Step 100: Final simulated state
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](images/Cascading:step=0,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)  |  ![](images/Cascading:step=6,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)  |  ![](images/Cascading:step=99,l=0.8,r=0.2,k_a=30,attack=rb_node,k_d=0,defense=None.jpg)
     
@@ -300,11 +300,13 @@ Beygelzimer *et al.* [Improving network robustness by edge modification](https:/
 
 **Simulation Frameworks:**
 * **[Cascading Failure Model](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)** 
-<br> Crucitti *et al.* [A model for cascading failures in complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.69.045104) (Physical Review E 2004)
+<br> Motter and Lai [Cascade-based attacks on complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.66.065102) (Physical Review E 2002)
 * **[Susceptible-Infected-Susceptible (SIS) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
-<br> Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+<br> Pastor-Satorras and Vespignani [Epidemic spreading in scale-free networks](https://doi.org/10.1103/PhysRevLett.86.3200) (Physical Review Letters 2001)
 * **[Susceptible-Infected-Recovered (SIR) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
 <br> Kermack *et al.* [A contribution to the mathematical theory of epidemics](https://royalsocietypublishing.org/doi/10.1098/rspa.1927.0118) (Royal Society A 1927)
+
+TIGER implements SIS and SIR as synchronous, discrete-time stochastic processes on a contact network.
 
 --------------------------------------------------------------------------------
 

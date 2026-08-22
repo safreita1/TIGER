@@ -1,11 +1,34 @@
+import os
+import platform
+import tempfile
+from pathlib import Path
+
 from graph_tiger.graphs import karate
 from graph_tiger.diffusion import Diffusion
 
 
 def run_test(params):
-    graph = karate()
-    ds = Diffusion(graph, **params)
-    ds.run_simulation()
+    cwd = os.getcwd()
+
+    with tempfile.TemporaryDirectory() as directory:
+        os.chdir(directory)
+        try:
+            graph = karate()
+            ds = Diffusion(graph, **params)
+            results = ds.run_simulation()
+
+            assert len(results) == params['steps'] + 1
+
+            if params['plot_transition']:
+                assert len(list(Path(directory).rglob('*.pdf'))) > 0
+
+            if params['gif_animation'] and platform.system() != 'Windows':
+                assert len(list(Path(directory).rglob('*.mp4'))) == 1
+
+            if params.get('gif_snaps') and platform.system() != 'Windows':
+                assert len(list(Path(directory).rglob('gif_snaps/*.pdf'))) > 0
+        finally:
+            os.chdir(cwd)
 
 
 def test_animation():
@@ -14,8 +37,8 @@ def test_animation():
         'b': 0.00208,
         'd': 0.01,
         'c': 1,
-        'runs': 10,
-        'steps': 500,
+        'runs': 1,
+        'steps': 2,
         'seed': 1,
 
         'diffusion': 'max',
@@ -35,8 +58,8 @@ def test_transition():
         'b': 0.00208,
         'd': 0.01,
         'c': 1,
-        'runs': 10,
-        'steps': 500,
+        'runs': 1,
+        'steps': 2,
         'seed': 1,
 
         'diffusion': 'max',
@@ -56,8 +79,8 @@ def test_gif_snaps():
         'b': 0.00208,
         'd': 0.01,
         'c': 1,
-        'runs': 10,
-        'steps': 500,
+        'runs': 1,
+        'steps': 2,
         'seed': 1,
 
         'diffusion': 'max',
@@ -78,8 +101,8 @@ def test_force_atlas():
         'b': 0.00208,
         'd': 0.01,
         'c': 1,
-        'runs': 10,
-        'steps': 500,
+        'runs': 1,
+        'steps': 2,
         'seed': 1,
 
         'diffusion': 'max',
@@ -88,7 +111,7 @@ def test_force_atlas():
 
         'edge_style': None,
         'node_style': 'force_atlas',
-        'fa_iter': 200,
+        'fa_iter': 20,
         'plot_transition': True,
         'gif_animation': False
     }
@@ -102,8 +125,8 @@ def test_edge_bundling():
         'b': 0.00208,
         'd': 0.01,
         'c': 1,
-        'runs': 10,
-        'steps': 500,
+        'runs': 1,
+        'steps': 2,
         'seed': 1,
 
         'diffusion': 'max',
@@ -112,7 +135,7 @@ def test_edge_bundling():
 
         'edge_style': 'bundled',
         'node_style': 'force_atlas',
-        'fa_iter': 200,
+        'fa_iter': 20,
         'plot_transition': True,
         'gif_animation': False
     }

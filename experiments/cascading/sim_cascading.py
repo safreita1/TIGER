@@ -13,9 +13,9 @@ from graph_tiger.cascading import Cascading
 def plot_results(graph, params, results, xlabel='Steps', line_label='', experiment=''):
     plt.figure(figsize=(6.4, 4.8))
 
-    title = '{}:step={},l={},r={},k_a={},attack={},k_d={},defense={}'.format(experiment, params['steps'], params['l'],
-                                                                             params['r'], params['k_a'],  params['attack'],
-                                                                             params['k_d'], params['defense'])
+    title = '{}:step={},model={},r={},k_a={},attack={},k_d={},defense={}'.format(experiment, params['steps'], params['model'],
+                                                                                 params['r'], params['k_a'], params['attack'],
+                                                                                 params['k_d'], params['defense'])
     for strength, result in results.items():
 
         result_norm = [r / len(graph) for r in result]
@@ -38,11 +38,11 @@ def plot_results(graph, params, results, xlabel='Steps', line_label='', experime
 
 def experiment_redundancy(graph):
     params = {
+        'model': 'motter_lai',
         'runs': 10,
         'steps': 100,
         'seed': 1,
 
-        'l': 0.8,
         'r': 0.2,
         'c': int(0.1 * len(graph)),
 
@@ -87,11 +87,11 @@ def experiment_redundancy(graph):
 
 def experiment_attack(graph):
     params = {
+        'model': 'motter_lai',
         'runs': 10,
         'steps': 100,
         'seed': 1,
 
-        'l': 0.8,
         'r': 0.4,
         'c': int(0.1 * len(graph)),
 
@@ -155,11 +155,11 @@ def experiment_attack(graph):
 
 def experiment_defense(graph):
     params = {
+        'model': 'motter_lai',
         'runs': 10,
         'steps': 100,
         'seed': 1,
 
-        'l': 0.8,
         'r': 0.2,
         'c': int(0.1 * len(graph)),
 
