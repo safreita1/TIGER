@@ -1,38 +1,36 @@
 name: Upload
 
-# Only trigger, when the "Tests" workflow succeeds
 on:
-  workflow_run:
-    workflows: ["Tests"]
+  release:
     types:
-      - completed
+      - published
 
 jobs:
   upload:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
-      # Checkout the latest code from the repo
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # Setup Python
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.8"
+          python-version: '3.12'
 
-      # Install Twine
-      - name: Install Twine dependencies
+      - name: Install build dependencies
         run: |
-          pip install setuptools wheel twine
+          python -m pip install --upgrade pip
+          python -m pip install build twine
 
-      # Build and publish distribution to TestPyPi
-      - name: Build and publish
+      - name: Build and validate package
+        run: |
+          python -m build
+          python -m twine check dist/*
+
+      - name: Publish package
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
           TWINE_REPOSITORY: pypi
-        run: |
-          python setup.py sdist
-          twine upload --skip-existing dist/graph-tiger-*.tar.gz
+        run: twine upload dist/*
