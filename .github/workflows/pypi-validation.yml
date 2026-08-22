@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - codex/pypi-0.4.0-validation
+  pull_request:
+    branches:
+      - master
 
 jobs:
   core:
