@@ -18,11 +18,15 @@ def plot_results(graph, params, results, xlabel='Steps', line_label='', experime
                                                                                  params['k_d'], params['defense'])
     for strength, result in results.items():
 
-        result_norm = [r / len(graph) for r in result]
+        if params['model'] == 'crucitti':
+            result_norm = result
+        else:
+            result_norm = [r / len(graph) for r in result]
+
         plt.plot(result_norm, label="{}: {}".format(line_label, strength))
 
     plt.xlabel(xlabel)
-    plt.ylabel(params['robust_measure'])
+    plt.ylabel('network_efficiency' if params['model'] == 'crucitti' else params['robust_measure'])
     plt.ylim(0, 1)
 
     save_dir = os.getcwd() + '/plots/' + experiment + '/'

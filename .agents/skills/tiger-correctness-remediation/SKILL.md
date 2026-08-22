@@ -51,6 +51,21 @@ Read `../../../CORRECTNESS_REMEDIATION_PLAN.md` before making changes. Treat its
 - Never process the same failed load twice.
 - Never mutate the caller's graph.
 
+### Crucitti cascading failures
+
+- Keep overloaded nodes in the functioning graph; only the initial trigger is removed.
+- Set fixed capacity to ``(1 + r) L_i(0)``, with positive ``r``.
+- Update incident edge efficiencies synchronously from the capacity-to-load ratio.
+- Route over paths minimizing the sum of reciprocal edge efficiencies.
+- Report average weighted network efficiency, not largest-component size.
+- Verify degradation, recovery, weighted route selection, and caller-graph preservation.
+
+### Python compatibility
+
+- Exercise core behavior on Python 3.8 through 3.14.
+- Exercise the complete optional visualization stack on the latest stable Python.
+- Do not retain dependency pins that make a declared Python version unsatisfiable.
+
 ### Measures
 
 - Verify formulas on analytically solvable toy graphs.

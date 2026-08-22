@@ -1,6 +1,6 @@
 [![Run Python Tests](https://github.com/safreita1/TIGER/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/safreita1/TIGER/actions/workflows/ci.yml)
 ![Version](https://img.shields.io/pypi/v/graph-tiger?color=dark)
-[![Python 3](https://img.shields.io/badge/python-3.6|3.7|3.8-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python 3](https://img.shields.io/badge/python-3.8|3.9|3.10|3.11|3.12|3.13|3.14-blue.svg)](https://www.python.org/downloads/)
 [![Python 3](https://img.shields.io/badge/OS-Ubuntu|Mac|Windows-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Documentation Status](https://readthedocs.org/projects/graph-tiger/badge/?version=latest)](https://graph-tiger.readthedocs.io/en/latest/?badge=latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -94,6 +94,9 @@ If you find *TIGER* useful in your research, please consider citing the followin
     
 
 ### EX 2. Run a cascading failure simulation on a Barabasi Albert graph
+
+Use `model='motter_lai'` for permanent overload failures or `model='crucitti'` for dynamic edge-efficiency congestion. Crucitti results are average network efficiencies and are already normalized.
+
     from graph_tiger.cascading import Cascading
     from graph_tiger.graphs import graph_loader
     

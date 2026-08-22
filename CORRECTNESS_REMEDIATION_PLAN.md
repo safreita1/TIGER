@@ -70,6 +70,7 @@ Measure names use standard graph-theoretic definitions. Exact defaults must be e
 | CAS-05 | Critical | `Cascading.reset_simulation` | An attacked node must be removed/failed regardless of its sampled pre-attack load. | Low-load attacked nodes still initiate the defined cascade transition. |
 | CAS-06 | High | `Cascading` | Use a simulation-owned graph copy and restore it on every run. | Constructor and repeated runs leave the caller graph unchanged. |
 | CAS-07 | High | `Cascading` timeline | Define `t=0` and return exactly `steps + 1` states, or return exactly `steps` transitions consistently across the framework. | Result length and plotted state count are stable and documented. |
+| CAS-08 | Critical | `graph_tiger/cascading.py` | Add the separately named Crucitti weighted efficiency-dynamics model. | Analytical congestion, recovery, weighted-routing, and efficiency fixtures match the paper. |
 | RNG-01 | High | `graph_tiger/simulations.py:Simulation.__init__` | Apply child `seed` before any random initialization. | Different seeds yield different initial states; equal seeds reproduce them. |
 | RNG-02 | High | simulation dispatch | Do not reseed global generators inside every helper call or run. Prefer simulation-local Python and NumPy generators. | Runs in one ensemble are independent but reproducible as a sequence. |
 | IMP-01 | High | `graph_tiger/simulations.py` | Lazy-load ForceAtlas2 and Datashader only when requested. | Core attacks, measures, and simulations import without optional visualization packages. |
@@ -92,6 +93,7 @@ Measure names use standard graph-theoretic definitions. Exact defaults must be e
 | GRA-04 | Medium | graph models | Decide whether Watts-Strogatz means ordinary WS or connected-conditioned WS and document it. | Seeded generator result matches the chosen NetworkX contract. |
 | GRA-05 | Medium | graph readers | Preserve or explicitly convert directionality according to dataset definitions. | Directed-source fixtures have documented graph type. |
 | PKG-01 | High | `setup.py` | Remove nested `pip install` and the accidental package named `install`; declare runtime and optional dependencies through package metadata. | Wheel/sdist build in an isolated environment without network side effects. |
+| PKG-02 | High | package metadata and CI | Support current stable Python releases through 3.14. | Core tests pass on Python 3.8 through 3.14 and visualization tests pass on Python 3.14. |
 | UTL-01 | High | `graph_tiger/utils.py` | Replace deprecated NetworkX sparse APIs, `np.float`, and pip private APIs. | Supported modern NumPy, SciPy, NetworkX, and pip versions import and run. |
 | API-01 | Medium | public dispatchers | Validate unknown methods, invalid probabilities, negative sizes, and impossible budgets consistently. | Boundary tests assert one documented exception policy. |
 | VIZ-01 | Medium | visualization paths | Use real node labels in coordinates/status mappings and normalize only measures whose definitions require it. | Arbitrary-label graphs render correctly; non-count measures are not divided by `N`. |
@@ -185,10 +187,9 @@ The setup commit adds direct tests for:
 Completed on `codex/correctness-remediation` for the 0.3.0 release candidate.
 
 - Phases 0 through 8 and every issue ID in the ledger are implemented.
-- The core suite passes on Python 3.8, 3.9, 3.10, and 3.11.
-- The optional visualization suite passes with ForceAtlas2, Datashader, image, and animation coverage.
-- Motter-Lai is the literature-aligned default cascading model. The corrected historical TIGER rule is available only as `legacy_redistribution`.
-- A Crucitti efficiency-dynamics model is intentionally not claimed or implemented; it remains a separately named future model if the project chooses to add it.
+- The core suite passes on Python 3.8 through 3.14.
+- The optional visualization suite passes on Python 3.14 with ForceAtlas2, Datashader, image, and animation coverage.
+- Motter-Lai remains the default cascading model, the weighted efficiency-dynamics implementation is available as `crucitti`, and the corrected historical TIGER rule is available only as `legacy_redistribution`.
 
 ## Acceptance criteria
 

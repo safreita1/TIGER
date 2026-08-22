@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 - Crucitti model and modern Python
+
+### Added
+
+- Added the Crucitti-Latora-Marchiori weighted efficiency-dynamics model as `model='crucitti'`.
+- Added analytical tests for congestion, recovery, weighted route selection, network efficiency, model validation, and caller-graph preservation.
+- Added core compatibility testing and package classifiers for Python 3.12, 3.13, and 3.14.
+
+### Changed
+
+- The visualization dependency stack now uses the current ForceAtlas2 package and is tested on Python 3.14 without legacy NumPy or Cython installation pins.
+- Crucitti simulations report average network efficiency and expose overloaded nodes and per-edge efficiencies in each recorded state.
+
 ## 0.3.0 - Correctness remediation
 
 ### Corrected
