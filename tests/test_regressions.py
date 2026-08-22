@@ -3,7 +3,7 @@ import json
 import networkx as nx
 import numpy as np
 
-from graph_tiger.attacks import get_node_ns
+from graph_tiger.attacks import get_node_ns, run_attack_method
 from graph_tiger.cascading import Cascading
 from graph_tiger.defenses import Defense, run_defense_method
 from graph_tiger.diffusion import Diffusion
@@ -28,6 +28,52 @@ def test_netshield_preserves_node_labels():
 
     assert nodes == ['middle']
 
+
+def test_attack_and_defense_validate_budgets():
+    invalid = [
+        lambda: run_attack_method(p4_graph(), method='unknown', k=1),
+        lambda: run_attack_method(p4_graph(), method='id_node', k=-1),
+        lambda: run_attack_method(p4_graph(), method='id_node', k=5),
+        lambda: run_defense_method(p4_graph(), method='unknown', k=1),
+        lambda: run_defense_method(p4_graph(), method='id_node', k=-1),
+        lambda: run_defense_method(p4_graph(), method='id_node', k=5)
+    ]
+
+    for call in invalid:
+        raised = False
+        try:
+            call()
+        except ValueError:
+            raised = True
+
+        assert raised
+
+
+def test_random_methods_use_local_seed():
+    graph = nx.path_graph(10)
+
+    first_attack = run_attack_method(graph, method='rnd_node', k=3, seed=1)
+    repeated_attack = run_attack_method(graph, method='rnd_node', k=3, seed=1)
+    second_attack = run_attack_method(graph, method='rnd_node', k=3, seed=2)
+
+    first_defense = run_defense_method(graph, method='add_edge_random', k=3, seed=1)
+    repeated_defense = run_defense_method(graph, method='add_edge_random', k=3, seed=1)
+    second_defense = run_defense_method(graph, method='add_edge_random', k=3, seed=2)
+
+    assert first_attack == repeated_attack
+    assert first_attack != second_attack
+    assert first_defense['added'] == repeated_defense['added']
+    assert first_defense['added'] != second_defense['added']
+
+
+def test_random_edge_addition_rejects_complete_graph():
+    raised = False
+    try:
+        run_defense_method(nx.complete_graph(4), method='add_edge_random', k=1, seed=1)
+    except ValueError:
+        raised = True
+
+    assert raised
 
 def test_defense_removes_unprotected_attacked_nodes():
     params = get_simulation_params()
@@ -422,6 +468,9 @@ def test_graph_loader_loads_karate_offline():
 
 def main():
     test_netshield_preserves_node_labels()
+    test_attack_and_defense_validate_budgets()
+    test_random_methods_use_local_seed()
+    test_random_edge_addition_rejects_complete_graph()
     test_defense_removes_unprotected_attacked_nodes()
     test_defense_uses_requested_budget()
     test_defense_edge_attack_removes_edges()

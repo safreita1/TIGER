@@ -12,30 +12,37 @@ from graph_tiger.utils import get_sparse_graph
 
 def run_attack_method(graph, method, k=3, approx=None, seed=None):
     """
-    Runs a specified attack on an undirected graph, returning a list of nodes to attack
+    Runs a specified attack on an undirected graph, returning a list of nodes or edges.
 
     :param graph: an undirected NetworkX graph
     :param method: a string representing one of the attack methods
     :param k: number of nodes or edges to attack
     :param approx: attack approximation parameter (not available for every measure)
     :param seed: sets the seed in order to obtain reproducible attacks
-
-    :return: a list of nodes selected for attack
+    :return: a list of nodes or edges selected for attack
     """
 
-    attacked = []
-    if method in methods and k > 0:
-        if seed is not None:
-            np.random.seed(seed)
-        if approx is None:
-            attacked = methods[method](graph, k)
-        else:
-            attacked = methods[method](graph, k, approx=approx)
-    else:
-        print("{} not implemented or k<= 0".format(method))
+    if method not in methods:
+        raise ValueError("attack method '{}' is not implemented".format(method))
+    if not isinstance(k, (int, np.integer)) or k < 0:
+        raise ValueError('k must be a nonnegative integer')
+    if k == 0:
+        return []
 
-    return attacked
+    category = get_attack_category(method)
+    feasible = len(graph) if category == 'node' else len(graph.edges)
+    if k > feasible:
+        raise ValueError('k exceeds the number of available {}s'.format(category))
 
+    rng = np.random.RandomState(seed)
+
+    if method in ['rnd_node', 'rnd_edge']:
+        return methods[method](graph, k, rng=rng)
+    if method in ['ib_node', 'rb_node', 'ib_edge', 'rb_edge']:
+        approx = np.inf if approx is None else approx
+        return methods[method](graph, k, approx=approx, seed=seed)
+
+    return methods[method](graph, k)
 
 def get_attack_methods():
     """
@@ -66,18 +73,26 @@ def get_attack_category(method):
 
 def get_node_ns(graph, k=3):
     """
-    Get k nodes to attack based on the Netshield algorithm :cite`tong2010vulnerability`.
+    Get k nodes to attack based on the NetShield algorithm :cite:`tong2010vulnerability`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
-
-    :return: a list of nodes to attack
+    :return: a list of node labels to attack
     """
 
-    if not scipy.sparse.issparse(graph):
-        sparse_graph = get_sparse_graph(graph)
-    else:
+    if scipy.sparse.issparse(graph):
         sparse_graph = graph
+        nodes_graph = list(range(graph.shape[0]))
+    else:
+        sparse_graph = get_sparse_graph(graph)
+        nodes_graph = list(graph.nodes)
+
+    if k == 0:
+        return []
+    if k < 0 or k > len(nodes_graph):
+        raise ValueError('k must satisfy 0 <= k <= number of nodes')
+    if len(nodes_graph) == 1:
+        return nodes_graph.copy()
 
     lam, u = eigsh(sparse_graph, k=1, which='LA')
     lam = lam[0]
@@ -86,17 +101,17 @@ def get_node_ns(graph, k=3):
     v = (2 * lam * np.ones(len(u))) * np.power(u, 2)
 
     nodes = []
-    for i in range(k):
-        B = sparse_graph[:, nodes]
-        b = B * u[nodes]
+    for _ in range(k):
+        score = v.copy()
+        if len(nodes) > 0:
+            B = sparse_graph[:, nodes]
+            b = np.asarray(B.dot(u[nodes])).flatten()
+            score = score - 2 * b * u
 
-        score = v - 2 * b * u
-        score[nodes] = -1
+        score[nodes] = -np.inf
+        nodes.append(int(np.argmax(score)))
 
-        nodes.append(np.argmax(score))
-
-    return nodes
-
+    return [nodes_graph[idx] for idx in nodes]
 
 def get_node_pr(graph, k=3):
     """
@@ -166,7 +181,7 @@ def get_node_rd(graph, k=3):
     return nodes
 
 
-def get_node_ib(graph, k=3, approx=np.inf):
+def get_node_ib(graph, k=3, approx=np.inf, seed=None):
     """
     Get k nodes to attack based on Initial Betweenness (IB) Removal :cite:`beygelzimer2005improving`.
 
@@ -178,13 +193,14 @@ def get_node_ib(graph, k=3, approx=np.inf):
     :return: a list of nodes to attack
     """
 
-    centrality = nx.betweenness_centrality(graph, k=min(len(graph), approx))
+    samples = None if np.isinf(approx) or approx >= len(graph) else int(approx)
+    centrality = nx.betweenness_centrality(graph, k=samples, seed=seed)
     nodes = heapq.nlargest(k, centrality, key=centrality.get)
 
     return nodes
 
 
-def get_node_rb(graph, k=3, approx=np.inf):
+def get_node_rb(graph, k=3, approx=np.inf, seed=None):
     """
     Get k nodes to attack based on Recalculated Betweenness (RB) Removal :cite:`beygelzimer2005improving`.
 
@@ -199,7 +215,7 @@ def get_node_rb(graph, k=3, approx=np.inf):
 
     nodes = []
     for _ in range(k):
-        u = get_node_ib(graph_, k=1, approx=approx)[0]
+        u = get_node_ib(graph_, k=1, approx=approx, seed=seed)[0]
 
         nodes.append(u)
         graph_.remove_node(u)
@@ -207,7 +223,7 @@ def get_node_rb(graph, k=3, approx=np.inf):
     return nodes
 
 
-def get_node_rnd(graph, k=3):
+def get_node_rnd(graph, k=3, rng=None):
     """
     Randomly select k distinct nodes to attack
 
@@ -216,7 +232,8 @@ def get_node_rnd(graph, k=3):
 
     :return: a list of nodes to attack
     """
-    return np.random.choice(graph.nodes, k, replace=False).tolist()
+    rng = np.random if rng is None else rng
+    return rng.choice(list(graph.nodes), k, replace=False).tolist()
 
 
 def get_edge_line_ns(graph, k=3):
@@ -316,7 +333,7 @@ def get_edge_rd(graph, k=3):
     return edges
 
 
-def get_edge_ib(graph, k=3, approx=np.inf):
+def get_edge_ib(graph, k=3, approx=np.inf, seed=None):
     """
     Get k edges to attack based on Initial Betweenness (IB) Removal :cite:`holme2002attack`.
 
@@ -327,13 +344,14 @@ def get_edge_ib(graph, k=3, approx=np.inf):
     :return: a list of edge tuples to attack
     """
 
-    centrality = nx.edge_betweenness_centrality(graph, k=min(len(graph), approx))
+    samples = None if np.isinf(approx) or approx >= len(graph) else int(approx)
+    centrality = nx.edge_betweenness_centrality(graph, k=samples, seed=seed)
     edges = heapq.nlargest(k, centrality, key=centrality.get)
 
     return edges
 
 
-def get_edge_rb(graph, k=3, approx=np.inf):
+def get_edge_rb(graph, k=3, approx=np.inf, seed=None):
     """
     Get k edges to attack based on Recalculated Betweenness (RB) Removal :cite:`holme2002attack`.
 
@@ -348,7 +366,7 @@ def get_edge_rb(graph, k=3, approx=np.inf):
     graph_ = graph.copy()
 
     for _ in range(k):
-        u, v = get_edge_ib(graph_, k=1, approx=approx)[0]
+        u, v = get_edge_ib(graph_, k=1, approx=approx, seed=seed)[0]
 
         top_edges.append((u, v))
         graph_.remove_edge(u, v)
@@ -356,7 +374,7 @@ def get_edge_rb(graph, k=3, approx=np.inf):
     return top_edges
 
 
-def get_edge_rnd(graph, k=3):
+def get_edge_rnd(graph, k=3, rng=None):
     """
     Randomly select k edges to attack
 
@@ -366,7 +384,8 @@ def get_edge_rnd(graph, k=3):
     :return: a list of edge tuples to attack
     """
     edges = list(graph.edges)
-    idx = np.random.choice(len(edges), k, replace=False)
+    rng = np.random if rng is None else rng
+    idx = rng.choice(len(edges), k, replace=False)
     rnd_edges = [edges[i] for i in idx]
 
     return rnd_edges

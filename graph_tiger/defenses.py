@@ -21,24 +21,40 @@ from graph_tiger.attacks import get_attack_category, run_attack_method
 
 def run_defense_method(graph, method, k=3, seed=None):
     """
-    Runs a specified defense on an undirected graph, returning a list of nodes to defend.
+    Runs a specified defense on an undirected graph.
 
     :param graph: an undirected NetworkX graph
-    :param method: a string representing one of the attack methods
-    :param k: number of nodes or edges to attack
+    :param method: a string representing one of the defense methods
+    :param k: number of nodes or edges to defend
     :param seed: sets the seed in order to obtain reproducible defense runs
-    :return: a list of nodes or edge tuples to defend
+    :return: a list of nodes or a dictionary of edge changes
     """
 
-    protected = []
-    if method in methods and k > 0:
-        if seed is not None: np.random.seed(seed)
-        protected = methods[method](graph, k)
-    else:
-        print("{} not implemented or k <= 0".format(method))
+    if method not in methods:
+        raise ValueError("defense method '{}' is not implemented".format(method))
+    if not isinstance(k, (int, np.integer)) or k < 0:
+        raise ValueError('k must be a nonnegative integer')
 
-    return protected
+    category = get_defense_category(method)
+    if k == 0:
+        return [] if category == 'node' else defaultdict(list)
 
+    if category == 'node' and k > len(graph):
+        raise ValueError('k exceeds the number of available nodes')
+
+    if method.startswith('add_edge') and k > len(list(nx.non_edges(graph))):
+        raise ValueError('k exceeds the number of available nonedges')
+
+    if method.startswith('rewire_edge') and k > len(graph.edges):
+        raise ValueError('k exceeds the number of available edges')
+
+    rng = np.random.RandomState(seed)
+    if method in ['rnd_node', 'add_edge_random', 'rewire_edge_random',
+                  'rewire_edge_random_neighbor', 'rewire_edge_preferential',
+                  'rewire_edge_preferential_random']:
+        return methods[method](graph, k, rng=rng)
+
+    return methods[method](graph, k)
 
 def get_defense_methods():
     """
@@ -160,7 +176,7 @@ def get_node_rd(graph, k=3):
     return get_node_rd_attack(graph, k)
 
 
-def get_node_rnd(graph, k=3):
+def get_node_rnd(graph, k=3, rng=None):
     """
     Randomly select k distinct nodes to defend
 
@@ -169,20 +185,19 @@ def get_node_rnd(graph, k=3):
 
     :return: a list of nodes to defend
     """
-    return get_node_rnd_attack(graph, k)
+    rng = np.random if rng is None else rng
+    return rng.choice(list(graph.nodes), k, replace=False).tolist()
 
 
 def get_central_edges(graph, k, method='eig'):
     """
-    Internal function to compute edge PageRank, eigenvector centrality and degree centrality
+    Internal function to compute edge PageRank, eigenvector centrality and degree centrality.
 
     :param graph: undirected NetworkX graph
-    :param k: int number of nodes to defend
+    :param k: int number of edges to add
     :param method: string representing defense method
     :return: list of edges to add
     """
-    max_deg = max([d[1] for d in graph.degree])
-    top_nodes = get_node_id(graph, k=max_deg + k)
 
     if method == 'pr':
         centrality = nx.pagerank(graph)
@@ -190,21 +205,12 @@ def get_central_edges(graph, k, method='eig'):
         centrality = nx.eigenvector_centrality(graph)
     elif method == 'deg':
         centrality = dict(graph.degree)
+    else:
+        raise ValueError("central edge method '{}' is not implemented".format(method))
 
-    score = {}
-    tried = set()
+    score = {(u, v): centrality[u] * centrality[v] for u, v in nx.non_edges(graph)}
 
-    for u in top_nodes:
-        for v in top_nodes:
-            if u != v and not graph.has_edge(u, v) and (u, v) not in tried:
-                tried.add((u, v))
-                tried.add((v, u))
-
-                score[(u, v)] = centrality[u] * centrality[v]
-
-    nodes = heapq.nlargest(k, score, key=score.get)
-
-    return nodes
+    return heapq.nlargest(k, score, key=score.get)
 
 
 def add_edge_pr(graph, k=3):
@@ -243,7 +249,7 @@ def add_edge_degree(graph, k=3):
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
-    :return: a list of edges to add
+    :return: a dictionary of the edges to be 'added'
     """
 
     info = defaultdict(list)
@@ -252,173 +258,224 @@ def add_edge_degree(graph, k=3):
     return info
 
 
-def add_edge_rnd(graph, k=3):
+def add_edge_rnd(graph, k=3, rng=None):
     """
-    Add k random edges to the graph
+    Add k random nonedges to the graph.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
+    :param rng: optional NumPy random generator
     :return: a dictionary of the edges to be 'added'
     """
 
-    graph_ = graph.copy()
+    rng = np.random if rng is None else rng
     info = defaultdict(list)
+    available = list(nx.non_edges(graph))
 
-    for _ in range(k):
-        nodes = graph_.nodes
-        u, v = np.random.choice(nodes, 2, replace=False)
+    if k > len(available):
+        raise ValueError('k exceeds the number of available nonedges')
 
-        while graph_.has_edge(u, v) or u == v:
-            u, v = np.random.choice(nodes, 2, replace=False)
-
-        graph_.add_edge(u, v)
-        info['added'].append((u, v))
+    idx = rng.choice(len(available), k, replace=False)
+    info['added'] = [available[i] for i in np.atleast_1d(idx)]
 
     return info
 
 
 def add_edge_pref(graph, k=3):
     """
-    Adds an edge connecting two nodes with the lowest degrees :cite:`beygelzimer2005improving`.
+    Adds edges between the lowest-degree feasible pairs :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to add
     :return: a dictionary of the edges to be 'added'
     """
 
-    info = defaultdict(list)
-    deg = dict(graph.degree)
-
-    edges_tried = set()
-    for _ in range(k):
-        u = min(deg, key=deg.get)
-
-        u_d = deg[u] + 1
-        deg.pop(u)
-
-        v = min(deg, key=deg.get)
-
-        deg[v] += 1
-        deg[u] = u_d
-
-        if (u, v) not in edges_tried and (v, u) not in edges_tried:
-            info['added'].append((u, v))
-            edges_tried.update([(u, v), (v, u)])
-
-    return info
-
-
-def rewire_edge_rnd(graph, k=3):
-    """
-    Removes a random edge and adds one randomly :cite:`beygelzimer2005improving`.
-
-    :param graph: an undirected NetworkX graph
-    :param k: number of edges to rewire
-    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
-    """
-
-    info = defaultdict(list)
-    edges = list(graph.edges)
-
-    m = len(edges)
-    k = min(k, m)
-    idx = np.random.choice(m, k, replace=False)
-
-    info['removed'] = [edges[i] for i in idx]
-    info['added'] = add_edge_rnd(graph, k=k)['added']
-
-    return info
-
-
-def rewire_edge_rnd_neighbor(graph, k=3):
-    """
-    Randomly selects a neighbor of a node and removes the edge; then adds a random edge :cite:`beygelzimer2005improving`.
-
-    :param graph: an undirected NetworkX graph
-    :param k: number of edges to rewire
-    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
-    """
-
-    info = defaultdict(list)
-
-    edges_seen = set()
-    nodes = [n for n in graph.nodes if len(list(graph.neighbors(n))) > 0]  # get non-isolated nodes
-    nodes = np.random.choice(nodes, min(k, len(nodes)), replace=False)
-
-    for u in nodes:
-        v = np.random.choice(list(graph.neighbors(u)))
-        removed = (u, v)
-
-        added = add_edge_rnd(graph, k=1)['added'][0]
-        if added not in edges_seen and removed not in edges_seen:
-            info['added'].append(added)
-            info['removed'].append(removed)
-
-            edges_seen.update([added, added[::-1], removed, removed[::-1]])
-
-    return info
-
-
-def rewire_edge_pref(graph, k=3):
-    """
-    Selects node with highest degree, randomly removes a neighbor; adds edge to random node in graph :cite:`beygelzimer2005improving`.
-
-    :param graph: an undirected NetworkX graph
-    :param k: number of edges to rewire
-    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
-    """
-
     graph_ = graph.copy()
     info = defaultdict(list)
+    order = {n: idx for idx, n in enumerate(graph_.nodes)}
 
     for _ in range(k):
-        u = max(dict(graph_.degree), key=dict(graph_.degree).get)
-        nbr = np.random.choice(list(graph_.neighbors(u)))
+        available = list(nx.non_edges(graph_))
+        if len(available) == 0:
+            raise ValueError('k exceeds the number of available nonedges')
 
-        graph_.remove_edge(u, nbr)
-        info['removed'].append((u, nbr))
-
-        v = np.random.choice(graph_.nodes)
-        while graph_.has_edge(u, v) or u == v:
-            v = np.random.choice(graph_.nodes)
-
-        graph_.add_edge(nbr, v)
-        info['added'].append((nbr, v))
+        degree = dict(graph_.degree)
+        edge = min(available, key=lambda e: (degree[e[0]] + degree[e[1]],
+                                             max(degree[e[0]], degree[e[1]]),
+                                             order[e[0]], order[e[1]]))
+        graph_.add_edge(*edge)
+        info['added'].append(edge)
 
     return info
 
 
-def rewire_edge_pref_rnd(graph, k=3):
+def get_random_nonedges(graph, k, rng, excluded=None):
     """
-    Selects an edge, disconnects the higher degree node, and reconnects to a random one :cite:`beygelzimer2005improving`.
+    Return k random nonedges, excluding specified unordered node pairs.
+    """
+
+    excluded = set() if excluded is None else excluded
+    available = [edge for edge in nx.non_edges(graph) if frozenset(edge) not in excluded]
+
+    if k > len(available):
+        raise ValueError('not enough nonedges are available for rewiring')
+
+    idx = rng.choice(len(available), k, replace=False)
+    return [available[i] for i in np.atleast_1d(idx)]
+
+
+def rewire_edge_rnd(graph, k=3, rng=None):
+    """
+    Removes k random edges and adds k different random nonedges :cite:`beygelzimer2005improving`.
 
     :param graph: an undirected NetworkX graph
     :param k: number of edges to rewire
+    :param rng: optional NumPy random generator
     :return: a dictionary of the edges to be 'removed' and edges to be 'added'
     """
 
+    rng = np.random if rng is None else rng
     graph_ = graph.copy()
     info = defaultdict(list)
-
     edges = list(graph_.edges)
 
-    k = min(len(edges), k)
-    idx = np.random.choice(len(edges), k, replace=False)
+    if k > len(edges):
+        raise ValueError('k exceeds the number of available edges')
 
-    edges = [edges[i] for i in idx]
-    for u, v in edges:
-        info['removed'].append((u, v))
+    idx = rng.choice(len(edges), k, replace=False)
+    info['removed'] = [edges[i] for i in np.atleast_1d(idx)]
+    graph_.remove_edges_from(info['removed'])
 
-        rnd_node = np.random.choice(graph_.nodes)
-        if graph_.degree(u) > graph_.degree(v):
-            graph_.add_edge(v, rnd_node)
-            info['added'].append((v, rnd_node))
-        else:
-            graph_.add_edge(u, rnd_node)
-            info['added'].append((u, rnd_node))
+    excluded = {frozenset(edge) for edge in info['removed']}
+    info['added'] = get_random_nonedges(graph_, k, rng, excluded=excluded)
 
     return info
 
+
+def rewire_edge_rnd_neighbor(graph, k=3, rng=None):
+    """
+    Randomly removes a neighbor edge and adds a different random edge :cite:`beygelzimer2005improving`.
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to rewire
+    :param rng: optional NumPy random generator
+    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
+    """
+
+    rng = np.random if rng is None else rng
+    graph_ = graph.copy()
+    info = defaultdict(list)
+    nodes = [n for n in graph_.nodes if graph_.degree(n) > 0]
+
+    if k > len(nodes):
+        raise ValueError('k exceeds the number of nodes with neighbors')
+
+    idx = rng.choice(len(nodes), k, replace=False)
+    selected = [nodes[i] for i in np.atleast_1d(idx)]
+    removed_seen = set()
+
+    for u in selected:
+        nbrs = [v for v in graph_.neighbors(u) if frozenset((u, v)) not in removed_seen]
+        if len(nbrs) == 0:
+            raise ValueError('not enough distinct neighbor edges are available')
+
+        v = nbrs[int(rng.choice(len(nbrs)))]
+        removed = (u, v)
+        graph_.remove_edge(*removed)
+        removed_seen.add(frozenset(removed))
+
+        added = get_random_nonedges(graph_, 1, rng, excluded=removed_seen)[0]
+        graph_.add_edge(*added)
+
+        info['removed'].append(removed)
+        info['added'].append(added)
+
+    return info
+
+
+def rewire_edge_pref(graph, k=3, rng=None):
+    """
+    Detaches a neighbor of a highest-degree node and reconnects that neighbor elsewhere.
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to rewire
+    :param rng: optional NumPy random generator
+    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
+    """
+
+    rng = np.random if rng is None else rng
+    graph_ = graph.copy()
+    info = defaultdict(list)
+
+    for _ in range(k):
+        nodes = [n for n in graph_.nodes if graph_.degree(n) > 0]
+        if len(nodes) == 0:
+            raise ValueError('not enough edges are available for rewiring')
+
+        u = max(nodes, key=dict(graph_.degree).get)
+        nbrs = list(graph_.neighbors(u))
+        nbr = nbrs[int(rng.choice(len(nbrs)))]
+        removed = (u, nbr)
+
+        graph_.remove_edge(*removed)
+        excluded = {frozenset(removed)}
+        candidates = [(nbr, v) for v in graph_.nodes
+                      if nbr != v and not graph_.has_edge(nbr, v)
+                      and frozenset((nbr, v)) not in excluded]
+
+        if len(candidates) == 0:
+            raise ValueError('not enough nonedges are available for rewiring')
+
+        added = candidates[int(rng.choice(len(candidates)))]
+        graph_.add_edge(*added)
+
+        info['removed'].append(removed)
+        info['added'].append(added)
+
+    return info
+
+
+def rewire_edge_pref_rnd(graph, k=3, rng=None):
+    """
+    Disconnects the higher-degree endpoint and reconnects the other endpoint randomly.
+
+    :param graph: an undirected NetworkX graph
+    :param k: number of edges to rewire
+    :param rng: optional NumPy random generator
+    :return: a dictionary of the edges to be 'removed' and edges to be 'added'
+    """
+
+    rng = np.random if rng is None else rng
+    graph_ = graph.copy()
+    info = defaultdict(list)
+    edges = list(graph_.edges)
+
+    if k > len(edges):
+        raise ValueError('k exceeds the number of available edges')
+
+    idx = rng.choice(len(edges), k, replace=False)
+    selected = [edges[i] for i in np.atleast_1d(idx)]
+
+    for u, v in selected:
+        anchor = v if graph_.degree(u) > graph_.degree(v) else u
+        removed = (u, v)
+        graph_.remove_edge(*removed)
+
+        excluded = {frozenset(removed)}
+        candidates = [(anchor, n) for n in graph_.nodes
+                      if anchor != n and not graph_.has_edge(anchor, n)
+                      and frozenset((anchor, n)) not in excluded]
+
+        if len(candidates) == 0:
+            raise ValueError('not enough nonedges are available for rewiring')
+
+        added = candidates[int(rng.choice(len(candidates)))]
+        graph_.add_edge(*added)
+
+        info['removed'].append(removed)
+        info['added'].append(added)
+
+    return info
 
 categories = {
     'ns_node': 'node',
