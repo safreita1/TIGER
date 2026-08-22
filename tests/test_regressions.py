@@ -8,7 +8,7 @@ from graph_tiger.cascading import Cascading
 from graph_tiger.defenses import Defense, run_defense_method
 from graph_tiger.diffusion import Diffusion
 from graph_tiger.graphs import get_graph_options, graph_loader, p4_graph
-from graph_tiger.measures import run_measure
+from graph_tiger.measures import algebraic_connectivity, largest_connected_component, run_measure
 
 
 def get_simulation_params():
@@ -372,14 +372,30 @@ def test_standard_average_vertex_betweenness():
 
 
 def test_large_path_exact_laplacian_measures():
-    graph = nx.path_graph(100)
+    for n in [99, 100, 101]:
+        graph = nx.path_graph(n)
+        expected_resistance = (n ** 3 - n) / 6
 
-    num_trees = run_measure(graph, 'number_spanning_trees')
-    resistance = run_measure(graph, 'effective_resistance')
+        num_trees = run_measure(graph, 'number_spanning_trees')
+        resistance = run_measure(graph, 'effective_resistance')
 
-    assert num_trees == 1
-    assert resistance == 166650
+        assert num_trees == 1
+        assert resistance == expected_resistance
 
+
+def test_measure_direct_calls_and_empty_graph():
+    assert algebraic_connectivity(p4_graph()) == 0.59
+    assert largest_connected_component(nx.Graph()) == 0
+
+
+def test_unknown_measure_raises_value_error():
+    raised = False
+    try:
+        run_measure(p4_graph(), 'unknown_measure')
+    except ValueError:
+        raised = True
+
+    assert raised
 
 def test_natural_connectivity_uses_graph_order():
     graph = nx.complete_graph(100)
@@ -425,6 +441,8 @@ def main():
     test_cascading_timeline_length()
     test_standard_average_vertex_betweenness()
     test_large_path_exact_laplacian_measures()
+    test_measure_direct_calls_and_empty_graph()
+    test_unknown_measure_raises_value_error()
     test_natural_connectivity_uses_graph_order()
     test_graph_options_are_json_serializable()
     test_graph_loader_loads_karate_offline()
