@@ -246,12 +246,8 @@ def get_edge_line_ns(graph, k=3):
     :return: a list of edge tuples to attack
     """
     line_graph = nx.line_graph(graph)
-    line_nodes = list(line_graph.nodes)
 
-    idx = get_node_ns(line_graph, k=k)
-    edges = [line_nodes[i] for i in idx]
-
-    return edges
+    return get_node_ns(line_graph, k=k)
 
 
 def get_edge_line_pr(graph, k=3):

@@ -228,6 +228,9 @@ class Cascading(Simulation):
         Run the cascading-failure simulation.
         """
 
+        if 0 not in self.sim_info:
+            self.track_simulation(step=0)
+
         stable = False
         for step in range(self.prm['steps']):
             if not stable:
