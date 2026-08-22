@@ -33,6 +33,34 @@ jobs:
       - name: Run core tests
         run: python -m pytest tests/ --ignore=tests/test_visualizations.py
 
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+
+      - name: Build and validate package
+        run: |
+          python -m build
+          python -m twine check dist/*
+
+      - name: Check installed package
+        run: |
+          python -m pip install dist/*.whl
+          cd /tmp
+          python -c "import graph_tiger"
+
   visualization:
     runs-on: ubuntu-latest
 
