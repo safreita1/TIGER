@@ -301,7 +301,9 @@ class Simulation:
             return nodes,
 
         if self.child_class() == 'Diffusion':
-            frames = iter(list(range(0, self.prm['steps'] + 1, 10)))
+            frames = list(range(0, self.prm['steps'] + 1, 10))
+            if self.prm['steps'] not in frames:
+                frames.append(self.prm['steps'])
             interval = 20
             fps = 5
         elif self.child_class() == 'Cascading':

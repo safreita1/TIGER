@@ -52,7 +52,7 @@ setup(
     ],
     extras_require={
         "test": ["pytest>=7", "pytest-cov>=4"],
-        "visualization": ["datashader>=0.13", "fa2", "numpy<2", "pillow>=8"]
+        "visualization": ["dask>=2022", "datashader>=0.13", "fa2", "numpy<2", "pillow>=8", "scikit-image>=0.19"]
     },
     classifiers=["Development Status :: 3 - Alpha",
                  "Intended Audience :: Developers",
