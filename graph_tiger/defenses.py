@@ -480,11 +480,12 @@ class Defense(Simulation):
 
     def __init__(self, graph, runs=10, steps=50, attack='id_node', defense=None, k_d=0, **kwargs):
         super().__init__(graph, runs, steps, **kwargs)
-        self.graph = graph
+        self.graph = self.graph_og.copy()
 
         self.prm.update({
             'attack': attack,
             'attack_approx': None,
+            'k_a': 0,
 
             'k_d': k_d,
             'defense': defense,
@@ -541,6 +542,8 @@ class Defense(Simulation):
             else:
                 self.graph_.remove_nodes_from(self.attacked)
 
+        self.track_simulation(step=0)
+
     def track_simulation(self, step):
         """
          Keeps track of important simulation information at each step of the simulation
@@ -583,8 +586,6 @@ class Defense(Simulation):
 
         for step in range(self.prm['steps']):
             if get_defense_category(self.prm['defense']) == 'edge' and step < len(self.protected['added']):
-                self.track_simulation(step)
-
                 if 'removed' in self.protected and step < len(self.protected['removed']):
                     u, v = self.protected['removed'][step]
                     self.graph_.remove_edge(u, v)
@@ -593,10 +594,12 @@ class Defense(Simulation):
                 self.graph_.add_edge(u, v)
 
             else:
-                self.track_simulation(step)
                 print("Ending defense simulation early, not an 'edge' defense or out of {}s".format(get_defense_category(self.prm['defense'])))
 
-        results = [v['measure'] if v['measure'] is not None else 0 for k, v in self.sim_info.items()]
+            self.track_simulation(step + 1)
+
+        results = [self.sim_info[step]['measure'] if self.sim_info[step]['measure'] is not None else 0
+                   for step in range(self.prm['steps'] + 1)]
         return results
 
 

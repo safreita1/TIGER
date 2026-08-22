@@ -431,7 +431,7 @@ class Attack(Simulation):
 
     def __init__(self, graph, runs=10, steps=50, attack='id_node', defense=None, k_d=0, **kwargs):
         super().__init__(graph, runs, steps, **kwargs)
-        self.graph = graph
+        self.graph = self.graph_og.copy()
 
         self.prm.update({
             'attack': attack,
@@ -491,6 +491,8 @@ class Attack(Simulation):
         elif self.prm['defense'] is not None:
             print(self.prm['defense'], "not available or k <= 0")
 
+        self.track_simulation(step=0)
+
     def track_simulation(self, step):
         """
         Keeps track of important simulation information at each step of the simulation
@@ -531,9 +533,6 @@ class Attack(Simulation):
 
         for step in range(self.prm['steps']):
             if step < len(self.attacked) and len(self.attacked) > 0:
-
-                self.track_simulation(step)
-
                 v = self.attacked[step]
 
                 if get_attack_category(self.prm['attack']) == 'edge':
@@ -545,7 +544,10 @@ class Attack(Simulation):
             else:
                 print("Ending attack simulation early, ran of {}s".format(get_attack_category(self.prm['attack'])))
 
-        results = [v['measure'] if v['measure'] is not None else 0 for k, v in self.sim_info.items()]
+            self.track_simulation(step + 1)
+
+        results = [self.sim_info[step]['measure'] if self.sim_info[step]['measure'] is not None else 0
+                   for step in range(self.prm['steps'] + 1)]
         return results
 
 

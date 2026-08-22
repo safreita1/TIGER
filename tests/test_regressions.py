@@ -204,12 +204,32 @@ def test_diffusion_uses_requested_seed():
     })
 
     first = Diffusion(nx.path_graph(20), **params)
+    repeated = Diffusion(nx.path_graph(20), **params)
 
     params['seed'] = 2
     second = Diffusion(nx.path_graph(20), **params)
 
+    assert first.infected == repeated.infected
     assert first.infected != second.infected
 
+
+def test_diffusion_timeline_length():
+    params = get_simulation_params()
+    params.update({
+        'steps': 3,
+        'model': 'SIS',
+        'b': 0.1,
+        'd': 0.1,
+        'c': 0.25,
+        'diffusion': None,
+        'method': None,
+        'k': 0
+    })
+
+    ds = Diffusion(nx.path_graph(20), **params)
+    results = ds.run_single_sim()
+
+    assert len(results) == params['steps'] + 1
 
 def test_cascading_uses_requested_seed():
     params = get_simulation_params()
@@ -223,11 +243,14 @@ def test_cascading_uses_requested_seed():
         'robust_measure': 'largest_connected_component'
     })
 
+    params['model'] = 'legacy_redistribution'
     first = Cascading(nx.path_graph(5), **params)
+    repeated = Cascading(nx.path_graph(5), **params)
 
     params['seed'] = 2
     second = Cascading(nx.path_graph(5), **params)
 
+    assert dict(first.load) == dict(repeated.load)
     assert dict(first.load) != dict(second.load)
 
 
@@ -393,6 +416,7 @@ def main():
     test_sir_state_transition()
     test_diffusion_validates_parameters()
     test_diffusion_uses_requested_seed()
+    test_diffusion_timeline_length()
     test_cascading_uses_requested_seed()
     test_cascading_edge_attack_preserves_input_graph()
     test_motter_lai_initial_load_and_capacity()

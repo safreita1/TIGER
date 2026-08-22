@@ -121,7 +121,7 @@ class Cascading(Simulation):
         else:
             self.load = {}
             for n in self.graph.nodes:
-                self.load[n] = self.capacity_og[n] * np.random.uniform(0, self.prm['l'])
+                self.load[n] = self.capacity_og[n] * self.rng.uniform(0, self.prm['l'])
 
         # attacked nodes or edges
         if self.prm['attack'] is not None and self.prm['k_a'] > 0:

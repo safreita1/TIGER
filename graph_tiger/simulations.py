@@ -46,12 +46,18 @@ class Simulation:
             'fa_iter': 200
         }
 
+        self.prm.update(kwargs)
+
+        if self.prm['runs'] <= 0:
+            raise ValueError('runs must be positive')
+        if self.prm['steps'] < 0:
+            raise ValueError('steps must be nonnegative')
+
         self.sim_info = defaultdict()
         self.sparse_graph = get_sparse_graph(self.graph)
 
-        if self.prm['seed'] is not None:
-            random.seed(self.prm['seed'])
-            np.random.seed(self.prm['seed'])
+        self.random = random.Random(self.prm['seed'])
+        self.rng = np.random.RandomState(self.prm['seed'])
 
     def child_class(self):
         """
@@ -323,8 +329,12 @@ class Simulation:
 
             self.reset_simulation()
 
+        result_length = len(sim_results[0])
+        if any(len(result) != result_length for result in sim_results):
+            raise ValueError('simulation runs returned different timeline lengths')
+
         avg_results = []
-        for t in range(self.prm['steps']):
+        for t in range(result_length):
             avg_results.append(np.mean([sim_results[r][t] for r in range(self.prm['runs'])]))
 
         return avg_results
