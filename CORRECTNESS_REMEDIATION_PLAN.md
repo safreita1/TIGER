@@ -180,6 +180,16 @@ The setup commit adds direct tests for:
 - natural-connectivity normalization;
 - JSON graph options and offline Karate loading.
 
+## Implementation status
+
+Completed on `codex/correctness-remediation` for the 0.3.0 release candidate.
+
+- Phases 0 through 8 and every issue ID in the ledger are implemented.
+- The core suite passes on Python 3.8, 3.9, 3.10, and 3.11.
+- The optional visualization suite passes with ForceAtlas2, Datashader, image, and animation coverage.
+- Motter-Lai is the literature-aligned default cascading model. The corrected historical TIGER rule is available only as `legacy_redistribution`.
+- A Crucitti efficiency-dynamics model is intentionally not claimed or implemented; it remains a separately named future model if the project chooses to add it.
+
 ## Acceptance criteria
 
 - All existing and new tests pass without weakening expected values or hiding failures behind broad exception handling.
