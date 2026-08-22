@@ -1,0 +1,70 @@
+name: PyPI Tests
+
+on:
+  push:
+    branches:
+      - codex/pypi-0.4.0-validation
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
+
+    steps:
+      - name: Checkout tests
+        uses: actions/checkout@v4
+        with:
+          path: source-tests
+          sparse-checkout: tests
+
+      - name: Install Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install released package and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'graph-tiger[test]==0.4.0'
+
+      - name: Verify released package
+        working-directory: /tmp
+        run: python -c "import graph_tiger, importlib.metadata; assert importlib.metadata.version('graph-tiger') == '0.4.0'; print(graph_tiger.__file__)"
+
+      - name: Run core tests
+        working-directory: /tmp
+        run: python -m pytest "$GITHUB_WORKSPACE/source-tests/tests" --ignore="$GITHUB_WORKSPACE/source-tests/tests/test_visualizations.py" --import-mode=importlib
+
+  visualization:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout tests
+        uses: actions/checkout@v4
+        with:
+          path: source-tests
+          sparse-checkout: tests
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Install ffmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v3
+
+      - name: Install released package and visualization dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'graph-tiger[test,visualization]==0.4.0'
+
+      - name: Verify released package
+        working-directory: /tmp
+        run: python -c "import graph_tiger, importlib.metadata; assert importlib.metadata.version('graph-tiger') == '0.4.0'; print(graph_tiger.__file__)"
+
+      - name: Run visualization tests
+        working-directory: /tmp
+        run: python -m pytest "$GITHUB_WORKSPACE/source-tests/tests/test_visualizations.py" --import-mode=importlib
