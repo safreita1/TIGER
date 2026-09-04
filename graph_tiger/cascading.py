@@ -22,25 +22,35 @@ class Cascading(Simulation):
     over the most efficient weighted paths and results report average network
     efficiency :cite:`crucitti2004model`.
 
+    The local-load-sharing model gives node ``i`` initial load equal to its degree
+    and fixed capacity ``(1 + r) L_i(0)``. A failed node redistributes its complete
+    current load among functioning neighbors with weights proportional to
+    ``degree ** beta``. Thus ``beta=0`` gives equal sharing, while larger values
+    increasingly favor high-degree recipients :cite:`wei2012analysis`.
+
     The historical TIGER redistribution rule remains available as
     ``model='legacy_redistribution'``. It is a TIGER-specific model.
 
     :param graph: an undirected NetworkX graph
-    :param model: cascading model (``motter_lai``, ``crucitti``, or ``legacy_redistribution``)
+    :param model: cascading model (``motter_lai``, ``crucitti``, ``local_load_sharing``,
+        or ``legacy_redistribution``)
     :param runs: an integer number of times to run the simulation
     :param steps: an integer number of steps to run a single simulation
     :param l: a float representing the maximum initial load in the legacy model
     :param r: a float representing the amount of redundancy in the network
+    :param beta: a nonnegative degree-preference exponent for local load sharing
     :param **kwargs: see parent class Simulation for additional options
     """
 
-    def __init__(self, graph, model='motter_lai', runs=10, steps=100, l=0.8, r=0.2, **kwargs):
+    def __init__(self, graph, model='motter_lai', runs=10, steps=100, l=0.8, r=0.2,
+                 beta=0, **kwargs):
         super().__init__(graph, runs, steps, **kwargs)
 
         self.prm.update({
             'model': model,
             'l': l,
             'r': r,
+            'beta': beta,
             'c': len(graph),
 
             'robust_measure': 'largest_connected_component',
@@ -67,7 +77,10 @@ class Cascading(Simulation):
         self.save_dir = os.path.join(os.getcwd(), 'plots', self.get_plot_title(steps))
         os.makedirs(self.save_dir, exist_ok=True)
 
-        self.capacity_og = self.get_load(self.graph_og)
+        if self.prm['model'] == 'local_load_sharing':
+            self.capacity_og = dict(self.graph_og.degree())
+        else:
+            self.capacity_og = self.get_load(self.graph_og)
         self.max_val = max(self.capacity_og.values(), default=0) * (1.0 + self.prm['r'])
         self.prm['max_val'] = self.max_val
 
@@ -76,6 +89,7 @@ class Cascading(Simulation):
         self.failed_edges = set()
         self.processed = set()
         self.overloaded = set()
+        self.shed_load = 0
         self.load = {}
         self.sim_info = defaultdict()
 
@@ -86,17 +100,21 @@ class Cascading(Simulation):
         Validate cascading-model parameters.
         """
 
-        if self.prm['model'] not in ['motter_lai', 'crucitti', 'legacy_redistribution']:
-            raise ValueError("model must be 'motter_lai', 'crucitti', or 'legacy_redistribution'")
+        models = ['motter_lai', 'crucitti', 'local_load_sharing', 'legacy_redistribution']
+        if self.prm['model'] not in models:
+            raise ValueError('unknown cascading model')
         if self.prm['l'] < 0 or self.prm['l'] > 1:
             raise ValueError('l must satisfy 0 <= l <= 1')
         if self.prm['r'] < 0:
             raise ValueError('r must be nonnegative')
+        if self.prm['beta'] < 0:
+            raise ValueError('beta must be nonnegative')
         if self.prm['model'] == 'crucitti' and self.prm['r'] == 0:
             raise ValueError('r must be positive for the Crucitti model')
-        if self.prm['model'] == 'crucitti' and self.prm['attack'] is not None:
-            if get_attack_category(self.prm['attack']) != 'node':
-                raise ValueError('the Crucitti model requires a node attack')
+        if self.prm['model'] in ['crucitti', 'local_load_sharing']:
+            if self.prm['attack'] is not None:
+                if get_attack_category(self.prm['attack']) != 'node':
+                    raise ValueError('the selected cascading model requires a node attack')
         if len(self.graph_og) > 0 and self.prm['c'] is not None and self.prm['c'] <= 0:
             raise ValueError('c must be positive')
 
@@ -180,10 +198,11 @@ class Cascading(Simulation):
         self.failed_edges = set()
         self.processed = set()
         self.overloaded = set()
+        self.shed_load = 0
         self.sim_info = defaultdict()
         self.capacity = {n: (1.0 + self.prm['r']) * value for n, value in self.capacity_og.items()}
 
-        if self.prm['model'] in ['motter_lai', 'crucitti']:
+        if self.prm['model'] in ['motter_lai', 'crucitti', 'local_load_sharing']:
             self.load = self.capacity_og.copy()
         else:
             self.load = {}
@@ -262,6 +281,7 @@ class Cascading(Simulation):
             'overloaded': self.overloaded,
             'edge_efficiency': {(u, v): data.get('efficiency', 1)
                                 for u, v, data in self.graph.edges(data=True)},
+            'shed_load': self.shed_load,
             'measure': measure,
             'protected': self.protected
         }
@@ -318,6 +338,45 @@ class Cascading(Simulation):
 
         return changed
 
+    def run_local_load_sharing_step(self):
+        """
+        Redistribute newly failed loads using the Wei local preferential rule.
+
+        The degree weights come from the intact graph. Transfers from every
+        source in one round are accumulated before loads and failures are
+        updated, making the transition synchronous.
+
+        :return: set of nodes that fail in this step
+        """
+
+        sources = self.failed.difference(self.processed)
+        transfers = defaultdict(float)
+
+        for n in sources:
+            nbrs = set(self.graph.neighbors(n)).difference(self.failed)
+
+            if len(nbrs) == 0:
+                self.shed_load += self.load[n]
+            else:
+                weights = {nb: self.graph_og.degree(nb) ** self.prm['beta'] for nb in nbrs}
+                total_weight = sum(weights.values())
+
+                for nb in nbrs:
+                    transfers[nb] += self.load[n] * weights[nb] / total_weight
+
+            self.load[n] = 0
+
+        for n, value in transfers.items():
+            self.load[n] += value
+
+        self.processed.update(sources)
+
+        nodes_functioning = set(self.graph.nodes).difference(self.failed)
+        failed_new = {n for n in nodes_functioning if self.load[n] > self.capacity[n]}
+        self.failed.update(failed_new)
+
+        return failed_new
+
     def run_legacy_step(self):
         """
         Redistribute each newly failed node's load once among functioning neighbors.
@@ -360,6 +419,10 @@ class Cascading(Simulation):
 
                 elif self.prm['model'] == 'crucitti':
                     stable = not self.run_crucitti_step()
+
+                elif self.prm['model'] == 'local_load_sharing':
+                    failed_new = self.run_local_load_sharing_step()
+                    stable = len(failed_new) == 0
 
                 else:
                     failed_new = self.run_legacy_step()
