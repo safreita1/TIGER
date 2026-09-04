@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added `model='local_load_sharing'`, implementing degree-weighted local redistribution with `beta=0` for equal sharing and larger values favoring higher-degree neighbors.
+- Local cascade states now report load that cannot reach a functioning neighbor as `shed_load`.
+- Added analytical regressions for initialization, equal and preferential allocation, synchronous updates, stranded load, and parameter validation.
+
 ## 0.4.0 - Crucitti model and modern Python
 
 ### Added
