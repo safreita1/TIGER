@@ -414,6 +414,25 @@ def test_motter_lai_initial_load_and_capacity():
 
 
 
+def test_motter_lai_recomputes_and_fails_synchronously():
+    params = get_simulation_params()
+    params.update({
+        'model': 'motter_lai',
+        'r': 0.1,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    cf = Cascading(nx.cycle_graph(5), **params)
+    cf.failed = {0}
+
+    failed_new = cf.run_motter_lai_step()
+
+    assert failed_new == {2, 3}
+
+
 def test_crucitti_reference_transition():
     params = get_simulation_params()
     params.update({
@@ -499,6 +518,26 @@ def test_crucitti_uses_weighted_efficient_paths():
 
     assert load[1] == 1
     assert np.isclose(efficiency, 5 / 6)
+
+
+def test_crucitti_uses_most_congested_endpoint():
+    params = get_simulation_params()
+    params.update({
+        'model': 'crucitti',
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    cf = Cascading(nx.path_graph(2), **params)
+    cf.load = {0: 2, 1: 4}
+    cf.capacity = {0: 1, 1: 1}
+
+    cf.run_crucitti_step()
+
+    assert cf.graph[0][1]['efficiency'] == 0.25
 
 
 def test_crucitti_validates_parameters():
@@ -859,9 +898,11 @@ def main():
     test_cascading_uses_requested_seed()
     test_cascading_edge_attack_preserves_input_graph()
     test_motter_lai_initial_load_and_capacity()
+    test_motter_lai_recomputes_and_fails_synchronously()
     test_crucitti_reference_transition()
     test_crucitti_restores_edge_efficiency()
     test_crucitti_uses_weighted_efficient_paths()
+    test_crucitti_uses_most_congested_endpoint()
     test_crucitti_validates_parameters()
     test_local_load_sharing_initial_load_and_capacity()
     test_local_load_sharing_equal_redistribution()
