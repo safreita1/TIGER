@@ -302,8 +302,10 @@ Beygelzimer *et al.* [Improving network robustness by edge modification](https:/
 
 
 **Simulation Frameworks:**
-* **[Cascading Failure Model](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)** 
-<br> Motter and Lai [Cascade-based attacks on complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.66.065102) (Physical Review E 2002)
+* **[Cascading Failure Models](https://graph-tiger.readthedocs.io/en/latest/cascading.html#graph_tiger.cascading.Cascading)**
+  * Motter and Lai [Cascade-based attacks on complex networks](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.66.065102) (Physical Review E 2002)
+  * Crucitti, Latora, and Marchiori [Model for cascading failures in complex networks](https://doi.org/10.1103/PhysRevE.69.045104) (Physical Review E 2004)
+  * Wei, Luo, and Zhang [Analysis of cascading failure in complex power networks under the load local preferential redistribution rule](https://doi.org/10.1016/j.physa.2011.12.030) (Physica A 2012)
 * **[Susceptible-Infected-Susceptible (SIS) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 
 <br> Pastor-Satorras and Vespignani [Epidemic spreading in scale-free networks](https://doi.org/10.1103/PhysRevLett.86.3200) (Physical Review Letters 2001)
 * **[Susceptible-Infected-Recovered (SIR) Model](https://graph-tiger.readthedocs.io/en/latest/diffusion.html#graph_tiger.diffusion.Diffusion)** 

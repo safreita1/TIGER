@@ -414,6 +414,25 @@ def test_motter_lai_initial_load_and_capacity():
 
 
 
+def test_motter_lai_recomputes_and_fails_synchronously():
+    params = get_simulation_params()
+    params.update({
+        'model': 'motter_lai',
+        'r': 0.1,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    cf = Cascading(nx.cycle_graph(5), **params)
+    cf.failed = {0}
+
+    failed_new = cf.run_motter_lai_step()
+
+    assert failed_new == {2, 3}
+
+
 def test_crucitti_reference_transition():
     params = get_simulation_params()
     params.update({
@@ -501,6 +520,26 @@ def test_crucitti_uses_weighted_efficient_paths():
     assert np.isclose(efficiency, 5 / 6)
 
 
+def test_crucitti_uses_most_congested_endpoint():
+    params = get_simulation_params()
+    params.update({
+        'model': 'crucitti',
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    cf = Cascading(nx.path_graph(2), **params)
+    cf.load = {0: 2, 1: 4}
+    cf.capacity = {0: 1, 1: 1}
+
+    cf.run_crucitti_step()
+
+    assert cf.graph[0][1]['efficiency'] == 0.25
+
+
 def test_crucitti_validates_parameters():
     invalid = [
         {'r': 0, 'attack': None, 'k_a': 0},
@@ -524,6 +563,148 @@ def test_crucitti_validates_parameters():
             raised = True
 
         assert raised
+
+def test_local_load_sharing_initial_load_and_capacity():
+    params = get_simulation_params()
+    params.update({
+        'model': 'local_load_sharing',
+        'beta': 0,
+        'r': 0.5,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    graph = nx.path_graph(3)
+    cf = Cascading(graph, **params)
+
+    assert cf.load == dict(graph.degree())
+    assert cf.capacity == {0: 1.5, 1: 3, 2: 1.5}
+
+
+def test_local_load_sharing_equal_redistribution():
+    params = get_simulation_params()
+    params.update({
+        'model': 'local_load_sharing',
+        'beta': 0,
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    cf = Cascading(nx.star_graph(3), **params)
+    cf.load = {0: 12, 1: 0, 2: 0, 3: 0}
+    cf.capacity = {0: 0, 1: 10, 2: 10, 3: 10}
+    cf.failed = {0}
+    cf.processed = set()
+
+    failed_new = cf.run_local_load_sharing_step()
+
+    assert failed_new == set()
+    assert cf.load == {0: 0, 1: 4, 2: 4, 3: 4}
+    assert cf.shed_load == 0
+
+
+def test_local_load_sharing_degree_preference():
+    params = get_simulation_params()
+    params.update({
+        'model': 'local_load_sharing',
+        'beta': 1,
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    graph = nx.Graph([(0, 1), (0, 2), (0, 3), (2, 4), (3, 5), (3, 6)])
+    cf = Cascading(graph, **params)
+    cf.load = {n: 0 for n in graph.nodes}
+    cf.load[0] = 12
+    cf.capacity = {n: 20 for n in graph.nodes}
+    cf.failed = {0}
+    cf.processed = set()
+
+    cf.run_local_load_sharing_step()
+
+    assert cf.load[1] == 2
+    assert cf.load[2] == 4
+    assert cf.load[3] == 6
+
+
+def test_local_load_sharing_updates_synchronously():
+    params = get_simulation_params()
+    params.update({
+        'model': 'local_load_sharing',
+        'beta': 0,
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    graph = nx.Graph([(0, 2), (1, 2)])
+    cf = Cascading(graph, **params)
+    cf.load = {0: 4, 1: 6, 2: 0}
+    cf.capacity = {0: 0, 1: 0, 2: 9}
+    cf.failed = {0, 1}
+    cf.processed = set()
+
+    failed_new = cf.run_local_load_sharing_step()
+
+    assert failed_new == {2}
+    assert cf.load == {0: 0, 1: 0, 2: 10}
+
+
+def test_local_load_sharing_records_shed_load():
+    params = get_simulation_params()
+    params.update({
+        'model': 'local_load_sharing',
+        'beta': 0,
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    graph = nx.empty_graph(1)
+    cf = Cascading(graph, **params)
+    cf.load = {0: 5}
+    cf.capacity = {0: 0}
+    cf.failed = {0}
+    cf.processed = set()
+
+    cf.run_local_load_sharing_step()
+
+    assert cf.load[0] == 0
+    assert cf.shed_load == 5
+
+
+def test_local_load_sharing_validates_parameters():
+    params = get_simulation_params()
+    params.update({
+        'model': 'local_load_sharing',
+        'beta': -1,
+        'r': 0.2,
+        'k_a': 0,
+        'attack': None,
+        'k_d': 0,
+        'defense': None
+    })
+
+    raised = False
+    try:
+        Cascading(nx.path_graph(3), **params)
+    except ValueError:
+        raised = True
+
+    assert raised
+
 
 def test_legacy_cascading_redistributes_failed_load_once():
     params = get_simulation_params()
@@ -717,10 +898,18 @@ def main():
     test_cascading_uses_requested_seed()
     test_cascading_edge_attack_preserves_input_graph()
     test_motter_lai_initial_load_and_capacity()
+    test_motter_lai_recomputes_and_fails_synchronously()
     test_crucitti_reference_transition()
     test_crucitti_restores_edge_efficiency()
     test_crucitti_uses_weighted_efficient_paths()
+    test_crucitti_uses_most_congested_endpoint()
     test_crucitti_validates_parameters()
+    test_local_load_sharing_initial_load_and_capacity()
+    test_local_load_sharing_equal_redistribution()
+    test_local_load_sharing_degree_preference()
+    test_local_load_sharing_updates_synchronously()
+    test_local_load_sharing_records_shed_load()
+    test_local_load_sharing_validates_parameters()
     test_legacy_cascading_redistributes_failed_load_once()
     test_legacy_cascading_redistributes_to_functioning_neighbors()
     test_cascading_timeline_length()

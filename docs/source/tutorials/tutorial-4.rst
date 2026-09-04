@@ -1,153 +1,97 @@
 Tutorial 4: Cascading Failures
 =========================================
 
-Cascading failures often arise as a result of natural failures or targeted attacks in a network. Consider an electrical grid where a central substation goes offline. In order to maintain the distribution of power, neighboring substations have to increase production in order to meet demand. However, if this is not possible, the neighboring substation fails, which in turn causes additional neighboring substations to fail. The end result is a series of cascading failures i.e., a blackout. While cascading failures can occur in a variety of network types e.g., water, electrical, communication, we focus on the electrical grid. Below, we discuss the design and implementation of the cascading failure model and how TIGER can be used to both **induce** and **prevent** cascading failures using the attack and defense mechanisms discussed in previous tutorials. There are 3 main processes governing the network simulation:
+A cascade begins with an initial component failure and continues when the
+resulting change in load overloads additional components. The appropriate TIGER
+model depends on how load moves after the trigger.
 
-- **capacity** of each node :math:`c_v\in [0,1]`
-- **load** of each node :math:`l_v\in U(0, l_{max})` 
-- network **redundancy** :math:`r\in [0, 1]`
+- ``motter_lai`` recomputes global shortest-path load and removes overloaded nodes.
+- ``crucitti`` reroutes over most-efficient paths and degrades service through
+  congested nodes without removing them.
+- ``local_load_sharing`` transfers a failed node's load only to its functioning
+  neighbors.
 
-The capacity of each node :math:`c_v` is the the maximum load a node can handle, which is set based on the node's normalized betweenness centrality. The load of each node :math:`l_v` represents the fraction of maximum capacity :math:`c_v` that the node operates at. Load for each node :math:`c_v` is set by uniformly drawing from :math:`U(0, l_{max})`, where :math:`l_{max}` is the maximum initial load. Network redundancy *r* represents the amount of reserve capacity present in the network i.e., auxiliary support systems. At the beginning of the simulation, we allow the user to attack and defend the network according to the node attack and defense strategies discussed in previous tutorials. When a node is attacked it becomes "overloaded", causing it to fail and requiring the load be distributed to its neighbors. When defending a node we increase it's capacity to protect against attacks.
+Local load sharing
+------------------
 
+The local model follows the degree-weighted redistribution rule of
+:cite:`wei2012analysis`. A node starts with load equal to its intact degree and
+capacity :math:`(1+r)L_i(0)`. When it fails, a neighboring node :math:`j`
+receives
 
-.. figure:: ../../../images/cascading-failure.jpg
-   :width: 100 %
-   :align: center
+.. math::
 
-   TIGER cascading failure simulation on the US power grid network when 4 nodes are overloaded according to the ID attack strategy. Time step 1: shows the network under normal conditions. Time step 50: we observe a series of failures originating from the bottom of the network. Time step 70: most of the network has collapsed.
+   \Delta L_{i\rightarrow j}
+   =
+   L_i
+   \frac{k_j^\beta}
+   {\sum_{u\in N_i^+} k_u^\beta}.
 
-To help users visualize cascading failures induced by targeted attacks, we enable them to create visuals like the figure above, where we overload 4 nodes selected by the ID attack strategy on the US power grid dataset (:math:`l_max=0.8`). Nodesize represents capacity i.e., larger size :math:`\rightarrow` higher capacity, and color indicates the load of each node on a gradient scale from blue (low load) to red (high load); dark red indicates node failure (overloaded). Time step 1 shows the network under normal conditions; at step 50 we observe a series of failures originating from the bottom of the network; by step 70 most of the network has collapsed. 
+With ``beta=0``, every functioning neighbor receives the same share. With
+``beta=1``, a neighbor of degree 3 receives three times as much as a neighbor
+of degree 1. Larger values concentrate the failed load more strongly on
+high-degree neighbors.
 
-
-To run a cascading failure simulations and create the visual, we just have to write a few lines of code:
+The following simulation attacks one high-degree node and applies linear
+degree preference:
 
 .. code-block:: python
-   :name: cascading-failure-1
+   :name: local-load-sharing
 
    from graph_tiger.cascading import Cascading
    from graph_tiger.graphs import graph_loader
-   
+
    graph = graph_loader('electrical')
+   cascade = Cascading(
+       graph,
+       model='local_load_sharing',
+       beta=1,
+       r=0.2,
+       attack='id_node',
+       k_a=1,
+       defense=None,
+       k_d=0,
+       runs=1,
+       steps=20,
+       seed=7,
+       plot_transition=False,
+       gif_animation=False
+   )
 
-   params = {
-      'runs': 1,
-      'steps': 100,
-      'seed': 1,
+   trajectory = cascade.run_single_sim()
+   failed_by_step = [cascade.sim_info[t]['failed']
+                     for t in range(len(trajectory))]
+   shed_by_step = [cascade.sim_info[t]['shed_load']
+                   for t in range(len(trajectory))]
 
-      'l': 0.8,
-      'r': 0.2,
-      'c': int(0.1 * len(graph)),
+Comparing equal and preferential sharing
+------------------------------------------
 
-      'k_a': 30,
-      'attack': 'rb_node',
-      'attack_approx': int(0.1 * len(graph)),
-
-      'k_d': 0,
-      'defense': None,
-
-      'robust_measure': 'largest_connected_component',
-
-      'plot_transition': True,  # False turns off key simulation image "snapshots"
-      'gif_animation': False,  # True creaets a video of the simulation (MP4 file)
-      'gif_snaps': False,  # True saves each frame of the simulation as an image
-
-      'edge_style': 'bundled',
-      'node_style': 'force_atlas',
-      'fa_iter': 2000,
-   }
-
-   cascading = Cascading(graph, **params)
-   results = cascading.run_simulation()
-
-   cascading.plot_results(results)
-
-
-We can also summarize simulation results over many configurations, and create plots the figure below, which shows the effect of network redundancy when 4 nodes are overloaded by the ID attack strategy. At 50% redundancy, we observe a critical threshold where the network is able to redistribute the increased load. For :math:`r < 50%`, the cascading failure can be delayed but not prevented.
-
-.. figure:: ../../../images/cascading-failure-comparison.jpg
-   :width: 75 %
-   :align: center
-
-   Effect of network redundancy *r* on the US power grid where 4 nodes are overloaded using ID. When :math:`r\geq 50\%` the network is able to redistribute the increased load.
-
-Running and visualizing multiple simulations only takes a few extra lines of code:
+Keep the graph, attack, capacity margin, and seed fixed, then change only
+``beta``:
 
 .. code-block:: python
-   :name: cascading-failure-comparison
+   :name: compare-local-sharing
 
-   params = {
-        'runs': 10,
-        'steps': 100,
-        'seed': 1,
+   results = {}
+   for beta in [0, 1, 2]:
+       cascade = Cascading(
+           graph, model='local_load_sharing', beta=beta, r=0.2,
+           attack='id_node', k_a=1, defense=None, k_d=0,
+           runs=1, steps=20, seed=7,
+           plot_transition=False, gif_animation=False
+       )
+       cascade.run_single_sim()
+       results[beta] = cascade.sim_info[20]['failed']
 
-        'l': 0.8,
-        'r': 0.2,
-        'c': int(0.1 * len(graph)),
+This comparison isolates the allocation rule. It does not assume that larger
+``beta`` is always safer: concentrating load on hubs can prevent low-degree
+neighbors from failing, but it can also overload an already stressed hub.
 
-        'k_a': 5,
-        'attack': 'id_node',
-        'attack_approx': None,  # int(0.1 * len(graph)),
+State and interpretation
+------------------------
 
-        'k_d': 0,
-        'defense': None,
-
-        'robust_measure': 'largest_connected_component',
-
-        'plot_transition': False,
-        'gif_animation': False,
-
-        'edge_style': None,
-        'node_style': 'spectral',
-        'fa_iter': 2000,
-
-    }
-
-    results = defaultdict(list)
-    redundancy = np.arange(0, 0.5, .1)
-
-    for idx, r in enumerate(redundancy):
-        params['r'] = r
-
-        if idx == 2:
-            params['plot_transition'] = True
-            params['gif_animation'] = True
-            params['gif_snaps'] = True
-        else:
-            params['plot_transition'] = False
-            params['gif_animation'] = False
-            params['gif_snaps'] = False
-
-        cf = Cascading(graph, **params)
-        results[r] = cf.run_simulation()
-
-    plot_results(graph, params, results, xlabel='Steps', line_label='Redundancy', experiment='redundancy')
-
-
-.. code-block:: python
-   :name: plot-results
-
-   def plot_results(graph, params, results, xlabel='Steps', line_label='', experiment=''):
-      plt.figure(figsize=(6.4, 4.8))
-
-      title = '{}:step={},l={},r={},k_a={},attack={},k_d={},defense={}'.format(experiment, params['steps'], params['l'], params['r'], params['k_a'],
-                                                                                    params['attack'], params['k_d'], params['defense'])
-      for strength, result in results.items():
-         result_norm = [r / len(graph) for r in result]
-         plt.plot(result_norm, label="{}: {}".format(line_label, strength))
-
-      plt.xlabel(xlabel)
-      plt.ylabel(params['robust_measure'])
-      plt.ylim(0, 1)
-
-      save_dir = os.getcwd() + '/plots/' + experiment + '/'
-      os.makedirs(save_dir, exist_ok=True)
-
-      plt.legend()
-      plt.title(title)
-      plt.savefig(save_dir + title + '.pdf')
-      plt.show()
-      plt.clf()
-
-
-
-
+The attacked state is recorded at index 0, followed by one state for each
+requested transition. ``failed`` gives the cumulative number of failed nodes.
+``status`` records node loads, and ``shed_load`` records load from failed nodes
+that had no functioning neighbor. The input graph is not modified.
