@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0 - Local load-sharing cascades
 
 ### Added
 
