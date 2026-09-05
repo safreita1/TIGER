@@ -2,7 +2,7 @@ import os
 from setuptools import find_packages, setup
 
 # run "git tag <version>" and then "git push origin master <version> when releasing a package to PyPi
-version = "0.5.0"
+version = "0.6.0"
 
 keywords = ["data-science",
             "machine-learning",
