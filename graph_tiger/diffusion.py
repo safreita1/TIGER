@@ -20,7 +20,7 @@ class Diffusion(Simulation):
     :param b: float representing birth rate of virus (probability of transmitting disease to each neighbor)
     :param d: float representing death rate of virus (probability of each infected node healing)
     :param c: fraction of initially infected nodes
-    :param **kwargs: see parent class Simulation for additional options
+    :param kwargs: see parent class Simulation for additional options
     """
 
     def __init__(self, graph, model='SIS', runs=10, steps=5000, b=0.00208, d=0.01, c=1, **kwargs):
