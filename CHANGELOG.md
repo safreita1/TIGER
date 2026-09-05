@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Local cascades accept `allocation='greedy'`, `'proportional'`, or `'max_flow'`, alongside the existing default `'degree'` policy. All policies transfer full displaced workloads; greedy and maximum-flow allocations distribute overflow equally.
+- Added complete `initial_load` and `capacities` mappings and an exact `initial_failures` set for local cascades. Supplied capacities are used directly and all inputs are copied for repeatable resets.
+- Added `lost_load` for work with no functioning recipient, retaining `shed_load` as a compatible attribute/history alias, and `last_transfers` for inspecting individual handoffs.
+- Added analytical and randomized conservation/max-flow tests, a runnable allocation study, and six tutorial figures with transfer data.
+
+### Fixed
+
+- Empty graphs now have a zero-by-zero sparse adjacency matrix rather than failing during simulation construction.
+
 ## 0.5.0 - Local load-sharing cascades
 
 ### Added

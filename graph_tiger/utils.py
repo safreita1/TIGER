@@ -22,6 +22,8 @@ def get_sparse_graph(graph):
     :return: Scipy sparse adjacency matrix
     """
 
+    if len(graph) == 0:
+        return sparse.csr_matrix((0, 0), dtype=float)
     if hasattr(nx, 'to_scipy_sparse_array'):
         return nx.to_scipy_sparse_array(graph, format='csr', dtype=float, nodelist=list(graph.nodes))
 

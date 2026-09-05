@@ -201,6 +201,15 @@ Completed on `codex/correctness-remediation` for the 0.4.0 release candidate.
 - Published-model names, equations, state transitions, and citations agree.
 - The final diff preserves the repository's established style and contains no unrelated reformatting.
 
+## Local allocation follow-up
+
+The local-allocation issue cluster extends the existing cascade contracts:
+
+- CAS-09: add greedy, proportional, and coordinated maximum-flow allocation with complete overflow transfers, pre-round headroom, explicit insertion-order ties, and synchronous failures.
+- CAS-10: accept copied application loads/capacities and exact initiating failures; expose lost service without breaking the older shed_load field.
+- UTL-02: allow empty-graph simulation initialization through a zero-size sparse adjacency matrix.
+- DOC-01 / TST-01: synchronize the tutorial, API reference, runnable figures, analytical examples, conservation invariants, and independent min-cut checks in the same PR.
+
 ## Primary references
 
 - W. O. Kermack and A. G. McKendrick, "A Contribution to the Mathematical Theory of Epidemics," 1927.

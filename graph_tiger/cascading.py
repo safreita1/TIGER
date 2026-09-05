@@ -1,5 +1,7 @@
 import numpy as np
 from collections import defaultdict
+from collections.abc import Mapping
+from numbers import Real
 
 from graph_tiger.simulations import Simulation
 from graph_tiger.graphs import *
@@ -27,6 +29,9 @@ class Cascading(Simulation):
     current load among functioning neighbors with weights proportional to
     ``degree ** beta``. Thus ``beta=0`` gives equal sharing, while larger values
     increasingly favor high-degree recipients :cite:`wei2012analysis`.
+    Alternatively, ``allocation`` selects greedy or proportional spare-capacity
+    sharing, or coordinated maximum flow. Every policy transfers the full load
+    when a recipient exists. Only work with no recipient becomes lost service.
 
     The historical TIGER redistribution rule remains available as
     ``model='legacy_redistribution'``. It is a TIGER-specific model.
@@ -39,11 +44,22 @@ class Cascading(Simulation):
     :param l: a float representing the maximum initial load in the legacy model
     :param r: a float representing the amount of redundancy in the network
     :param beta: a nonnegative degree-preference exponent for local load sharing
-    :param **kwargs: see parent class Simulation for additional options
+    :param allocation: local policy: degree (default), greedy, proportional, or
+        max_flow. Greedy ties follow graph node insertion order. Maximum flow
+        uses Edmonds-Karp with that order; ties can affect subsequent failures.
+    :param initial_load: optional complete node-to-load mapping for local sharing;
+        finite nonnegative values, default intact unweighted degrees
+    :param capacities: optional complete node-to-capacity mapping for local sharing;
+        finite nonnegative values, default (1+r) times initial load. Explicit
+        capacities are used directly, without another redundancy multiplier.
+    :param initial_failures: optional iterable of initially failed nodes for local
+        sharing; replaces attack selection and its budget, including when empty
+    :param kwargs: see parent class Simulation for additional options
     """
 
     def __init__(self, graph, model='motter_lai', runs=10, steps=100, l=0.8, r=0.2,
-                 beta=0, **kwargs):
+                 beta=0, allocation='degree', initial_load=None, capacities=None,
+                 initial_failures=None, **kwargs):
         super().__init__(graph, runs, steps, **kwargs)
 
         self.prm.update({
@@ -51,6 +67,10 @@ class Cascading(Simulation):
             'l': l,
             'r': r,
             'beta': beta,
+            'allocation': allocation,
+            'initial_load': initial_load,
+            'capacities': capacities,
+            'initial_failures': initial_failures,
             'c': len(graph),
 
             'robust_measure': 'largest_connected_component',
@@ -78,10 +98,15 @@ class Cascading(Simulation):
         os.makedirs(self.save_dir, exist_ok=True)
 
         if self.prm['model'] == 'local_load_sharing':
-            self.capacity_og = dict(self.graph_og.degree())
+            self.capacity_og = (dict(self.graph_og.degree()) if self.prm['initial_load'] is None
+                                else self.prm['initial_load'].copy())
         else:
             self.capacity_og = self.get_load(self.graph_og)
-        self.max_val = max(self.capacity_og.values(), default=0) * (1.0 + self.prm['r'])
+        self.capacity_initial = {n: (1.0 + self.prm['r']) * value
+                                 for n, value in self.capacity_og.items()}
+        if self.prm['capacities'] is not None:
+            self.capacity_initial = self.prm['capacities'].copy()
+        self.max_val = max(self.capacity_initial.values(), default=0)
         self.prm['max_val'] = self.max_val
 
         self.protected = set()
@@ -105,14 +130,35 @@ class Cascading(Simulation):
             raise ValueError('unknown cascading model')
         if self.prm['l'] < 0 or self.prm['l'] > 1:
             raise ValueError('l must satisfy 0 <= l <= 1')
-        if self.prm['r'] < 0:
+        if not np.isfinite(self.prm['r']) or self.prm['r'] < 0:
             raise ValueError('r must be nonnegative')
-        if self.prm['beta'] < 0:
+        if not np.isfinite(self.prm['beta']) or self.prm['beta'] < 0:
             raise ValueError('beta must be nonnegative')
+        if self.prm['allocation'] not in ['degree', 'greedy', 'proportional', 'max_flow']:
+            raise ValueError('unknown local allocation policy')
+        local_options = ['initial_load', 'capacities', 'initial_failures']
+        if self.prm['model'] != 'local_load_sharing':
+            if self.prm['allocation'] != 'degree' or any(self.prm[k] is not None for k in local_options):
+                raise ValueError('allocation and supplied load/capacity/failure inputs require local_load_sharing')
+        for key in ['initial_load', 'capacities']:
+            values = self.prm[key]
+            if values is not None:
+                if not isinstance(values, Mapping) or set(values) != set(self.graph_og):
+                    raise ValueError(key + ' must map every graph node exactly once')
+                if any(not isinstance(v, Real) or not np.isfinite(v) or v < 0 for v in values.values()):
+                    raise ValueError(key + ' must contain finite nonnegative numbers')
+                self.prm[key] = {n: float(values[n]) for n in self.graph_og}
+        if self.prm['initial_failures'] is not None:
+            if isinstance(self.prm['initial_failures'], (str, bytes)):
+                raise ValueError('initial_failures must be an iterable of node labels')
+            failed = set(self.prm['initial_failures'])
+            if not failed.issubset(self.graph_og):
+                raise ValueError('initial_failures contains unknown nodes')
+            self.prm['initial_failures'] = tuple(n for n in self.graph_og if n in failed)
         if self.prm['model'] == 'crucitti' and self.prm['r'] == 0:
             raise ValueError('r must be positive for the Crucitti model')
         if self.prm['model'] in ['crucitti', 'local_load_sharing']:
-            if self.prm['attack'] is not None:
+            if self.prm['attack'] is not None and self.prm['initial_failures'] is None:
                 if get_attack_category(self.prm['attack']) != 'node':
                     raise ValueError('the selected cascading model requires a node attack')
         if len(self.graph_og) > 0 and self.prm['c'] is not None and self.prm['c'] <= 0:
@@ -135,6 +181,15 @@ class Cascading(Simulation):
 
         return nx.betweenness_centrality(graph, k=int(self.prm['c']), normalized=False,
                                          endpoints=False, weight=weight, seed=self.get_random_seed())
+
+    @property
+    def shed_load(self):
+        """Backward-compatible alias for lost_load; no deliberate shedding."""
+        return self.lost_load
+
+    @shed_load.setter
+    def shed_load(self, value):
+        self.lost_load = value
 
     @staticmethod
     def get_efficiency_graph(graph):
@@ -200,7 +255,8 @@ class Cascading(Simulation):
         self.overloaded = set()
         self.shed_load = 0
         self.sim_info = defaultdict()
-        self.capacity = {n: (1.0 + self.prm['r']) * value for n, value in self.capacity_og.items()}
+        self.last_transfers = {}
+        self.capacity = self.capacity_initial.copy()
 
         if self.prm['model'] in ['motter_lai', 'crucitti', 'local_load_sharing']:
             self.load = self.capacity_og.copy()
@@ -210,7 +266,9 @@ class Cascading(Simulation):
                 self.load[n] = self.capacity_og[n] * self.rng.uniform(0, self.prm['l'])
 
         # attacked nodes or edges
-        if self.prm['attack'] is not None and self.prm['k_a'] > 0:
+        if self.prm['initial_failures'] is not None:
+            self.failed = set(self.prm['initial_failures'])
+        elif self.prm['attack'] is not None and self.prm['k_a'] > 0:
             attacked = run_attack_method(self.graph, self.prm['attack'], self.prm['k_a'],
                                          approx=self.prm['attack_approx'], seed=self.get_random_seed())
 
@@ -282,6 +340,7 @@ class Cascading(Simulation):
             'edge_efficiency': {(u, v): data.get('efficiency', 1)
                                 for u, v, data in self.graph.edges(data=True)},
             'shed_load': self.shed_load,
+            'lost_load': self.lost_load,
             'measure': measure,
             'protected': self.protected
         }
@@ -340,29 +399,65 @@ class Cascading(Simulation):
 
     def run_local_load_sharing_step(self):
         """
-        Redistribute newly failed loads using the Wei local preferential rule.
+        Transfer complete failed workloads, then synchronously fail overloads.
 
-        The degree weights come from the intact graph. Transfers from every
-        source in one round are accumulated before loads and failures are
-        updated, making the transition synchronous.
+        Degree weights use the intact graph. Greedy and proportional allocations
+        use pre-round headroom independently for each source. Maximum flow
+        coordinates the capacity-fitting pass across all sources. Greedy and
+        maximum-flow leftovers are divided equally among eligible recipients;
+        proportional sharing uses equal shares when all headroom is zero.
+        last_transfers maps (failed source, recipient) to the completed transfer.
+        lost_load accumulates work with no functioning neighbor; shed_load is
+        retained as a compatibility alias, not a deliberate shedding control.
 
         :return: set of nodes that fail in this step
         """
 
-        sources = self.failed.difference(self.processed)
+        sources = [n for n in self.graph_og if n in self.failed and n not in self.processed]
+        order = {n: i for i, n in enumerate(self.graph_og)}
+        eligible = {n: sorted((j for j in self.graph.neighbors(n) if j not in self.failed),
+                              key=order.__getitem__) for n in sources}
+        spare = {n: max(0.0, self.capacity[n] - self.load[n])
+                 for n in self.graph if n not in self.failed}
+        policy = self.prm['allocation']
+        flow = self._local_capacity_flow(sources, eligible, spare) if policy == 'max_flow' else {}
         transfers = defaultdict(float)
+        self.last_transfers = {}
 
         for n in sources:
-            nbrs = set(self.graph.neighbors(n)).difference(self.failed)
+            nbrs = eligible[n]
+            demand = self.load[n]
 
             if len(nbrs) == 0:
-                self.shed_load += self.load[n]
+                self.lost_load += demand
             else:
-                weights = {nb: self.graph_og.degree(nb) ** self.prm['beta'] for nb in nbrs}
-                total_weight = sum(weights.values())
-
+                if policy == 'degree':
+                    degrees = {j: self.graph_og.degree(j) for j in nbrs}
+                    scale = max(degrees.values())
+                    weights = {j: (degrees[j] / scale) ** self.prm['beta']
+                               if scale else 1.0 for j in nbrs}
+                    total = sum(weights.values())
+                    assigned = {j: demand * (weights[j] / total) for j in nbrs}
+                elif policy == 'proportional':
+                    scale = max(spare[j] for j in nbrs)
+                    weights = {j: spare[j] / scale if scale else 1.0 for j in nbrs}
+                    total = sum(weights.values())
+                    assigned = {j: demand * (weights[j] / total) for j in nbrs}
+                else:
+                    assigned = {j: 0.0 for j in nbrs}
+                    remaining = demand
+                    if policy == 'greedy':
+                        for j in sorted(nbrs, key=lambda j: -spare[j]):
+                            assigned[j] = min(remaining, spare[j])
+                            remaining -= assigned[j]
+                    else:
+                        assigned = {j: flow.get(n, {}).get(j, 0.0) for j in nbrs}
+                        remaining = max(0.0, demand - sum(assigned.values()))
+                    for j in nbrs:
+                        assigned[j] += remaining / len(nbrs)
                 for nb in nbrs:
-                    transfers[nb] += self.load[n] * weights[nb] / total_weight
+                    self.last_transfers[n, nb] = assigned[nb]
+                    transfers[nb] += assigned[nb]
 
             self.load[n] = 0
 
@@ -376,6 +471,23 @@ class Cascading(Simulation):
         self.failed.update(failed_new)
 
         return failed_new
+
+    def _local_capacity_flow(self, sources, eligible, spare):
+        """Joint headroom-fitting pass with deterministic insertion-order ties."""
+        network = nx.DiGraph()
+        source, sink = object(), object()
+        network.add_nodes_from([source, sink])
+        for n in sources:
+            network.add_edge(source, ('failed', n), capacity=self.load[n])
+            for j in eligible[n]:
+                network.add_edge(('failed', n), ('recipient', j), capacity=self.load[n])
+        for j in self.graph_og:
+            if ('recipient', j) in network:
+                network.add_edge(('recipient', j), sink, capacity=spare[j])
+        _, flows = nx.maximum_flow(network, source, sink,
+                                   flow_func=nx.algorithms.flow.edmonds_karp)
+        return {n: {j: flows[('failed', n)].get(('recipient', j), 0.0)
+                    for j in eligible[n]} for n in sources}
 
     def run_legacy_step(self):
         """

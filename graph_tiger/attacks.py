@@ -188,7 +188,7 @@ def get_node_ib(graph, k=3, approx=np.inf, seed=None):
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
     :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n
-    is the number of nodes in the graph
+        is the number of nodes in the graph
 
     :return: a list of nodes to attack
     """
@@ -207,7 +207,7 @@ def get_node_rb(graph, k=3, approx=np.inf, seed=None):
     :param graph: an undirected NetworkX graph
     :param k: number of nodes to attack
     :param approx: number of nodes to approximate the betweenness centrality, k=0.1n is a good approximation, where n
-    is the number of nodes in the graph
+        is the number of nodes in the graph
 
     :return: a list of nodes to attack
     """
@@ -441,7 +441,7 @@ class Attack(Simulation):
     :param attack: a string representing the attack strategy to run
     :param defense: a string representing the defense strategy to run
     :param k_d: an integer number of nodes to defend
-    :param **kwargs: see parent class Simulation for additional options
+    :param kwargs: see parent class Simulation for additional options
     """
 
     def __init__(self, graph, runs=10, steps=50, attack='id_node', defense=None, k_d=0, **kwargs):
