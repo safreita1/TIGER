@@ -1,0 +1,18 @@
+{
+  "graph": "karate",
+  "b": 0.08,
+  "d": 0.2,
+  "c": 0.1,
+  "seed": 17,
+  "steps": 150,
+  "final_recovered": 0.08823529411764706,
+  "final_infected": 0.0,
+  "peak_infected": 0.08823529411764706,
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}

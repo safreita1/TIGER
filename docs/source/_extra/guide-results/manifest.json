@@ -1,0 +1,125 @@
+{
+  "package_version": "0.6.0",
+  "dependencies": {
+    "graph-tiger": "0.6.0",
+    "numpy": "2.5.2",
+    "networkx": "3.6.1",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.1",
+    "pandas": "3.0.5"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "artifacts": {
+    "attacks.csv": {
+      "sha256": "c355dbef8f67e966458df471568be09a0ee7c5383bdb0128adbd7047746b60a1",
+      "bytes": 88116
+    },
+    "cascade-snapshots.csv": {
+      "sha256": "9ded92cb771b19685a2f045a695df9399a79b8a154a883a684877a904bce884b",
+      "bytes": 36
+    },
+    "cascades-global.csv": {
+      "sha256": "001b2b60dbdf39addc6558dedc00901aa12d6fa3230f231e2999d4b7746bbfe6",
+      "bytes": 4869
+    },
+    "cascades-local.csv": {
+      "sha256": "8d4d37930bb84ab260b6a186ec2a798afbbc40357270678c9fe7d911cf58ba90",
+      "bytes": 4074
+    },
+    "defenses-edge.csv": {
+      "sha256": "26c8627fc6bff507059fe7777c471346e1a717e664c827b5820ae06aa736c399",
+      "bytes": 75402
+    },
+    "defenses-node.csv": {
+      "sha256": "fe11377dfae48aed89da304d042a4b897ce5ec777d990564a16ac77f22951174",
+      "bytes": 15884
+    },
+    "epidemics-sir.csv": {
+      "sha256": "15b9a1641b3e76036176542c7175689c90f3638e57a4ebc4cb7084327260b8e6",
+      "bytes": 14528
+    },
+    "epidemics-spread.csv": {
+      "sha256": "63091a611ce59572e9f9b808f0326d9400b6f4974c089a2cdef8207bcfb81477",
+      "bytes": 206797
+    },
+    "epidemics.csv": {
+      "sha256": "38fbf1947160153e6727bf9117fd3176b5f9cb1dff70715c1e0de1bf6bde6c21",
+      "bytes": 643244
+    },
+    "local-allocation.csv": {
+      "sha256": "6d2aba3e37eb9e1f8cc52b01de553524ce19887b8d06cf06b8339582294091bb",
+      "bytes": 1114
+    },
+    "local-complete.csv": {
+      "sha256": "d03791b311520486adca39b1065547803ca4392a2d374280e55836bb0cfb29a8",
+      "bytes": 41922
+    },
+    "power-routing.csv": {
+      "sha256": "d804835a83a1a1e8988a5e94fd97a8509a523e6b395d3d99fb9c95ab7badba75",
+      "bytes": 48306
+    },
+    "preventive-defense.csv": {
+      "sha256": "eb13fe9566b9c850734be33f2286e318cfa1303fdf74e3878a27f2205f1c3535",
+      "bytes": 27613
+    },
+    "sir-ensemble.csv": {
+      "sha256": "64ed7b7aafc8cfc4604d386a534acdb9c72dc733ff08a301ff69878e4ebab45c",
+      "bytes": 2741
+    },
+    "sir-prevalence.csv": {
+      "sha256": "3d7fb7d12a8ec3551f89bbe400cd9fcafd6ffddd530bc9b14f23a0611507991c",
+      "bytes": 503756
+    },
+    "sir-snapshots.csv": {
+      "sha256": "707f38341ead7a6c9790992378366ad1fa500524c30e86fb46f78a4f8d5a05a8",
+      "bytes": 59
+    },
+    "vis-states.csv": {
+      "sha256": "f61ded2591c48a6b303a6832a0c74e36219c7e7d2d4d66791c1f751463828c0f",
+      "bytes": 114
+    },
+    "visualization.csv": {
+      "sha256": "89d9b83e2fe3ac976e33f645ed3507b59052deebbdf71239bbe91c889053c8bd",
+      "bytes": 77
+    },
+    "run-guide-studies.py": {
+      "sha256": "6bea998afbd568ada295dc31aec80916cd352da8ddf8fe04693e00aae680dd4c"
+    },
+    "run-extended-studies.py": {
+      "sha256": "c53524f759237ed5fa88ddca9bb66ddf77a91fb7db9ced684a64587c796060df"
+    },
+    "run_guide_bootstrap.py": {
+      "sha256": "0bc16e29a55b7dfb9ee84ea44cb5c5c72e77729f7bae4ca4eac0ee585c56b08f"
+    },
+    "run-local-allocation-study.py": {
+      "sha256": "cf085185c90e2d1a64ce84ab96a0e475f574a1094c9aaaded486a193681e0d4e"
+    }
+  },
+  "datasets": {
+    "ky2.txt": {
+      "sha256": "c3f78cb9d9749bc85a1d7420c1dbfa2075914bb7f298ecc7dd3847fd4527e525",
+      "bytes": 164225
+    },
+    "power.gml": {
+      "sha256": "9d7945f5c7099116a2680d85a2479b2a80134051bb833b9e7e69142b028030ca",
+      "bytes": 439291
+    }
+  },
+  "preprocessing": {
+    "ky2": "Keep junction-to-junction links, relabel nodes, retain largest component; positions retained.",
+    "electrical": "Read power.gml; undirected NetworkX graph.",
+    "karate": "NetworkX karate-club graph; weighted in the first guide studies. Additional defense and SIR studies explicitly set all weights to 1.",
+    "BA": "Parameters and generation seed recorded per study."
+  },
+  "package_source": {
+    "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attacks.py": "7aef82011e47c3481bfdc25743d72acecde48bef058bf1e43844cadc0533fdf0",
+    "cascading.py": "e22954ba0f4e2d062ff4e1905571ffe7c7fe2459e6ff4ffa5eb865abe183c4ff",
+    "defenses.py": "23e3e59d529743792ef27bd0b7745a1dd093c53f9385cf6d0ee3de1884b2e5c6",
+    "diffusion.py": "1676825e95a63887068597287b1cc13fcb8a608772084d5408328dc1dd1af52c",
+    "graphs.py": "91d0a3f424c36ee1c7c0906f7737160716c2181a6aec8cc7e6896db9e5396069",
+    "measures.py": "7cbafc39fa01c5e55018b70d44d633bdb9a30168488a5e35c350674c2d2f044e",
+    "simulations.py": "8566d37c36b2f30ad15af3ffea9ae02e86a314d5c108a9237333a473c5727370",
+    "utils.py": "ae7cc611e118d1006df24c1656ae116b6e1884be971271688800d255ff4ebb3f"
+  }
+}

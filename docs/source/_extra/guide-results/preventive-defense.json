@@ -1,0 +1,46 @@
+{
+  "graph": "unweighted karate",
+  "attack": "rb_node",
+  "attack_seed": 17,
+  "attack_order": [
+    0,
+    33,
+    32,
+    2,
+    1,
+    23,
+    3,
+    24
+  ],
+  "k_d": 5,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "threat": "Fixed order computed on intact graph; no retargeting after defense.",
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}

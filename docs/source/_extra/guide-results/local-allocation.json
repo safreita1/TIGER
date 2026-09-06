@@ -1,0 +1,66 @@
+{
+  "package_version": "0.6.0",
+  "policies": [
+    "degree",
+    "greedy",
+    "proportional",
+    "max_flow"
+  ],
+  "rounds": 1,
+  "beta": 0,
+  "single": {
+    "demands": [
+      12,
+      18
+    ],
+    "recipient_spare_capacity": [
+      3,
+      5,
+      7
+    ]
+  },
+  "shared": {
+    "initial_failures": [
+      "A",
+      "B"
+    ],
+    "loads": {
+      "A": 5,
+      "B": 7,
+      "U": 0,
+      "V": 0
+    },
+    "recipient_spare_capacity": {
+      "U": 7,
+      "V": 5
+    },
+    "edges": [
+      [
+        "A",
+        "U"
+      ],
+      [
+        "A",
+        "V"
+      ],
+      [
+        "B",
+        "U"
+      ]
+    ]
+  },
+  "conventions": "Pre-round headroom; synchronous overload checks; Edmonds-Karp max flow with graph node/edge insertion order; equal overflow; no deliberate shedding.",
+  "shared_new_failures": {
+    "degree": [
+      "U"
+    ],
+    "greedy": [
+      "U"
+    ],
+    "proportional": [
+      "U"
+    ],
+    "max_flow": []
+  },
+  "files": {}
+}

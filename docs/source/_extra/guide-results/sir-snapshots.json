@@ -1,0 +1,19 @@
+{
+  "graph": "BA",
+  "n": 60,
+  "m": 2,
+  "graph_seed": 17,
+  "seed": 17,
+  "b": 0.15,
+  "d": 0.08,
+  "c": 0.1,
+  "steps": 30,
+  "selection": "Fixed seed and snapshot times; same realization rerun to each horizon.",
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}
