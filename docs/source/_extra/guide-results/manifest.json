@@ -1,7 +1,7 @@
 {
-  "package_version": "0.6.0",
+  "package_version": "0.7.0",
   "dependencies": {
-    "graph-tiger": "0.6.0",
+    "graph-tiger": "0.7.0",
     "numpy": "2.5.2",
     "networkx": "3.6.1",
     "scipy": "1.18.1",
@@ -45,6 +45,10 @@
     "epidemics.csv": {
       "sha256": "38fbf1947160153e6727bf9117fd3176b5f9cb1dff70715c1e0de1bf6bde6c21",
       "bytes": 643244
+    },
+    "influence.csv": {
+      "sha256": "0f08f044278d6cedf9c0db8fb2b1c6d7a5d2d2b6d5c5f405a03f8d313627b0e6",
+      "bytes": 127622
     },
     "local-allocation.csv": {
       "sha256": "6d2aba3e37eb9e1f8cc52b01de553524ce19887b8d06cf06b8339582294091bb",
@@ -93,6 +97,9 @@
     },
     "run-local-allocation-study.py": {
       "sha256": "cf085185c90e2d1a64ce84ab96a0e475f574a1094c9aaaded486a193681e0d4e"
+    },
+    "run-influence-guide.py": {
+      "sha256": "13006f5c76fb73484074bf418620fe6f8ad214af0e67108e269c18e544027f67"
     }
   },
   "datasets": {
@@ -118,6 +125,7 @@
     "defenses.py": "23e3e59d529743792ef27bd0b7745a1dd093c53f9385cf6d0ee3de1884b2e5c6",
     "diffusion.py": "1676825e95a63887068597287b1cc13fcb8a608772084d5408328dc1dd1af52c",
     "graphs.py": "91d0a3f424c36ee1c7c0906f7737160716c2181a6aec8cc7e6896db9e5396069",
+    "influence.py": "fe31e69b34b5b72b828c0bd54f7d478fb38b66939f655053b458fa9c8b60b2ba",
     "measures.py": "7cbafc39fa01c5e55018b70d44d633bdb9a30168488a5e35c350674c2d2f044e",
     "simulations.py": "8566d37c36b2f30ad15af3ffea9ae02e86a314d5c108a9237333a473c5727370",
     "utils.py": "ae7cc611e118d1006df24c1656ae116b6e1884be971271688800d255ff4ebb3f"

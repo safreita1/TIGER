@@ -3,7 +3,7 @@ Installation
 
 .. raw:: html
 
-   <p>Install TIGER in a Python environment, then start with a small graph before running a larger empirical study.</p><pre><code>python -m pip install graph-tiger==0.6.0</code></pre><p>Optional ForceAtlas2 layouts and edge bundling use the visualization extra.</p><pre><code>python -m pip install "graph-tiger[visualization]==0.6.0"</code></pre>
+   <p>Install TIGER in a Python environment, then start with a small graph before running a larger empirical study.</p><pre><code>python -m pip install graph-tiger==0.7.0</code></pre><p>Optional ForceAtlas2 layouts and edge bundling use the visualization extra.</p><pre><code>python -m pip install "graph-tiger[visualization]==0.7.0"</code></pre>
 
 .. _installation-section-1:
 

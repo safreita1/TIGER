@@ -14,7 +14,7 @@ state-of-the-art methods to help users conduct graph vulnerability and robustnes
 Specifically, TIGER helps users: 
 
 1. **Quantify** network *vulnerability* and *robustness*, 
-2. **Simulate** a variety of network attacks, cascading failures and spread of dissemination of entities
+2. **Simulate** network attacks, cascading failures, epidemics, and information or opinion diffusion
 3. **Augment** a network's structure to resist *attacks* and recover from *failure* 
 4. **Regulate** the dissemination of entities on a network (e.g., viruses, propaganda). 
 
@@ -46,18 +46,9 @@ To verify that everything works as expected, you can run the tests cases using `
 
 --------------------------------------------------------------------------------
 
-### Tutorials
-We provide 5 in-depth tutorials in the **[Documentation](https://graph-tiger.readthedocs.io/)**, each covers a core aspect of TIGER's functionality.
+### Guides
 
-**Tutorial 1: [Measuring Graph Vulnerability and Robustness](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-1.html)** 
-
-**Tutorial 2: [Attacking a Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-2.html)** 
-
-**Tutorial 3: [Defending A Network](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-3.html)** 
-
-**Tutorial 4: [Simulating Cascading Failures on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-4.html)** 
-
-**Tutorial 5: [Simulating Entity Dissemination on Networks](https://graph-tiger.readthedocs.io/en/latest/tutorials/tutorial-5.html)** 
+The **[documentation](https://graph-tiger.readthedocs.io/)** includes guides for [loading graphs](https://graph-tiger.readthedocs.io/en/latest/network-inputs.html), [robustness measures](https://graph-tiger.readthedocs.io/en/latest/measures.html), [attack types](https://graph-tiger.readthedocs.io/en/latest/attacks.html), [defense measures](https://graph-tiger.readthedocs.io/en/latest/defenses.html), [epidemic simulations](https://graph-tiger.readthedocs.io/en/latest/epidemics.html), [information diffusion](https://graph-tiger.readthedocs.io/en/latest/influence.html), [cascading failures](https://graph-tiger.readthedocs.io/en/latest/cascades.html), and [visualization](https://graph-tiger.readthedocs.io/en/latest/visualization.html).
 
 --------------------------------------------------------------------------------
 

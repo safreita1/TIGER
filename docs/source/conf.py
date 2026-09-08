@@ -1,7 +1,7 @@
 """Sphinx configuration for the TIGER documentation."""
 project = 'TIGER'
 author = 'Scott Freitas'
-release = '0.6.0'
+release = '0.7.0'
 version = release
 extensions = []
 root_doc = 'index'

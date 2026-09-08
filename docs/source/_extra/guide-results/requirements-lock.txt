@@ -1,4 +1,4 @@
-graph-tiger==0.6.0
+graph-tiger==0.7.0
 numpy==2.5.2
 networkx==3.6.1
 scipy==1.18.1

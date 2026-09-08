@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.0 - Information diffusion and influence
+
+### Added
+
+- Added independent-cascade and linear-threshold simulations with synchronous frontiers, directed-edge support, and scalar or attributed influence parameters.
+- Added an asynchronous voter model with complete caller-supplied initial states.
+- Added competitive message cascades with message-specific probabilities and explicit random or priority tie resolution.
+- Added per-step state, count, frontier, and changed-node histories; normalized plots; reproducible resets; and fixed-length repeated-run trajectories.
+- Added analytical and visualization tests plus a customer guide with four reproducible model figures, downloadable observations, parameters, and primary references.
+
 ## 0.6.0 - Capacity-aware local allocation
 
 ### Added
