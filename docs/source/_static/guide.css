@@ -1,0 +1,68 @@
+.wy-nav-content{max-width:1080px}.study-figure,.approximation-figure{margin:28px 0}.study-figure>a{display:block;margin:16px 0}.study-figure img,.approximation-figure img{width:100%;height:auto}.study-figure figcaption{font-size:14px;line-height:1.7;color:#4b6268}.approximation-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}.equation{overflow-x:auto;margin:24px 0;padding:12px 20px;border-left:2px solid #c9d9d5}.equation math{font-size:1.15em}.api-entry>summary{cursor:pointer;padding:14px 6px;border-top:1px solid #dae6e2}.api-body{padding:10px}.source-code pre{max-height:600px;overflow:auto}.api-entry code{white-space:normal}.api-body pre code{white-space:pre;color:inherit;background:none;border:0}.table-scroll table{width:100%;border-collapse:separate;border-spacing:0}.table-scroll th,.table-scroll td{padding:12px 14px;border:0;border-bottom:1px solid #dbe5e2;vertical-align:top}.table-scroll tr>*+*{border-left:1px solid #dbe5e2}.table-scroll tbody tr:last-child>*{border-bottom:0}details>summary{cursor:pointer}.refs li{margin:18px 0}@media(max-width:700px){.approximation-pair{grid-template-columns:1fr}}
+.document > .toctree-wrapper { display: none; }
+.document .tag {
+  margin-bottom: 0.4rem;
+  color: #087f73;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.document .lead {
+  max-width: 52rem;
+  margin: 0 0 1.4rem;
+  color: #3f5960;
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+.document .call {
+  margin: 1.5rem 0 2.2rem;
+  padding: 1rem 1.15rem;
+  border-left: 4px solid #087f73;
+  border-radius: 0 8px 8px 0;
+  background: #eaf6f3;
+}
+.document .grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2.2rem;
+}
+.document .card {
+  min-width: 0;
+  padding: 1.1rem;
+  border: 1px solid #dae6e2;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(24 63 69 / 6%);
+}
+.document .card h2,
+.document .card h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+.document .pill {
+  display: inline-block;
+  margin: 0.2rem 0.35rem 0.2rem 0;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid #d3e0dd;
+  border-radius: 999px;
+  background: #f3f8f6;
+  color: #24585a;
+  font: 0.86em/1.35 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+.document .card .card-title {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.document .card p:last-child { margin-bottom: 0; }
+.document ol li { margin-bottom: 0.65rem; }
+@media (max-width: 1050px) {
+  .document .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .document .lead { font-size: 1.05rem; }
+}

@@ -1,0 +1,46 @@
+{
+  "graph": "BA",
+  "n": 100,
+  "m": 3,
+  "graph_seed": 17,
+  "b": [
+    0.02,
+    0.04,
+    0.08
+  ],
+  "d": 0.2,
+  "c": 0.1,
+  "k": 5,
+  "steps": 150,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "interval": "10th\u201390th percentile across runs",
+  "initial_infection": "Vaccinated initial infections are removed, not replaced.",
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}

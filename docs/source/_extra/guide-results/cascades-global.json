@@ -1,0 +1,21 @@
+{
+  "graph": "karate",
+  "nodes": 34,
+  "r": [
+    0.2,
+    0.5,
+    1.0
+  ],
+  "attack": "id_node",
+  "k_a": 1,
+  "seed": 7,
+  "steps": 20,
+  "note": "Different model-specific outcomes; step 0 is after initial attack. Crucitti denominator uses surviving nodes before division by intact efficiency.",
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}

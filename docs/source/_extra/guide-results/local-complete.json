@@ -1,0 +1,31 @@
+{
+  "graph": "electrical",
+  "nodes": 4941,
+  "edges": 6594,
+  "r": 0.2,
+  "beta": [
+    0,
+    1,
+    2
+  ],
+  "seed": 7,
+  "steps": 200,
+  "last_change_round": {
+    "0": 34,
+    "1": 33,
+    "2": 36
+  },
+  "completion": "No unprocessed failed nodes and unchanged failure/lost-load totals.",
+  "final_failures": {
+    "0": 4941,
+    "1": 4941,
+    "2": 4801
+  },
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}

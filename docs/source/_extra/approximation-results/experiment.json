@@ -1,0 +1,34 @@
+{
+  "graph": "NetworkX powerlaw_cluster_graph",
+  "n": 300,
+  "m": 3,
+  "p": 0.3,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "k": [
+    10,
+    30,
+    60,
+    100,
+    200,
+    300
+  ],
+  "time_unit": "seconds",
+  "error": "mean of per-graph absolute errors against full calculation",
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "versions": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.1"
+  },
+  "threads": 1,
+  "timing": "one timed call per graph, measure, and k; machine dependent"
+}

@@ -1,0 +1,27 @@
+{
+  "graph": "ky2",
+  "nodes": 809,
+  "edges": 1110,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "steps": 30,
+  "attack_approx": 80,
+  "interval": "10th\u201390th percentile across runs",
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}

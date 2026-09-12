@@ -1,0 +1,111 @@
+{
+  "competitive_cascade": {
+    "graph": "9-node path",
+    "message_seeds": {
+      "claim": [
+        0
+      ],
+      "correction": [
+        8
+      ]
+    },
+    "priority": [
+      "correction",
+      "claim"
+    ],
+    "probability": 1.0,
+    "seed": 17,
+    "steps": 4,
+    "tie_break": "priority"
+  },
+  "independent_cascade": {
+    "graph": "A\u2192B, B\u2192C, B\u2192D",
+    "probability": 1.0,
+    "seed": 17,
+    "seeds": [
+      "A"
+    ],
+    "steps": 2
+  },
+  "linear_threshold": {
+    "edges": [
+      [
+        "A",
+        "C",
+        0.35
+      ],
+      [
+        "B",
+        "C",
+        0.35
+      ],
+      [
+        "C",
+        "D",
+        1.0
+      ]
+    ],
+    "seed": 17,
+    "seeds": [
+      "A",
+      "B"
+    ],
+    "steps": 2,
+    "thresholds": {
+      "A": 1.0,
+      "B": 1.0,
+      "C": 0.6,
+      "D": 0.8
+    }
+  },
+  "voter": {
+    "displayed_run": 17,
+    "graph": "20-node cycle",
+    "initial_state": "nodes 0\u20139: 0; 10\u201319: 1",
+    "runs": 40,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "steps": 100,
+    "tracked_state": 1
+  }
+}

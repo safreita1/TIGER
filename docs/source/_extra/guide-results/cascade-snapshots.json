@@ -1,0 +1,16 @@
+{
+  "graph": "unweighted karate",
+  "beta": 0,
+  "r": 0.2,
+  "seed": 7,
+  "attack": "id_node",
+  "k_a": 1,
+  "manual_steps": "Public local-step method; captures failed-node identities before the next transition.",
+  "environment": {
+    "graph-tiger": "0.6.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.2",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.12.14"
+}

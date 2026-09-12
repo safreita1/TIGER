@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% set title = 'Search documentation' %}
+{% block body %}
+<h1>Search documentation</h1>
+<label for="doc-search">Search guides and API entries</label>
+<input id="doc-search" type="search" placeholder="Try beta, NetShield, timeout…">
+<div id="search-results" aria-live="polite"></div>
+{% endblock %}
