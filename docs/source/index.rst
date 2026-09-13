@@ -44,7 +44,7 @@ Where to go next
 
 .. raw:: html
 
-   <p>Begin with <a href="installation.html">installation and first steps</a>, then learn how to <a href="network-inputs.html">load graphs</a> and <a href="measures.html">choose robustness measures</a>. Continue to the attack, defense, epidemic, influence, or cascade guide that matches the process you need to study. The <a href="visualization.html">visualization guide</a> shows how to inspect network states and results, while the <a href="reproducibility.html">reproducibility guide</a> records the conventions used by the documentation experiments.</p>
+   <p>Begin with <a href="installation.html">installation and first steps</a>, then learn how to <a href="network-inputs.html">load graphs</a> and <a href="measures.html">choose robustness measures</a>. For large spectral calculations, see <a href="gpu.html">GPU acceleration</a>. Continue to the attack, defense, epidemic, influence, or cascade guide that matches the process you need to study. The <a href="visualization.html">visualization guide</a> shows how to inspect network states and results, while the <a href="reproducibility.html">reproducibility guide</a> records the conventions used by the documentation experiments.</p>
 
 .. toctree::
    :maxdepth: 3
@@ -55,6 +55,7 @@ Where to go next
    installation
    network-inputs
    measures
+   gpu
    attacks
    defenses
    epidemics
