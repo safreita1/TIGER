@@ -252,6 +252,10 @@ def run_benchmarks(args):
                 graph = build_graph(family, nodes, args.mean_degree, seed)
                 for measure in args.measures:
                     k = measure_k(measure, args.k)
+                    if args.exact and measure not in {
+                            'spectral_radius', 'spectral_gap',
+                            'algebraic_connectivity'}:
+                        k = np.inf
                     selection = select_backend(
                         graph, backend='auto', k=k,
                         min_gpu_nodes=args.min_gpu_nodes
@@ -315,6 +319,10 @@ def parse_args():
     parser.add_argument('--mean-degree', type=int, default=8)
     parser.add_argument('--graph-seeds', type=int, default=3)
     parser.add_argument('--k', type=int, default=30)
+    parser.add_argument(
+        '--exact', action='store_true',
+        help='request full spectra; use only with suitably small node sizes'
+    )
     parser.add_argument('--warmups', type=int, default=2)
     parser.add_argument('--repeats', type=int, default=7)
     parser.add_argument('--min-gpu-nodes', type=int, default=1000)
