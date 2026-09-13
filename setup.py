@@ -2,7 +2,7 @@ import os
 from setuptools import find_packages, setup
 
 # run "git tag <version>" and then "git push origin master <version> when releasing a package to PyPi
-version = "0.7.0"
+version = "0.8.0"
 
 keywords = ["data-science",
             "machine-learning",
@@ -54,7 +54,20 @@ setup(
     ],
     extras_require={
         "test": ["pytest>=7", "pytest-cov>=4"],
-        "visualization": ["dask>=2022", "datashader>=0.13", "fa2", "pillow>=8", "scikit-image>=0.19"]
+        "visualization": ["dask>=2022", "datashader>=0.13", "fa2", "pillow>=8", "scikit-image>=0.19"],
+        "gpu-cu12": [
+            "cupy-cuda12x>=14; python_version >= '3.10' and (platform_system == 'Linux' or platform_system == 'Windows')",
+            "networkx>=3.4; python_version >= '3.11' and platform_system == 'Linux'",
+            "nx-cugraph-cu12>=26.8; python_version >= '3.11' and platform_system == 'Linux'"
+        ],
+        "gpu-cu13": [
+            "cupy-cuda13x>=14; python_version >= '3.10' and (platform_system == 'Linux' or platform_system == 'Windows')",
+            "networkx>=3.4; python_version >= '3.11' and platform_system == 'Linux'",
+            "nx-cugraph-cu13>=26.8; python_version >= '3.11' and platform_system == 'Linux'"
+        ]
+    },
+    entry_points={
+        "console_scripts": ["tiger-gpu-status=graph_tiger.gpu:main"]
     },
     classifiers=["Development Status :: 3 - Alpha",
                  "Intended Audience :: Developers",

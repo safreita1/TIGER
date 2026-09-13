@@ -8,6 +8,7 @@ from graph_tiger.graphs import *
 from graph_tiger.measures import run_measure
 from graph_tiger.attacks import run_attack_method, get_attack_category
 from graph_tiger.defenses import run_defense_method, get_defense_category
+from graph_tiger.utils import networkx_backend_kwargs
 
 
 class Cascading(Simulation):
@@ -54,6 +55,8 @@ class Cascading(Simulation):
         capacities are used directly, without another redundancy multiplier.
     :param initial_failures: optional iterable of initially failed nodes for local
         sharing; replaces attack selection and its budget, including when empty
+    :param backend: cpu, gpu, or auto. Motter--Lai uses nx-cugraph on GPU;
+        Crucitti weighted betweenness and local allocation remain CPU operations
     :param kwargs: see parent class Simulation for additional options
     """
 
@@ -80,7 +83,10 @@ class Cascading(Simulation):
             'attack_approx': None,
 
             'k_d': 0,
-            'defense': None
+            'defense': None,
+
+            'backend': 'cpu',
+            'min_gpu_nodes': 1000
         })
 
         self.prm.update(kwargs)
@@ -128,6 +134,10 @@ class Cascading(Simulation):
         models = ['motter_lai', 'crucitti', 'local_load_sharing', 'legacy_redistribution']
         if self.prm['model'] not in models:
             raise ValueError('unknown cascading model')
+        if self.prm['backend'] not in ['auto', 'cpu', 'gpu']:
+            raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
+        if self.prm['min_gpu_nodes'] < 0:
+            raise ValueError('min_gpu_nodes must be nonnegative')
         if self.prm['l'] < 0 or self.prm['l'] > 1:
             raise ValueError('l must satisfy 0 <= l <= 1')
         if not np.isfinite(self.prm['r']) or self.prm['r'] < 0:
@@ -176,11 +186,22 @@ class Cascading(Simulation):
         if len(graph) == 0:
             return {}
 
-        if self.prm['c'] is None or self.prm['c'] >= len(graph):
-            return nx.betweenness_centrality(graph, normalized=False, endpoints=False, weight=weight)
+        dispatch = {}
+        if weight is None:
+            dispatch = networkx_backend_kwargs(
+                graph, self.prm['backend'], self.prm['min_gpu_nodes']
+            )
 
-        return nx.betweenness_centrality(graph, k=int(self.prm['c']), normalized=False,
-                                         endpoints=False, weight=weight, seed=self.get_random_seed())
+        if self.prm['c'] is None or self.prm['c'] >= len(graph):
+            return nx.betweenness_centrality(
+                graph, normalized=False, endpoints=False, weight=weight,
+                **dispatch
+            )
+
+        return nx.betweenness_centrality(
+            graph, k=int(self.prm['c']), normalized=False, endpoints=False,
+            weight=weight, seed=self.get_random_seed(), **dispatch
+        )
 
     @property
     def shed_load(self):
@@ -233,7 +254,11 @@ class Cascading(Simulation):
         graph_ = self.get_efficiency_graph(graph)
         efficiency = 0
 
-        for source, distances in nx.all_pairs_dijkstra_path_length(graph_, weight='distance'):
+        dispatch = networkx_backend_kwargs(
+            graph_, self.prm['backend'], self.prm['min_gpu_nodes']
+        )
+        for source, distances in nx.all_pairs_dijkstra_path_length(
+                graph_, weight='distance', **dispatch):
             for target, distance in distances.items():
                 if source != target and distance > 0:
                     efficiency += 1 / distance
@@ -270,7 +295,9 @@ class Cascading(Simulation):
             self.failed = set(self.prm['initial_failures'])
         elif self.prm['attack'] is not None and self.prm['k_a'] > 0:
             attacked = run_attack_method(self.graph, self.prm['attack'], self.prm['k_a'],
-                                         approx=self.prm['attack_approx'], seed=self.get_random_seed())
+                                         approx=self.prm['attack_approx'], seed=self.get_random_seed(),
+                                         backend=self.prm['backend'],
+                                         min_gpu_nodes=self.prm['min_gpu_nodes'])
 
             if get_attack_category(self.prm['attack']) == 'node':
                 self.failed = set(attacked)
@@ -287,13 +314,17 @@ class Cascading(Simulation):
 
             if get_defense_category(self.prm['defense']) == 'node':
                 self.protected = set(run_defense_method(self.graph, self.prm['defense'],
-                                                        self.prm['k_d'], seed=self.get_random_seed()))
+                                                        self.prm['k_d'], seed=self.get_random_seed(),
+                                                        backend=self.prm['backend'],
+                                                        min_gpu_nodes=self.prm['min_gpu_nodes']))
                 for n in self.protected:
                     self.capacity[n] = 2 * self.capacity[n]
 
             elif get_defense_category(self.prm['defense']) == 'edge':
                 edge_info = run_defense_method(self.graph, self.prm['defense'],
-                                               self.prm['k_d'], seed=self.get_random_seed())
+                                               self.prm['k_d'], seed=self.get_random_seed(),
+                                               backend=self.prm['backend'],
+                                               min_gpu_nodes=self.prm['min_gpu_nodes'])
 
                 if 'removed' in edge_info:
                     self.graph.remove_edges_from(edge_info['removed'])
@@ -330,7 +361,11 @@ class Cascading(Simulation):
             if self.prm['model'] == 'crucitti':
                 measure = self.get_efficiency(graph_)
             else:
-                measure = run_measure(graph_, self.prm['robust_measure'])
+                measure = run_measure(
+                    graph_, self.prm['robust_measure'],
+                    backend=self.prm['backend'],
+                    min_gpu_nodes=self.prm['min_gpu_nodes']
+                )
 
         self.sim_info[step] = {
             'status': [self.load.get(n, 0) for n in self.graph_og.nodes],

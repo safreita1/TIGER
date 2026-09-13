@@ -1,4 +1,4 @@
-"""Benchmark CPU and GPU implementations of TIGER spectral measures.
+"""Benchmark CPU and GPU implementations of TIGER robustness measures.
 
 The benchmark records end-to-end public-API time, including conversion and
 transfer costs. It also compares numerical results before reporting speedup.
@@ -23,11 +23,12 @@ from graph_tiger.utils import (
     get_adjacency_spectrum,
     get_laplacian_spectrum,
     gpu_status,
-    select_backend
+    select_backend,
+    select_networkx_backend
 )
 
 
-MEASURES = [
+SPECTRAL_MEASURES = [
     'spectral_radius',
     'spectral_gap',
     'natural_connectivity',
@@ -38,9 +39,25 @@ MEASURES = [
     'effective_resistance'
 ]
 
+MEASURES = [
+    'diameter',
+    'average_distance',
+    'average_inverse_distance',
+    'average_vertex_betweenness',
+    'average_edge_betweenness',
+    'average_clustering_coefficient',
+    'largest_connected_component'
+] + SPECTRAL_MEASURES
+
+NETWORKX_GPU_MEASURES = {
+    'average_vertex_betweenness',
+    'average_edge_betweenness',
+    'average_clustering_coefficient'
+}
+
 
 def measure_k(measure, requested_k):
-    """Return the eigenpair count actually used by a measure."""
+    """Return the eigenpair or sampled-source count used by a measure."""
 
     return {
         'spectral_radius': 1,
@@ -81,14 +98,18 @@ def synchronize_gpu():
     cp.cuda.Stream.null.synchronize()
 
 
-def timed_measure(graph, measure, k, backend):
+def timed_measure(
+        graph, measure, k, backend, distance_block_size, seed):
     """Measure one end-to-end call through TIGER's public measure API."""
 
     gc.collect()
     if backend == 'gpu':
         synchronize_gpu()
     start = time.perf_counter()
-    value = run_measure(graph, measure, k=k, backend=backend)
+    value = run_measure(
+        graph, measure, k=k, backend=backend,
+        distance_block_size=distance_block_size, seed=seed
+    )
     if backend == 'gpu':
         synchronize_gpu()
     return value, time.perf_counter() - start
@@ -126,12 +147,17 @@ def result_error(cpu_value, gpu_value, atol, rtol):
 def raw_spectrum_error(graph, measure, k):
     """Compare unrounded eigenvalues used by the CPU and GPU paths."""
 
+    if measure not in SPECTRAL_MEASURES:
+        return np.nan, np.nan
+
+    compare_magnitudes = False
     if measure in {
             'spectral_radius', 'spectral_gap', 'natural_connectivity',
             'spectral_scaling', 'generalized_robustness_index'}:
         which = 'LM' if measure in {
             'spectral_scaling', 'generalized_robustness_index'
         } else 'LA'
+        compare_magnitudes = which == 'LM'
         count = {
             'spectral_radius': 1,
             'spectral_gap': 2
@@ -151,23 +177,43 @@ def raw_spectrum_error(graph, measure, k):
             graph, k=count, eigvals_only=True, backend='gpu'
         )
 
-    cpu = np.sort(np.asarray(cpu, dtype=float))
-    gpu = np.sort(np.asarray(gpu, dtype=float))
+    cpu = np.asarray(cpu, dtype=float)
+    gpu = np.asarray(gpu, dtype=float)
+    if compare_magnitudes:
+        # ``LM`` requests the largest magnitudes.  At the truncation boundary,
+        # equally valid positive and negative eigenvalues can have nearly tied
+        # magnitudes, so compare the requested magnitude sets rather than
+        # pairing the signed values by algebraic order.
+        cpu = np.sort(np.abs(cpu))
+        gpu = np.sort(np.abs(gpu))
+    else:
+        cpu = np.sort(cpu)
+        gpu = np.sort(gpu)
     absolute = float(np.max(np.abs(cpu - gpu))) if len(cpu) else 0.0
     scale = max(float(np.max(np.abs(cpu))) if len(cpu) else 0.0,
                 np.finfo(float).eps)
     return absolute, absolute / scale
 
 
-def benchmark_case(graph, measure, k, repeats, warmups, atol, rtol):
+def benchmark_case(
+        graph, measure, k, repeats, warmups, atol, rtol,
+        distance_block_size, seed):
     """Benchmark one graph and measure after independent backend warm-ups."""
 
-    cpu_cold_value, cpu_cold = timed_measure(graph, measure, k, 'cpu')
-    gpu_cold_value, gpu_cold = timed_measure(graph, measure, k, 'gpu')
+    cpu_cold_value, cpu_cold = timed_measure(
+        graph, measure, k, 'cpu', distance_block_size, seed
+    )
+    gpu_cold_value, gpu_cold = timed_measure(
+        graph, measure, k, 'gpu', distance_block_size, seed
+    )
 
     for _ in range(warmups):
-        timed_measure(graph, measure, k, 'cpu')
-        timed_measure(graph, measure, k, 'gpu')
+        timed_measure(
+            graph, measure, k, 'cpu', distance_block_size, seed
+        )
+        timed_measure(
+            graph, measure, k, 'gpu', distance_block_size, seed
+        )
 
     cpu_times = []
     gpu_times = []
@@ -176,7 +222,9 @@ def benchmark_case(graph, measure, k, repeats, warmups, atol, rtol):
     for repeat in range(repeats):
         order = ('cpu', 'gpu') if repeat % 2 == 0 else ('gpu', 'cpu')
         for backend in order:
-            value, duration = timed_measure(graph, measure, k, backend)
+            value, duration = timed_measure(
+                graph, measure, k, backend, distance_block_size, seed
+            )
             if backend == 'cpu':
                 cpu_value = value
                 cpu_times.append(duration)
@@ -190,9 +238,10 @@ def benchmark_case(graph, measure, k, repeats, warmups, atol, rtol):
         cpu_value, gpu_value, atol, rtol
     )
     eigen_absolute, eigen_relative = raw_spectrum_error(graph, measure, k)
-    passed = passed and (
-        eigen_absolute <= atol or eigen_relative <= rtol
-    )
+    if not np.isnan(eigen_absolute):
+        passed = passed and (
+            eigen_absolute <= atol or eigen_relative <= rtol
+        )
     return {
         'cpu_value': cpu_value,
         'gpu_value': gpu_value,
@@ -244,6 +293,8 @@ def run_benchmarks(args):
     status = gpu_status()
     if not status['available']:
         raise RuntimeError('GPU benchmark unavailable: {}'.format(status['reason']))
+    if hasattr(nx, 'config') and hasattr(nx.config, 'warnings_to_ignore'):
+        nx.config.warnings_to_ignore.add('cache')
 
     rows = []
     for family in args.families:
@@ -256,13 +307,27 @@ def run_benchmarks(args):
                             'spectral_radius', 'spectral_gap',
                             'algebraic_connectivity'}:
                         k = np.inf
-                    selection = select_backend(
-                        graph, backend='auto', k=k,
-                        min_gpu_nodes=args.min_gpu_nodes
-                    )
+                    if measure in NETWORKX_GPU_MEASURES:
+                        selection = select_networkx_backend(
+                            graph, backend='auto',
+                            min_gpu_nodes=args.min_gpu_nodes,
+                            operation=measure
+                        )
+                    else:
+                        selection = select_backend(
+                            graph, backend='auto', k=k,
+                            min_gpu_nodes=args.min_gpu_nodes,
+                            operation=measure
+                        )
+                    if measure == 'largest_connected_component':
+                        selection['selected'] = 'cpu'
+                        selection['reason'] = (
+                            'measured GPU end-to-end time is slower through '
+                            '20,000 nodes'
+                        )
                     result = benchmark_case(
                         graph, measure, k, args.repeats, args.warmups,
-                        args.atol, args.rtol
+                        args.atol, args.rtol, args.distance_block_size, seed
                     )
                     result.update({
                         'family': family,
@@ -305,7 +370,7 @@ def run_benchmarks(args):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='Compare TIGER spectral measures on CPU and GPU'
+        description='Compare TIGER GPU-capable measures on CPU and GPU'
     )
     parser.add_argument(
         '--nodes', nargs='+', type=int, default=[1000, 5000, 20000]
@@ -315,17 +380,26 @@ def parse_args():
         choices=['barabasi_albert', 'watts_strogatz', 'erdos_renyi'],
         default=['barabasi_albert', 'watts_strogatz', 'erdos_renyi']
     )
-    parser.add_argument('--measures', nargs='+', choices=MEASURES, default=MEASURES)
+    parser.add_argument(
+        '--measures', nargs='+', choices=MEASURES,
+        default=SPECTRAL_MEASURES
+    )
     parser.add_argument('--mean-degree', type=int, default=8)
     parser.add_argument('--graph-seeds', type=int, default=3)
     parser.add_argument('--k', type=int, default=30)
     parser.add_argument(
         '--exact', action='store_true',
-        help='request full spectra; use only with suitably small node sizes'
+        help=('request full spectra or exact betweenness; use only with '
+              'suitably small node sizes')
     )
     parser.add_argument('--warmups', type=int, default=2)
     parser.add_argument('--repeats', type=int, default=7)
-    parser.add_argument('--min-gpu-nodes', type=int, default=1000)
+    parser.add_argument(
+        '--min-gpu-nodes', type=int, default=None,
+        help=('override every automatic crossover recorded by the benchmark; '
+              'the default uses TIGER\'s per-operation policy')
+    )
+    parser.add_argument('--distance-block-size', type=int, default=1024)
     parser.add_argument('--atol', type=float, default=1e-2)
     parser.add_argument('--rtol', type=float, default=1e-3)
     parser.add_argument(

@@ -1,4 +1,6 @@
 import importlib.util
+import shutil
+import subprocess
 from functools import lru_cache
 
 import numpy as np
@@ -9,6 +11,90 @@ from scipy.sparse.linalg import eigsh
 
 
 _BACKENDS = {'auto', 'cpu', 'gpu'}
+
+_AUTO_GPU_THRESHOLDS = {
+    'average_distance': 250,
+    'average_inverse_distance': 250,
+    'diameter': 250,
+    'average_vertex_betweenness': 500,
+    'average_edge_betweenness': 5000,
+    'average_clustering_coefficient': 5000,
+    'pagerank': 5000,
+    'eigenvector': 5000,
+    'motter_lai': 1000,
+    'spectral_radius': 20000,
+    'spectral_gap': 20000,
+    'algebraic_connectivity': 20000,
+    'natural_connectivity': {True: 250, False: None},
+    'number_spanning_trees': {True: 250, False: 20000},
+    'effective_resistance': {True: 250, False: 20000},
+    'spectral_scaling': None,
+    'generalized_robustness_index': None,
+    'largest_connected_component': None,
+    'sis': None,
+    'sir': None,
+    'independent_cascade': None,
+    'linear_threshold': None,
+    'competitive_cascade': None,
+    'netshield': None
+}
+
+
+def automatic_gpu_threshold(operation, exact=False):
+    """Return the measured auto-selection threshold for one operation.
+
+    ``None`` means automatic execution stays on the CPU. Unknown operations
+    retain the historical 1,000-node threshold for compatibility.
+    """
+
+    if operation is None:
+        return 1000
+    policy = _AUTO_GPU_THRESHOLDS.get(str(operation).lower(), 1000)
+    if isinstance(policy, dict):
+        return policy[bool(exact)]
+    return policy
+
+
+def system_gpu_status():
+    """Detect NVIDIA hardware through ``nvidia-smi`` without importing CuPy."""
+
+    status = {
+        'available': False,
+        'devices': [],
+        'reason': 'nvidia-smi was not found'
+    }
+    command = shutil.which('nvidia-smi')
+    if command is None:
+        return status
+
+    try:
+        result = subprocess.run(
+            [command, '--query-gpu=name,driver_version,memory.total',
+             '--format=csv,noheader,nounits'],
+            capture_output=True, text=True, timeout=5, check=False
+        )
+        if result.returncode != 0:
+            status['reason'] = result.stderr.strip() or 'nvidia-smi failed'
+            return status
+
+        for line in result.stdout.splitlines():
+            fields = [field.strip() for field in line.split(',')]
+            if len(fields) != 3:
+                continue
+            status['devices'].append({
+                'name': fields[0],
+                'driver_version': fields[1],
+                'memory_mib': int(float(fields[2]))
+            })
+        if status['devices']:
+            status['available'] = True
+            status['reason'] = 'NVIDIA driver and GPU detected'
+        else:
+            status['reason'] = 'nvidia-smi found no NVIDIA GPUs'
+    except (OSError, subprocess.SubprocessError, ValueError) as error:
+        status['reason'] = '{}: {}'.format(type(error).__name__, error)
+
+    return status
 
 
 @lru_cache(maxsize=1)
@@ -63,6 +149,125 @@ def gpu_available():
     return gpu_status()['available']
 
 
+@lru_cache(maxsize=1)
+def networkx_gpu_status():
+    """Return whether NetworkX can dispatch algorithms to nx-cugraph."""
+
+    status = gpu_status().copy()
+    status['backend'] = 'cugraph'
+    if not status['available']:
+        return status
+
+    try:
+        backends = getattr(nx.config, 'backends', {})
+    except AttributeError:
+        status['available'] = False
+        status['reason'] = 'NetworkX does not support backend dispatch'
+        return status
+
+    if 'cugraph' not in backends:
+        status['available'] = False
+        status['reason'] = 'nx-cugraph is not installed'
+        return status
+
+    status['reason'] = 'nx-cugraph and a CUDA device are ready'
+    return status
+
+
+def select_networkx_backend(
+        graph, backend='auto', min_gpu_nodes=None, operation=None):
+    """Resolve CPU NetworkX or its optional nx-cugraph backend.
+
+    :param graph: NetworkX graph supplied to a dispatchable algorithm
+    :param backend: auto, cpu, or gpu
+    :param min_gpu_nodes: optional user override for the automatic threshold
+    :param operation: algorithm name used by the measured automatic policy
+    :return: dictionary describing the selection
+    """
+
+    if backend not in _BACKENDS:
+        raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
+    if min_gpu_nodes is not None and min_gpu_nodes < 0:
+        raise ValueError('min_gpu_nodes must be nonnegative')
+
+    threshold = (automatic_gpu_threshold(operation)
+                 if min_gpu_nodes is None else min_gpu_nodes)
+
+    status = networkx_gpu_status()
+    result = {
+        'requested': backend,
+        'selected': 'cpu',
+        'available': status['available'],
+        'suitable': False,
+        'reason': 'CPU requested',
+        'nodes': len(graph),
+        'edges': graph.number_of_edges(),
+        'device_name': status['device_name']
+    }
+
+    if backend == 'cpu':
+        return result
+    if not status['available']:
+        if backend == 'gpu':
+            raise RuntimeError('GPU requested but unavailable: {}'.format(status['reason']))
+        result['reason'] = status['reason']
+        return result
+
+    result['suitable'] = threshold is not None and len(graph) >= threshold
+    if backend == 'gpu' or result['suitable']:
+        result['selected'] = 'gpu'
+        result['reason'] = ('GPU explicitly requested' if backend == 'gpu'
+                            else 'nx-cugraph is available and the graph is large enough')
+    else:
+        if threshold is None:
+            result['reason'] = 'automatic policy keeps {} on CPU'.format(operation)
+        else:
+            result['reason'] = 'graph has fewer than {} nodes'.format(threshold)
+
+    return result
+
+
+def networkx_backend(
+        graph, backend='auto', min_gpu_nodes=None, operation=None):
+    """Return the explicit NetworkX backend name for one graph algorithm."""
+
+    selected = select_networkx_backend(
+        graph, backend=backend, min_gpu_nodes=min_gpu_nodes,
+        operation=operation
+    )['selected']
+    return 'cugraph' if selected == 'gpu' else 'networkx'
+
+
+def networkx_backend_kwargs(
+        graph, backend='auto', min_gpu_nodes=None, operation=None):
+    """Return backend-dispatch keywords compatible with the installed NetworkX.
+
+    NetworkX releases before backend dispatch do not accept a ``backend``
+    keyword. CPU execution therefore omits it on those releases, while an
+    explicit GPU request still fails through :func:`select_networkx_backend`
+    with a useful availability error.
+    """
+
+    selected = networkx_backend(
+        graph, backend, min_gpu_nodes, operation=operation
+    )
+    if selected == 'networkx' and not hasattr(nx, 'config'):
+        return {}
+    return {'backend': selected}
+
+
+def counter_random(xp, size, seed, offset=0):
+    """Return reproducible uniforms computed identically by NumPy and CuPy."""
+
+    values = xp.arange(size, dtype=xp.uint64)
+    values = values + xp.uint64(seed) + xp.uint64(offset)
+    values = values + xp.uint64(0x9E3779B97F4A7C15)
+    values = (values ^ (values >> xp.uint64(30))) * xp.uint64(0xBF58476D1CE4E5B9)
+    values = (values ^ (values >> xp.uint64(27))) * xp.uint64(0x94D049BB133111EB)
+    values = values ^ (values >> xp.uint64(31))
+    return (values >> xp.uint64(11)).astype(xp.float64) * (1.0 / (1 << 53))
+
+
 def _memory_required(graph, exact, k):
     """Conservative matrix and eigensolver workspace estimate in bytes."""
 
@@ -78,7 +283,8 @@ def _memory_required(graph, exact, k):
     return 4 * (csr_bytes + eigenvectors)
 
 
-def select_backend(graph, backend='auto', k=np.inf, min_gpu_nodes=1000):
+def select_backend(
+        graph, backend='auto', k=np.inf, min_gpu_nodes=None, operation=None):
     """Resolve a requested compute backend for a spectral calculation.
 
     CPU always selects SciPy. GPU requires a working CUDA device and raises if
@@ -88,18 +294,21 @@ def select_backend(graph, backend='auto', k=np.inf, min_gpu_nodes=1000):
     :param graph: NetworkX graph
     :param backend: auto, cpu, or gpu
     :param k: requested number of eigenpairs; infinity denotes a full spectrum
-    :param min_gpu_nodes: minimum graph order considered worthwhile in auto mode
+    :param min_gpu_nodes: optional user override for the automatic threshold
+    :param operation: calculation name used by the measured automatic policy
     :return: dictionary describing the selection
     """
 
     if backend not in _BACKENDS:
         raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
-    if min_gpu_nodes < 0:
+    if min_gpu_nodes is not None and min_gpu_nodes < 0:
         raise ValueError('min_gpu_nodes must be nonnegative')
 
     status = gpu_status().copy()
     n = len(graph)
     exact = np.isinf(k) or k >= n
+    threshold = (automatic_gpu_threshold(operation, exact=exact)
+                 if min_gpu_nodes is None else min_gpu_nodes)
     required = _memory_required(graph, exact, k)
     result = {
         'requested': backend,
@@ -125,7 +334,7 @@ def select_backend(graph, backend='auto', k=np.inf, min_gpu_nodes=1000):
         return result
 
     memory_ok = required <= 0.5 * status['free_memory']
-    large_enough = n >= min_gpu_nodes
+    large_enough = threshold is not None and n >= threshold
     result['suitable'] = memory_ok and large_enough
 
     if backend == 'gpu':
@@ -140,7 +349,10 @@ def select_backend(graph, backend='auto', k=np.inf, min_gpu_nodes=1000):
         return result
 
     if not large_enough:
-        result['reason'] = 'graph has fewer than {} nodes'.format(min_gpu_nodes)
+        if threshold is None:
+            result['reason'] = 'automatic policy keeps {} on CPU'.format(operation)
+        else:
+            result['reason'] = 'graph has fewer than {} nodes'.format(threshold)
     elif not memory_ok:
         result['reason'] = 'estimated working set exceeds half of free GPU memory'
     else:
@@ -171,6 +383,135 @@ def get_sparse_graph(graph):
     return nx.to_scipy_sparse_matrix(
         graph, format='csr', dtype=float, nodelist=list(graph.nodes)
     )
+
+
+def get_largest_component_size(
+        graph, backend='auto', min_gpu_nodes=1000):
+    """Return the largest undirected component size on CPU or GPU.
+
+    Explicit GPU execution remains available for parity checks and future
+    crossover calibration.  ``auto`` deliberately stays on NetworkX because
+    measured GPU end-to-end time is slower through 20,000 nodes.
+    """
+
+    if len(graph) == 0:
+        return 0
+
+    selected = 'cpu' if backend == 'auto' else select_backend(
+        graph, backend=backend, k=1, min_gpu_nodes=min_gpu_nodes
+    )['selected']
+    if selected == 'cpu':
+        return len(max(nx.connected_components(graph), key=len))
+
+    import cupy as cp
+    matrix = get_sparse_graph(graph).tocoo()
+    sources = cp.asarray(matrix.row, dtype=cp.int64)
+    targets = cp.asarray(matrix.col, dtype=cp.int64)
+    labels = cp.arange(len(graph), dtype=cp.int64)
+    while True:
+        updated = labels.copy()
+        cp.minimum.at(updated, targets, labels[sources])
+        updated = updated[updated]
+        changed = bool(cp.any(updated != labels).item())
+        labels = updated
+        if not changed:
+            break
+    return int(cp.bincount(labels).max().item())
+
+
+def get_shortest_path_statistics(
+        graph, backend='auto', min_gpu_nodes=None, block_size=1024,
+        operation='average_distance'):
+    """Reduce unweighted all-pairs distances without returning path dictionaries.
+
+    The returned sums count ordered source-target pairs and exclude self-pairs.
+    GPU execution processes sources in bounded dense blocks while retaining the
+    sparse graph and every reduction on the device.
+    """
+
+    if not isinstance(block_size, (int, np.integer)) or block_size <= 0:
+        raise ValueError('block_size must be a positive integer')
+
+    n = len(graph)
+    if n == 0:
+        return {
+            'distance_sum': 0,
+            'inverse_distance_sum': 0.0,
+            'diameter': 0,
+            'reachable_pairs': 0,
+            'backend': 'cpu'
+        }
+
+    selected = select_backend(
+        graph, backend=backend, k=1, min_gpu_nodes=min_gpu_nodes,
+        operation=operation
+    )['selected']
+    if selected == 'cpu':
+        distance_sum = 0
+        inverse_sum = 0.0
+        diameter = 0
+        reachable_pairs = 0
+        for source, distances in nx.all_pairs_shortest_path_length(graph):
+            for target, distance in distances.items():
+                if source == target:
+                    continue
+                distance_sum += distance
+                inverse_sum += 1.0 / distance
+                diameter = max(diameter, distance)
+                reachable_pairs += 1
+        return {
+            'distance_sum': distance_sum,
+            'inverse_distance_sum': inverse_sum,
+            'diameter': diameter,
+            'reachable_pairs': reachable_pairs,
+            'backend': selected
+        }
+
+    import cupy as cp
+    from cupyx.scipy.sparse import csr_matrix
+
+    status = gpu_status()
+    bytes_per_source = max(1, 12 * n)
+    memory_block = max(1, int(0.25 * status['free_memory'] / bytes_per_source))
+    block_size = min(int(block_size), n, memory_block)
+
+    adjacency = csr_matrix(get_sparse_graph(graph), dtype=cp.float32).transpose().tocsr()
+    adjacency.data.fill(1)
+    distance_sum = 0
+    inverse_sum = 0.0
+    diameter = 0
+    reachable_pairs = 0
+
+    for start in range(0, n, block_size):
+        stop = min(n, start + block_size)
+        width = stop - start
+        frontier = cp.zeros((n, width), dtype=cp.float32)
+        frontier[cp.arange(start, stop), cp.arange(width)] = 1
+        visited = frontier.astype(cp.bool_)
+        depth = 0
+
+        while True:
+            reached = adjacency.dot(frontier)
+            discovered = (reached > 0) & ~visited
+            count = int(discovered.sum().item())
+            if count == 0:
+                break
+            depth += 1
+            distance_sum += depth * count
+            inverse_sum += count / depth
+            diameter = max(diameter, depth)
+            visited |= discovered
+            frontier = discovered.astype(cp.float32)
+
+        reachable_pairs += int(visited.sum().item()) - width
+
+    return {
+        'distance_sum': distance_sum,
+        'inverse_distance_sum': inverse_sum,
+        'diameter': diameter,
+        'reachable_pairs': reachable_pairs,
+        'backend': selected
+    }
 
 
 def _gpu_dense_spectrum(matrix, eigvals_only):
@@ -206,9 +547,49 @@ def _gpu_sparse_spectrum(matrix, k, which, eigvals_only, tol=0):
     return cp.asnumpy(result)
 
 
+def _restore_laplacian_zero_modes(graph, eigpairs, k, eigvals_only):
+    """Return the known Laplacian nullspace plus computed nonzero modes."""
+
+    if eigvals_only:
+        values = np.asarray(eigpairs)
+        vectors = None
+    else:
+        values, vectors = eigpairs
+        values = np.asarray(values)
+        vectors = np.asarray(vectors)
+
+    zero_count = min(nx.number_connected_components(graph), k)
+    near_zero = np.flatnonzero(np.abs(values) <= 1e-10)
+    remove_count = min(zero_count, len(near_zero))
+    remove = set(near_zero[np.argsort(np.abs(values[near_zero]))[:remove_count]])
+    nonzero = np.array(
+        [index for index in np.argsort(values) if index not in remove],
+        dtype=int
+    )
+    nonzero = nonzero[:max(0, k - zero_count)]
+    restored_values = np.concatenate((
+        np.zeros(zero_count, dtype=float), values[nonzero]
+    ))
+
+    if eigvals_only:
+        return restored_values
+
+    node_index = {node: index for index, node in enumerate(graph.nodes)}
+    null_vectors = np.zeros((len(graph), zero_count), dtype=float)
+    for column, component in enumerate(nx.connected_components(graph)):
+        if column >= zero_count:
+            break
+        indices = [node_index[node] for node in component]
+        null_vectors[indices, column] = 1.0 / np.sqrt(len(indices))
+    restored_vectors = np.column_stack((
+        null_vectors, vectors[:, nonzero]
+    ))
+    return restored_values, restored_vectors
+
+
 def get_adjacency_spectrum(
         graph, k=np.inf, eigvals_only=False, which='LA', backend='cpu',
-        min_gpu_nodes=1000, use_gpu=None):
+        min_gpu_nodes=None, use_gpu=None, operation=None):
     """Get the top k eigenpairs of the adjacency matrix.
 
     :param graph: undirected NetworkX graph
@@ -218,6 +599,7 @@ def get_adjacency_spectrum(
     :param backend: cpu, gpu, or auto
     :param min_gpu_nodes: auto-selection threshold
     :param use_gpu: backward-compatible Boolean alias for backend
+    :param operation: measure name used by the automatic backend policy
     """
 
     n = len(graph)
@@ -232,7 +614,7 @@ def get_adjacency_spectrum(
     selection_k = np.inf if dense else k
     selected = select_backend(
         graph, backend=backend, k=selection_k,
-        min_gpu_nodes=min_gpu_nodes
+        min_gpu_nodes=min_gpu_nodes, operation=operation
     )['selected']
 
     if dense:
@@ -274,7 +656,7 @@ def get_adjacency_spectrum(
 
 def get_laplacian_spectrum(
         graph, k=np.inf, which='SM', tol=1E-8, eigvals_only=True,
-        backend='cpu', min_gpu_nodes=1000, use_gpu=None):
+        backend='cpu', min_gpu_nodes=None, use_gpu=None, operation=None):
     """Get the bottom k eigenpairs of the Laplacian matrix.
 
     :param graph: undirected NetworkX graph
@@ -285,6 +667,7 @@ def get_laplacian_spectrum(
     :param backend: cpu, gpu, or auto
     :param min_gpu_nodes: auto-selection threshold
     :param use_gpu: backward-compatible Boolean alias for backend
+    :param operation: measure name used by the automatic backend policy
     """
 
     n = len(graph)
@@ -299,7 +682,7 @@ def get_laplacian_spectrum(
     selection_k = np.inf if dense else k
     selected = select_backend(
         graph, backend=backend, k=selection_k,
-        min_gpu_nodes=min_gpu_nodes
+        min_gpu_nodes=min_gpu_nodes, operation=operation
     )['selected']
 
     if dense:
@@ -314,13 +697,20 @@ def get_laplacian_spectrum(
         matrix = get_laplacian(graph)
         k = min(int(k), n - 1)
         if selected == 'gpu':
+            # CuPy does not support SciPy's ``SM`` selector.  A graph
+            # Laplacian is positive semidefinite, so ``SA`` is equivalent.
+            sparse_which = 'SA' if which == 'SM' else which
             eigpairs = _gpu_sparse_spectrum(
-                matrix, k, which, eigvals_only, tol=tol
+                matrix, k, sparse_which, eigvals_only, tol=tol
             )
         else:
             eigpairs = eigsh(
                 matrix, k=k, which=which, tol=tol,
                 return_eigenvectors=not eigvals_only
+            )
+        if which == 'SM':
+            eigpairs = _restore_laplacian_zero_modes(
+                graph, eigpairs, k, eigvals_only
             )
 
     if eigvals_only:

@@ -1,5 +1,4 @@
 import os
-import heapq
 import numpy as np
 import networkx as nx
 from collections import defaultdict
@@ -8,6 +7,7 @@ from scipy.interpolate import interp1d
 from graph_tiger.graphs import graph_loader
 from graph_tiger.measures import run_measure
 from graph_tiger.simulations import Simulation
+from graph_tiger.utils import networkx_backend_kwargs
 from graph_tiger.attacks import get_node_ns as get_node_ns_attack
 from graph_tiger.attacks import get_node_pr as get_node_pr_attack
 from graph_tiger.attacks import get_node_eig as get_node_eig_attack
@@ -19,7 +19,8 @@ from graph_tiger.attacks import get_node_rd as get_node_rd_attack
 from graph_tiger.attacks import get_attack_category, run_attack_method
 
 
-def run_defense_method(graph, method, k=3, seed=None):
+def run_defense_method(graph, method, k=3, seed=None, backend='cpu',
+                       min_gpu_nodes=None):
     """
     Runs a specified defense on an undirected graph.
 
@@ -27,11 +28,17 @@ def run_defense_method(graph, method, k=3, seed=None):
     :param method: a string representing one of the defense methods
     :param k: number of nodes or edges to defend
     :param seed: sets the seed in order to obtain reproducible defense runs
+    :param backend: cpu, gpu, or auto for supported centrality methods
+    :param min_gpu_nodes: auto-selection threshold
     :return: a list of nodes or a dictionary of edge changes
     """
 
     if method not in methods:
         raise ValueError("defense method '{}' is not implemented".format(method))
+    if backend not in ['auto', 'cpu', 'gpu']:
+        raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
+    if min_gpu_nodes is not None and min_gpu_nodes < 0:
+        raise ValueError('min_gpu_nodes must be nonnegative')
     if not isinstance(k, (int, np.integer)) or k < 0:
         raise ValueError('k must be a nonnegative integer')
 
@@ -53,6 +60,11 @@ def run_defense_method(graph, method, k=3, seed=None):
                   'rewire_edge_random_neighbor', 'rewire_edge_preferential',
                   'rewire_edge_preferential_random']:
         return methods[method](graph, k, rng=rng)
+
+    if method in ['ns_node', 'pr_node', 'eig_node', 'ib_node', 'rb_node',
+                  'add_edge_pr', 'add_edge_eig']:
+        return methods[method](graph, k, seed=seed, backend=backend,
+                               min_gpu_nodes=min_gpu_nodes)
 
     return methods[method](graph, k)
 
@@ -82,7 +94,7 @@ def get_defense_category(method):
     return category
 
 
-def get_node_ns(graph, k=3):
+def get_node_ns(graph, k=3, seed=None, backend='cpu', min_gpu_nodes=None):
     """
     Get k nodes to defend based on the Netshield algorithm :cite:`tong2010vulnerability`.
 
@@ -92,10 +104,12 @@ def get_node_ns(graph, k=3):
     :return: a list of nodes to defend
     """
 
-    return get_node_ns_attack(graph, k)
+    return get_node_ns_attack(
+        graph, k, backend=backend, min_gpu_nodes=min_gpu_nodes
+    )
 
 
-def get_node_pr(graph, k=3):
+def get_node_pr(graph, k=3, seed=None, backend='cpu', min_gpu_nodes=None):
     """
     Get k nodes to defend based on top PageRank entries :cite:`page1999pagerank`.
 
@@ -105,10 +119,12 @@ def get_node_pr(graph, k=3):
     :return: a list of nodes to defend
     """
 
-    return get_node_pr_attack(graph, k)
+    return get_node_pr_attack(
+        graph, k, backend=backend, min_gpu_nodes=min_gpu_nodes
+    )
 
 
-def get_node_eig(graph, k=3):
+def get_node_eig(graph, k=3, seed=None, backend='cpu', min_gpu_nodes=None):
     """
     Get k nodes to defend based on top eigenvector centrality entries
 
@@ -117,10 +133,13 @@ def get_node_eig(graph, k=3):
     :return: a list of nodes to defend
     """
 
-    return get_node_eig_attack(graph, k)
+    return get_node_eig_attack(
+        graph, k, backend=backend, min_gpu_nodes=min_gpu_nodes
+    )
 
 
-def get_node_ib(graph, k=3, approx=np.inf):
+def get_node_ib(graph, k=3, approx=np.inf, seed=None, backend='cpu',
+                min_gpu_nodes=None):
     """
     Get k nodes to defend based on Initial Betweenness (IB) Removal :cite:`holme2002attack`.
 
@@ -132,10 +151,14 @@ def get_node_ib(graph, k=3, approx=np.inf):
     :return: a list of nodes to defend
     """
 
-    return get_node_ib_attack(graph, k, approx)
+    return get_node_ib_attack(
+        graph, k, approx, seed=seed, backend=backend,
+        min_gpu_nodes=min_gpu_nodes
+    )
 
 
-def get_node_rb(graph, k=3, approx=np.inf):
+def get_node_rb(graph, k=3, approx=np.inf, seed=None, backend='cpu',
+                min_gpu_nodes=None):
     """
     Get k nodes to defend based on Recalculated Betweenness (RB) Removal :cite:`holme2002attack`
 
@@ -147,7 +170,10 @@ def get_node_rb(graph, k=3, approx=np.inf):
     :return: a list of nodes to defend
     """
 
-    return get_node_rb_attack(graph, k, approx)
+    return get_node_rb_attack(
+        graph, k, approx, seed=seed, backend=backend,
+        min_gpu_nodes=min_gpu_nodes
+    )
 
 
 def get_node_id(graph, k=3):
@@ -189,7 +215,8 @@ def get_node_rnd(graph, k=3, rng=None):
     return rng.choice(list(graph.nodes), k, replace=False).tolist()
 
 
-def get_central_edges(graph, k, method='eig'):
+def get_central_edges(graph, k, method='eig', backend='cpu',
+                      min_gpu_nodes=None):
     """
     Internal function to compute edge PageRank, eigenvector centrality and degree centrality.
 
@@ -200,20 +227,33 @@ def get_central_edges(graph, k, method='eig'):
     """
 
     if method == 'pr':
-        centrality = nx.pagerank(graph)
+        centrality = nx.pagerank(
+            graph, **networkx_backend_kwargs(
+                graph, backend, min_gpu_nodes, operation='pagerank'
+            )
+        )
     elif method == 'eig':
-        centrality = nx.eigenvector_centrality(graph)
+        centrality = nx.eigenvector_centrality(
+            graph, **networkx_backend_kwargs(
+                graph, backend, min_gpu_nodes, operation='eigenvector'
+            )
+        )
     elif method == 'deg':
         centrality = dict(graph.degree)
     else:
         raise ValueError("central edge method '{}' is not implemented".format(method))
 
-    score = {(u, v): centrality[u] * centrality[v] for u, v in nx.non_edges(graph)}
+    candidates = list(nx.non_edges(graph))
+    score = {edge: centrality[edge[0]] * centrality[edge[1]]
+             for edge in candidates}
+    order = {edge: index for index, edge in enumerate(candidates)}
+    return sorted(
+        candidates,
+        key=lambda edge: (-round(float(score[edge]), 7), order[edge])
+    )[:k]
 
-    return heapq.nlargest(k, score, key=score.get)
 
-
-def add_edge_pr(graph, k=3):
+def add_edge_pr(graph, k=3, seed=None, backend='cpu', min_gpu_nodes=None):
     """
     Get k edges to defend based on top edge PageRank entries :cite:`tong2012gelling`.
 
@@ -223,12 +263,15 @@ def add_edge_pr(graph, k=3):
     """
 
     info = defaultdict(list)
-    info['added'] = get_central_edges(graph, k, method='pr')
+    info['added'] = get_central_edges(
+        graph, k, method='pr', backend=backend,
+        min_gpu_nodes=min_gpu_nodes
+    )
 
     return info
 
 
-def add_edge_eig(graph, k=3):
+def add_edge_eig(graph, k=3, seed=None, backend='cpu', min_gpu_nodes=None):
     """
     Get k edges to defend based on top edge eigenvector centrality entries :cite:`tong2012gelling`.
 
@@ -238,7 +281,10 @@ def add_edge_eig(graph, k=3):
     """
 
     info = defaultdict(list)
-    info['added'] = get_central_edges(graph, k, method='eig')
+    info['added'] = get_central_edges(
+        graph, k, method='eig', backend=backend,
+        min_gpu_nodes=min_gpu_nodes
+    )
 
     return info
 
@@ -525,6 +571,7 @@ class Defense(Simulation):
     :param attack: a string representing the attack strategy to run
     :param defense: a string representing the defense strategy to run
     :param k_d: an integer number of nodes to defend
+    :param backend: cpu, gpu, or auto for supported calculations
     :param kwargs: see parent class Simulation for additional options
     """
 
@@ -541,9 +588,16 @@ class Defense(Simulation):
             'defense': defense,
 
             'robust_measure': 'largest_connected_component',
+            'backend': 'cpu',
+            'min_gpu_nodes': None,
         })
 
         self.prm.update(kwargs)
+        if self.prm['backend'] not in ['auto', 'cpu', 'gpu']:
+            raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
+        if (self.prm['min_gpu_nodes'] is not None
+                and self.prm['min_gpu_nodes'] < 0):
+            raise ValueError('min_gpu_nodes must be nonnegative')
 
         if self.prm['plot_transition'] or self.prm['gif_animation']:
             self.node_pos, self.edge_pos = self.get_graph_coordinates()
@@ -571,7 +625,12 @@ class Defense(Simulation):
 
         # attacked nodes or edges
         if self.prm['attack'] is not None and self.prm['k_a'] > 0:
-            self.attacked = run_attack_method(self.graph_, self.prm['attack'], self.prm['k_a'], approx=self.prm['attack_approx'], seed=self.get_random_seed())
+            self.attacked = run_attack_method(
+                self.graph_, self.prm['attack'], self.prm['k_a'],
+                approx=self.prm['attack_approx'], seed=self.get_random_seed(),
+                backend=self.prm['backend'],
+                min_gpu_nodes=self.prm['min_gpu_nodes']
+            )
 
             if get_attack_category(self.prm['attack']) == 'edge':
                 self.graph_.remove_edges_from(self.attacked)
@@ -581,7 +640,11 @@ class Defense(Simulation):
 
         # defended nodes or edges
         if self.prm['defense'] is not None and self.prm['k_d'] > 0:
-            self.protected = run_defense_method(self.graph_, self.prm['defense'], self.prm['k_d'], seed=self.get_random_seed())
+            self.protected = run_defense_method(
+                self.graph_, self.prm['defense'], self.prm['k_d'],
+                seed=self.get_random_seed(), backend=self.prm['backend'],
+                min_gpu_nodes=self.prm['min_gpu_nodes']
+            )
 
         elif self.prm['defense'] is not None:
             print(self.prm['defense'], "not available or k <= 0")
@@ -603,7 +666,11 @@ class Defense(Simulation):
          :param step: current simulation iteration
          """
 
-        measure = run_measure(self.graph_, self.prm['robust_measure'])
+        measure = run_measure(
+            self.graph_, self.prm['robust_measure'],
+            backend=self.prm['backend'],
+            min_gpu_nodes=self.prm['min_gpu_nodes']
+        )
 
         ccs = list(nx.connected_components(self.graph_))
         ccs.sort(key=len, reverse=True)
