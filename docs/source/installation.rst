@@ -35,7 +35,7 @@ Environment and optional dependencies
 
 .. raw:: html
 
-   <p>The package supports Python 3.8 and later. These documented results were run on Python 3.12 with versions recorded in the <a href="guide-results/requirements-lock.txt">environment lock</a>. Use an isolated environment and start with a small graph. Basic plotting does not need ForceAtlas2 or edge bundling.</p><p>The visualization extra can require a compiler for optional dependencies. If it fails, use NetworkX spring or spectral layouts. Native MP4 export is unavailable on Windows; static figures remain available. Laplacian GPU calculations are unavailable, while optional adjacency-spectrum calculations require a working CuPy/CUDA environment and a partial-spectrum request.</p>
+   <p>The package supports Python 3.8 and later. These documented results were run on Python 3.12 with versions recorded in the <a href="guide-results/requirements-lock.txt">environment lock</a>. Use an isolated environment and start with a small graph. Basic plotting does not need ForceAtlas2 or edge bundling.</p><p>The visualization extra can require a compiler for optional dependencies. If it fails, use NetworkX spring or spectral layouts. Native MP4 export is unavailable on Windows; static figures remain available. Optional adjacency- and Laplacian-spectrum GPU calculations require a working CuPy/CUDA environment; see the GPU acceleration guide for installation, backend selection, and benchmarks.</p>
 
 .. _installation-section-3:
 
