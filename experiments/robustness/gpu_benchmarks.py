@@ -180,8 +180,8 @@ def benchmark_case(graph, measure, k, repeats, warmups, atol, rtol):
         cpu_value, gpu_value, atol, rtol
     )
     eigen_absolute, eigen_relative = raw_spectrum_error(graph, measure, k)
-    passed = passed and eigen_absolute <= atol + rtol * max(
-        abs(float(cpu_value)) if cpu_value is not None else 0.0, 1.0
+    passed = passed and (
+        eigen_absolute <= atol or eigen_relative <= rtol
     )
     return {
         'cpu_value': cpu_value,
