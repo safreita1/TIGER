@@ -7,30 +7,46 @@ from scipy.special import logsumexp
 from graph_tiger.utils import get_adjacency_spectrum, get_laplacian_spectrum
 
 
-def run_measure(graph, measure, k=np.inf, use_gpu=False, timeout=None):
+def run_measure(graph, measure, k=np.inf, backend='cpu', use_gpu=None,
+                min_gpu_nodes=1000, timeout=None):
     """
     Evaluates graph robustness according to a specified measure
 
     :param graph: undirected NetworkX graph to measure
     :param measure: string containing the robustness measure to evaluate
     :param k: an integer for fast approximation of certain robustness measures. small k = fast, large k = precise
+    :param backend: cpu, gpu, or auto for supported spectral measures
+    :param use_gpu: backward-compatible Boolean alias for backend
+    :param min_gpu_nodes: auto-selection threshold
     :param timeout: optional number of seconds to wait for the measure.
     :return: a float representing the robustness of the graph, or None if it times out or a NetworkX error occurs
     """
 
     if measure not in measures:
         raise ValueError("measure '{}' is not implemented".format(measure))
+    if backend not in {'auto', 'cpu', 'gpu'}:
+        raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
     if timeout is not None and timeout < 0:
         raise ValueError('timeout must be nonnegative')
+
+    if use_gpu is not None:
+        if backend != 'cpu':
+            raise ValueError('specify backend or use_gpu, not both')
+        backend = 'gpu' if use_gpu else 'cpu'
 
     executor = None
 
     try:
         if timeout is None:
-            return measures[measure](graph, k=k, use_gpu=use_gpu)
+            return measures[measure](
+                graph, k=k, backend=backend, min_gpu_nodes=min_gpu_nodes
+            )
 
         executor = ThreadPoolExecutor(max_workers=1)
-        result = executor.submit(measures[measure], graph, k=k, use_gpu=use_gpu)
+        result = executor.submit(
+            measures[measure], graph, k=k, backend=backend,
+            min_gpu_nodes=min_gpu_nodes
+        )
         return result.result(timeout=timeout)
 
     except FutureTimeoutError:
@@ -222,7 +238,7 @@ Adjacency Matrix Spectral Measures
 """
 
 
-def spectral_radius(graph, use_gpu=False, **kwargs):
+def spectral_radius(graph, backend='cpu', use_gpu=None, min_gpu_nodes=1000, **kwargs):
     """
     The largest eigenvalue :math:`\lambda_1` of an adjacency matrix **A** is called the spectral radius.
     The larger the spectral radius, the more robust the graph. This can be viewed from its close relationship to the
@@ -235,7 +251,10 @@ def spectral_radius(graph, use_gpu=False, **kwargs):
     if len(graph) == 0:
         return 0
 
-    lam = get_adjacency_spectrum(graph, k=1, which='LA', eigvals_only=True, use_gpu=use_gpu)
+    lam = get_adjacency_spectrum(
+        graph, k=1, which='LA', eigvals_only=True, backend=backend,
+        min_gpu_nodes=min_gpu_nodes, use_gpu=use_gpu
+    )
 
     idx = lam.argsort()[::-1]  # sort descending algebraic
     lam = lam[idx]
@@ -243,7 +262,7 @@ def spectral_radius(graph, use_gpu=False, **kwargs):
     return round(lam[0], 2)
 
 
-def spectral_gap(graph, use_gpu=False, **kwargs):
+def spectral_gap(graph, backend='cpu', use_gpu=None, min_gpu_nodes=1000, **kwargs):
     """
     The difference between the largest and second largest eigenvalues of the adjacency matrix
     (:math:`\lambda_1 - \lambda_2`) is called the spectral gap :math:`\lambda_d`.
@@ -258,7 +277,10 @@ def spectral_gap(graph, use_gpu=False, **kwargs):
     if len(graph) < 2:
         return 0
 
-    lam = get_adjacency_spectrum(graph, k=2, which='LA', eigvals_only=True, use_gpu=use_gpu)
+    lam = get_adjacency_spectrum(
+        graph, k=2, which='LA', eigvals_only=True, backend=backend,
+        min_gpu_nodes=min_gpu_nodes, use_gpu=use_gpu
+    )
 
     idx = lam.argsort()[::-1]  # sort descending algebraic
     lam = lam[idx]
@@ -266,7 +288,8 @@ def spectral_gap(graph, use_gpu=False, **kwargs):
     return round(lam[0] - lam[1], 2)
 
 
-def natural_connectivity(graph, k=np.inf, use_gpu=False, **kwargs):
+def natural_connectivity(
+        graph, k=np.inf, backend='cpu', use_gpu=None, min_gpu_nodes=1000, **kwargs):
     """
     Natural connectivity has a physical and structural interpretation that is tied to the connectivity properties
     of a network, identifying alternative pathways in a network through the weighted number of closed walks.
@@ -279,7 +302,10 @@ def natural_connectivity(graph, k=np.inf, use_gpu=False, **kwargs):
     if len(graph) == 0:
         return 0
 
-    lam = get_adjacency_spectrum(graph, k=k, which='LA', eigvals_only=True, use_gpu=use_gpu)
+    lam = get_adjacency_spectrum(
+        graph, k=k, which='LA', eigvals_only=True, backend=backend,
+        min_gpu_nodes=min_gpu_nodes, use_gpu=use_gpu
+    )
 
     return round(logsumexp(lam.real) - math.log(len(graph)), 2)
 
@@ -302,7 +328,8 @@ def odd_subgraph_centrality(i, lam, u):
     return sc
 
 
-def spectral_scaling(graph, k=np.inf, use_gpu=False, **kwargs):
+def spectral_scaling(
+        graph, k=np.inf, backend='cpu', use_gpu=None, min_gpu_nodes=1000, **kwargs):
     """
     Spectral scaling is a combination of the spectral gap and subgraph centrality. Spectral scaling takes into account
     if a graph has many bridges. The smaller the value, the more robust the graph :cite:`estrada2006network`.
@@ -311,7 +338,10 @@ def spectral_scaling(graph, k=np.inf, use_gpu=False, **kwargs):
     :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
-    lam, u = get_adjacency_spectrum(graph, k=k, which='LM', eigvals_only=False, use_gpu=use_gpu)
+    lam, u = get_adjacency_spectrum(
+        graph, k=k, which='LM', eigvals_only=False, backend=backend,
+        min_gpu_nodes=min_gpu_nodes, use_gpu=use_gpu
+    )
 
     idx = np.abs(lam).argsort()[::-1]  # sort descending magnitude
     lam = lam[idx]
@@ -329,7 +359,8 @@ def spectral_scaling(graph, k=np.inf, use_gpu=False, **kwargs):
     return sc
 
 
-def generalized_robustness_index(graph, k=30, use_gpu=False, **kwargs):
+def generalized_robustness_index(
+        graph, k=30, backend='cpu', use_gpu=None, min_gpu_nodes=1000, **kwargs):
     """
     This can be considered a fast approximation of spectral scaling. The smaller the value, the more robust the graph.
     Also helps determine if a graph has many bridges (bad for robustness) :cite:`malliaros2012fast`.
@@ -338,7 +369,10 @@ def generalized_robustness_index(graph, k=30, use_gpu=False, **kwargs):
     :param use_gpu: defaults to False; set to True to use GPU (if available)
     :return: a float
     """
-    return spectral_scaling(graph, k=k, use_gpu=use_gpu, kwargs=kwargs)
+    return spectral_scaling(
+        graph, k=k, backend=backend, use_gpu=use_gpu,
+        min_gpu_nodes=min_gpu_nodes, **kwargs
+    )
 
 
 '''
@@ -359,7 +393,11 @@ def algebraic_connectivity(graph, **kwargs):
     if len(graph) < 2:
         return 0
 
-    lam = get_laplacian_spectrum(graph, k=2, use_gpu=kwargs.get('use_gpu', False))
+    lam = get_laplacian_spectrum(
+        graph, k=2, backend=kwargs.get('backend', 'cpu'),
+        min_gpu_nodes=kwargs.get('min_gpu_nodes', 1000),
+        use_gpu=kwargs.get('use_gpu')
+    )
 
     return round(lam[1], 2)
 
@@ -381,7 +419,11 @@ def num_spanning_trees(graph, k=np.inf, **kwargs):
     if not nx.is_connected(graph):
         return 0
 
-    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs.get('use_gpu', False))
+    lam = get_laplacian_spectrum(
+        graph, k=k, backend=kwargs.get('backend', 'cpu'),
+        min_gpu_nodes=kwargs.get('min_gpu_nodes', 1000),
+        use_gpu=kwargs.get('use_gpu')
+    )
     num_trees = np.prod(lam[1:]) / len(graph)
 
     return round(float(num_trees), 2)
@@ -402,7 +444,11 @@ def effective_resistance(graph, k=np.inf, **kwargs):
     if not nx.is_connected(graph):
         return np.inf
 
-    lam = get_laplacian_spectrum(graph, k=k, use_gpu=kwargs.get('use_gpu', False))
+    lam = get_laplacian_spectrum(
+        graph, k=k, backend=kwargs.get('backend', 'cpu'),
+        min_gpu_nodes=kwargs.get('min_gpu_nodes', 1000),
+        use_gpu=kwargs.get('use_gpu')
+    )
     resistance = len(graph) * np.sum(1.0 / lam[1:])
 
     return round(float(resistance), 2)
