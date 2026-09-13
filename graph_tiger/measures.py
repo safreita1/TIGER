@@ -24,6 +24,8 @@ def run_measure(graph, measure, k=np.inf, backend='cpu', use_gpu=None,
 
     if measure not in measures:
         raise ValueError("measure '{}' is not implemented".format(measure))
+    if backend not in {'auto', 'cpu', 'gpu'}:
+        raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
     if timeout is not None and timeout < 0:
         raise ValueError('timeout must be nonnegative')
 
