@@ -48,7 +48,7 @@ To verify that everything works as expected, you can run the tests cases using `
 
 ### Guides
 
-The **[documentation](https://graph-tiger.readthedocs.io/)** includes guides for [loading graphs](https://graph-tiger.readthedocs.io/en/latest/network-inputs.html), [robustness measures](https://graph-tiger.readthedocs.io/en/latest/measures.html), [attack types](https://graph-tiger.readthedocs.io/en/latest/attacks.html), [defense measures](https://graph-tiger.readthedocs.io/en/latest/defenses.html), [epidemic simulations](https://graph-tiger.readthedocs.io/en/latest/epidemics.html), [information diffusion](https://graph-tiger.readthedocs.io/en/latest/influence.html), [cascading failures](https://graph-tiger.readthedocs.io/en/latest/cascades.html), and [visualization](https://graph-tiger.readthedocs.io/en/latest/visualization.html).
+The **[documentation](https://graph-tiger.readthedocs.io/)** includes guides for [loading graphs](https://graph-tiger.readthedocs.io/en/latest/network-inputs.html), [robustness measures](https://graph-tiger.readthedocs.io/en/latest/measures.html), [GPU acceleration](https://graph-tiger.readthedocs.io/en/latest/gpu.html), [attack types](https://graph-tiger.readthedocs.io/en/latest/attacks.html), [defense measures](https://graph-tiger.readthedocs.io/en/latest/defenses.html), [epidemic simulations](https://graph-tiger.readthedocs.io/en/latest/epidemics.html), [information diffusion](https://graph-tiger.readthedocs.io/en/latest/influence.html), [cascading failures](https://graph-tiger.readthedocs.io/en/latest/cascades.html), and [visualization](https://graph-tiger.readthedocs.io/en/latest/visualization.html).
 
 --------------------------------------------------------------------------------
 
