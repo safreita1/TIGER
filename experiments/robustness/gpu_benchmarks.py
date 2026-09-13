@@ -8,9 +8,7 @@ import argparse
 import csv
 import gc
 import json
-import os
 import platform
-import statistics
 import sys
 import time
 from pathlib import Path
@@ -21,7 +19,12 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from graph_tiger.measures import run_measure
-from graph_tiger.utils import gpu_status, select_backend
+from graph_tiger.utils import (
+    get_adjacency_spectrum,
+    get_laplacian_spectrum,
+    gpu_status,
+    select_backend
+)
 
 
 MEASURES = [
@@ -110,6 +113,42 @@ def result_error(cpu_value, gpu_value, atol, rtol):
     ))
 
 
+def raw_spectrum_error(graph, measure, k):
+    """Compare unrounded eigenvalues used by the CPU and GPU paths."""
+
+    if measure in {
+            'spectral_radius', 'spectral_gap', 'natural_connectivity',
+            'spectral_scaling', 'generalized_robustness_index'}:
+        which = 'LM' if measure in {
+            'spectral_scaling', 'generalized_robustness_index'
+        } else 'LA'
+        count = {
+            'spectral_radius': 1,
+            'spectral_gap': 2
+        }.get(measure, k)
+        cpu = get_adjacency_spectrum(
+            graph, k=count, which=which, eigvals_only=True, backend='cpu'
+        )
+        gpu = get_adjacency_spectrum(
+            graph, k=count, which=which, eigvals_only=True, backend='gpu'
+        )
+    else:
+        count = 2 if measure == 'algebraic_connectivity' else k
+        cpu = get_laplacian_spectrum(
+            graph, k=count, eigvals_only=True, backend='cpu'
+        )
+        gpu = get_laplacian_spectrum(
+            graph, k=count, eigvals_only=True, backend='gpu'
+        )
+
+    cpu = np.sort(np.asarray(cpu, dtype=float))
+    gpu = np.sort(np.asarray(gpu, dtype=float))
+    absolute = float(np.max(np.abs(cpu - gpu))) if len(cpu) else 0.0
+    scale = max(float(np.max(np.abs(cpu))) if len(cpu) else 0.0,
+                np.finfo(float).eps)
+    return absolute, absolute / scale
+
+
 def benchmark_case(graph, measure, k, repeats, warmups, atol, rtol):
     """Benchmark one graph and measure after independent backend warm-ups."""
 
@@ -140,12 +179,18 @@ def benchmark_case(graph, measure, k, repeats, warmups, atol, rtol):
     absolute, relative, passed = result_error(
         cpu_value, gpu_value, atol, rtol
     )
+    eigen_absolute, eigen_relative = raw_spectrum_error(graph, measure, k)
+    passed = passed and eigen_absolute <= atol + rtol * max(
+        abs(float(cpu_value)) if cpu_value is not None else 0.0, 1.0
+    )
     return {
         'cpu_value': cpu_value,
         'gpu_value': gpu_value,
         'absolute_error': absolute,
         'relative_error': relative,
         'parity_passed': passed,
+        'eigenvalue_absolute_error': eigen_absolute,
+        'eigenvalue_relative_error': eigen_relative,
         'cpu_cold_seconds': cpu_cold,
         'gpu_cold_seconds': gpu_cold,
         'cpu_median_seconds': cpu_stats['median'],
