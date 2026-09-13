@@ -36,7 +36,7 @@ def test_backend_selection_rejects_invalid_name():
 
 
 def test_cpu_partial_spectra_match_expected_values():
-    graph = nx.path_graph(20)
+    graph = nx.path_graph(120)
     adjacency = np.sort(get_adjacency_spectrum(
         graph, k=2, eigvals_only=True, backend='cpu'
     ))
