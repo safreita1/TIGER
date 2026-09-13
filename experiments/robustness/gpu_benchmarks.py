@@ -39,6 +39,16 @@ MEASURES = [
 ]
 
 
+def measure_k(measure, requested_k):
+    """Return the eigenpair count actually used by a measure."""
+
+    return {
+        'spectral_radius': 1,
+        'spectral_gap': 2,
+        'algebraic_connectivity': 2
+    }.get(measure, requested_k)
+
+
 def build_graph(family, nodes, mean_degree, seed):
     """Create one connected benchmark graph."""
 
@@ -241,12 +251,13 @@ def run_benchmarks(args):
             for seed in range(args.graph_seeds):
                 graph = build_graph(family, nodes, args.mean_degree, seed)
                 for measure in args.measures:
+                    k = measure_k(measure, args.k)
                     selection = select_backend(
-                        graph, backend='auto', k=args.k,
+                        graph, backend='auto', k=k,
                         min_gpu_nodes=args.min_gpu_nodes
                     )
                     result = benchmark_case(
-                        graph, measure, args.k, args.repeats, args.warmups,
+                        graph, measure, k, args.repeats, args.warmups,
                         args.atol, args.rtol
                     )
                     result.update({
@@ -257,7 +268,7 @@ def run_benchmarks(args):
                         'density': nx.density(graph),
                         'seed': seed,
                         'measure': measure,
-                        'k': args.k,
+                        'k': k,
                         'auto_backend': selection['selected'],
                         'auto_reason': selection['reason']
                     })
