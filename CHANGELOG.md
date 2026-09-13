@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.8.0 - GPU acceleration
+
+### Added
+
+- Added optional nx-cuGraph dispatch for centrality attacks, defenses, and Motter--Lai load recomputation.
+- Added parity-preserving CuPy execution for synchronous SIS/SIR, independent cascade, linear threshold, and competitive cascade models.
+- Added a 270-case non-spectral GPU benchmark with exact selection/state gates and workload-specific crossover reporting.
+- Added exact GPU implementations for diameter, average distance, average inverse distance, average clustering coefficient, and largest-connected-component size.
+- Extended the robustness benchmark to cover every GPU-capable measure and to distinguish sampled betweenness from exact runs.
+- Added CUDA 12 and CUDA 13 installation extras plus the ``tiger-gpu-status`` hardware and runtime diagnostic.
+
+### Fixed
+
+- Corrected nx-cuGraph approximate edge-betweenness scaling and stabilized centrality tie ordering across CPU and GPU backends.
+
+### Changed
+
+- Synchronous stochastic simulations now use a backend-independent counter-based random stream. Equal seeds reproduce exactly across CPU and GPU, but seeded trajectories can differ from releases that used Python's iteration-dependent random draws.
+- Automatic GPU selection uses measured, operation-specific crossover defaults and stays on CPU when the measured advantage is marginal. Full-state epidemic and influence simulations remain CPU in automatic mode; explicit GPU selection remains available.
+- Largest-connected-component measurement remains on CPU in automatic mode because its GPU end-to-end path was slower through 20,000 nodes; explicit GPU selection remains available.
+
 ## 0.7.0 - Information diffusion and influence
 
 ### Added

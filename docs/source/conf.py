@@ -1,9 +1,9 @@
 """Sphinx configuration for the TIGER documentation."""
 project = 'TIGER'
 author = 'Scott Freitas'
-release = '0.7.0'
+release = '0.8.0'
 version = release
-extensions = []
+extensions = ['sphinx.ext.autodoc']
 root_doc = 'index'
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = {'collapse_navigation': False, 'navigation_depth': 3, 'includehidden': True}

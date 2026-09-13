@@ -39,8 +39,23 @@ To quickly get started, install TIGER using pip
 $ pip install graph-tiger
 ``` 
 
-Alternatively, you can clone [TIGER](https://github.com/safreita1/TIGER.git), create a new Anaconda environment,
-and install the library by running ```python setup.py install```.
+The default installation is CPU-only. NVIDIA GPU support is optional because
+the package must match the installed CUDA generation. On CUDA 12 or CUDA 13,
+install one of:
+
+```sh
+$ pip install "graph-tiger[gpu-cu12]" --extra-index-url https://pypi.nvidia.com
+$ pip install "graph-tiger[gpu-cu13]" --extra-index-url https://pypi.nvidia.com
+```
+
+Run `tiger-gpu-status` before and after installing a GPU extra. It detects an
+NVIDIA device without importing CuPy, then verifies that CuPy can allocate and
+synchronize on the device and that NetworkX can see nx-cugraph. RAPIDS
+centrality acceleration requires Linux or Windows through WSL2; native Windows
+can use TIGER's CuPy measures but not nx-cugraph.
+
+Alternatively, clone [TIGER](https://github.com/safreita1/TIGER.git), create an
+isolated environment, and install the checkout with `python -m pip install -e .`.
 
 To verify that everything works as expected, you can run the tests cases using ```python -m pytest tests/```.
 
@@ -48,7 +63,7 @@ To verify that everything works as expected, you can run the tests cases using `
 
 ### Guides
 
-The **[documentation](https://graph-tiger.readthedocs.io/)** includes guides for [loading graphs](https://graph-tiger.readthedocs.io/en/latest/network-inputs.html), [robustness measures](https://graph-tiger.readthedocs.io/en/latest/measures.html), [attack types](https://graph-tiger.readthedocs.io/en/latest/attacks.html), [defense measures](https://graph-tiger.readthedocs.io/en/latest/defenses.html), [epidemic simulations](https://graph-tiger.readthedocs.io/en/latest/epidemics.html), [information diffusion](https://graph-tiger.readthedocs.io/en/latest/influence.html), [cascading failures](https://graph-tiger.readthedocs.io/en/latest/cascades.html), and [visualization](https://graph-tiger.readthedocs.io/en/latest/visualization.html).
+The **[documentation](https://graph-tiger.readthedocs.io/)** includes guides for [loading graphs](https://graph-tiger.readthedocs.io/en/latest/network-inputs.html), [robustness measures](https://graph-tiger.readthedocs.io/en/latest/measures.html), [attack types](https://graph-tiger.readthedocs.io/en/latest/attacks.html), [defense measures](https://graph-tiger.readthedocs.io/en/latest/defenses.html), [epidemic simulations](https://graph-tiger.readthedocs.io/en/latest/epidemics.html), [information diffusion](https://graph-tiger.readthedocs.io/en/latest/influence.html), [cascading failures](https://graph-tiger.readthedocs.io/en/latest/cascades.html), [visualization](https://graph-tiger.readthedocs.io/en/latest/visualization.html), and optional [GPU acceleration](https://graph-tiger.readthedocs.io/en/latest/gpu.html).
 
 --------------------------------------------------------------------------------
 

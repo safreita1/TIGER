@@ -55,6 +55,7 @@ class Simulation:
         self.sparse_graph = get_sparse_graph(self.graph)
 
         self._reset_rng = np.random.RandomState(self.prm['seed'])
+        self._run_seed = self.prm['seed']
         self.random = random.Random(self.prm['seed'])
         self.rng = np.random.RandomState(self.prm['seed'])
 
@@ -64,6 +65,7 @@ class Simulation:
         """
 
         seed = int(self._reset_rng.randint(0, np.iinfo(np.int32).max))
+        self._run_seed = seed
         self.random = random.Random(seed)
         self.rng = np.random.RandomState(seed)
 

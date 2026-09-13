@@ -7,6 +7,7 @@ import numpy as np
 from matplotlib.colors import ListedColormap
 
 from graph_tiger.simulations import Simulation
+from graph_tiger.utils import counter_random, select_backend
 
 
 class Influence(Simulation):
@@ -30,6 +31,7 @@ class Influence(Simulation):
     :param tracked_state: state or message counted in the returned trajectory
     :param tie_break: random or priority for simultaneous competitive-cascade arrivals
     :param priority: message order used when tie_break is priority
+    :param backend: cpu, gpu, or auto. The asynchronous voter model is CPU-only
     :param kwargs: see parent class Simulation for random seed and plotting options
     """
 
@@ -58,7 +60,9 @@ class Influence(Simulation):
             },
             'tracked_state': tracked_state,
             'tie_break': tie_break,
-            'priority': None if priority is None else tuple(priority)
+            'priority': None if priority is None else tuple(priority),
+            'backend': 'cpu',
+            'min_gpu_nodes': None
         })
         self.prm.update(kwargs)
 
@@ -77,6 +81,13 @@ class Influence(Simulation):
         """Validate graph, model, initial-state, and model-specific parameters."""
         if self.prm['model'] not in self.models:
             raise ValueError('unknown influence model')
+        if self.prm['backend'] not in {'auto', 'cpu', 'gpu'}:
+            raise ValueError("backend must be one of 'auto', 'cpu', or 'gpu'")
+        if (self.prm['min_gpu_nodes'] is not None
+                and self.prm['min_gpu_nodes'] < 0):
+            raise ValueError('min_gpu_nodes must be nonnegative')
+        if self.prm['model'] == 'voter' and self.prm['backend'] == 'gpu':
+            raise ValueError('the asynchronous voter model is CPU-only')
         if self.graph_og.is_multigraph():
             raise ValueError('influence models require a simple graph')
 
@@ -329,6 +340,182 @@ class Influence(Simulation):
             for source, target in self.graph.edges
         )
 
+    def _edge_arrays(self):
+        """Return stable directed-edge indices for vectorized models."""
+
+        sources = []
+        targets = []
+        edges = []
+        for source in self.node_order:
+            for target in self._targets(source):
+                sources.append(self.node_index[source])
+                targets.append(self.node_index[target])
+                edges.append((source, target))
+        return np.asarray(sources), np.asarray(targets), edges
+
+    def _run_progressive_array(self, selected):
+        """Run progressive influence with equivalent NumPy or CuPy arrays."""
+
+        if selected == 'gpu':
+            import cupy as xp
+        else:
+            xp = np
+
+        sources_host, targets_host, edges = self._edge_arrays()
+        sources = xp.asarray(sources_host, dtype=xp.int64)
+        targets = xp.asarray(targets_host, dtype=xp.int64)
+        active = xp.asarray([node in self.active for node in self.node_order])
+        frontier = xp.asarray([node in self.frontier for node in self.node_order])
+        influence = xp.asarray([self.influence[node] for node in self.node_order])
+
+        if self.prm['model'] == 'independent_cascade':
+            probabilities = xp.asarray([
+                self._edge_probability(source, target) for source, target in edges
+            ])
+        else:
+            weights = xp.asarray([
+                (self.graph[source][target].get(self.prm['weight'], 1.0)
+                 if self.prm['weight'] is not None else 1.0)
+                for source, target in edges
+            ])
+            thresholds = xp.asarray([
+                self._threshold(node) for node in self.node_order
+            ])
+
+        self.track_simulation(0)
+        for step in range(self.prm['steps']):
+            activated = xp.zeros(len(self.node_order), dtype=xp.bool_)
+            if self.prm['model'] == 'independent_cascade':
+                random_values = counter_random(
+                    xp, len(edges), self._run_seed, step * len(edges)
+                )
+                successful = (frontier[sources] & ~active[targets]
+                              & (random_values < probabilities))
+                activated[targets[successful]] = True
+            else:
+                contribution = xp.zeros(len(self.node_order), dtype=xp.float64)
+                xp.add.at(contribution, targets, weights * frontier[sources])
+                influence = influence + contribution
+                activated = ~active & (influence >= thresholds)
+
+            active = active | activated
+            frontier = activated
+            if selected == 'gpu':
+                active_host = xp.asnumpy(active)
+                frontier_host = xp.asnumpy(frontier)
+                influence_host = xp.asnumpy(influence)
+            else:
+                active_host = active
+                frontier_host = frontier
+                influence_host = influence
+
+            self.active = {
+                node for node, value in zip(self.node_order, active_host) if value
+            }
+            self.frontier = {
+                node for node, value in zip(self.node_order, frontier_host) if value
+            }
+            self.changed = set(self.frontier)
+            self.state = {
+                node: int(value) for node, value in zip(self.node_order, active_host)
+            }
+            self.influence = {
+                node: float(value)
+                for node, value in zip(self.node_order, influence_host)
+            }
+            self.track_simulation(step + 1)
+
+    def _run_competitive_array(self, selected):
+        """Run competitive cascade proposals and tie resolution on arrays."""
+
+        if selected == 'gpu':
+            import cupy as xp
+        else:
+            xp = np
+
+        sources_host, targets_host, edges = self._edge_arrays()
+        sources = xp.asarray(sources_host, dtype=xp.int64)
+        targets = xp.asarray(targets_host, dtype=xp.int64)
+        state = xp.full(len(self.node_order), -1, dtype=xp.int64)
+        frontiers = xp.zeros(
+            (len(self.messages), len(self.node_order)), dtype=xp.bool_
+        )
+        for message_index, message in enumerate(self.messages):
+            for node in self.frontiers[message]:
+                state[self.node_index[node]] = message_index
+                frontiers[message_index, self.node_index[node]] = True
+        probabilities = xp.asarray([
+            [self._edge_probability(source, target, message)
+             for source, target in edges]
+            for message in self.messages
+        ])
+        priority = (self.prm['priority'] if self.prm['tie_break'] == 'priority'
+                    else self.messages)
+        priority_indices = [self.messages.index(message) for message in priority]
+        random_span = max(1, len(edges) * len(self.messages))
+
+        self.track_simulation(0)
+        for step in range(self.prm['steps']):
+            proposals = xp.zeros_like(frontiers)
+            for message_index in range(len(self.messages)):
+                random_values = counter_random(
+                    xp, len(edges), self._run_seed,
+                    step * random_span + message_index * len(edges)
+                )
+                successful = (frontiers[message_index, sources]
+                              & (state[targets] < 0)
+                              & (random_values < probabilities[message_index]))
+                proposals[message_index, targets[successful]] = True
+
+            unclaimed = state < 0
+            winner = xp.full(len(self.node_order), -1, dtype=xp.int64)
+            if self.prm['tie_break'] == 'priority':
+                for message_index in reversed(priority_indices):
+                    winner = xp.where(proposals[message_index], message_index, winner)
+            else:
+                counts = proposals.sum(axis=0)
+                choices = (counter_random(
+                    xp, len(self.node_order), self._run_seed,
+                    (step + 1) * random_span
+                ) * xp.maximum(counts, 1)).astype(xp.int64)
+                seen = xp.zeros(len(self.node_order), dtype=xp.int64)
+                for message_index in range(len(self.messages)):
+                    choose = proposals[message_index] & (seen == choices)
+                    winner = xp.where(choose, message_index, winner)
+                    seen = seen + proposals[message_index]
+
+            changed = unclaimed & (winner >= 0)
+            state = xp.where(changed, winner, state)
+            frontiers = xp.asarray([
+                changed & (winner == message_index)
+                for message_index in range(len(self.messages))
+            ])
+            if selected == 'gpu':
+                state_host = xp.asnumpy(state)
+                frontiers_host = xp.asnumpy(frontiers)
+                changed_host = xp.asnumpy(changed)
+            else:
+                state_host = state
+                frontiers_host = frontiers
+                changed_host = changed
+
+            self.state = {
+                node: (None if value < 0 else self.messages[int(value)])
+                for node, value in zip(self.node_order, state_host)
+            }
+            self.frontiers = {
+                message: {
+                    node for node, value in zip(
+                        self.node_order, frontiers_host[message_index]
+                    ) if value
+                }
+                for message_index, message in enumerate(self.messages)
+            }
+            self.changed = {
+                node for node, value in zip(self.node_order, changed_host) if value
+            }
+            self.track_simulation(step + 1)
+
     def track_simulation(self, step):
         """Store node states, counts, changes, and frontiers for one step."""
         counts = Counter(self.state.values())
@@ -359,16 +546,20 @@ class Influence(Simulation):
 
         :return: active counts for progressive models or tracked-state counts otherwise
         """
-        methods = {
-            'independent_cascade': self.run_independent_cascade_step,
-            'linear_threshold': self.run_linear_threshold_step,
-            'voter': self.run_voter_step,
-            'competitive_cascade': self.run_competitive_cascade_step
-        }
-
-        for step in range(self.prm['steps']):
-            self.changed = set() if self._absorbed() else methods[self.prm['model']]()
-            self.track_simulation(step + 1)
+        if self.prm['model'] == 'voter':
+            for step in range(self.prm['steps']):
+                self.changed = set() if self._absorbed() else self.run_voter_step()
+                self.track_simulation(step + 1)
+        else:
+            selected = select_backend(
+                self.graph, backend=self.prm['backend'], k=1,
+                min_gpu_nodes=self.prm['min_gpu_nodes'],
+                operation=self.prm['model']
+            )['selected']
+            if self.prm['model'] == 'competitive_cascade':
+                self._run_competitive_array(selected)
+            else:
+                self._run_progressive_array(selected)
 
         if self.prm['model'] in {'independent_cascade', 'linear_threshold'}:
             field = 'active'
