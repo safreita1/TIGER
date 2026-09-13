@@ -63,7 +63,7 @@ def gpu_available():
     return gpu_status()['available']
 
 
-def _memory_required(graph, exact):
+def _memory_required(graph, exact, k):
     """Conservative matrix and eigensolver workspace estimate in bytes."""
 
     n = len(graph)
@@ -73,7 +73,8 @@ def _memory_required(graph, exact):
     nnz = 2 * graph.number_of_edges()
     csr_bytes = nnz * (np.dtype(float).itemsize + np.dtype(np.int64).itemsize)
     csr_bytes += (n + 1) * np.dtype(np.int64).itemsize
-    return 4 * csr_bytes
+    eigenvectors = len(graph) * min(int(k), max(0, len(graph) - 1)) * np.dtype(float).itemsize
+    return 4 * (csr_bytes + eigenvectors)
 
 
 def select_backend(graph, backend='auto', k=np.inf, min_gpu_nodes=1000):
@@ -98,7 +99,7 @@ def select_backend(graph, backend='auto', k=np.inf, min_gpu_nodes=1000):
     status = gpu_status().copy()
     n = len(graph)
     exact = np.isinf(k) or k >= n
-    required = _memory_required(graph, exact)
+    required = _memory_required(graph, exact, k)
     result = {
         'requested': backend,
         'selected': 'cpu',
