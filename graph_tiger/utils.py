@@ -73,7 +73,8 @@ def _memory_required(graph, exact, k):
     nnz = 2 * graph.number_of_edges()
     csr_bytes = nnz * (np.dtype(float).itemsize + np.dtype(np.int64).itemsize)
     csr_bytes += (n + 1) * np.dtype(np.int64).itemsize
-    eigenvectors = len(graph) * min(int(k), max(0, len(graph) - 1)) * np.dtype(float).itemsize
+    eigenpairs = min(max(0, int(k)), max(0, len(graph) - 1))
+    eigenvectors = len(graph) * eigenpairs * np.dtype(float).itemsize
     return 4 * (csr_bytes + eigenvectors)
 
 
