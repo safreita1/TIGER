@@ -31,3 +31,6 @@ MANIFEST
 backup/
 plots/
 old/
+gpu-benchmark-results.csv
+gpu-benchmark-results.metadata.json
+gpu-benchmark-results.pdf
