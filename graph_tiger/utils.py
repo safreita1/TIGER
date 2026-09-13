@@ -228,11 +228,14 @@ def get_adjacency_spectrum(
 
     backend = _legacy_backend(backend, use_gpu)
     exact = np.isinf(k) or k >= n
+    dense = exact or n < 100
+    selection_k = np.inf if dense else k
     selected = select_backend(
-        graph, backend=backend, k=k, min_gpu_nodes=min_gpu_nodes
+        graph, backend=backend, k=selection_k,
+        min_gpu_nodes=min_gpu_nodes
     )['selected']
 
-    if exact:
+    if dense:
         matrix = nx.to_numpy_array(
             graph, nodelist=list(graph.nodes), dtype=float
         )
@@ -292,11 +295,14 @@ def get_laplacian_spectrum(
 
     backend = _legacy_backend(backend, use_gpu)
     exact = np.isinf(k) or k >= n
+    dense = exact or n < 100
+    selection_k = np.inf if dense else k
     selected = select_backend(
-        graph, backend=backend, k=k, min_gpu_nodes=min_gpu_nodes
+        graph, backend=backend, k=selection_k,
+        min_gpu_nodes=min_gpu_nodes
     )['selected']
 
-    if exact:
+    if dense:
         matrix = nx.laplacian_matrix(
             graph, nodelist=list(graph.nodes)
         ).toarray().astype(float)
