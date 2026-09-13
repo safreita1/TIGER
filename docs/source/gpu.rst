@@ -153,8 +153,16 @@ The CSV records:
 * the backend that automatic selection would choose.
 
 The process exits unsuccessfully if any CPU--GPU comparison violates the
-declared numerical tolerances. This makes correctness a prerequisite for
-reporting performance.
+declared numerical tolerances. It compares both the returned measure and the
+unrounded eigenvalues, making correctness a prerequisite for reporting
+performance. Run a separate dense-spectrum study on smaller graphs when exact
+natural connectivity, spectral scaling, spanning-tree, or resistance timing is
+needed:
+
+.. code-block:: console
+
+   python experiments/robustness/gpu_benchmarks.py --nodes 250 500 --exact \\
+       --output gpu-exact-benchmark-results.csv
 
 Render the results
 ------------------
