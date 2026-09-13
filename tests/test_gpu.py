@@ -31,7 +31,7 @@ def test_cpu_dispatch_omits_backend_for_predispatch_networkx(monkeypatch):
     graph = nx.path_graph(3)
     tiger_utils.networkx_gpu_status.cache_clear()
     with monkeypatch.context() as context:
-        context.delattr(nx, 'config')
+        context.delattr(nx, 'config', raising=False)
         assert networkx_backend_kwargs(graph, backend='cpu') == {}
     tiger_utils.networkx_gpu_status.cache_clear()
 
