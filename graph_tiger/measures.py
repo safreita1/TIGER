@@ -322,7 +322,7 @@ Adjacency Matrix Spectral Measures
 
 
 def spectral_radius(graph, backend='cpu', use_gpu=None, min_gpu_nodes=None, **kwargs):
-    """
+    r"""
     The largest eigenvalue :math:`\lambda_1` of an adjacency matrix **A** is called the spectral radius.
     The larger the spectral radius, the more robust the graph. This can be viewed from its close relationship to the
     "path" or "loop" capacity in a network :cite:`chen2015node,tong2010vulnerability`.
@@ -347,7 +347,7 @@ def spectral_radius(graph, backend='cpu', use_gpu=None, min_gpu_nodes=None, **kw
 
 
 def spectral_gap(graph, backend='cpu', use_gpu=None, min_gpu_nodes=None, **kwargs):
-    """
+    r"""
     The difference between the largest and second largest eigenvalues of the adjacency matrix
     (:math:`\lambda_1 - \lambda_2`) is called the spectral gap :math:`\lambda_d`.
     The larger the spectral gap, the more robust the graph.
