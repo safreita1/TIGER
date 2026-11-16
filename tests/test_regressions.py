@@ -1,5 +1,7 @@
 import json
 import time
+import warnings
+from pathlib import Path
 
 import networkx as nx
 import numpy as np
@@ -877,6 +879,19 @@ def test_graph_loader_loads_karate_offline():
     assert len(graph.edges) == 78
 
 
+def test_sources_compile_without_invalid_escape_warnings():
+    package = Path(tiger_measures.__file__).resolve().parent
+    for path in sorted(package.glob('*.py')):
+        with warnings.catch_warnings():
+            warnings.simplefilter('error', SyntaxWarning)
+            compile(path.read_text(encoding='utf-8'), str(path), 'exec')
+
+
+def test_spectral_docstrings_keep_math_markup():
+    assert r':math:`\lambda_1`' in tiger_measures.spectral_radius.__doc__
+    assert r':math:`\lambda_1 - \lambda_2`' in tiger_measures.spectral_gap.__doc__
+
+
 def main():
     test_netshield_preserves_node_labels()
     test_attack_and_defense_validate_budgets()
@@ -925,6 +940,8 @@ def main():
     test_watts_strogatz_uses_standard_generator()
     test_unknown_graph_raises_value_error()
     test_graph_loader_loads_karate_offline()
+    test_sources_compile_without_invalid_escape_warnings()
+    test_spectral_docstrings_keep_math_markup()
 
 
 if __name__ == '__main__':
